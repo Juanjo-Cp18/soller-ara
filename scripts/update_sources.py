@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Actualitza data/posts.json a partir de les fonts públiques configurades.
 
-v0.2: suporta RSS/Atom amb llibreries estàndard de Python.
+v0.21: neteja extractes, millora la classificació i afegeix la categoria Serveis.
 """
 
 from __future__ import annotations
@@ -22,30 +22,58 @@ SOURCES_FILE = ROOT / "sources.json"
 OUTPUT_FILE = ROOT / "data" / "posts.json"
 MAX_POSTS_PER_SOURCE = 40
 SUMMARY_LIMIT = 260
-USER_AGENT = "SollerAra/0.2 (+https://github.com/Juanjo-Cp18/soller-ara)"
+USER_AGENT = "SollerAra/0.21 (+https://github.com/Juanjo-Cp18/soller-ara)"
 
 CATEGORY_KEYWORDS = {
     "alerts": [
-        "alerta", "avís", "avis", "emergència", "emergencia", "meteobal",
-        "tall", "tancament", "carretera", "mobilitat", "seguretat", "pluges",
-        "tempesta", "inund", "incendi", "112",
+        ("emergències", 8), ("emergencia", 8), ("alerta", 8), ("avís urgent", 8),
+        ("avis urgent", 8), ("meteobal", 8), ("112", 8), ("incendi", 7),
+        ("inund", 7), ("tempesta", 6), ("pluges", 5), ("precaució", 5),
+        ("tall de trànsit", 7), ("tall de transit", 7), ("tall de carretera", 7),
+        ("tancament", 5), ("restricció", 5),
     ],
-    "agenda": [
-        "agenda", "reunió", "reunion", "activitat", "acte", "taller", "jornada",
-        "dilluns", "dimarts", "dimecres", "dijous", "divendres", "dissabte", "diumenge",
+    "services": [
+        ("porta a porta", 8), ("recollida", 6), ("residus", 6), ("deixalleria", 6),
+        ("mobilitat", 5), ("trànsit", 5), ("transit", 5), ("transport", 5),
+        ("aparcament", 5), ("estacionament", 5), ("sanejament", 6), ("pluvials", 6),
+        ("aigua", 5), ("enllumenat", 5), ("neteja", 5), ("obres", 4),
+        ("carretera", 4), ("carrer", 3), ("servei", 3), ("serveis", 3),
     ],
     "culture": [
-        "cultura", "concert", "exposició", "exposicion", "art", "museu", "literari",
-        "festa", "festes", "teatre", "música", "musica",
+        ("cultura", 6), ("concert", 7), ("exposició", 7), ("exposicion", 7),
+        ("teatre", 7), ("música", 6), ("musica", 6), ("museu", 6),
+        ("literari", 6), ("havaneres", 7), ("festa", 5), ("festes", 5),
+        ("patrona", 4), ("premis literaris", 7),
     ],
     "sports": [
-        "esport", "esports", "futbol", "bàsquet", "basquet", "cursa", "club", "torneig",
+        ("esport", 6), ("esports", 6), ("futbol", 7), ("bàsquet", 7),
+        ("basquet", 7), ("cursa", 7), ("torneig", 7), ("competició", 6),
+        ("club esportiu", 6),
     ],
     "commerce": [
-        "comerç", "comerc", "comercial", "horeca", "restauració", "restauracio",
-        "mercat", "empresa", "negoci", "bons comercials",
+        ("comerç", 6), ("comerc", 6), ("comercial", 5), ("horeca", 7),
+        ("restauració", 6), ("restauracio", 6), ("mercat", 5), ("empresa", 4),
+        ("negoci", 4), ("bons comercials", 7),
+    ],
+    "agenda": [
+        ("agenda", 7), ("reunió informativa", 6), ("reunion informativa", 6),
+        ("convocatòria", 6), ("convocatoria", 6), ("tindrà lloc", 6),
+        ("tendra lloc", 6), ("inscripció", 5), ("inscripcions", 5),
+        ("taller", 5), ("jornada", 5), ("programació", 5), ("programacio", 5),
+        ("ple ordinari", 6), ("ple extraordinari", 6),
     ],
 }
+
+CATEGORY_PRIORITY = ["alerts", "services", "culture", "sports", "commerce", "agenda", "news"]
+
+DATE_PREFIX_RE = re.compile(
+    r"""^\s*(?:
+        \d{1,2}[-/][A-Za-zÀ-ÿ]+[-/]\d{4}
+        |\d{1,2}[-/]\d{1,2}[-/]\d{2,4}
+        |\d{1,2}\s+de\s+[A-Za-zÀ-ÿ]+\s+de\s+\d{4}
+    )\s*[-–—:]?\s*""",
+    flags=re.I | re.X,
+)
 
 
 def clean_text(value: str | None) -> str:
@@ -64,6 +92,23 @@ def truncate(value: str, limit: int = SUMMARY_LIMIT) -> str:
         return value
     shortened = value[: limit + 1].rsplit(" ", 1)[0].rstrip(" ,.;:-")
     return f"{shortened}…"
+
+
+def clean_summary(title: str, summary: str) -> str:
+    summary = clean_text(summary)
+    title = clean_text(title)
+
+    if title and summary.casefold().startswith(title.casefold()):
+        summary = summary[len(title):].lstrip(" :-–—")
+
+    summary = DATE_PREFIX_RE.sub("", summary, count=1)
+
+    if title and summary.casefold().startswith(title.casefold()):
+        summary = summary[len(title):].lstrip(" :-–—")
+
+    summary = re.split(r"\s+Documents adjunts\b", summary, maxsplit=1, flags=re.I)[0]
+    summary = re.sub(r"\s+", " ", summary).strip(" :-–—")
+    return truncate(summary)
 
 
 def parse_date(value: str | None) -> str | None:
@@ -88,10 +133,30 @@ def parse_date(value: str | None) -> str | None:
         return None
 
 
+def category_score(text: str, keywords: list[tuple[str, int]], title: str) -> int:
+    score = 0
+    title_folded = title.casefold()
+    text_folded = text.casefold()
+    for keyword, weight in keywords:
+        keyword_folded = keyword.casefold()
+        if keyword_folded in title_folded:
+            score += weight * 3
+        elif keyword_folded in text_folded:
+            score += weight
+    return score
+
+
 def categorize(title: str, summary: str) -> str:
-    text = f"{title} {summary}".lower()
-    for category, keywords in CATEGORY_KEYWORDS.items():
-        if any(keyword in text for keyword in keywords):
+    combined = f"{title} {summary}"
+    scores = {
+        category: category_score(combined, keywords, title)
+        for category, keywords in CATEGORY_KEYWORDS.items()
+    }
+    best_score = max(scores.values(), default=0)
+    if best_score <= 0:
+        return "news"
+    for category in CATEGORY_PRIORITY:
+        if scores.get(category, 0) == best_score:
             return category
     return "news"
 
@@ -118,7 +183,7 @@ def parse_rss(xml_bytes: bytes, source: dict) -> list[dict]:
         for item in rss_items[:MAX_POSTS_PER_SOURCE]:
             title = clean_text(text_of(item, ["title"]))
             url = clean_text(text_of(item, ["link", "guid"]))
-            summary = truncate(clean_text(text_of(item, ["description", "summary"])))
+            summary = clean_summary(title, text_of(item, ["description", "summary"]))
             published_at = parse_date(text_of(item, ["pubDate", "date", "published", "updated"]))
             if not title or not url:
                 continue
@@ -129,7 +194,7 @@ def parse_rss(xml_bytes: bytes, source: dict) -> list[dict]:
     entries = root.findall(".//{*}entry")
     for entry in entries[:MAX_POSTS_PER_SOURCE]:
         title = clean_text(text_of(entry, ["{*}title"]))
-        summary = truncate(clean_text(text_of(entry, ["{*}summary", "{*}content"])))
+        summary = clean_summary(title, text_of(entry, ["{*}summary", "{*}content"]))
         published_at = parse_date(text_of(entry, ["{*}published", "{*}updated"]))
         url = ""
         for link in entry.findall("{*}link"):
@@ -200,7 +265,8 @@ def main() -> int:
     ordered_posts = sorted(deduped.values(), key=sort_key, reverse=True)
 
     payload = {
-        "version": 1,
+        "version": 2,
+        "generator_version": "0.21",
         "fetched_at": datetime.now(timezone.utc).isoformat(),
         "source_count": len([s for s in config.get("sources", []) if s.get("enabled", True)]),
         "errors": errors,
