@@ -4,10 +4,11 @@ Projecte públic i sense ànim de lucre per reunir informació local de Sóller 
 
 ## Versió
 
-**v0.8**
+**v0.81**
 
-## Novetats de la v0.8
+## Novetats de la v0.81
 
+- Correcció de memòria cau del navegador: els recursos estàtics incorporen versió a la URL perquè CSS i JavaScript s’actualitzin conjuntament amb l’HTML.
 - Nova zona **Accessos útils** orientada a mobilitat i serveis.
 - Enllaç directe als horaris oficials de Tren i Tramvia de Sóller.
 - Enllaç directe a la informació oficial d'ORA i aparcament de Sóller 2010.
