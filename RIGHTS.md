@@ -42,7 +42,7 @@ En tots els altres casos, Sóller Ara utilitza icones pròpies o elements visual
 
 Els continguts agregats mantenen sempre un enllaç visible a la font d'origen.
 
-Els serveis externs com horaris de transport, TIB, ORA, aparcament o contactes municipals es poden presentar com a **accessos directes** a la pàgina oficial. En aquests casos Sóller Ara evita reproduir taules, tarifes, mapes, logotips, fotografies o altres continguts protegits i limita la funcionalitat a identificar el servei i facilitar-ne l'enllaç oficial.
+Els serveis externs com horaris de transport, TIB, VISICAR, ORA, aparcament o contactes municipals es poden presentar com a **accessos directes** a la pàgina oficial. En aquests casos Sóller Ara evita reproduir taules, tarifes, mapes, logotips, fotografies o altres continguts protegits i limita la funcionalitat a identificar el servei i facilitar-ne l'enllaç oficial.
 
 ## Fonts jurídiques de referència
 
