@@ -1,4 +1,4 @@
-{
+window.SOLLER_ARA_DATA = {
   "version": 6,
   "generator_version": "0.41",
   "fetched_at": "2026-09-14T16:32:12.144223+00:00",
@@ -596,4 +596,4 @@
       "related_sources": []
     }
   ]
-}
+};
