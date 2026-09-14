@@ -146,7 +146,7 @@ a { color: inherit; }
 .quick-grid {
   margin-top: 18px;
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 12px;
 }
 .quick-link {
@@ -193,6 +193,35 @@ a { color: inherit; }
 .quick-arrow {
   color: var(--primary);
   font-weight: 800;
+}
+.tib-shortcuts {
+  margin-top: 14px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  font-size: .82rem;
+  color: var(--muted);
+}
+.tib-shortcuts-label {
+  font-weight: 800;
+  color: var(--text);
+}
+.tib-shortcuts a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 30px;
+  padding: 5px 9px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--bg);
+  color: var(--primary);
+  font-weight: 750;
+  text-decoration: none;
+}
+.tib-shortcuts a:hover {
+  border-color: var(--primary);
+  text-decoration: underline;
 }
 
 .section-heading {

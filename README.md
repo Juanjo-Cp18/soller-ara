@@ -4,19 +4,21 @@ Projecte públic i sense ànim de lucre per reunir informació local de Sóller 
 
 ## Versió
 
-**v0.81**
+**v0.9**
 
-## Novetats de la v0.81
+## Novetats de la v0.9
 
-- Correcció de memòria cau del navegador: els recursos estàtics incorporen versió a la URL perquè CSS i JavaScript s’actualitzin conjuntament amb l’HTML.
-- Nova zona **Accessos útils** orientada a mobilitat i serveis.
-- Enllaç directe als horaris oficials de Tren i Tramvia de Sóller.
-- Enllaç directe a la informació oficial d'ORA i aparcament de Sóller 2010.
-- Enllaç directe a la pàgina oficial de la Policia Local de Sóller.
-- Enllaç directe a la fitxa municipal de Radio Taxis Sóller.
-- No es copien horaris, tarifes, mapes, fotografies ni altres continguts d'aquestes webs: Sóller Ara actua com a porta d'entrada a la font oficial.
-- Els accessos estan traduïts a català, castellà i anglès.
-- Es manté la política de drets de la v0.7 i les 4 fonts d'actualitat.
+- Incorporació del servei oficial d'autobusos **TIB** a la zona d'accessos útils.
+- Accés principal a **TIB Ara**, on l'usuari pot consultar informació de servei en temps real, avisos, alertes i planificació de trajectes.
+- Accés directe a la parada **Sóller centre 2 (61031)** per consultar pròximes sortides.
+- Atajos directes a les línies que passen per Sóller:
+  - 203
+  - 204
+  - 231
+  - 232
+- No es copien horaris, tarifes o dades operatives del TIB. Els accessos sempre apunten a la informació oficial i vigent.
+- Es manté la política de drets de la v0.7.
+- S'incrementa la versió dels recursos estàtics a `v=0.9` per evitar problemes de caché.
 
 ## Fonts d'actualitat
 
@@ -28,6 +30,7 @@ Projecte públic i sense ànim de lucre per reunir informació local de Sóller 
 ## Accessos oficials
 
 - Ferrocarril de Sóller — horaris oficials.
+- TIB — TIB Ara, pròximes sortides i línies de Sóller.
 - Sóller 2010 — ORA i aparcament.
 - Ajuntament de Sóller — Policia Local.
 - Ajuntament de Sóller — Radio Taxis Sóller.
@@ -38,13 +41,11 @@ No es mostren fotografies de tercers de manera automàtica.
 
 Només s'incorporaran quan disposem d'una llicència, permís escrit, domini públic verificat o material propi.
 
-Els accessos útils utilitzen icones genèriques pròpies del sistema i enllacen directament a la font oficial.
-
 ## Arquitectura actual
 
 - `index.html`: estructura de la interfície i accessos útils.
 - `styles.css`: disseny responsive.
-- `app.js`: idiomes, filtres, cerca, lògica d'Ara i traducció dels accessos.
+- `app.js`: idiomes, filtres, cerca, lògica d'Ara i traduccions.
 - `sources.json`: fonts d'actualitat i política de drets.
 - `scripts/update_sources.py`: lectura, classificació i generació de dades.
 - `RIGHTS.md`: política de drets i reutilització.
