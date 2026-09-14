@@ -1,5 +1,5 @@
 {
-  "version": 7,
+  "version": 8,
   "sources": [
     {
       "id": "ajuntament-soller-noticies",
@@ -70,6 +70,22 @@
       "filter_zone_codes": [
         "645401"
       ]
+    },
+    {
+      "id": "youtube-ajuntament-soller",
+      "name": "Ajuntament de Sóller · YouTube",
+      "type": "youtube_channel",
+      "url": "https://www.youtube.com/feeds/videos.xml?channel_id=UCIziZJjF0elmpg9Zyy4xYpA",
+      "language": "ca",
+      "locality": "Sóller",
+      "source_type": "social",
+      "platform": "YouTube",
+      "account": "@ajuntamentdesoller_",
+      "max_items": 15,
+      "enabled": true,
+      "image_policy": "embed_only",
+      "content_policy": "generated_social_summary",
+      "rights_status": "platform_embed"
     }
   ]
 }

@@ -4,21 +4,27 @@ Projecte públic i sense ànim de lucre per reunir informació local de Sóller 
 
 ## Versió
 
-**v0.12**
+**v0.13**
 
-## Novetats de la v0.12
+## Novetats de la v0.13
 
-- Arquitectura preparada perquè les publicacions socials apareguin dins **Tot**, **Ara** i **Xarxes**.
-- Les targetes socials admeten un resum propi de Sóller Ara i el contingut original embegut.
-- Suport inicial de multimèdia oficial:
-  - X: post embegut amb fotos/vídeos quan la publicació pública els contingui.
-  - TikTok: reproductor oficial.
-  - YouTube: reproductor oficial.
-  - imatge directa només quan els drets estiguin explícitament verificats.
-- Les fotos i vídeos no es descarreguen ni es tornen a allotjar.
-- Nova documentació `SOCIAL.md`.
-- Correcció AEMET: els avisos automàtics queden limitats a **Sierra de Tramontana (645401)**, zona que inclou Sóller.
-- Recursos estàtics actualitzats a `v=0.12`.
+- Primera font social real i automàtica: **Ajuntament de Sóller · YouTube**.
+- Els vídeos del canal oficial entren automàticament al sistema mitjançant el feed oficial de YouTube.
+- Les publicacions socials apareixen dins:
+  - **Tot**
+  - **Ara**, si són prou recents
+  - **Xarxes**
+- El botó **Xarxes** torna a funcionar com un filtre real de contingut, no només com un accés a perfils.
+- Cada vídeo conserva:
+  - plataforma,
+  - compte,
+  - data,
+  - títol,
+  - resum automàtic propi de Sóller Ara,
+  - enllaç original,
+  - reproductor YouTube embegut.
+- Les xarxes oficials d'Emergències, AEMET i IBANAT continuen disponibles com a accessos complementaris.
+- Recursos estàtics actualitzats a `v=0.13`.
 
 ## Fonts automàtiques
 
@@ -27,10 +33,13 @@ Projecte públic i sense ànim de lucre per reunir informació local de Sóller 
 3. Setmanari Sóller.
 4. Sóller 2010.
 5. AEMET · Serra de Tramuntana.
+6. Ajuntament de Sóller · YouTube.
 
-## Xarxes socials
+## Xarxes
 
-La infraestructura de visualització ja està preparada. La captació automàtica de cada plataforma s'activarà només quan disposem d'una API o sistema oficial estable que permita descubrir publicaciones públicas relevantes para Sóller.
+YouTube és la primera plataforma activada de forma automàtica perquè proporciona un feed públic estable del canal.
+
+X, Instagram i Facebook continuen en estudi per a la captació automàtica. No s'utilitzaran serveis de scraping no oficials només per simular una integració.
 
 ## Cost
 

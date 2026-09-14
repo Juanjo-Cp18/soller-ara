@@ -14,8 +14,8 @@ const translations = {
     "hero.eyebrow": "Avui a Sóller",
     "hero.title": "La informació local, ordenada i accessible.",
     "hero.body": "Una portada única per descobrir avisos, serveis, notícies, agenda, cultura, esport, comerç i publicacions de fonts locals.",
-    "hero.statusTitle": "5 fonts reals connectades",
-    "hero.statusBody": "Fonts locals + AEMET",
+    "hero.statusTitle": "6 fonts reals connectades",
+    "hero.statusBody": "Fonts locals + AEMET + YouTube",
     "feed.eyebrow": "Actualitat",
     "feed.title": "Publicacions destacades",
     "feed.loading": "Carregant actualització...",
@@ -75,8 +75,8 @@ const translations = {
     "hero.eyebrow": "Hoy en Sóller",
     "hero.title": "La información local, ordenada y accesible.",
     "hero.body": "Una portada única para descubrir avisos, servicios, noticias, agenda, cultura, deporte, comercio y publicaciones de fuentes locales.",
-    "hero.statusTitle": "5 fuentes reales conectadas",
-    "hero.statusBody": "Fuentes locales + AEMET",
+    "hero.statusTitle": "6 fuentes reales conectadas",
+    "hero.statusBody": "Fuentes locales + AEMET + YouTube",
     "feed.eyebrow": "Actualidad",
     "feed.title": "Publicaciones destacadas",
     "feed.loading": "Cargando actualización...",
@@ -136,8 +136,8 @@ const translations = {
     "hero.eyebrow": "Today in Sóller",
     "hero.title": "Local information, organized and accessible.",
     "hero.body": "A single homepage for alerts, services, news, events, culture, sports, local businesses and posts from local sources.",
-    "hero.statusTitle": "5 live sources connected",
-    "hero.statusBody": "Local sources + AEMET",
+    "hero.statusTitle": "6 live sources connected",
+    "hero.statusBody": "Local sources + AEMET + YouTube",
     "feed.eyebrow": "Latest",
     "feed.title": "Featured posts",
     "feed.loading": "Loading update...",
@@ -324,7 +324,11 @@ function renderFeed() {
   const normalizedSearch = currentSearch.trim().toLocaleLowerCase(currentLanguage);
   let visiblePosts = posts.filter((post) => {
     const categoryMatches = currentCategory === "all"
-      || (currentCategory === "now" ? isNowPost(post) : post.category === currentCategory);
+      || (currentCategory === "now"
+        ? isNowPost(post)
+        : currentCategory === "social"
+          ? post.source_type === "social"
+          : post.category === currentCategory);
     const sourceMatches = currentSource === "all" || post.source_id === currentSource;
     const relatedText = Array.isArray(post.related_sources) ? post.related_sources.map((item) => `${item.source || ""} ${item.title || ""}`).join(" ") : "";
     const haystack = `${post.title || ""} ${post.summary || ""} ${post.source || ""} ${relatedText}`.toLocaleLowerCase(currentLanguage);
@@ -361,7 +365,7 @@ function renderFeed() {
         <div class="card-media" aria-hidden="true">${iconFor(post.category)}</div>
         <div class="card-body">
           <div class="meta">
-            <span class="source-wrap">${post.source_type === "official" ? '<span class="official-dot" aria-hidden="true"></span>' : ""}<span class="source-name">${escapeHtml(post.source || "")}</span>${socialLabel}</span>
+            <span class="source-wrap">${post.source_type === "official" ? '<span class="official-dot" aria-hidden="true"></span>' : ""}<span class="source-name">${escapeHtml(post.source || "")}</span>${post.account ? `<span class="social-account">${escapeHtml(post.account)}</span>` : ""}${socialLabel}</span>
             <span>${formatDate(post.published_at)}</span>
           </div>
           <span class="badge">${escapeHtml(categoryLabel)}</span>
@@ -569,12 +573,6 @@ document.querySelectorAll(".category").forEach((button) => {
   button.addEventListener("click", () => {
     document.querySelectorAll(".category").forEach((item) => item.classList.remove("active"));
     button.classList.add("active");
-
-    if (button.id === "socialNavButton") {
-      document.getElementById("officialSocial")?.scrollIntoView({ behavior: "smooth", block: "start" });
-      return;
-    }
-
     currentCategory = button.dataset.category;
     renderFeed();
   });

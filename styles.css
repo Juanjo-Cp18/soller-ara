@@ -451,6 +451,11 @@ a { color: inherit; }
 }
 .card h3 { margin: 0; font-size: 1.22rem; line-height: 1.25; }
 .card p { margin: 0; color: var(--muted); line-height: 1.55; }
+.social-account {
+  color: var(--muted);
+  font-size: .72rem;
+  white-space: nowrap;
+}
 .social-platform {
   display: inline-flex;
   align-items: center;

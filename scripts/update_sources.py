@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Actualitza data/posts.json a partir de les fonts públiques configurades.
 
-v0.12: limita AEMET a la Serra de Tramuntana i prepara targetes socials amb multimèdia embeguda.
+v0.13: incorpora YouTube de l'Ajuntament com a primera font social automàtica.
 """
 
 from __future__ import annotations
@@ -27,7 +27,7 @@ OUTPUT_FILE = ROOT / "data" / "posts.json"
 JS_OUTPUT_FILE = ROOT / "data" / "posts.js"
 MAX_POSTS_PER_SOURCE = 40
 SUMMARY_LIMIT = 260
-USER_AGENT = "SollerAra/0.12 (+https://github.com/Juanjo-Cp18/soller-ara)"
+USER_AGENT = "SollerAra/0.13 (+https://github.com/Juanjo-Cp18/soller-ara)"
 RELATED_WINDOW_HOURS = 72
 
 CATEGORY_KEYWORDS = {
@@ -335,6 +335,9 @@ def build_post(source: dict, title: str, summary: str, url: str, published_at: s
         "title": title,
         "summary": public_summary,
         "url": url,
+        "platform": source.get("platform"),
+        "account": source.get("account"),
+        "media_type": source.get("media_type"),
         "content_policy": content_policy,
         "rights_status": source.get("rights_status", "unknown"),
         "image_allowed": source.get("image_policy") == "allowed",
@@ -634,6 +637,39 @@ def fetch_aemet_alerts(source: dict) -> list[dict]:
     return filtered
 
 
+def social_summary_from_title(source: dict, title: str) -> str:
+    name = source.get("name", "la font")
+    lowered = title.casefold()
+
+    if "ple" in lowered or "sessió" in lowered or "sesion" in lowered:
+        return f"Vídeo publicat per {name} relacionat amb una sessió plenària o activitat municipal."
+    if "directe" in lowered or "en directe" in lowered or "live" in lowered:
+        return f"Retransmissió publicada per {name}."
+    if "fira" in lowered or "firó" in lowered or "firo" in lowered or "festa" in lowered:
+        return f"Vídeo publicat per {name} relacionat amb una activitat o celebració local."
+    if "avís" in lowered or "avis" in lowered or "alerta" in lowered:
+        return f"Vídeo informatiu publicat per {name} amb contingut d'interès local."
+
+    return f"Vídeo publicat per {name} sobre «{title}»."
+
+
+def fetch_youtube_channel(source: dict) -> list[dict]:
+    payload, _ = fetch_bytes(
+        source["url"],
+        "application/atom+xml, application/xml, text/xml;q=0.9, */*;q=0.8",
+    )
+    posts = parse_rss(payload, source)
+    max_items = int(source.get("max_items", 15))
+
+    for post in posts[:max_items]:
+        post["source_type"] = "social"
+        post["platform"] = source.get("platform", "YouTube")
+        post["account"] = source.get("account")
+        post["media_type"] = "video"
+        post["summary"] = social_summary_from_title(source, post.get("title", ""))
+    return posts[:max_items]
+
+
 def fetch_source(source: dict) -> list[dict]:
     if source["type"] in ("rss", "atom"):
         payload, _ = fetch_bytes(
@@ -650,6 +686,9 @@ def fetch_source(source: dict) -> list[dict]:
 
     if source["type"] == "aemet_alerts":
         return fetch_aemet_alerts(source)
+
+    if source["type"] == "youtube_channel":
+        return fetch_youtube_channel(source)
 
     raise ValueError(f"Tipus de font no suportat: {source['type']}")
 
@@ -699,8 +738,8 @@ def main() -> int:
     ordered_posts, related_pair_count = annotate_related_posts(ordered_posts)
 
     payload = {
-        "version": 12,
-        "generator_version": "0.12",
+        "version": 13,
+        "generator_version": "0.13",
         "fetched_at": datetime.now(timezone.utc).isoformat(),
         "source_count": len([s for s in config.get("sources", []) if s.get("enabled", True)]),
         "source_status": source_status,

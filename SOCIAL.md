@@ -50,3 +50,14 @@ Per tant, l'arquitectura permet multimèdia des d'ara, però l'activació autom�
 ## Regla editorial
 
 Una publicación social nunca se elimina por parecerse a una noticia de otra fuente. Puede marcarse como relacionada, pero siempre conserva su tarjeta y enlace original.
+
+
+## Primera font automàtica activada
+
+La primera font social automàtica és el canal oficial de YouTube de l'Ajuntament de Sóller.
+
+Canal: `@ajuntamentdesoller_`
+
+Sóller Ara consulta el feed públic oficial de YouTube i crea una entrada social per cada vídeo recent. El text resum és generat per Sóller Ara a partir del títol i del tipus de publicació; no copia la descripció completa del vídeo.
+
+El vídeo es reprodueix amb el reproductor oficial de YouTube i continua allotjat a YouTube.
