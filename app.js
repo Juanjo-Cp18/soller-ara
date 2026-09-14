@@ -6,13 +6,14 @@ const translations = {
     "nav.news": "Notícies",
     "nav.agenda": "Agenda",
     "nav.alerts": "Avisos",
+    "nav.services": "Serveis",
     "nav.culture": "Cultura",
     "nav.sports": "Esports",
     "nav.commerce": "Comerç",
     "nav.social": "Xarxes",
     "hero.eyebrow": "Avui a Sóller",
     "hero.title": "La informació local, ordenada i accessible.",
-    "hero.body": "Una portada única per descobrir avisos, notícies, agenda, cultura, esport, comerç i publicacions de fonts locals.",
+    "hero.body": "Una portada única per descobrir avisos, serveis, notícies, agenda, cultura, esport, comerç i publicacions de fonts locals.",
     "hero.statusTitle": "Font real connectada",
     "hero.statusBody": "Ajuntament de Sóller · actualització automàtica",
     "feed.eyebrow": "Actualitat",
@@ -25,7 +26,7 @@ const translations = {
     "card.original": "Veure original",
     "card.share": "Compartir",
     "empty": "No hi ha publicacions que coincideixin amb la cerca.",
-    categories: { now: "Ara", news: "Notícies", agenda: "Agenda", alerts: "Avisos", culture: "Cultura", sports: "Esports", commerce: "Comerç", social: "Xarxes" }
+    categories: { now: "Ara", news: "Notícies", agenda: "Agenda", alerts: "Avisos", services: "Serveis", culture: "Cultura", sports: "Esports", commerce: "Comerç", social: "Xarxes" }
   },
   es: {
     tagline: "Todo lo que pasa en Sóller, en un solo lugar.",
@@ -34,13 +35,14 @@ const translations = {
     "nav.news": "Noticias",
     "nav.agenda": "Agenda",
     "nav.alerts": "Avisos",
+    "nav.services": "Servicios",
     "nav.culture": "Cultura",
     "nav.sports": "Deportes",
     "nav.commerce": "Comercio",
     "nav.social": "Redes",
     "hero.eyebrow": "Hoy en Sóller",
     "hero.title": "La información local, ordenada y accesible.",
-    "hero.body": "Una portada única para descubrir avisos, noticias, agenda, cultura, deporte, comercio y publicaciones de fuentes locales.",
+    "hero.body": "Una portada única para descubrir avisos, servicios, noticias, agenda, cultura, deporte, comercio y publicaciones de fuentes locales.",
     "hero.statusTitle": "Fuente real conectada",
     "hero.statusBody": "Ayuntamiento de Sóller · actualización automática",
     "feed.eyebrow": "Actualidad",
@@ -53,7 +55,7 @@ const translations = {
     "card.original": "Ver original",
     "card.share": "Compartir",
     "empty": "No hay publicaciones que coincidan con la búsqueda.",
-    categories: { now: "Ahora", news: "Noticias", agenda: "Agenda", alerts: "Avisos", culture: "Cultura", sports: "Deportes", commerce: "Comercio", social: "Redes" }
+    categories: { now: "Ahora", news: "Noticias", agenda: "Agenda", alerts: "Avisos", services: "Servicios", culture: "Cultura", sports: "Deportes", commerce: "Comercio", social: "Redes" }
   },
   en: {
     tagline: "Everything happening in Sóller, in one place.",
@@ -62,13 +64,14 @@ const translations = {
     "nav.news": "News",
     "nav.agenda": "Events",
     "nav.alerts": "Alerts",
+    "nav.services": "Services",
     "nav.culture": "Culture",
     "nav.sports": "Sports",
     "nav.commerce": "Local business",
     "nav.social": "Social",
     "hero.eyebrow": "Today in Sóller",
     "hero.title": "Local information, organized and accessible.",
-    "hero.body": "A single homepage for alerts, news, events, culture, sports, local businesses and posts from local sources.",
+    "hero.body": "A single homepage for alerts, services, news, events, culture, sports, local businesses and posts from local sources.",
     "hero.statusTitle": "Live source connected",
     "hero.statusBody": "Sóller Town Council · automatic updates",
     "feed.eyebrow": "Latest",
@@ -81,7 +84,7 @@ const translations = {
     "card.original": "View original",
     "card.share": "Share",
     "empty": "No posts match your search.",
-    categories: { now: "Now", news: "News", agenda: "Events", alerts: "Alerts", culture: "Culture", sports: "Sports", commerce: "Local business", social: "Social" }
+    categories: { now: "Now", news: "News", agenda: "Events", alerts: "Alerts", services: "Services", culture: "Culture", sports: "Sports", commerce: "Local business", social: "Social" }
   }
 };
 
@@ -134,6 +137,7 @@ function isNowPost(post) {
 function iconFor(category) {
   return {
     alerts: "🚨",
+    services: "🛠️",
     agenda: "📅",
     culture: "🎭",
     sports: "⚽",
@@ -202,7 +206,7 @@ function renderFeed() {
         <div class="card-media" aria-hidden="true">${iconFor(post.category)}</div>
         <div class="card-body">
           <div class="meta">
-            <span class="source-wrap"><span class="official-dot" aria-hidden="true"></span><span class="source-name">${escapeHtml(post.source || "")}</span></span>
+            <span class="source-wrap">${post.source_type === "official" ? '<span class="official-dot" aria-hidden="true"></span>' : ""}<span class="source-name">${escapeHtml(post.source || "")}</span></span>
             <span>${formatDate(post.published_at)}</span>
           </div>
           <span class="badge">${escapeHtml(categoryLabel)}</span>
