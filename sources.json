@@ -1,5 +1,5 @@
 {
-  "version": 3,
+  "version": 4,
   "sources": [
     {
       "id": "ajuntament-soller-noticies",
@@ -30,6 +30,17 @@
       "locality": "Sóller",
       "source_type": "media",
       "max_items": 20,
+      "enabled": true
+    },
+    {
+      "id": "soller-2010",
+      "name": "Sóller 2010",
+      "type": "soller2010_news",
+      "url": "https://soller2010.com/noticias",
+      "language": "ca",
+      "locality": "Sóller",
+      "source_type": "official",
+      "max_items": 15,
       "enabled": true
     }
   ]

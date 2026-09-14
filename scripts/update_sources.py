@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Actualitza data/posts.json a partir de les fonts públiques configurades.
 
-v0.5: registra l'estat de cada font i manté el sistema preparat per filtrar-les des de la interfície.
+v0.6: afegeix Sóller 2010 com a quarta font oficial i manté l'aïllament d'errors per font.
 """
 
 from __future__ import annotations
@@ -27,7 +27,7 @@ OUTPUT_FILE = ROOT / "data" / "posts.json"
 JS_OUTPUT_FILE = ROOT / "data" / "posts.js"
 MAX_POSTS_PER_SOURCE = 40
 SUMMARY_LIMIT = 260
-USER_AGENT = "SollerAra/0.5 (+https://github.com/Juanjo-Cp18/soller-ara)"
+USER_AGENT = "SollerAra/0.6 (+https://github.com/Juanjo-Cp18/soller-ara)"
 RELATED_WINDOW_HOURS = 72
 
 CATEGORY_KEYWORDS = {
@@ -371,6 +371,44 @@ class LatestArticleLinkParser(HTMLParser):
         self.current_text = []
 
 
+
+class Soller2010LinkParser(HTMLParser):
+    def __init__(self, base_url: str):
+        super().__init__(convert_charrefs=True)
+        self.base_url = base_url
+        self.current_href: str | None = None
+        self.current_text: list[str] = []
+        self.links: list[tuple[str, str]] = []
+
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        if tag.lower() != "a":
+            return
+        href = dict(attrs).get("href")
+        if not href:
+            return
+        absolute = urljoin(self.base_url, href)
+        parsed = urlparse(absolute)
+        if not parsed.netloc.endswith("soller2010.com"):
+            return
+        if not parsed.path.startswith("/noticias/"):
+            return
+        self.current_href = parsed._replace(query="", fragment="").geturl()
+        self.current_text = []
+
+    def handle_data(self, data: str) -> None:
+        if self.current_href:
+            self.current_text.append(data)
+
+    def handle_endtag(self, tag: str) -> None:
+        if tag.lower() != "a" or not self.current_href:
+            return
+        title = clean_text(" ".join(self.current_text))
+        if len(title) >= 6:
+            self.links.append((self.current_href, title))
+        self.current_href = None
+        self.current_text = []
+
+
 class ArticleMetaParser(HTMLParser):
     def __init__(self):
         super().__init__(convert_charrefs=True)
@@ -483,6 +521,84 @@ def fetch_html_latest(source: dict) -> list[dict]:
     return posts
 
 
+
+def parse_numeric_date_from_text(value: str) -> str | None:
+    match = re.search(r"\b(\d{1,2})/(\d{1,2})/(\d{4})\b", value)
+    if not match:
+        return None
+    try:
+        day, month, year = map(int, match.groups())
+        return datetime(year, month, day, 12, 0, tzinfo=timezone.utc).isoformat()
+    except ValueError:
+        return None
+
+
+def fetch_soller2010_news(source: dict) -> list[dict]:
+    payload, charset = fetch_bytes(
+        source["url"],
+        "text/html,application/xhtml+xml;q=0.9,*/*;q=0.8",
+    )
+    listing_html = payload.decode(charset, errors="replace")
+    parser = Soller2010LinkParser(source["url"])
+    parser.feed(listing_html)
+
+    unique_links: list[tuple[str, str]] = []
+    seen: set[str] = set()
+    for url, title in parser.links:
+        if url in seen:
+            continue
+        seen.add(url)
+        unique_links.append((url, title))
+
+    max_items = int(source.get("max_items", 15))
+    posts: list[dict] = []
+
+    for url, listing_title in unique_links[:max_items]:
+        title = listing_title
+        summary = ""
+        published_at = None
+
+        try:
+            article_payload, article_charset = fetch_bytes(
+                url,
+                "text/html,application/xhtml+xml;q=0.9,*/*;q=0.8",
+            )
+            article_html = article_payload.decode(article_charset, errors="replace")
+            meta = ArticleMetaParser()
+            meta.feed(article_html)
+
+            title = clean_text(
+                meta.meta.get("og:title")
+                or meta.meta.get("twitter:title")
+                or meta.h1
+                or listing_title
+            )
+            summary = clean_summary(
+                title,
+                meta.meta.get("description")
+                or meta.meta.get("og:description")
+                or meta.meta.get("twitter:description")
+                or "",
+            )
+            visible_text = clean_text(article_html)
+            published_at = (
+                parse_date(meta.meta.get("article:published_time"))
+                or parse_date(meta.meta.get("datepublished"))
+                or parse_date(meta.meta.get("date"))
+                or parse_numeric_date_from_text(visible_text)
+            )
+        except Exception as exc:
+            print(f"AVÍS {source['name']} article {url}: {exc}", file=sys.stderr)
+
+        # No publiquem un avís sense data: és preferible ometre'l que presentar-lo com a recent.
+        if not title or not published_at:
+            continue
+
+        posts.append(build_post(source, title, summary, url, published_at))
+
+    return posts
+
+
 def fetch_source(source: dict) -> list[dict]:
     if source["type"] in ("rss", "atom"):
         payload, _ = fetch_bytes(
@@ -493,6 +609,9 @@ def fetch_source(source: dict) -> list[dict]:
 
     if source["type"] == "html_latest":
         return fetch_html_latest(source)
+
+    if source["type"] == "soller2010_news":
+        return fetch_soller2010_news(source)
 
     raise ValueError(f"Tipus de font no suportat: {source['type']}")
 
@@ -542,8 +661,8 @@ def main() -> int:
     ordered_posts, related_pair_count = annotate_related_posts(ordered_posts)
 
     payload = {
-        "version": 7,
-        "generator_version": "0.5",
+        "version": 8,
+        "generator_version": "0.6",
         "fetched_at": datetime.now(timezone.utc).isoformat(),
         "source_count": len([s for s in config.get("sources", []) if s.get("enabled", True)]),
         "source_status": source_status,

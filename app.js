@@ -14,8 +14,8 @@ const translations = {
     "hero.eyebrow": "Avui a Sóller",
     "hero.title": "La informació local, ordenada i accessible.",
     "hero.body": "Una portada única per descobrir avisos, serveis, notícies, agenda, cultura, esport, comerç i publicacions de fonts locals.",
-    "hero.statusTitle": "3 fonts reals connectades",
-    "hero.statusBody": "Ajuntament + Sa Veu + Setmanari Sóller",
+    "hero.statusTitle": "4 fonts reals connectades",
+    "hero.statusBody": "Ajuntament + Sa Veu + Setmanari + Sóller 2010",
     "feed.eyebrow": "Actualitat",
     "feed.title": "Publicacions destacades",
     "feed.loading": "Carregant actualització...",
@@ -46,8 +46,8 @@ const translations = {
     "hero.eyebrow": "Hoy en Sóller",
     "hero.title": "La información local, ordenada y accesible.",
     "hero.body": "Una portada única para descubrir avisos, servicios, noticias, agenda, cultura, deporte, comercio y publicaciones de fuentes locales.",
-    "hero.statusTitle": "3 fuentes reales conectadas",
-    "hero.statusBody": "Ayuntamiento + Sa Veu + Setmanari Sóller",
+    "hero.statusTitle": "4 fuentes reales conectadas",
+    "hero.statusBody": "Ayuntamiento + Sa Veu + Setmanari + Sóller 2010",
     "feed.eyebrow": "Actualidad",
     "feed.title": "Publicaciones destacadas",
     "feed.loading": "Cargando actualización...",
@@ -78,8 +78,8 @@ const translations = {
     "hero.eyebrow": "Today in Sóller",
     "hero.title": "Local information, organized and accessible.",
     "hero.body": "A single homepage for alerts, services, news, events, culture, sports, local businesses and posts from local sources.",
-    "hero.statusTitle": "3 live sources connected",
-    "hero.statusBody": "Town Council + Sa Veu + Setmanari Sóller",
+    "hero.statusTitle": "4 live sources connected",
+    "hero.statusBody": "Town Council + Sa Veu + Setmanari + Sóller 2010",
     "feed.eyebrow": "Latest",
     "feed.title": "Featured posts",
     "feed.loading": "Loading update...",
@@ -140,10 +140,31 @@ function formatDate(value) {
 }
 
 function isNowPost(post) {
-  if (post.category === "alerts") return true;
   if (!post.published_at) return false;
-  const age = Date.now() - new Date(post.published_at).getTime();
-  return age >= 0 && age <= 72 * 60 * 60 * 1000;
+
+  const publishedAt = new Date(post.published_at).getTime();
+  if (Number.isNaN(publishedAt)) return false;
+
+  const ageHours = (Date.now() - publishedAt) / (60 * 60 * 1000);
+  if (ageHours < 0) return false;
+
+  if (post.category === "alerts") return ageHours <= 168;
+  if (post.category === "services") return ageHours <= 120;
+  return ageHours <= 24;
+}
+
+function nowPriority(post) {
+  const categoryPriority = {
+    alerts: 0,
+    services: 1,
+    agenda: 2,
+    news: 3,
+    culture: 4,
+    sports: 5,
+    commerce: 6,
+    social: 7
+  };
+  return categoryPriority[post.category] ?? 9;
 }
 
 function iconFor(category) {
@@ -214,7 +235,7 @@ function populateSourceSelect() {
 
 function renderFeed() {
   const normalizedSearch = currentSearch.trim().toLocaleLowerCase(currentLanguage);
-  const visiblePosts = posts.filter((post) => {
+  let visiblePosts = posts.filter((post) => {
     const categoryMatches = currentCategory === "all"
       || (currentCategory === "now" ? isNowPost(post) : post.category === currentCategory);
     const sourceMatches = currentSource === "all" || post.source_id === currentSource;
@@ -223,6 +244,14 @@ function renderFeed() {
     const searchMatches = !normalizedSearch || haystack.includes(normalizedSearch);
     return categoryMatches && sourceMatches && searchMatches;
   });
+
+  if (currentCategory === "now") {
+    visiblePosts = [...visiblePosts].sort((a, b) => {
+      const priorityDiff = nowPriority(a) - nowPriority(b);
+      if (priorityDiff !== 0) return priorityDiff;
+      return new Date(b.published_at).getTime() - new Date(a.published_at).getTime();
+    });
+  }
 
   if (!visiblePosts.length) {
     feed.innerHTML = `<div class="empty">${t("empty")}</div>`;

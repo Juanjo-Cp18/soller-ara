@@ -4,32 +4,26 @@ Projecte públic i sense ànim de lucre per reunir informació local de Sóller 
 
 ## Versió
 
-**v0.5**
+**v0.6**
 
-## Novetats de la v0.5
+## Novetats de la v0.6
 
-- Filtre per font a la portada.
-- L'usuari pot veure totes les publicacions o limitar-les a:
-  - Ajuntament de Sóller
-  - Sa Veu de Sóller
-  - Setmanari Sóller
-- El generador registra ara l'estat de cada font a `data/posts.json`:
-  - si l'actualització ha funcionat,
-  - quantes publicacions ha aportat,
-  - quin mètode s'ha utilitzat,
-  - i l'error concret si una font falla.
-- Una font que falla no impedeix que les altres continuïn actualitzant-se.
-- Es manté la compatibilitat amb obertura local mitjançant `data/posts.js`.
+- Quarta font real: **Sóller 2010**, entitat pública empresarial municipal.
+- Els avisos es llegeixen des de la pàgina pública de notícies i, per cada avís, es comprova la data publicada a la pàgina individual.
+- Si un avís de Sóller 2010 no té una data fiable, no s'incorpora a la cronologia.
+- La font queda aïllada: si Sóller 2010 canvia la seva web o falla, les altres fonts continuen actualitzant-se.
+- La secció **Ara** ja no manté avisos antics indefinidament:
+  - Avisos: fins a 7 dies.
+  - Serveis: fins a 5 dies.
+  - Altres continguts: fins a 24 hores.
+- Dins **Ara**, els avisos i serveis tenen prioritat visual/cronològica sobre la resta.
 
 ## Fonts actuals
 
 1. **Ajuntament de Sóller** — RSS oficial.
 2. **Sa Veu de Sóller** — RSS públic.
 3. **Setmanari Sóller** — pàgina pública d'últimes notícies.
-
-## Font candidata pendent
-
-**Sóller 2010** publica avisos útils sobre residus, ORA, aparcaments, Son Angelats i altres serveis públics. De moment no s'ha afegit a la cronologia perquè el seu llistat públic no ofereix una data fiable per a cada avís. Preferim no mostrar una publicació antiga com si fos recent.
+4. **Sóller 2010** — pàgina pública d'avisos, amb verificació de data a cada publicació.
 
 ## Regles de contingut
 
@@ -38,15 +32,16 @@ Projecte públic i sense ànim de lucre per reunir informació local de Sóller 
 - Les publicacions només es poden marcar com a relacionades si coincideixen clarament tant en titular com en resum i proximitat temporal.
 - Fins i tot si estan relacionades, totes les publicacions continuen visibles separadament.
 - No es copia el cos complet dels articles; es conserva la font i l'enllaç original.
+- Un avís sense data fiable no es presenta com a actual.
 
 ## Arquitectura actual
 
 - `index.html`: estructura de la interfície.
 - `styles.css`: disseny visual responsive.
-- `app.js`: idiomes, filtres per categoria i font, cerca, càrrega web/local i compartició.
+- `app.js`: idiomes, filtres per categoria i font, cerca, lògica d'Ara, càrrega web/local i compartició.
 - `manifest.webmanifest`: configuració inicial PWA.
 - `sources.json`: registre de fonts públiques.
-- `scripts/update_sources.py`: lectura de fonts, classificació, control d'estat i generació de dades.
+- `scripts/update_sources.py`: lectura de RSS, webs públiques, classificació, control d'estat i generació de dades.
 - `data/posts.json`: dades per a la web.
 - `data/posts.js`: dades compatibles amb obertura local.
 - `.github/workflows/update-sources.yml`: actualització horària.
