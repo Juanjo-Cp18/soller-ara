@@ -423,9 +423,9 @@ function renderFeed() {
 
   if (currentCategory === "now") {
     visiblePosts = [...visiblePosts].sort((a, b) => {
-      const priorityDiff = nowPriority(a) - nowPriority(b);
-      if (priorityDiff !== 0) return priorityDiff;
-      return new Date(b.published_at).getTime() - new Date(a.published_at).getTime();
+      const dateDiff = new Date(b.published_at).getTime() - new Date(a.published_at).getTime();
+      if (dateDiff !== 0) return dateDiff;
+      return nowPriority(a) - nowPriority(b);
     });
   }
 
