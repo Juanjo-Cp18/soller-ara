@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "sources": [
     {
       "platform": "YouTube",
@@ -13,35 +13,53 @@
       "name": "AEMET Baleares",
       "account": "@AEMET_Baleares",
       "mode": "official_link",
-      "status": "api_pending"
+      "status": "paid_api_not_enabled"
     },
     {
       "platform": "X",
       "name": "IBANAT",
       "account": "@ibanat_IB",
       "mode": "official_link",
-      "status": "api_pending"
+      "status": "paid_api_not_enabled"
     },
     {
       "platform": "X",
       "name": "SAMU 061 Illes Balears",
       "account": "@SAMU061IB",
       "mode": "official_link",
-      "status": "api_pending"
+      "status": "paid_api_not_enabled"
     },
     {
       "platform": "Facebook",
       "name": "Policia Tutor de Sóller",
       "account": "policiatutorsoller",
       "mode": "official_link",
-      "status": "api_pending"
+      "status": "meta_review_required"
     },
     {
       "platform": "Instagram",
       "name": "Serveis Socials Sóller",
       "account": "@serveissocialssoller",
+      "mode": "meta_business_discovery",
+      "status": "credentials_required",
+      "username": "serveissocialssoller",
+      "max_age_days": 30
+    },
+    {
+      "platform": "Instagram",
+      "name": "Emergències 112 Illes Balears",
+      "account": "@emergencies112_ib",
+      "username": "emergencies112_ib",
+      "mode": "meta_business_discovery",
+      "status": "credentials_required",
+      "max_age_days": 30
+    },
+    {
+      "platform": "Facebook",
+      "name": "Serveis Socials Sóller",
+      "account": "Sollerserveissocials",
       "mode": "official_link",
-      "status": "api_pending"
+      "status": "meta_review_required"
     }
   ]
 }

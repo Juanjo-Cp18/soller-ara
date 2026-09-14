@@ -84,3 +84,16 @@ A partir d'ara:
 - una plataforma només compta com a integrada quan Sóller Ara pot obtenir publicacions individuals;
 - les plataformes no integrades es mantenen com a accessos directes verificats;
 - no es mostraran finestres buides o errors de connexió com si fossin contingut social.
+
+
+## v0.19 — Connector Meta preparat
+
+Sóller Ara ja incorpora un connector opcional per Instagram Business Discovery.
+
+Quan GitHub disposi de `META_ACCESS_TOKEN` i `META_IG_USER_ID`, les fonts marcades com `meta_business_discovery` a `social_sources.json` es consultaran automàticament.
+
+El text original de la publicació s'utilitza només per classificar-la i generar una descripció pròpia i neutral. No es publica íntegrament.
+
+El contingut visual es presenta amb l'embed oficial d'Instagram a partir del permalink original.
+
+Si les credencials no estan configurades, el connector s'omet sense provocar errors en les fonts existents.

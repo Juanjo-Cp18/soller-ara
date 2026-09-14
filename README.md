@@ -4,21 +4,26 @@ Projecte públic i sense ànim de lucre per reunir informació local de Sóller 
 
 ## Versió
 
-**v0.18**
+**v0.19**
 
-## Novetats de la v0.18
+## Novetats de la v0.19
 
-- La pestanya **Ara** queda ordenada estrictament de més recent a més antic.
-- La prioritat de categoria (avisos, serveis, etc.) només s'utilitza com a desempat quan dues publicacions tenen exactament la mateixa data/hora.
-- Els avisos poden continuar visibles fins a 7 dies si encara entren dins la finestra d'`Ara`, però ja no apareixen per davant de publicacions més recents.
-- **Ara** continua sent la pestanya inicial i **Tot** la segona.
-- Recursos estàtics actualitzats a `v=0.18`.
+- Preparada la integració oficial d'**Instagram amb Meta Business Discovery**.
+- Els comptes d'Instagram configurats podran entrar automàticament com a targetes a **Tot / Ara / Xarxes**.
+- Cada targeta social conservarà data, compte, enllaç original i un resum propi de Sóller Ara.
+- Les fotos, carrusels i Reels es mostraran mitjançant l'**embed oficial d'Instagram**, no descarregant els fitxers.
+- GitHub Actions queda preparat per rebre les credencials com a secrets, sense exposar-les al repositori.
+- Comptes inicials preparats:
+  - @serveissocialssoller
+  - @emergencies112_ib
+- X es manté com a accés directe perquè la seva API oficial de lectura és de pagament.
+- Facebook queda pendent de Page Public Content Access / permisos de Meta.
+- Es manté la correcció de **Ara** de la v0.18: ordre estrictament cronològic, més recent primer.
 
-## Xarxes
+## Activació de Instagram
 
-- YouTube de l'Ajuntament continua integrat automàticament.
-- Instagram, Facebook i X continuen registrats com a fonts socials oficials amb accés directe mentre es prepara una integració fiable per publicacions individuals.
+Vegeu `META_SETUP.md`. Fins que no existeixin `META_ACCESS_TOKEN` i `META_IG_USER_ID`, la integració Meta es manté preparada però inactiva i no afecta les sis fonts actuals.
 
 ## Cost
 
-Cost addicional actual: **0 €**.
+Cost addicional actual de Sóller Ara: **0 €**.

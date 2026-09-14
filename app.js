@@ -60,7 +60,7 @@ const translations = {
     "socialSources.title": "Comptes oficials i contingut integrat",
     "socialSources.body": "Les publicacions que podem obtenir de forma fiable apareixen com a targetes. La resta de comptes oficials es mantenen com a accessos directes fins que disposem d'una integració estable.",
     "socialSources.youtube": "YouTube · publicacions integrades",
-    "socialSources.instagram": "Instagram · accés oficial",
+    "socialSources.instagram": "Instagram · integració Meta preparada",
     "socialSources.facebook": "Facebook · accés oficial",
     "socialSources.x": "X · accés oficial",
     "socialSources.policeTutor": "Policia Tutor de Sóller",
@@ -139,7 +139,7 @@ const translations = {
     "socialSources.title": "Cuentas oficiales y contenido integrado",
     "socialSources.body": "Las publicaciones que podemos obtener de forma fiable aparecen como tarjetas. El resto de cuentas oficiales se mantienen como accesos directos hasta disponer de una integración estable.",
     "socialSources.youtube": "YouTube · publicaciones integradas",
-    "socialSources.instagram": "Instagram · acceso oficial",
+    "socialSources.instagram": "Instagram · integración Meta preparada",
     "socialSources.facebook": "Facebook · acceso oficial",
     "socialSources.x": "X · acceso oficial",
     "socialSources.policeTutor": "Policía Tutor de Sóller",
@@ -218,7 +218,7 @@ const translations = {
     "socialSources.title": "Official accounts and integrated content",
     "socialSources.body": "Posts we can retrieve reliably appear as cards. Other official accounts remain direct links until a stable integration is available.",
     "socialSources.youtube": "YouTube · integrated posts",
-    "socialSources.instagram": "Instagram · official link",
+    "socialSources.instagram": "Instagram · Meta integration ready",
     "socialSources.facebook": "Facebook · official link",
     "socialSources.x": "X · official link",
     "socialSources.policeTutor": "Sóller Youth Liaison Police",
@@ -471,6 +471,7 @@ function renderFeed() {
   });
 
   ensureXWidgets();
+  ensureInstagramWidgets();
 }
 
 function escapeHtml(value) {
@@ -517,6 +518,16 @@ function renderSocialEmbed(post) {
       </div>`;
   }
 
+  if (platform === "instagram") {
+    return `
+      <div class="social-embed social-embed-instagram">
+        <blockquote
+          class="instagram-media"
+          data-instgrm-permalink="${escapeAttribute(post.url)}"
+          data-instgrm-version="14"></blockquote>
+      </div>`;
+  }
+
   if (platform === "tiktok") {
     const id = extractTikTokId(post.url);
     if (!id) return "";
@@ -553,6 +564,24 @@ function renderSocialEmbed(post) {
   }
 
   return "";
+}
+
+function ensureInstagramWidgets() {
+  if (!document.querySelector(".instagram-media")) return;
+
+  if (window.instgrm?.Embeds) {
+    window.instgrm.Embeds.process();
+    return;
+  }
+
+  if (document.querySelector('script[data-soller-instagram-embed]')) return;
+
+  const script = document.createElement("script");
+  script.src = "https://www.instagram.com/embed.js";
+  script.async = true;
+  script.dataset.sollerInstagramEmbed = "true";
+  script.addEventListener("load", () => window.instgrm?.Embeds?.process());
+  document.body.appendChild(script);
 }
 
 function ensureXWidgets() {

@@ -10,6 +10,7 @@ on:
     paths:
       - "sources.json"
       - "scripts/update_sources.py"
+      - "social_sources.json"
       - ".github/workflows/update-sources.yml"
 
 permissions:
@@ -32,6 +33,10 @@ jobs:
           python-version: "3.13"
 
       - name: Actualitzar fonts
+        env:
+          META_ACCESS_TOKEN: ${{ secrets.META_ACCESS_TOKEN }}
+          META_IG_USER_ID: ${{ secrets.META_IG_USER_ID }}
+          META_GRAPH_VERSION: "v26.0"
         run: python scripts/update_sources.py
 
       - name: Guardar dades actualitzades

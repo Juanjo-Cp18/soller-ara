@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Actualitza data/posts.json a partir de les fonts públiques configurades.
 
-v0.15: ordena dates per instant UTC i reforça l'estat de les fonts.
+v0.19: prepara la integració oficial d'Instagram mitjançant Meta Business Discovery.
 """
 
 from __future__ import annotations
@@ -9,6 +9,7 @@ from __future__ import annotations
 import hashlib
 import html
 import json
+import os
 import re
 import sys
 import unicodedata
@@ -17,17 +18,18 @@ from datetime import datetime, timezone
 from html.parser import HTMLParser
 from email.utils import parsedate_to_datetime
 from pathlib import Path
-from urllib.parse import urljoin, urlparse
+from urllib.parse import urlencode, urljoin, urlparse
 from urllib.request import Request, urlopen
 from xml.etree import ElementTree as ET
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCES_FILE = ROOT / "sources.json"
+SOCIAL_SOURCES_FILE = ROOT / "social_sources.json"
 OUTPUT_FILE = ROOT / "data" / "posts.json"
 JS_OUTPUT_FILE = ROOT / "data" / "posts.js"
 MAX_POSTS_PER_SOURCE = 40
 SUMMARY_LIMIT = 260
-USER_AGENT = "SollerAra/0.15 (+https://github.com/Juanjo-Cp18/soller-ara)"
+USER_AGENT = "SollerAra/0.19 (+https://github.com/Juanjo-Cp18/soller-ara)"
 RELATED_WINDOW_HOURS = 72
 
 CATEGORY_KEYWORDS = {
@@ -464,6 +466,184 @@ def fetch_bytes(url: str, accept: str) -> tuple[bytes, str]:
     return payload, charset
 
 
+def fetch_json_bearer(url: str, token: str) -> dict:
+    request = Request(
+        url,
+        headers={
+            "User-Agent": USER_AGENT,
+            "Accept": "application/json",
+            "Authorization": f"Bearer {token}",
+        },
+    )
+    with urlopen(request, timeout=30) as response:
+        payload = response.read()
+    return json.loads(payload.decode("utf-8", errors="replace"))
+
+
+def social_title_from_text(source_name: str, text: str) -> str:
+    category = categorize(text, "")
+    labels = {
+        "alerts": f"Avís publicat per {source_name}",
+        "services": f"Informació de servei de {source_name}",
+        "agenda": f"Activitat anunciada per {source_name}",
+        "culture": f"Publicació cultural de {source_name}",
+        "sports": f"Publicació esportiva de {source_name}",
+        "commerce": f"Informació local de {source_name}",
+        "news": f"Actualització de {source_name}",
+    }
+    return labels.get(category, f"Publicació de {source_name}")
+
+
+def social_summary_from_text(source_name: str, text: str) -> str:
+    category = categorize(text, "")
+    labels = {
+        "alerts": f"{source_name} ha publicat un avís d'interès local. Consulta la publicació original per veure'n tots els detalls.",
+        "services": f"{source_name} ha compartit informació relacionada amb un servei o actuació local.",
+        "agenda": f"{source_name} ha anunciat una activitat o convocatòria d'interès local.",
+        "culture": f"{source_name} ha compartit una publicació relacionada amb cultura o activitats locals.",
+        "sports": f"{source_name} ha compartit una actualització relacionada amb l'activitat esportiva.",
+        "commerce": f"{source_name} ha compartit informació d'interès per a l'activitat local.",
+        "news": f"{source_name} ha publicat una nova actualització relacionada amb Sóller o el seu àmbit de servei.",
+    }
+    return labels.get(category, f"{source_name} ha publicat una nova actualització.")
+
+
+def fetch_meta_instagram_source(source: dict, token: str, ig_user_id: str, graph_version: str) -> list[dict]:
+    username = str(source.get("username") or source.get("account") or "").lstrip("@").strip()
+    if not username:
+        return []
+
+    fields = (
+        f"business_discovery.username({username})"
+        "{username,name,media.limit(20){id,caption,media_type,permalink,timestamp}}"
+    )
+    query = urlencode({"fields": fields})
+    endpoint = f"https://graph.facebook.com/{graph_version}/{ig_user_id}?{query}"
+    payload = fetch_json_bearer(endpoint, token)
+    business = payload.get("business_discovery") or {}
+    media = ((business.get("media") or {}).get("data")) or []
+
+    source_id = f"instagram-{username}"
+    source_name = source.get("name") or business.get("name") or username
+    account = source.get("account") or f"@{username}"
+    posts: list[dict] = []
+
+    for item in media:
+        permalink = clean_text(item.get("permalink"))
+        published_at = parse_date(item.get("timestamp"))
+        caption = clean_text(item.get("caption"))
+        if not permalink or not published_at:
+            continue
+
+        category = categorize(caption, "")
+        media_type = str(item.get("media_type") or "").casefold()
+        posts.append({
+            "id": stable_id(source_id, permalink, str(item.get("id") or permalink)),
+            "category": category,
+            "source_id": source_id,
+            "source": source_name,
+            "source_type": "social",
+            "language": source.get("language", "ca"),
+            "locality": source.get("locality", "Sóller"),
+            "published_at": published_at,
+            "title": social_title_from_text(source_name, caption),
+            "summary": social_summary_from_text(source_name, caption),
+            "url": permalink,
+            "platform": "Instagram",
+            "account": account,
+            "media_type": "video" if media_type in {"video", "reels", "reel"} else "image",
+            "content_policy": "generated_social_summary",
+            "rights_status": "platform_embed",
+            "image_allowed": False,
+        })
+
+    pseudo_source = {"max_age_days": source.get("max_age_days", 30)}
+    return filter_by_max_age(pseudo_source, posts)
+
+
+def fetch_optional_meta_social_sources() -> tuple[list[dict], list[dict], list[dict]]:
+    if not SOCIAL_SOURCES_FILE.exists():
+        return [], [], []
+
+    config = json.loads(SOCIAL_SOURCES_FILE.read_text(encoding="utf-8"))
+    targets = [
+        source for source in config.get("sources", [])
+        if source.get("mode") == "meta_business_discovery"
+    ]
+    token = os.environ.get("META_ACCESS_TOKEN", "").strip()
+    ig_user_id = os.environ.get("META_IG_USER_ID", "").strip()
+    graph_version = os.environ.get("META_GRAPH_VERSION", "v26.0").strip() or "v26.0"
+
+    integration_status: list[dict] = []
+    source_status: list[dict] = []
+    posts: list[dict] = []
+
+    if not token or not ig_user_id:
+        for source in targets:
+            integration_status.append({
+                "platform": "Instagram",
+                "name": source.get("name"),
+                "account": source.get("account"),
+                "configured": False,
+                "ok": False,
+                "count": 0,
+                "status": "credentials_required",
+                "error": None,
+            })
+        return posts, source_status, integration_status
+
+    for source in targets:
+        source_id = f"instagram-{str(source.get('username') or source.get('account') or '').lstrip('@')}"
+        try:
+            source_posts = fetch_meta_instagram_source(source, token, ig_user_id, graph_version)
+            posts.extend(source_posts)
+            status = {
+                "source_id": source_id,
+                "name": source.get("name"),
+                "source_type": "social",
+                "method": "meta_business_discovery",
+                "ok": True,
+                "count": len(source_posts),
+                "error": None,
+            }
+            source_status.append(status)
+            integration_status.append({
+                "platform": "Instagram",
+                "name": source.get("name"),
+                "account": source.get("account"),
+                "configured": True,
+                "ok": True,
+                "count": len(source_posts),
+                "status": "active",
+                "error": None,
+            })
+            print(f"OK {source.get('name')}: {len(source_posts)} publicacions Instagram")
+        except Exception as exc:
+            error_text = str(exc)
+            source_status.append({
+                "source_id": source_id,
+                "name": source.get("name"),
+                "source_type": "social",
+                "method": "meta_business_discovery",
+                "ok": False,
+                "count": 0,
+                "error": error_text,
+            })
+            integration_status.append({
+                "platform": "Instagram",
+                "name": source.get("name"),
+                "account": source.get("account"),
+                "configured": True,
+                "ok": False,
+                "count": 0,
+                "status": "error",
+                "error": error_text,
+            })
+            print(f"ERROR {source.get('name')}: {exc}", file=sys.stderr)
+
+    return posts, source_status, integration_status
+
+
 def date_from_article_url(url: str) -> str | None:
     match = re.search(r"/(\d{4})/(\d{2})/(\d{2})/", url)
     if not match:
@@ -734,6 +914,7 @@ def main() -> int:
     posts: list[dict] = []
     errors: list[dict] = []
     source_status: list[dict] = []
+    social_integration_status: list[dict] = []
 
     for source in config.get("sources", []):
         if not source.get("enabled", True):
@@ -765,17 +946,28 @@ def main() -> int:
             })
             print(f"ERROR {source.get('name', source.get('id'))}: {exc}", file=sys.stderr)
 
+    meta_posts, meta_source_status, social_integration_status = fetch_optional_meta_social_sources()
+    posts.extend(meta_posts)
+    source_status.extend(meta_source_status)
+    for status in meta_source_status:
+        if not status.get("ok"):
+            errors.append({
+                "source_id": status.get("source_id"),
+                "error": status.get("error"),
+            })
+
     # Només elimina duplicats exactes de la mateixa entrada. Mai elimina una publicació d'una altra font.
     deduped = {post["id"]: post for post in posts}
     ordered_posts = sorted(deduped.values(), key=sort_key, reverse=True)
     ordered_posts, related_pair_count = annotate_related_posts(ordered_posts)
 
     payload = {
-        "version": 15,
-        "generator_version": "0.15",
+        "version": 19,
+        "generator_version": "0.19",
         "fetched_at": datetime.now(timezone.utc).isoformat(),
-        "source_count": len([s for s in config.get("sources", []) if s.get("enabled", True)]),
+        "source_count": len(source_status),
         "source_status": source_status,
+        "social_integration_status": social_integration_status,
         "post_count": len(ordered_posts),
         "related_pair_count": related_pair_count,
         "errors": errors,
