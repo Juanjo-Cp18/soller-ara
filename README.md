@@ -4,19 +4,21 @@ Projecte públic i sense ànim de lucre per reunir informació local de Sóller 
 
 ## Versió
 
-**v0.6**
+**v0.61**
 
-## Novetats de la v0.6
+## Novetats de la v0.6 / v0.61
 
 - Quarta font real: **Sóller 2010**, entitat pública empresarial municipal.
-- Els avisos es llegeixen des de la pàgina pública de notícies i, per cada avís, es comprova la data publicada a la pàgina individual.
+- Els avisos es llegeixen des de la pàgina pública de notícies i es comprova la data publicada a cada avís individual.
 - Si un avís de Sóller 2010 no té una data fiable, no s'incorpora a la cronologia.
 - La font queda aïllada: si Sóller 2010 canvia la seva web o falla, les altres fonts continuen actualitzant-se.
+- Neteja específica dels títols i descripcions genèriques de Sóller 2010.
+- Millora de classificació per a recollida selectiva, voluminosos, reciclatge, piscines i Son Angelats.
 - La secció **Ara** ja no manté avisos antics indefinidament:
   - Avisos: fins a 7 dies.
   - Serveis: fins a 5 dies.
   - Altres continguts: fins a 24 hores.
-- Dins **Ara**, els avisos i serveis tenen prioritat visual/cronològica sobre la resta.
+- Dins **Ara**, els avisos i serveis tenen prioritat sobre la resta.
 
 ## Fonts actuals
 

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Actualitza data/posts.json a partir de les fonts públiques configurades.
 
-v0.6: afegeix Sóller 2010 com a quarta font oficial i manté l'aïllament d'errors per font.
+v0.61: neteja els avisos de Sóller 2010 i millora la seva classificació.
 """
 
 from __future__ import annotations
@@ -27,7 +27,7 @@ OUTPUT_FILE = ROOT / "data" / "posts.json"
 JS_OUTPUT_FILE = ROOT / "data" / "posts.js"
 MAX_POSTS_PER_SOURCE = 40
 SUMMARY_LIMIT = 260
-USER_AGENT = "SollerAra/0.6 (+https://github.com/Juanjo-Cp18/soller-ara)"
+USER_AGENT = "SollerAra/0.61 (+https://github.com/Juanjo-Cp18/soller-ara)"
 RELATED_WINDOW_HOURS = 72
 
 CATEGORY_KEYWORDS = {
@@ -39,7 +39,8 @@ CATEGORY_KEYWORDS = {
         ("tancament", 5), ("restricció", 5),
     ],
     "services": [
-        ("porta a porta", 8), ("recollida", 6), ("residus", 6), ("deixalleria", 6),
+        ("porta a porta", 8), ("recollida", 6), ("recollida selectiva", 8), ("residus", 6), ("deixalleria", 6),
+        ("voluminosos", 7), ("reciclatge", 5), ("reciclar", 5),
         ("mobilitat", 5), ("trànsit", 5), ("transit", 5), ("transport", 5),
         ("aparcament", 5), ("estacionament", 5), ("sanejament", 6), ("pluvials", 6),
         ("aigua", 5), ("enllumenat", 5), ("neteja", 5), ("obres", 4),
@@ -53,6 +54,7 @@ CATEGORY_KEYWORDS = {
     ],
     "sports": [
         ("esport", 6), ("esports", 6), ("futbol", 7), ("bàsquet", 7),
+        ("piscina", 6), ("piscines", 6), ("son angelats", 6),
         ("basquet", 7), ("cursa", 7), ("torneig", 7), ("competició", 6),
         ("club esportiu", 6),
     ],
@@ -572,6 +574,8 @@ def fetch_soller2010_news(source: dict) -> list[dict]:
                 or meta.h1
                 or listing_title
             )
+            title = re.sub(r"\s+Darrers avisos\s*$", "", title, flags=re.I).strip()
+
             summary = clean_summary(
                 title,
                 meta.meta.get("description")
@@ -579,6 +583,8 @@ def fetch_soller2010_news(source: dict) -> list[dict]:
                 or meta.meta.get("twitter:description")
                 or "",
             )
+            if summary.casefold() in {"soller 2010", "sóller 2010"}:
+                summary = ""
             visible_text = clean_text(article_html)
             published_at = (
                 parse_date(meta.meta.get("article:published_time"))
@@ -660,8 +666,8 @@ def main() -> int:
     ordered_posts, related_pair_count = annotate_related_posts(ordered_posts)
 
     payload = {
-        "version": 8,
-        "generator_version": "0.6",
+        "version": 9,
+        "generator_version": "0.61",
         "fetched_at": datetime.now(timezone.utc).isoformat(),
         "source_count": len([s for s in config.get("sources", []) if s.get("enabled", True)]),
         "source_status": source_status,
