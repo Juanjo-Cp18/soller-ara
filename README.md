@@ -4,18 +4,18 @@ Projecte públic i sense ànim de lucre per reunir informació local de Sóller 
 
 ## Versió
 
-**v0.2**
+**v0.21**
 
-## Novetats de la v0.2
+## Novetats de la v0.21
 
-- Primera font real: **Ajuntament de Sóller**.
-- Connexió mitjançant el RSS oficial de notícies.
-- Actualització automàtica amb GitHub Actions, programada cada hora.
-- Les dades es guarden a `data/posts.json` i GitHub Pages les publica com a fitxer estàtic.
-- Sistema de fonts independent a `sources.json`.
-- Classificació automàtica bàsica per paraules clau: notícies, avisos, agenda, cultura, esports i comerç.
-- La interfície continua disponible en català, castellà i anglès; el contingut de la font es conserva en el seu idioma original.
-- Les targetes mostren la font, la data, un extracte breu i l'enllaç a l'original.
+- Neteja automàtica dels extractes RSS: elimina el títol i la data quan venen duplicats al resum.
+- Nova categoria **Serveis** per a residus, porta a porta, mobilitat, trànsit, aigua, sanejament, obres i altres serveis públics.
+- Classificació millorada amb puntuacions i prioritat per categories, en lloc d'assignar la primera paraula clau trobada.
+- Ja no s'utilitzen els dies de la setmana com a senyal automàtica d'Agenda.
+- Els avisos urgents continuen tenint prioritat sobre la resta de categories.
+- El punt visual de font oficial només apareix a les fonts marcades realment com a oficials.
+- Corregit el disparador del workflow d'actualització de fonts.
+- GitHub Pages es torna a publicar automàticament quan acaba una actualització de dades amb èxit.
 
 ## Arquitectura actual
 
@@ -24,7 +24,7 @@ Projecte públic i sense ànim de lucre per reunir informació local de Sóller 
 - `app.js`: idiomes, filtres, cerca, càrrega de dades i compartició.
 - `manifest.webmanifest`: configuració inicial PWA.
 - `sources.json`: registre de fonts públiques.
-- `scripts/update_sources.py`: lector RSS/Atom i normalitzador de publicacions.
+- `scripts/update_sources.py`: lector RSS/Atom, neteja i classificació.
 - `data/posts.json`: dades generades automàticament.
 - `.github/workflows/update-sources.yml`: actualització horària de les fonts.
 - `.github/workflows/deploy-pages.yml`: publicació automàtica a GitHub Pages.
@@ -34,9 +34,9 @@ Projecte públic i sense ànim de lucre per reunir informació local de Sóller 
 - Cost addicional objectiu: **0 €**.
 - Català com a idioma inicial de la interfície.
 - Respecte a la font: no es reprodueix l'article complet; es mostra un extracte breu i un enllaç directe a l'original.
-- Sense IA de pagament a la v0.2.
+- Sense IA de pagament a la v0.21.
 
-## Font v0.2
+## Font actual
 
 Ajuntament de Sóller — RSS oficial de notícies:
 
@@ -44,4 +44,4 @@ Ajuntament de Sóller — RSS oficial de notícies:
 
 ## Estat
 
-La v0.2 és encara una versió pilot. La classificació per paraules clau és deliberadament simple i haurà d'anar millorant a mesura que afegim fonts i vegem casos reals.
+La v0.21 continua sent una versió pilot. La classificació ha millorat, però seguirà necessitant ajustos a mesura que incorporem més fonts i casos reals.
