@@ -4,42 +4,33 @@ Projecte públic i sense ànim de lucre per reunir informació local de Sóller 
 
 ## Versió
 
-**v0.11**
+**v0.12**
 
-## Novetats de la v0.11
+## Novetats de la v0.12
 
-- Cinquena font automàtica: **AEMET · Avisos Mallorca**, a partir del canal RSS oficial d'avisos meteorològics.
-- Els avisos d'AEMET es classifiquen sempre com a **Avisos** i es filtren per referències a Mallorca / Serra de Tramuntana.
-- Nova zona **Emergències i meteorologia** amb accés directe a:
-  - avisos AEMET de Serra de Tramuntana,
-  - Emergències 112 Illes Balears.
-- Nova zona **Xarxes oficials d'avisos**:
-  - X · Emergències 112,
-  - Instagram · Emergències 112,
-  - Facebook · Emergències 112,
-  - X · AEMET Baleares,
-  - X · IBANAT.
-- Les xarxes socials són una font complementària: Sóller Ara **no copia ni raspa automàticament** les publicacions.
-- El botó **Xarxes** del menú porta ara directament a aquests perfils oficials, en lloc de mostrar un filtre buit.
-- Recursos estàtics actualitzats a `v=0.11`.
+- Arquitectura preparada perquè les publicacions socials apareguin dins **Tot**, **Ara** i **Xarxes**.
+- Les targetes socials admeten un resum propi de Sóller Ara i el contingut original embegut.
+- Suport inicial de multimèdia oficial:
+  - X: post embegut amb fotos/vídeos quan la publicació pública els contingui.
+  - TikTok: reproductor oficial.
+  - YouTube: reproductor oficial.
+  - imatge directa només quan els drets estiguin explícitament verificats.
+- Les fotos i vídeos no es descarreguen ni es tornen a allotjar.
+- Nova documentació `SOCIAL.md`.
+- Correcció AEMET: els avisos automàtics queden limitats a **Sierra de Tramontana (645401)**, zona que inclou Sóller.
+- Recursos estàtics actualitzats a `v=0.12`.
 
 ## Fonts automàtiques
 
-1. **Ajuntament de Sóller** — RSS oficial.
-2. **Sa Veu de Sóller** — RSS públic; ús conservador de titular/enllaç.
-3. **Setmanari Sóller** — pàgina pública d'últimes notícies; ús conservador de titular/enllaç.
-4. **Sóller 2010** — avisos públics amb verificació de data.
-5. **AEMET** — RSS oficial d'avisos meteorològics.
+1. Ajuntament de Sóller.
+2. Sa Veu de Sóller.
+3. Setmanari Sóller.
+4. Sóller 2010.
+5. AEMET · Serra de Tramuntana.
 
-## Xarxes i emergències
+## Xarxes socials
 
-Les administracions poden difondre una alerta primer a les xarxes socials. Per aquest motiu Sóller Ara manté accessos directes als perfils oficials d'Emergències 112, AEMET Baleares i IBANAT.
-
-Aquesta capa no substitueix el 112, AEMET ni les fonts oficials. En una emergència s'ha de telefonar al **112**.
-
-## Drets
-
-AEMET autoritza l'ús i reproducció de la seva informació citant AEMET com a autora. Les xarxes socials es tracten únicament com a enllaços externs mentre no existeixi una API o autorització adequada per reutilitzar-ne el contingut.
+La infraestructura de visualització ja està preparada. La captació automàtica de cada plataforma s'activarà només quan disposem d'una API o sistema oficial estable que permita descubrir publicaciones públicas relevantes para Sóller.
 
 ## Cost
 

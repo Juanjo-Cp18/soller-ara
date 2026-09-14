@@ -1,5 +1,5 @@
 {
-  "version": 6,
+  "version": 7,
   "sources": [
     {
       "id": "ajuntament-soller-noticies",
@@ -57,22 +57,19 @@
     },
     {
       "id": "aemet-avisos-mallorca",
-      "name": "AEMET · Avisos Mallorca",
+      "name": "AEMET · Serra de Tramuntana",
       "type": "aemet_alerts",
       "url": "https://www.aemet.es/documentos_d/eltiempo/prediccion/avisos/rss/CAP_AFAE_wah_RSS.xml",
       "language": "es",
-      "locality": "Mallorca / Serra de Tramuntana",
+      "locality": "Sóller / Serra de Tramuntana",
       "source_type": "official",
-      "filter_terms": [
-        "Sierra Tramontana",
-        "Serra de Tramuntana",
-        "Mallorca",
-        "Illes Balears"
-      ],
       "enabled": true,
       "image_policy": "disabled_until_rights_verified",
       "content_policy": "short_factual_excerpt",
-      "rights_status": "reuse_authorized_with_attribution"
+      "rights_status": "reuse_authorized_with_attribution",
+      "filter_zone_codes": [
+        "645401"
+      ]
     }
   ]
 }

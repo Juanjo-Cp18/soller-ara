@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Actualitza data/posts.json a partir de les fonts públiques configurades.
 
-v0.11: afegeix avisos meteorològics oficials d'AEMET i manté les xarxes socials com a canals complementaris.
+v0.12: limita AEMET a la Serra de Tramuntana i prepara targetes socials amb multimèdia embeguda.
 """
 
 from __future__ import annotations
@@ -27,7 +27,7 @@ OUTPUT_FILE = ROOT / "data" / "posts.json"
 JS_OUTPUT_FILE = ROOT / "data" / "posts.js"
 MAX_POSTS_PER_SOURCE = 40
 SUMMARY_LIMIT = 260
-USER_AGENT = "SollerAra/0.11 (+https://github.com/Juanjo-Cp18/soller-ara)"
+USER_AGENT = "SollerAra/0.12 (+https://github.com/Juanjo-Cp18/soller-ara)"
 RELATED_WINDOW_HOURS = 72
 
 CATEGORY_KEYWORDS = {
@@ -621,12 +621,12 @@ def fetch_aemet_alerts(source: dict) -> list[dict]:
         "application/rss+xml, application/atom+xml, application/xml, text/xml;q=0.9, */*;q=0.8",
     )
     posts = parse_rss(payload, source)
-    terms = [term.casefold() for term in source.get("filter_terms", [])]
+    zone_codes = [str(code) for code in source.get("filter_zone_codes", [])]
 
     filtered: list[dict] = []
     for post in posts:
-        haystack = f"{post.get('title', '')} {post.get('summary', '')} {post.get('url', '')}".casefold()
-        if terms and not any(term in haystack for term in terms):
+        haystack = f"{post.get('title', '')} {post.get('summary', '')} {post.get('url', '')}"
+        if zone_codes and not any(code in haystack for code in zone_codes):
             continue
         post["category"] = "alerts"
         filtered.append(post)
@@ -699,8 +699,8 @@ def main() -> int:
     ordered_posts, related_pair_count = annotate_related_posts(ordered_posts)
 
     payload = {
-        "version": 11,
-        "generator_version": "0.11",
+        "version": 12,
+        "generator_version": "0.12",
         "fetched_at": datetime.now(timezone.utc).isoformat(),
         "source_count": len([s for s in config.get("sources", []) if s.get("enabled", True)]),
         "source_status": source_status,

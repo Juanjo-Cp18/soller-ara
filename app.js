@@ -348,6 +348,10 @@ function renderFeed() {
   feed.innerHTML = visiblePosts.map((post) => {
     const categoryLabel = translations[currentLanguage].categories[post.category] || post.category;
     const safeUrl = post.url || "#";
+    const socialEmbed = renderSocialEmbed(post);
+    const socialLabel = post.source_type === "social" && post.platform
+      ? `<span class="social-platform">${escapeHtml(post.platform)}</span>`
+      : "";
     const relatedSources = Array.isArray(post.related_sources) ? post.related_sources : [];
     const relatedHtml = relatedSources.length
       ? `<div class="related-sources"><span>${t("card.related")}:</span>${relatedSources.map((item) => `<a href="${escapeAttribute(item.url || "#")}" target="_blank" rel="noopener noreferrer">${escapeHtml(item.source || "")}</a>`).join("")}</div>`
@@ -357,12 +361,13 @@ function renderFeed() {
         <div class="card-media" aria-hidden="true">${iconFor(post.category)}</div>
         <div class="card-body">
           <div class="meta">
-            <span class="source-wrap">${post.source_type === "official" ? '<span class="official-dot" aria-hidden="true"></span>' : ""}<span class="source-name">${escapeHtml(post.source || "")}</span></span>
+            <span class="source-wrap">${post.source_type === "official" ? '<span class="official-dot" aria-hidden="true"></span>' : ""}<span class="source-name">${escapeHtml(post.source || "")}</span>${socialLabel}</span>
             <span>${formatDate(post.published_at)}</span>
           </div>
           <span class="badge">${escapeHtml(categoryLabel)}</span>
           <h3>${escapeHtml(post.title || "")}</h3>
           ${post.summary ? `<p>${escapeHtml(post.summary)}</p>` : ""}
+          ${socialEmbed}
           ${relatedHtml}
           <div class="card-actions">
             <a class="origin-link" href="${escapeAttribute(safeUrl)}" target="_blank" rel="noopener noreferrer">${t("card.original")} →</a>
@@ -375,6 +380,8 @@ function renderFeed() {
   document.querySelectorAll("[data-share-id]").forEach((button) => {
     button.addEventListener("click", () => sharePost(button.dataset.shareId));
   });
+
+  ensureXWidgets();
 }
 
 function escapeHtml(value) {
@@ -388,6 +395,93 @@ function escapeHtml(value) {
 
 function escapeAttribute(value) {
   return escapeHtml(value);
+}
+
+function extractYouTubeId(url) {
+  try {
+    const parsed = new URL(url);
+    if (parsed.hostname.includes("youtu.be")) return parsed.pathname.slice(1).split("/")[0];
+    if (parsed.pathname.startsWith("/shorts/")) return parsed.pathname.split("/")[2];
+    if (parsed.pathname.startsWith("/embed/")) return parsed.pathname.split("/")[2];
+    return parsed.searchParams.get("v") || "";
+  } catch (_) {
+    return "";
+  }
+}
+
+function extractTikTokId(url) {
+  const match = String(url || "").match(/\/video\/(\d+)/);
+  return match ? match[1] : "";
+}
+
+function renderSocialEmbed(post) {
+  if (post.source_type !== "social" || !post.url) return "";
+
+  const platform = String(post.platform || "").toLowerCase();
+
+  if (platform === "x" || platform === "twitter") {
+    return `
+      <div class="social-embed social-embed-x" data-x-embed>
+        <blockquote class="twitter-tweet" data-dnt="true">
+          <a href="${escapeAttribute(post.url)}"></a>
+        </blockquote>
+      </div>`;
+  }
+
+  if (platform === "tiktok") {
+    const id = extractTikTokId(post.url);
+    if (!id) return "";
+    return `
+      <div class="social-embed social-embed-video">
+        <iframe
+          src="https://www.tiktok.com/player/v1/${escapeAttribute(id)}?autoplay=0&description=1"
+          title="${escapeAttribute(post.title || "TikTok")}"
+          loading="lazy"
+          allow="fullscreen"
+          allowfullscreen></iframe>
+      </div>`;
+  }
+
+  if (platform === "youtube") {
+    const id = extractYouTubeId(post.url);
+    if (!id) return "";
+    return `
+      <div class="social-embed social-embed-video">
+        <iframe
+          src="https://www.youtube-nocookie.com/embed/${escapeAttribute(id)}"
+          title="${escapeAttribute(post.title || "YouTube")}"
+          loading="lazy"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen></iframe>
+      </div>`;
+  }
+
+  if (post.media_type === "image" && post.image_allowed && post.media_url) {
+    return `
+      <div class="social-embed social-embed-image">
+        <img src="${escapeAttribute(post.media_url)}" alt="" loading="lazy" referrerpolicy="no-referrer" />
+      </div>`;
+  }
+
+  return "";
+}
+
+function ensureXWidgets() {
+  if (!document.querySelector("[data-x-embed]")) return;
+
+  if (window.twttr?.widgets) {
+    window.twttr.widgets.load();
+    return;
+  }
+
+  if (document.querySelector('script[data-soller-x-widgets]')) return;
+
+  const script = document.createElement("script");
+  script.src = "https://platform.twitter.com/widgets.js";
+  script.async = true;
+  script.charset = "utf-8";
+  script.dataset.sollerXWidgets = "true";
+  document.body.appendChild(script);
 }
 
 async function sharePost(postId) {

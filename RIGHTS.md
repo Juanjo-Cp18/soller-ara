@@ -65,3 +65,12 @@ Els enllaços socials serveixen per facilitar l'accés a la publicació original
 ## AEMET
 
 AEMET indica a la seva web que l'ús i reproducció de la seva informació està autoritzat citant AEMET com a autora. Sóller Ara identifica sempre AEMET com a font dels avisos meteorològics.
+
+
+## Multimèdia embeguda
+
+Quan una xarxa social o plataforma de vídeo proporciona un mecanisme oficial d'embed, Sóller Ara pot utilitzar-lo per mostrar la publicació original dins la interfície.
+
+Això no implica descarregar, copiar ni tornar a allotjar el fitxer multimèdia. La publicació continua servida per la plataforma d'origen, amb la seva autoria, controls i enllaç original.
+
+Actualment la interfície està preparada per X, TikTok i YouTube. Les imatges directes només s'admeten quan els drets de reutilització s'han verificat explícitament.
