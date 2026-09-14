@@ -1,0 +1,11 @@
+{
+  "name": "Sóller Ara",
+  "short_name": "Sóller Ara",
+  "description": "Informació local de Sóller en un sol lloc.",
+  "lang": "ca",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f6f7f5",
+  "theme_color": "#0f766e",
+  "icons": []
+}
