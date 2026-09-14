@@ -4,35 +4,16 @@ Projecte públic i sense ànim de lucre per reunir informació local de Sóller 
 
 ## Versió
 
-**v0.14**
+**v0.15**
 
-## Novetats de la v0.14
+## Novetats de la v0.15
 
-- Nou camp configurable `max_age_days` per font.
-- El canal de YouTube de l'Ajuntament queda limitat a **60 dies**.
-- Les publicacions més antigues desapareixen automàticament de `Tot` i `Xarxes`.
-- La secció `Ara` manté els seus límits molt més curts.
-- Aquesta regla es podrà reutilitzar en futures fonts socials.
-
-## Novetats de la v0.13
-
-- Primera font social real i automàtica: **Ajuntament de Sóller · YouTube**.
-- Els vídeos del canal oficial entren automàticament al sistema mitjançant el feed oficial de YouTube.
-- Les publicacions socials apareixen dins:
-  - **Tot**
-  - **Ara**, si són prou recents
-  - **Xarxes**
-- El botó **Xarxes** torna a funcionar com un filtre real de contingut, no només com un accés a perfils.
-- Cada vídeo conserva:
-  - plataforma,
-  - compte,
-  - data,
-  - títol,
-  - resum automàtic propi de Sóller Ara,
-  - enllaç original,
-  - reproductor YouTube embegut.
-- Les xarxes oficials d'Emergències, AEMET i IBANAT continuen disponibles com a accessos complementaris.
-- Recursos estàtics actualitzats a `v=0.13`.
+- Ordenació cronològica corregida: les dates es comparen pel seu instant real en **UTC**, no pel text ISO.
+- Això evita errors subtils quan una font publica amb `+02:00` i una altra amb `+00:00`.
+- L'estat de la portada passa a mostrar la salut real de les fonts, per exemple **6/6 fonts actualitzades**.
+- Si una font falla, la portada ho indica sense impedir que les altres continuïn funcionant.
+- El lema de Sóller Ara queda correctament traduït en CA/ES/EN.
+- Recursos estàtics actualitzats a `v=0.15`.
 
 ## Fonts automàtiques
 
@@ -45,9 +26,7 @@ Projecte públic i sense ànim de lucre per reunir informació local de Sóller 
 
 ## Xarxes
 
-YouTube és la primera plataforma activada de forma automàtica perquè proporciona un feed públic estable del canal.
-
-X, Instagram i Facebook continuen en estudi per a la captació automàtica. No s'utilitzaran serveis de scraping no oficials només per simular una integració.
+YouTube continua com la primera font social automàtica. El límit actual és de **60 dies** i les publicacions socials poden aparèixer a `Tot`, `Ara` i `Xarxes`.
 
 ## Cost
 

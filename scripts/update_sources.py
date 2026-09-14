@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Actualitza data/posts.json a partir de les fonts públiques configurades.
 
-v0.14: aplica límits d'antiguitat configurables per font.
+v0.15: ordena dates per instant UTC i reforça l'estat de les fonts.
 """
 
 from __future__ import annotations
@@ -27,7 +27,7 @@ OUTPUT_FILE = ROOT / "data" / "posts.json"
 JS_OUTPUT_FILE = ROOT / "data" / "posts.js"
 MAX_POSTS_PER_SOURCE = 40
 SUMMARY_LIMIT = 260
-USER_AGENT = "SollerAra/0.14 (+https://github.com/Juanjo-Cp18/soller-ara)"
+USER_AGENT = "SollerAra/0.15 (+https://github.com/Juanjo-Cp18/soller-ara)"
 RELATED_WINDOW_HOURS = 72
 
 CATEGORY_KEYWORDS = {
@@ -693,8 +693,13 @@ def fetch_source(source: dict) -> list[dict]:
     raise ValueError(f"Tipus de font no suportat: {source['type']}")
 
 
-def sort_key(post: dict) -> str:
-    return post.get("published_at") or ""
+def sort_key(post: dict) -> float:
+    published = iso_datetime(post.get("published_at"))
+    if published is None:
+        return float("-inf")
+    if published.tzinfo is None:
+        published = published.replace(tzinfo=timezone.utc)
+    return published.astimezone(timezone.utc).timestamp()
 
 
 def filter_by_max_age(source: dict, posts: list[dict]) -> list[dict]:
@@ -766,8 +771,8 @@ def main() -> int:
     ordered_posts, related_pair_count = annotate_related_posts(ordered_posts)
 
     payload = {
-        "version": 14,
-        "generator_version": "0.14",
+        "version": 15,
+        "generator_version": "0.15",
         "fetched_at": datetime.now(timezone.utc).isoformat(),
         "source_count": len([s for s in config.get("sources", []) if s.get("enabled", True)]),
         "source_status": source_status,

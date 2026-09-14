@@ -16,6 +16,10 @@ const translations = {
     "hero.body": "Una portada única per descobrir avisos, serveis, notícies, agenda, cultura, esport, comerç i publicacions de fonts locals.",
     "hero.statusTitle": "6 fonts reals connectades",
     "hero.statusBody": "Fonts locals + AEMET + YouTube",
+    "hero.statusHealthy": "{ok}/{total} fonts actualitzades",
+    "hero.statusHealthyBody": "Totes les fonts han respost correctament.",
+    "hero.statusPartial": "{ok}/{total} fonts disponibles",
+    "hero.statusPartialBody": "Alguna font no ha respost en la darrera actualització.",
     "feed.eyebrow": "Actualitat",
     "feed.title": "Publicacions destacades",
     "feed.loading": "Carregant actualització...",
@@ -77,6 +81,10 @@ const translations = {
     "hero.body": "Una portada única para descubrir avisos, servicios, noticias, agenda, cultura, deporte, comercio y publicaciones de fuentes locales.",
     "hero.statusTitle": "6 fuentes reales conectadas",
     "hero.statusBody": "Fuentes locales + AEMET + YouTube",
+    "hero.statusHealthy": "{ok}/{total} fuentes actualizadas",
+    "hero.statusHealthyBody": "Todas las fuentes han respondido correctamente.",
+    "hero.statusPartial": "{ok}/{total} fuentes disponibles",
+    "hero.statusPartialBody": "Alguna fuente no ha respondido en la última actualización.",
     "feed.eyebrow": "Actualidad",
     "feed.title": "Publicaciones destacadas",
     "feed.loading": "Cargando actualización...",
@@ -138,6 +146,10 @@ const translations = {
     "hero.body": "A single homepage for alerts, services, news, events, culture, sports, local businesses and posts from local sources.",
     "hero.statusTitle": "6 live sources connected",
     "hero.statusBody": "Local sources + AEMET + YouTube",
+    "hero.statusHealthy": "{ok}/{total} sources updated",
+    "hero.statusHealthyBody": "All sources responded successfully.",
+    "hero.statusPartial": "{ok}/{total} sources available",
+    "hero.statusPartialBody": "One or more sources did not respond in the latest update.",
     "feed.eyebrow": "Latest",
     "feed.title": "Featured posts",
     "feed.loading": "Loading update...",
@@ -213,6 +225,8 @@ const feed = document.getElementById("feed");
 const searchInput = document.getElementById("searchInput");
 const sourceSelect = document.getElementById("sourceSelect");
 const lastUpdated = document.getElementById("lastUpdated");
+const sourceHealthTitle = document.getElementById("sourceHealthTitle");
+const sourceHealthBody = document.getElementById("sourceHealthBody");
 
 function t(key) {
   return translations[currentLanguage][key] ?? translations.ca[key] ?? key;
@@ -280,8 +294,32 @@ function applyTranslations() {
   });
 
   populateSourceSelect();
+  updateSourceHealth();
   updateLastUpdated();
   renderFeed();
+}
+
+function formatStatusTemplate(key, values) {
+  return Object.entries(values).reduce(
+    (value, [name, replacement]) => value.replaceAll(`{${name}}`, String(replacement)),
+    t(key)
+  );
+}
+
+function updateSourceHealth() {
+  if (!sourceHealthTitle || !sourceHealthBody || !sourceStatus.length) return;
+
+  const total = sourceStatus.length;
+  const ok = sourceStatus.filter((source) => source.ok).length;
+  const healthy = ok === total;
+
+  sourceHealthTitle.textContent = formatStatusTemplate(
+    healthy ? "hero.statusHealthy" : "hero.statusPartial",
+    { ok, total }
+  );
+  sourceHealthBody.textContent = t(
+    healthy ? "hero.statusHealthyBody" : "hero.statusPartialBody"
+  );
 }
 
 function updateLastUpdated() {
@@ -549,6 +587,7 @@ async function loadPosts() {
   }
 
   populateSourceSelect();
+  updateSourceHealth();
   updateLastUpdated();
   renderFeed();
 }
