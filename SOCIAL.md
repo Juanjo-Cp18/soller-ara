@@ -61,3 +61,16 @@ Canal: `@ajuntamentdesoller_`
 Sóller Ara consulta el feed públic oficial de YouTube i crea una entrada social per cada vídeo recent. El text resum és generat per Sóller Ara a partir del títol i del tipus de publicació; no copia la descripció completa del vídeo.
 
 El vídeo es reprodueix amb el reproductor oficial de YouTube i continua allotjat a YouTube.
+
+
+## v0.16 — Xarxes en directe
+
+S'ha afegit una capa de visualització oficial que no depèn de scraping:
+
+- X: timelines embegudes d'AEMET Baleares, IBANAT i SAMU 061 Illes Balears.
+- Facebook: Page Plugin de Policia Tutor de Sóller.
+- Instagram: accés al perfil @serveissocialssoller, identificat pel web oficial de l'Ajuntament.
+
+Aquesta capa és diferent de les targetes socials automàtiques. Les timelines mostren contingut real servit directament per la plataforma, però Sóller Ara no pot llegir programàticament cada publicació per resumir-la sense l'accés API corresponent.
+
+La meta continua sent que les publicacions seleccionades de X, Facebook i Instagram acabin entrant com a targetes individuals a Tot/Ara/Xarxes. Per fer-ho de forma estable i conforme a les plataformes, s'activaran les API oficials quan disposem dels permisos necessaris.

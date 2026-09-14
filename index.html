@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#0f766e" />
   <meta name="description" content="Sóller Ara - Informació local de Sóller en un sol lloc." />
   <link rel="manifest" href="manifest.webmanifest" />
-  <link rel="stylesheet" href="styles.css?v=0.15" />
+  <link rel="stylesheet" href="styles.css?v=0.16" />
   <title>Sóller Ara</title>
 </head>
 <body>
@@ -185,6 +185,74 @@
       </div>
     </section>
 
+    <section id="liveSocialFeeds" class="live-social-feeds" hidden aria-labelledby="liveSocialTitle">
+      <div class="live-social-head">
+        <p class="eyebrow" data-i18n="liveSocial.eyebrow">Xarxes en directe</p>
+        <h2 id="liveSocialTitle" data-i18n="liveSocial.title">Publicacions servides per les plataformes oficials</h2>
+        <p data-i18n="liveSocial.body">Aquest bloc mostra contingut públic directament des de X i Facebook. Encara no el convertim en resums individuals dins Tot/Ara perquè això requereix accés oficial a les API.</p>
+      </div>
+
+      <div class="live-social-grid">
+        <article class="live-social-card">
+          <div class="live-social-card-head">
+            <span aria-hidden="true">𝕏</span>
+            <div>
+              <strong>AEMET Baleares</strong>
+              <small>@AEMET_Baleares</small>
+            </div>
+          </div>
+          <a class="twitter-timeline" data-height="500" data-dnt="true" href="https://x.com/AEMET_Baleares">AEMET Baleares</a>
+        </article>
+
+        <article class="live-social-card">
+          <div class="live-social-card-head">
+            <span aria-hidden="true">𝕏</span>
+            <div>
+              <strong>IBANAT</strong>
+              <small>@ibanat_IB</small>
+            </div>
+          </div>
+          <a class="twitter-timeline" data-height="500" data-dnt="true" href="https://x.com/ibanat_IB">IBANAT</a>
+        </article>
+
+        <article class="live-social-card">
+          <div class="live-social-card-head">
+            <span aria-hidden="true">𝕏</span>
+            <div>
+              <strong>SAMU 061 Illes Balears</strong>
+              <small>@SAMU061IB</small>
+            </div>
+          </div>
+          <a class="twitter-timeline" data-height="500" data-dnt="true" href="https://x.com/SAMU061IB">SAMU 061 Illes Balears</a>
+        </article>
+
+        <article class="live-social-card">
+          <div class="live-social-card-head">
+            <span aria-hidden="true">f</span>
+            <div>
+              <strong data-i18n="liveSocial.policeTutor">Policia Tutor de Sóller</strong>
+              <small>Facebook</small>
+            </div>
+          </div>
+          <iframe
+            class="facebook-page-frame"
+            title="Facebook · Policia Tutor de Sóller"
+            loading="lazy"
+            src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fpoliciatutorsoller%2F&tabs=timeline&width=500&height=500&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=false"
+            width="500"
+            height="500"
+            style="border:none;overflow:hidden"
+            allowfullscreen
+            allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+        </article>
+      </div>
+
+      <div class="live-social-extra">
+        <span data-i18n="liveSocial.instagramNote">Instagram oficial local verificat des del web municipal:</span>
+        <a href="https://www.instagram.com/serveissocialssoller/" target="_blank" rel="noopener noreferrer">@serveissocialssoller ↗</a>
+      </div>
+    </section>
+
     <section class="section-heading">
       <div>
         <p class="eyebrow" data-i18n="feed.eyebrow">Actualitat</p>
@@ -207,7 +275,7 @@
     <p>© 2026 Sóller Ara · <span data-i18n="footer.nonprofit">Projecte sense ànim de lucre</span></p>
   </footer>
 
-  <script src="data/posts.js?v=0.15" defer></script>
-  <script src="app.js?v=0.15" defer></script>
+  <script src="data/posts.js?v=0.16" defer></script>
+  <script src="app.js?v=0.16" defer></script>
 </body>
 </html>

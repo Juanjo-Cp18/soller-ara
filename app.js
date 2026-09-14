@@ -51,6 +51,11 @@ const translations = {
     "emergency.112.body": "Informació i prevenció oficial",
     "social.official": "Xarxes oficials d'avisos:",
     "social.note": "Sóller Ara no copia automàticament aquestes publicacions: les xarxes es mantenen com a canal complementari perquè moltes alertes es difonen primer allà.",
+    "liveSocial.eyebrow": "Xarxes en directe",
+    "liveSocial.title": "Publicacions servides per les plataformes oficials",
+    "liveSocial.body": "Aquest bloc mostra contingut públic directament des de X i Facebook. Encara no el convertim en resums individuals dins Tot/Ara perquè això requereix accés oficial a les API.",
+    "liveSocial.policeTutor": "Policia Tutor de Sóller",
+    "liveSocial.instagramNote": "Instagram oficial local verificat des del web municipal:",
     "quick.ora.title": "ORA i aparcament",
     "quick.ora.body": "Informació oficial",
     "quick.police.title": "Policia Local",
@@ -116,6 +121,11 @@ const translations = {
     "emergency.112.body": "Información y prevención oficial",
     "social.official": "Redes oficiales de avisos:",
     "social.note": "Sóller Ara no copia automáticamente estas publicaciones: las redes se mantienen como canal complementario porque muchas alertas se difunden primero allí.",
+    "liveSocial.eyebrow": "Redes en directo",
+    "liveSocial.title": "Publicaciones servidas por las plataformas oficiales",
+    "liveSocial.body": "Este bloque muestra contenido público directamente desde X y Facebook. Todavía no lo convertimos en resúmenes individuales dentro de Todo/Ahora porque eso requiere acceso oficial a las API.",
+    "liveSocial.policeTutor": "Policía Tutor de Sóller",
+    "liveSocial.instagramNote": "Instagram oficial local verificado desde la web municipal:",
     "quick.ora.title": "ORA y aparcamiento",
     "quick.ora.body": "Información oficial",
     "quick.police.title": "Policía Local",
@@ -181,6 +191,11 @@ const translations = {
     "emergency.112.body": "Official information and prevention",
     "social.official": "Official alert channels:",
     "social.note": "Sóller Ara does not automatically copy these posts: social networks remain a complementary channel because many alerts appear there first.",
+    "liveSocial.eyebrow": "Live social feeds",
+    "liveSocial.title": "Posts served by the official platforms",
+    "liveSocial.body": "This block shows public content directly from X and Facebook. We do not yet convert it into individual summaries inside All/Now because that requires official API access.",
+    "liveSocial.policeTutor": "Sóller Youth Liaison Police",
+    "liveSocial.instagramNote": "Local official Instagram verified from the municipal website:",
     "quick.ora.title": "ORA and parking",
     "quick.ora.body": "Official information",
     "quick.police.title": "Local Police",
@@ -227,6 +242,7 @@ const sourceSelect = document.getElementById("sourceSelect");
 const lastUpdated = document.getElementById("lastUpdated");
 const sourceHealthTitle = document.getElementById("sourceHealthTitle");
 const sourceHealthBody = document.getElementById("sourceHealthBody");
+const liveSocialFeeds = document.getElementById("liveSocialFeeds");
 
 function t(key) {
   return translations[currentLanguage][key] ?? translations.ca[key] ?? key;
@@ -359,6 +375,10 @@ function populateSourceSelect() {
 
 
 function renderFeed() {
+  if (liveSocialFeeds) {
+    liveSocialFeeds.hidden = currentCategory !== "social";
+  }
+
   const normalizedSearch = currentSearch.trim().toLocaleLowerCase(currentLanguage);
   let visiblePosts = posts.filter((post) => {
     const categoryMatches = currentCategory === "all"
@@ -509,7 +529,7 @@ function renderSocialEmbed(post) {
 }
 
 function ensureXWidgets() {
-  if (!document.querySelector("[data-x-embed]")) return;
+  if (!document.querySelector("[data-x-embed], .twitter-timeline")) return;
 
   if (window.twttr?.widgets) {
     window.twttr.widgets.load();
@@ -614,6 +634,10 @@ document.querySelectorAll(".category").forEach((button) => {
     button.classList.add("active");
     currentCategory = button.dataset.category;
     renderFeed();
+
+    if (currentCategory === "social") {
+      requestAnimationFrame(() => ensureXWidgets());
+    }
   });
 });
 

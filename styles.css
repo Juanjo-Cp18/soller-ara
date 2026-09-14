@@ -378,6 +378,94 @@ a { color: inherit; }
   line-height: 1.5;
 }
 
+.live-social-feeds {
+  margin-top: 32px;
+  padding: 24px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+.live-social-head {
+  max-width: 780px;
+}
+.live-social-head h2 {
+  margin: 5px 0 8px;
+  font-size: 1.45rem;
+}
+.live-social-head > p:last-child {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.55;
+}
+.live-social-grid {
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+.live-social-card {
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background: var(--bg);
+}
+.live-social-card-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 14px;
+  border-bottom: 1px solid var(--border);
+}
+.live-social-card-head > span:first-child {
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  background: var(--primary-soft);
+  color: var(--primary);
+  font-weight: 900;
+}
+.live-social-card-head > div {
+  min-width: 0;
+  display: grid;
+  gap: 2px;
+}
+.live-social-card-head small {
+  color: var(--muted);
+}
+.live-social-card .twitter-timeline {
+  display: block;
+  padding: 18px;
+  color: var(--primary);
+  font-weight: 800;
+  text-decoration: none;
+}
+.facebook-page-frame {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+}
+.live-social-extra {
+  margin-top: 14px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  color: var(--muted);
+  font-size: .82rem;
+}
+.live-social-extra a {
+  color: var(--primary);
+  font-weight: 800;
+  text-decoration: none;
+}
+.live-social-extra a:hover {
+  text-decoration: underline;
+}
+
 .section-heading {
   margin: 38px 0 18px;
   display: flex;
@@ -543,7 +631,7 @@ a { color: inherit; }
   .hero h2 { font-size: 2.4rem; }
   .section-heading { align-items: stretch; flex-direction: column; }
   .quick-grid { grid-template-columns: 1fr; }
-  .mobility-now-links, .emergency-links { grid-template-columns: 1fr; }
+  .mobility-now-links, .emergency-links, .live-social-grid { grid-template-columns: 1fr; }
   .feed-controls { width: 100%; flex-direction: column; align-items: stretch; }
   .source-filter, .search { width: 100%; min-width: 0; }
   .feed { grid-template-columns: 1fr; }

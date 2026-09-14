@@ -4,29 +4,28 @@ Projecte públic i sense ànim de lucre per reunir informació local de Sóller 
 
 ## Versió
 
-**v0.15**
+**v0.16**
 
-## Novetats de la v0.15
+## Novetats de la v0.16
 
-- Ordenació cronològica corregida: les dates es comparen pel seu instant real en **UTC**, no pel text ISO.
-- Això evita errors subtils quan una font publica amb `+02:00` i una altra amb `+00:00`.
-- L'estat de la portada passa a mostrar la salut real de les fonts, per exemple **6/6 fonts actualitzades**.
-- Si una font falla, la portada ho indica sense impedir que les altres continuïn funcionant.
-- El lema de Sóller Ara queda correctament traduït en CA/ES/EN.
-- Recursos estàtics actualitzats a `v=0.15`.
+- La secció **Xarxes** incorpora ara contingut social en directe mitjançant eines oficials de les plataformes.
+- Timelines oficials de X:
+  - AEMET Baleares
+  - IBANAT
+  - SAMU 061 Illes Balears
+- Timeline de Facebook:
+  - Policia Tutor de Sóller
+- Accés a l'Instagram oficial de Serveis Socials de Sóller, verificat des del web municipal.
+- Els vídeos de YouTube de l'Ajuntament continuen entrant com a targetes individuals dins **Tot / Ara / Xarxes**.
+- Les timelines de X/Facebook encara no es converteixen en targetes resumides de Tot/Ara perquè la lectura automàtica de publicacions requereix accés oficial a API/permisos.
+- Recursos estàtics actualitzats a `v=0.16`.
 
-## Fonts automàtiques
+## Estat de les plataformes
 
-1. Ajuntament de Sóller.
-2. Sa Veu de Sóller.
-3. Setmanari Sóller.
-4. Sóller 2010.
-5. AEMET · Serra de Tramuntana.
-6. Ajuntament de Sóller · YouTube.
-
-## Xarxes
-
-YouTube continua com la primera font social automàtica. El límit actual és de **60 dies** i les publicacions socials poden aparèixer a `Tot`, `Ara` i `Xarxes`.
+- **YouTube**: automàtic i integrat.
+- **X**: visualització oficial en directe; automatització individual pendent d'accés API.
+- **Facebook**: visualització oficial mitjançant Page Plugin; automatització individual pendent de permisos de Meta.
+- **Instagram**: compte oficial accessible; automatització individual pendent de l'API d'Instagram/Meta.
 
 ## Cost
 
