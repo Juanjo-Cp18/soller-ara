@@ -61,7 +61,13 @@
         <h2 data-i18n="feed.title">Publicacions destacades</h2>
         <p id="lastUpdated" class="last-updated" data-i18n="feed.loading">Carregant actualització...</p>
       </div>
-      <input id="searchInput" class="search" type="search" placeholder="Cercar..." data-i18n-placeholder="search.placeholder" />
+      <div class="feed-controls">
+        <label class="sr-only" for="sourceSelect" data-i18n="source.label">Font</label>
+        <select id="sourceSelect" class="source-filter" aria-label="Font">
+          <option value="all" data-i18n="source.all">Totes les fonts</option>
+        </select>
+        <input id="searchInput" class="search" type="search" placeholder="Cercar..." data-i18n-placeholder="search.placeholder" />
+      </div>
     </section>
 
     <section id="feed" class="feed" aria-live="polite"></section>

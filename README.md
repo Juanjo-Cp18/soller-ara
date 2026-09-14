@@ -4,33 +4,32 @@ Projecte públic i sense ànim de lucre per reunir informació local de Sóller 
 
 ## Versió
 
-**v0.41**
+**v0.5**
 
-## Novetat de la v0.41: còpia local
+## Novetats de la v0.5
 
-A partir d'aquesta versió, una còpia completa del projecte es pot obrir directament des d'una carpeta del PC fent doble clic a `index.html`.
-
-El sistema genera les dades en dos formats:
-
-- `data/posts.json`: utilitzat principalment per la web publicada a GitHub Pages.
-- `data/posts.js`: còpia de les mateixes dades que el navegador pot carregar quan `index.html` s'obre com a fitxer local (`file://`).
-
-### Limitació important
-
-La còpia local mostra les notícies que contenia en el moment de descarregar el projecte, però **no s'actualitza automàticament cada hora per si sola**. L'actualització automàtica continua executant-se amb GitHub Actions a la versió publicada.
-
-Més endavant es pot preparar un actualitzador local per Windows/macOS si es considera útil.
+- Filtre per font a la portada.
+- L'usuari pot veure totes les publicacions o limitar-les a:
+  - Ajuntament de Sóller
+  - Sa Veu de Sóller
+  - Setmanari Sóller
+- El generador registra ara l'estat de cada font a `data/posts.json`:
+  - si l'actualització ha funcionat,
+  - quantes publicacions ha aportat,
+  - quin mètode s'ha utilitzat,
+  - i l'error concret si una font falla.
+- Una font que falla no impedeix que les altres continuïn actualitzant-se.
+- Es manté la compatibilitat amb obertura local mitjançant `data/posts.js`.
 
 ## Fonts actuals
 
-1. **Ajuntament de Sóller** — RSS oficial  
-   `https://ajsoller.net/ca/noticies/rss.xml`
+1. **Ajuntament de Sóller** — RSS oficial.
+2. **Sa Veu de Sóller** — RSS públic.
+3. **Setmanari Sóller** — pàgina pública d'últimes notícies.
 
-2. **Sa Veu de Sóller** — RSS públic  
-   `https://saveu.cat/feed/`
+## Font candidata pendent
 
-3. **Setmanari Sóller** — pàgina pública d'últimes notícies  
-   `https://www.elsoller.cat/ultimes.html`
+**Sóller 2010** publica avisos útils sobre residus, ORA, aparcaments, Son Angelats i altres serveis públics. De moment no s'ha afegit a la cronologia perquè el seu llistat públic no ofereix una data fiable per a cada avís. Preferim no mostrar una publicació antiga com si fos recent.
 
 ## Regles de contingut
 
@@ -44,13 +43,13 @@ Més endavant es pot preparar un actualitzador local per Windows/macOS si es con
 
 - `index.html`: estructura de la interfície.
 - `styles.css`: disseny visual responsive.
-- `app.js`: idiomes, filtres, cerca, càrrega web/local, contingut relacionat i compartició.
+- `app.js`: idiomes, filtres per categoria i font, cerca, càrrega web/local i compartició.
 - `manifest.webmanifest`: configuració inicial PWA.
 - `sources.json`: registre de fonts públiques.
-- `scripts/update_sources.py`: lector RSS/Atom, lector HTML controlat, classificació i generació de dades.
+- `scripts/update_sources.py`: lectura de fonts, classificació, control d'estat i generació de dades.
 - `data/posts.json`: dades per a la web.
 - `data/posts.js`: dades compatibles amb obertura local.
-- `.github/workflows/update-sources.yml`: actualització horària de les fonts.
+- `.github/workflows/update-sources.yml`: actualització horària.
 - `.github/workflows/deploy-pages.yml`: publicació automàtica a GitHub Pages.
 
 ## Cost

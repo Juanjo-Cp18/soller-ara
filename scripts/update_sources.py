@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Actualitza data/posts.json a partir de les fonts públiques configurades.
 
-v0.41: genera dades en JSON per al web i en JavaScript per permetre obrir la còpia local directament.
+v0.5: registra l'estat de cada font i manté el sistema preparat per filtrar-les des de la interfície.
 """
 
 from __future__ import annotations
@@ -27,7 +27,7 @@ OUTPUT_FILE = ROOT / "data" / "posts.json"
 JS_OUTPUT_FILE = ROOT / "data" / "posts.js"
 MAX_POSTS_PER_SOURCE = 40
 SUMMARY_LIMIT = 260
-USER_AGENT = "SollerAra/0.41 (+https://github.com/Juanjo-Cp18/soller-ara)"
+USER_AGENT = "SollerAra/0.5 (+https://github.com/Juanjo-Cp18/soller-ara)"
 RELATED_WINDOW_HOURS = 72
 
 CATEGORY_KEYWORDS = {
@@ -505,6 +505,7 @@ def main() -> int:
     config = json.loads(SOURCES_FILE.read_text(encoding="utf-8"))
     posts: list[dict] = []
     errors: list[dict] = []
+    source_status: list[dict] = []
 
     for source in config.get("sources", []):
         if not source.get("enabled", True):
@@ -512,9 +513,27 @@ def main() -> int:
         try:
             source_posts = fetch_source(source)
             posts.extend(source_posts)
+            source_status.append({
+                "source_id": source.get("id"),
+                "name": source.get("name"),
+                "source_type": source.get("source_type", "publisher"),
+                "method": source.get("type"),
+                "ok": True,
+                "count": len(source_posts),
+                "error": None,
+            })
             print(f"OK {source['name']}: {len(source_posts)} publicacions")
         except Exception as exc:  # Es registra l'error sense impedir altres fonts.
             errors.append({"source_id": source.get("id"), "error": str(exc)})
+            source_status.append({
+                "source_id": source.get("id"),
+                "name": source.get("name"),
+                "source_type": source.get("source_type", "publisher"),
+                "method": source.get("type"),
+                "ok": False,
+                "count": 0,
+                "error": str(exc),
+            })
             print(f"ERROR {source.get('name', source.get('id'))}: {exc}", file=sys.stderr)
 
     # Només elimina duplicats exactes de la mateixa entrada. Mai elimina una publicació d'una altra font.
@@ -523,10 +542,11 @@ def main() -> int:
     ordered_posts, related_pair_count = annotate_related_posts(ordered_posts)
 
     payload = {
-        "version": 6,
-        "generator_version": "0.41",
+        "version": 7,
+        "generator_version": "0.5",
         "fetched_at": datetime.now(timezone.utc).isoformat(),
         "source_count": len([s for s in config.get("sources", []) if s.get("enabled", True)]),
+        "source_status": source_status,
         "post_count": len(ordered_posts),
         "related_pair_count": related_pair_count,
         "errors": errors,

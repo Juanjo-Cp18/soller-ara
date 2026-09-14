@@ -22,6 +22,8 @@ const translations = {
     "feed.updated": "Darrera actualització",
     "feed.demo": "Dades de demostració: la font automàtica encara no està disponible.",
     "search.placeholder": "Cercar...",
+    "source.label": "Font",
+    "source.all": "Totes les fonts",
     "footer.nonprofit": "Projecte sense ànim de lucre",
     "card.original": "Veure original",
     "card.share": "Compartir",
@@ -52,6 +54,8 @@ const translations = {
     "feed.updated": "Última actualización",
     "feed.demo": "Datos de demostración: la fuente automática aún no está disponible.",
     "search.placeholder": "Buscar...",
+    "source.label": "Fuente",
+    "source.all": "Todas las fuentes",
     "footer.nonprofit": "Proyecto sin ánimo de lucro",
     "card.original": "Ver original",
     "card.share": "Compartir",
@@ -82,6 +86,8 @@ const translations = {
     "feed.updated": "Last updated",
     "feed.demo": "Demo data: the automatic source is not available yet.",
     "search.placeholder": "Search...",
+    "source.label": "Source",
+    "source.all": "All sources",
     "footer.nonprofit": "Non-profit project",
     "card.original": "View original",
     "card.share": "Share",
@@ -111,11 +117,14 @@ let fetchedAt = null;
 let usingDemoData = false;
 let currentLanguage = localStorage.getItem("sollerAraLanguage") || "ca";
 let currentCategory = "all";
+let currentSource = "all";
 let currentSearch = "";
+let sourceStatus = [];
 
 const languageSelect = document.getElementById("languageSelect");
 const feed = document.getElementById("feed");
 const searchInput = document.getElementById("searchInput");
+const sourceSelect = document.getElementById("sourceSelect");
 const lastUpdated = document.getElementById("lastUpdated");
 
 function t(key) {
@@ -162,6 +171,7 @@ function applyTranslations() {
     element.placeholder = t(element.dataset.i18nPlaceholder);
   });
 
+  populateSourceSelect();
   updateLastUpdated();
   renderFeed();
 }
@@ -186,15 +196,32 @@ function updateLastUpdated() {
   lastUpdated.textContent = `${t("feed.updated")}: ${formatted}`;
 }
 
+function populateSourceSelect() {
+  const currentValue = currentSource;
+  const uniqueSources = [...new Map(
+    posts
+      .filter((post) => post.source_id && post.source)
+      .map((post) => [post.source_id, { id: post.source_id, name: post.source }])
+  ).values()].sort((a, b) => a.name.localeCompare(b.name, currentLanguage));
+
+  sourceSelect.innerHTML = `<option value="all">${t("source.all")}</option>`
+    + uniqueSources.map((source) => `<option value="${escapeAttribute(source.id)}">${escapeHtml(source.name)}</option>`).join("");
+
+  sourceSelect.value = uniqueSources.some((source) => source.id === currentValue) ? currentValue : "all";
+  currentSource = sourceSelect.value;
+}
+
+
 function renderFeed() {
   const normalizedSearch = currentSearch.trim().toLocaleLowerCase(currentLanguage);
   const visiblePosts = posts.filter((post) => {
     const categoryMatches = currentCategory === "all"
       || (currentCategory === "now" ? isNowPost(post) : post.category === currentCategory);
+    const sourceMatches = currentSource === "all" || post.source_id === currentSource;
     const relatedText = Array.isArray(post.related_sources) ? post.related_sources.map((item) => `${item.source || ""} ${item.title || ""}`).join(" ") : "";
     const haystack = `${post.title || ""} ${post.summary || ""} ${post.source || ""} ${relatedText}`.toLocaleLowerCase(currentLanguage);
     const searchMatches = !normalizedSearch || haystack.includes(normalizedSearch);
-    return categoryMatches && searchMatches;
+    return categoryMatches && sourceMatches && searchMatches;
   });
 
   if (!visiblePosts.length) {
@@ -265,6 +292,7 @@ function applyPostsPayload(payload) {
   }
   posts = payload.posts;
   fetchedAt = payload.fetched_at || null;
+  sourceStatus = Array.isArray(payload.source_status) ? payload.source_status : [];
   usingDemoData = false;
 }
 
@@ -274,6 +302,7 @@ async function loadPosts() {
   if (window.location.protocol === "file:" && embeddedPayload) {
     try {
       applyPostsPayload(embeddedPayload);
+      populateSourceSelect();
       updateLastUpdated();
       renderFeed();
       return;
@@ -305,9 +334,15 @@ async function loadPosts() {
     }
   }
 
+  populateSourceSelect();
   updateLastUpdated();
   renderFeed();
 }
+
+sourceSelect.addEventListener("change", (event) => {
+  currentSource = event.target.value;
+  renderFeed();
+});
 
 languageSelect.addEventListener("change", (event) => {
   currentLanguage = event.target.value;
