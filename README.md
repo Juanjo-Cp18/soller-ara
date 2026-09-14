@@ -4,7 +4,15 @@ Projecte públic i sense ànim de lucre per reunir informació local de Sóller 
 
 ## Versió
 
-**v0.13**
+**v0.14**
+
+## Novetats de la v0.14
+
+- Nou camp configurable `max_age_days` per font.
+- El canal de YouTube de l'Ajuntament queda limitat a **60 dies**.
+- Les publicacions més antigues desapareixen automàticament de `Tot` i `Xarxes`.
+- La secció `Ara` manté els seus límits molt més curts.
+- Aquesta regla es podrà reutilitzar en futures fonts socials.
 
 ## Novetats de la v0.13
 

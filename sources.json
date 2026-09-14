@@ -1,5 +1,5 @@
 {
-  "version": 8,
+  "version": 9,
   "sources": [
     {
       "id": "ajuntament-soller-noticies",
@@ -85,7 +85,8 @@
       "enabled": true,
       "image_policy": "embed_only",
       "content_policy": "generated_social_summary",
-      "rights_status": "platform_embed"
+      "rights_status": "platform_embed",
+      "max_age_days": 60
     }
   ]
 }

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Actualitza data/posts.json a partir de les fonts públiques configurades.
 
-v0.13: incorpora YouTube de l'Ajuntament com a primera font social automàtica.
+v0.14: aplica límits d'antiguitat configurables per font.
 """
 
 from __future__ import annotations
@@ -27,7 +27,7 @@ OUTPUT_FILE = ROOT / "data" / "posts.json"
 JS_OUTPUT_FILE = ROOT / "data" / "posts.js"
 MAX_POSTS_PER_SOURCE = 40
 SUMMARY_LIMIT = 260
-USER_AGENT = "SollerAra/0.13 (+https://github.com/Juanjo-Cp18/soller-ara)"
+USER_AGENT = "SollerAra/0.14 (+https://github.com/Juanjo-Cp18/soller-ara)"
 RELATED_WINDOW_HOURS = 72
 
 CATEGORY_KEYWORDS = {
@@ -697,6 +697,33 @@ def sort_key(post: dict) -> str:
     return post.get("published_at") or ""
 
 
+def filter_by_max_age(source: dict, posts: list[dict]) -> list[dict]:
+    max_age_days = source.get("max_age_days")
+    if max_age_days is None:
+        return posts
+
+    try:
+        max_age_days = int(max_age_days)
+    except (TypeError, ValueError):
+        return posts
+
+    now = datetime.now(timezone.utc)
+    filtered: list[dict] = []
+
+    for post in posts:
+        published = iso_datetime(post.get("published_at"))
+        if published is None:
+            continue
+        if published.tzinfo is None:
+            published = published.replace(tzinfo=timezone.utc)
+
+        age_days = (now - published.astimezone(timezone.utc)).total_seconds() / 86400
+        if 0 <= age_days <= max_age_days:
+            filtered.append(post)
+
+    return filtered
+
+
 def main() -> int:
     config = json.loads(SOURCES_FILE.read_text(encoding="utf-8"))
     posts: list[dict] = []
@@ -708,6 +735,7 @@ def main() -> int:
             continue
         try:
             source_posts = fetch_source(source)
+            source_posts = filter_by_max_age(source, source_posts)
             posts.extend(source_posts)
             source_status.append({
                 "source_id": source.get("id"),
@@ -738,8 +766,8 @@ def main() -> int:
     ordered_posts, related_pair_count = annotate_related_posts(ordered_posts)
 
     payload = {
-        "version": 13,
-        "generator_version": "0.13",
+        "version": 14,
+        "generator_version": "0.14",
         "fetched_at": datetime.now(timezone.utc).isoformat(),
         "source_count": len([s for s in config.get("sources", []) if s.get("enabled", True)]),
         "source_status": source_status,
