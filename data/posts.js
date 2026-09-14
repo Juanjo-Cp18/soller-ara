@@ -1,8 +1,8 @@
 window.SOLLER_ARA_DATA = {
-  "version": 7,
-  "generator_version": "0.5",
-  "fetched_at": "2026-09-14T16:34:52.635286+00:00",
-  "source_count": 3,
+  "version": 8,
+  "generator_version": "0.6",
+  "fetched_at": "2026-09-14T16:39:41.858343+00:00",
+  "source_count": 4,
   "source_status": [
     {
       "source_id": "ajuntament-soller-noticies",
@@ -29,6 +29,15 @@ window.SOLLER_ARA_DATA = {
       "method": "html_latest",
       "ok": true,
       "count": 20,
+      "error": null
+    },
+    {
+      "source_id": "soller-2010",
+      "name": "Sóller 2010",
+      "source_type": "official",
+      "method": "soller2010_news",
+      "ok": true,
+      "count": 0,
       "error": null
     }
   ],
