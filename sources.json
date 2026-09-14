@@ -1,5 +1,5 @@
 {
-  "version": 4,
+  "version": 5,
   "sources": [
     {
       "id": "ajuntament-soller-noticies",
@@ -9,7 +9,10 @@
       "language": "ca",
       "locality": "Sóller",
       "source_type": "official",
-      "enabled": true
+      "enabled": true,
+      "image_policy": "disabled_until_rights_verified",
+      "content_policy": "short_factual_excerpt",
+      "rights_status": "public_source_reviewed"
     },
     {
       "id": "sa-veu-soller",
@@ -19,7 +22,10 @@
       "language": "ca",
       "locality": "Sóller",
       "source_type": "media",
-      "enabled": true
+      "enabled": true,
+      "image_policy": "disabled_until_rights_verified",
+      "content_policy": "headline_date_link_only",
+      "rights_status": "permission_pending"
     },
     {
       "id": "setmanari-soller",
@@ -30,7 +36,10 @@
       "locality": "Sóller",
       "source_type": "media",
       "max_items": 20,
-      "enabled": true
+      "enabled": true,
+      "image_policy": "disabled_until_rights_verified",
+      "content_policy": "headline_date_link_only",
+      "rights_status": "permission_pending"
     },
     {
       "id": "soller-2010",
@@ -41,7 +50,10 @@
       "locality": "Sóller",
       "source_type": "official",
       "max_items": 15,
-      "enabled": true
+      "enabled": true,
+      "image_policy": "disabled_until_rights_verified",
+      "content_policy": "short_factual_excerpt",
+      "rights_status": "public_source_reviewed"
     }
   ]
 }

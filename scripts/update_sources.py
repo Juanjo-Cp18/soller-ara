@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Actualitza data/posts.json a partir de les fonts públiques configurades.
 
-v0.61: neteja els avisos de Sóller 2010 i millora la seva classificació.
+v0.7: aplica una política conservadora de propietat intel·lectual per font.
 """
 
 from __future__ import annotations
@@ -27,7 +27,7 @@ OUTPUT_FILE = ROOT / "data" / "posts.json"
 JS_OUTPUT_FILE = ROOT / "data" / "posts.js"
 MAX_POSTS_PER_SOURCE = 40
 SUMMARY_LIMIT = 260
-USER_AGENT = "SollerAra/0.61 (+https://github.com/Juanjo-Cp18/soller-ara)"
+USER_AGENT = "SollerAra/0.7 (+https://github.com/Juanjo-Cp18/soller-ara)"
 RELATED_WINDOW_HOURS = 72
 
 CATEGORY_KEYWORDS = {
@@ -315,18 +315,29 @@ def parse_rss(xml_bytes: bytes, source: dict) -> list[dict]:
 
 
 def build_post(source: dict, title: str, summary: str, url: str, published_at: str | None) -> dict:
+    source_type = source.get("source_type", "publisher")
+    content_policy = source.get("content_policy", "headline_date_link_only")
+
+    # Política conservadora: dels mitjans de premsa no reproduïm extractes.
+    public_summary = ""
+    if content_policy == "short_factual_excerpt":
+        public_summary = truncate(clean_text(summary), 220)
+
     return {
         "id": stable_id(source["id"], url, title),
         "category": categorize(title, summary),
         "source_id": source["id"],
         "source": source["name"],
-        "source_type": source.get("source_type", "publisher"),
+        "source_type": source_type,
         "language": source.get("language", "ca"),
         "locality": source.get("locality", "Sóller"),
         "published_at": published_at,
         "title": title,
-        "summary": summary,
+        "summary": public_summary,
         "url": url,
+        "content_policy": content_policy,
+        "rights_status": source.get("rights_status", "unknown"),
+        "image_allowed": source.get("image_policy") == "allowed",
     }
 
 
@@ -666,8 +677,8 @@ def main() -> int:
     ordered_posts, related_pair_count = annotate_related_posts(ordered_posts)
 
     payload = {
-        "version": 9,
-        "generator_version": "0.61",
+        "version": 10,
+        "generator_version": "0.7",
         "fetched_at": datetime.now(timezone.utc).isoformat(),
         "source_count": len([s for s in config.get("sources", []) if s.get("enabled", True)]),
         "source_status": source_status,

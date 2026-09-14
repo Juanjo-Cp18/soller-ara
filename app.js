@@ -275,7 +275,7 @@ function renderFeed() {
           </div>
           <span class="badge">${escapeHtml(categoryLabel)}</span>
           <h3>${escapeHtml(post.title || "")}</h3>
-          <p>${escapeHtml(post.summary || "")}</p>
+          ${post.summary ? `<p>${escapeHtml(post.summary)}</p>` : ""}
           ${relatedHtml}
           <div class="card-actions">
             <a class="origin-link" href="${escapeAttribute(safeUrl)}" target="_blank" rel="noopener noreferrer">${t("card.original")} →</a>
