@@ -328,7 +328,7 @@ def build_post(source: dict, title: str, summary: str, url: str, published_at: s
 
 
 
-ARTICLE_URL_RE = re.compile(r"/\\d{4}/\\d{2}/\\d{2}/\\d+/[^/?#]+\\.html$", re.I)
+ARTICLE_URL_RE = re.compile(r"/\d{4}/\d{2}/\d{2}/\d+/[^/?#]+\.html$", re.I)
 
 
 class LatestArticleLinkParser(HTMLParser):
@@ -411,7 +411,7 @@ def fetch_bytes(url: str, accept: str) -> tuple[bytes, str]:
 
 
 def date_from_article_url(url: str) -> str | None:
-    match = re.search(r"/(\\d{4})/(\\d{2})/(\\d{2})/", url)
+    match = re.search(r"/(\d{4})/(\d{2})/(\d{2})/", url)
     if not match:
         return None
     try:
