@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="ca">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0f766e" />
+  <meta name="description" content="Sóller Ara - Informació local de Sóller en un sol lloc." />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="stylesheet" href="styles.css" />
+  <title>Sóller Ara</title>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand-wrap">
+      <div class="brand-mark" aria-hidden="true">SA</div>
+      <div>
+        <h1>Sóller Ara</h1>
+        <p id="tagline">Tot el que passa a Sóller, en un sol lloc.</p>
+      </div>
+    </div>
+
+    <label class="language-picker">
+      <span class="sr-only">Idioma</span>
+      <select id="languageSelect" aria-label="Idioma">
+        <option value="ca">CA</option>
+        <option value="es">ES</option>
+        <option value="en">EN</option>
+      </select>
+    </label>
+  </header>
+
+  <nav class="category-nav" aria-label="Categories">
+    <button class="category active" data-category="all" data-i18n="nav.all">Tot</button>
+    <button class="category" data-category="now" data-i18n="nav.now">Ara</button>
+    <button class="category" data-category="news" data-i18n="nav.news">Notícies</button>
+    <button class="category" data-category="agenda" data-i18n="nav.agenda">Agenda</button>
+    <button class="category" data-category="alerts" data-i18n="nav.alerts">Avisos</button>
+    <button class="category" data-category="culture" data-i18n="nav.culture">Cultura</button>
+    <button class="category" data-category="sports" data-i18n="nav.sports">Esports</button>
+    <button class="category" data-category="commerce" data-i18n="nav.commerce">Comerç</button>
+    <button class="category" data-category="social" data-i18n="nav.social">Xarxes</button>
+  </nav>
+
+  <main class="layout">
+    <section class="hero">
+      <div>
+        <span class="eyebrow" data-i18n="hero.eyebrow">Avui a Sóller</span>
+        <h2 data-i18n="hero.title">La informació local, ordenada i accessible.</h2>
+        <p data-i18n="hero.body">Una portada única per descobrir avisos, notícies, agenda, cultura, esport, comerç i publicacions de fonts locals.</p>
+      </div>
+      <div class="status-card">
+        <strong data-i18n="hero.statusTitle">Estat del projecte</strong>
+        <span data-i18n="hero.statusBody">Versió inicial de demostració · v0.1</span>
+      </div>
+    </section>
+
+    <section class="section-heading">
+      <div>
+        <p class="eyebrow" data-i18n="feed.eyebrow">Actualitat</p>
+        <h2 data-i18n="feed.title">Publicacions destacades</h2>
+      </div>
+      <input id="searchInput" class="search" type="search" placeholder="Cercar..." data-i18n-placeholder="search.placeholder" />
+    </section>
+
+    <section id="feed" class="feed" aria-live="polite"></section>
+  </main>
+
+  <footer class="footer">
+    <p>© 2026 Sóller Ara · <span data-i18n="footer.nonprofit">Projecte sense ànim de lucre</span></p>
+  </footer>
+
+  <script src="app.js" defer></script>
+</body>
+</html>
