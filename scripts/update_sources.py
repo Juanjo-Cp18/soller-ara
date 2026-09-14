@@ -403,8 +403,7 @@ class Soller2010LinkParser(HTMLParser):
         if tag.lower() != "a" or not self.current_href:
             return
         title = clean_text(" ".join(self.current_text))
-        if len(title) >= 6:
-            self.links.append((self.current_href, title))
+        self.links.append((self.current_href, title))
         self.current_href = None
         self.current_text = []
 
@@ -554,7 +553,7 @@ def fetch_soller2010_news(source: dict) -> list[dict]:
     posts: list[dict] = []
 
     for url, listing_title in unique_links[:max_items]:
-        title = listing_title
+        title = listing_title if len(listing_title) > 5 and listing_title.casefold() != "veure" else ""
         summary = ""
         published_at = None
 
