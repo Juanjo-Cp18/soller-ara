@@ -1,7 +1,7 @@
 {
-  "version": 15,
-  "generator_version": "0.15",
-  "fetched_at": "2026-09-14T17:46:34.119265+00:00",
+  "version": 19,
+  "generator_version": "0.19",
+  "fetched_at": "2026-09-14T18:29:23.105398+00:00",
   "source_count": 6,
   "source_status": [
     {
@@ -56,6 +56,28 @@
       "method": "youtube_channel",
       "ok": true,
       "count": 2,
+      "error": null
+    }
+  ],
+  "social_integration_status": [
+    {
+      "platform": "Instagram",
+      "name": "Serveis Socials Sóller",
+      "account": "@serveissocialssoller",
+      "configured": false,
+      "ok": false,
+      "count": 0,
+      "status": "credentials_required",
+      "error": null
+    },
+    {
+      "platform": "Instagram",
+      "name": "Emergències 112 Illes Balears",
+      "account": "@emergencies112_ib",
+      "configured": false,
+      "ok": false,
+      "count": 0,
+      "status": "credentials_required",
       "error": null
     }
   ],
