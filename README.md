@@ -4,57 +4,51 @@ Projecte públic i sense ànim de lucre per reunir informació local de Sóller 
 
 ## Versió
 
-**v0.7**
+**v0.8**
 
-## Novetats de la v0.7
+## Novetats de la v0.8
 
-- Política conservadora de propietat intel·lectual integrada al sistema.
-- Els mitjans de comunicació (Sa Veu i Setmanari Sóller) es mostren amb:
-  - titular,
-  - font,
-  - data,
-  - categoria,
-  - enllaç original.
-- No es publiquen els extractes dels articles de mitjans mentre no hi hagi una autorització clara.
-- Les fotografies de totes les fonts estan desactivades per defecte fins que els drets s'hagin verificat.
-- Cada font declara ara la seva política de contingut i l'estat dels drets a `sources.json`.
-- Nova documentació específica a `RIGHTS.md`.
-- Es manté Sóller 2010 com a quarta font i la lògica millorada de la secció **Ara**.
+- Nova zona **Accessos útils** orientada a mobilitat i serveis.
+- Enllaç directe als horaris oficials de Tren i Tramvia de Sóller.
+- Enllaç directe a la informació oficial d'ORA i aparcament de Sóller 2010.
+- Enllaç directe a la pàgina oficial de la Policia Local de Sóller.
+- Enllaç directe a la fitxa municipal de Radio Taxis Sóller.
+- No es copien horaris, tarifes, mapes, fotografies ni altres continguts d'aquestes webs: Sóller Ara actua com a porta d'entrada a la font oficial.
+- Els accessos estan traduïts a català, castellà i anglès.
+- Es manté la política de drets de la v0.7 i les 4 fonts d'actualitat.
 
-## Fonts actuals
+## Fonts d'actualitat
 
 1. **Ajuntament de Sóller** — RSS oficial.
 2. **Sa Veu de Sóller** — RSS públic; ús conservador de titular/enllaç.
 3. **Setmanari Sóller** — pàgina pública d'últimes notícies; ús conservador de titular/enllaç.
 4. **Sóller 2010** — avisos públics amb verificació de data.
 
-## Fotografies
+## Accessos oficials
+
+- Ferrocarril de Sóller — horaris oficials.
+- Sóller 2010 — ORA i aparcament.
+- Ajuntament de Sóller — Policia Local.
+- Ajuntament de Sóller — Radio Taxis Sóller.
+
+## Fotografies i drets
 
 No es mostren fotografies de tercers de manera automàtica.
 
 Només s'incorporaran quan disposem d'una llicència, permís escrit, domini públic verificat o material propi.
 
-## Regles de contingut
-
-- Cap notícia d'una font s'elimina o fusiona automàticament amb una altra.
-- Un titular igual no implica necessàriament el mateix contingut.
-- Els mitjans privats no aporten extractes textuals a la targeta mentre la reutilització no estigui autoritzada.
-- Les fonts oficials poden aportar informació factual breu sota una política conservadora.
-- Un avís sense data fiable no es presenta com a actual.
-- Sempre es conserva un enllaç visible a la font d'origen.
+Els accessos útils utilitzen icones genèriques pròpies del sistema i enllacen directament a la font oficial.
 
 ## Arquitectura actual
 
-- `index.html`: estructura de la interfície.
-- `styles.css`: disseny visual responsive.
-- `app.js`: idiomes, filtres, cerca, lògica d'Ara i renderització.
-- `manifest.webmanifest`: configuració PWA.
-- `sources.json`: fonts i política de drets per font.
-- `scripts/update_sources.py`: lectura, classificació, control d'estat i aplicación de política de contingut.
+- `index.html`: estructura de la interfície i accessos útils.
+- `styles.css`: disseny responsive.
+- `app.js`: idiomes, filtres, cerca, lògica d'Ara i traducció dels accessos.
+- `sources.json`: fonts d'actualitat i política de drets.
+- `scripts/update_sources.py`: lectura, classificació i generació de dades.
 - `RIGHTS.md`: política de drets i reutilització.
 - `data/posts.json` / `data/posts.js`: dades generades.
-- `.github/workflows/update-sources.yml`: actualització horària.
-- `.github/workflows/deploy-pages.yml`: publicació automàtica.
+- GitHub Actions: actualització horària i publicació automàtica.
 
 ## Cost
 
