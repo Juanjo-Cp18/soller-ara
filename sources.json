@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "sources": [
     {
       "id": "ajuntament-soller-noticies",
@@ -9,6 +9,16 @@
       "language": "ca",
       "locality": "Sóller",
       "source_type": "official",
+      "enabled": true
+    },
+    {
+      "id": "sa-veu-soller",
+      "name": "Sa Veu de Sóller",
+      "type": "rss",
+      "url": "https://saveu.cat/feed/",
+      "language": "ca",
+      "locality": "Sóller",
+      "source_type": "media",
       "enabled": true
     }
   ]

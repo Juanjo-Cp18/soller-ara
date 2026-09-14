@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Actualitza data/posts.json a partir de les fonts públiques configurades.
 
-v0.21: neteja extractes, millora la classificació i afegeix la categoria Serveis.
+v0.3: afegeix múltiples fonts i agrupació conservadora de publicacions molt similars.
 """
 
 from __future__ import annotations
@@ -11,6 +11,8 @@ import html
 import json
 import re
 import sys
+import unicodedata
+from difflib import SequenceMatcher
 from datetime import datetime, timezone
 from email.utils import parsedate_to_datetime
 from pathlib import Path
@@ -22,7 +24,8 @@ SOURCES_FILE = ROOT / "sources.json"
 OUTPUT_FILE = ROOT / "data" / "posts.json"
 MAX_POSTS_PER_SOURCE = 40
 SUMMARY_LIMIT = 260
-USER_AGENT = "SollerAra/0.21 (+https://github.com/Juanjo-Cp18/soller-ara)"
+USER_AGENT = "SollerAra/0.3 (+https://github.com/Juanjo-Cp18/soller-ara)"
+DUPLICATE_WINDOW_HOURS = 72
 
 CATEGORY_KEYWORDS = {
     "alerts": [
@@ -161,6 +164,87 @@ def categorize(title: str, summary: str) -> str:
     return "news"
 
 
+
+STOPWORDS = {
+    "el", "la", "els", "les", "un", "una", "uns", "unes", "de", "del", "dels",
+    "i", "a", "al", "als", "en", "per", "amb", "que", "es", "se", "sa", "ses",
+    "aquest", "aquesta", "aquests", "aquestes", "avui", "dema", "soller",
+}
+
+
+def normalize_title(value: str) -> str:
+    value = unicodedata.normalize("NFD", value.casefold())
+    value = "".join(ch for ch in value if unicodedata.category(ch) != "Mn")
+    value = re.sub(r"[^a-z0-9]+", " ", value)
+    tokens = [token for token in value.split() if token not in STOPWORDS and len(token) > 1]
+    return " ".join(tokens)
+
+
+def title_similarity(a: str, b: str) -> float:
+    na, nb = normalize_title(a), normalize_title(b)
+    if not na or not nb:
+        return 0.0
+    if na == nb:
+        return 1.0
+    sequence = SequenceMatcher(None, na, nb).ratio()
+    ta, tb = set(na.split()), set(nb.split())
+    union = ta | tb
+    jaccard = len(ta & tb) / len(union) if union else 0.0
+    return max(sequence, jaccard)
+
+
+def iso_datetime(value: str | None) -> datetime | None:
+    if not value:
+        return None
+    try:
+        return datetime.fromisoformat(value.replace("Z", "+00:00"))
+    except ValueError:
+        return None
+
+
+def close_in_time(a: dict, b: dict) -> bool:
+    da, db = iso_datetime(a.get("published_at")), iso_datetime(b.get("published_at"))
+    if da is None or db is None:
+        return normalize_title(a.get("title", "")) == normalize_title(b.get("title", ""))
+    return abs((da - db).total_seconds()) <= DUPLICATE_WINDOW_HOURS * 3600
+
+
+def is_probable_duplicate(a: dict, b: dict) -> bool:
+    if a.get("source_id") == b.get("source_id"):
+        return False
+    if not close_in_time(a, b):
+        return False
+    similarity = title_similarity(a.get("title", ""), b.get("title", ""))
+    return similarity >= 0.84
+
+
+def related_source(post: dict) -> dict:
+    return {
+        "source_id": post.get("source_id"),
+        "source": post.get("source"),
+        "source_type": post.get("source_type"),
+        "url": post.get("url"),
+        "published_at": post.get("published_at"),
+        "title": post.get("title"),
+    }
+
+
+def merge_probable_duplicates(posts: list[dict]) -> list[dict]:
+    merged: list[dict] = []
+    for post in posts:
+        post["related_sources"] = []
+        post["source_count"] = 1
+
+        match = next((item for item in merged if is_probable_duplicate(item, post)), None)
+        if match is None:
+            merged.append(post)
+            continue
+
+        match["related_sources"].append(related_source(post))
+        match["source_count"] = 1 + len(match["related_sources"])
+
+    return merged
+
 def stable_id(source_id: str, url: str, title: str) -> str:
     raw = f"{source_id}|{url}|{title}".encode("utf-8")
     return hashlib.sha256(raw).hexdigest()[:20]
@@ -260,15 +344,18 @@ def main() -> int:
             errors.append({"source_id": source.get("id"), "error": str(exc)})
             print(f"ERROR {source.get('name', source.get('id'))}: {exc}", file=sys.stderr)
 
-    # Elimina duplicats per ID i ordena les publicacions més recents primer.
+    # Elimina duplicats exactes per ID, ordena i agrupa només coincidències molt probables entre fonts diferents.
     deduped = {post["id"]: post for post in posts}
-    ordered_posts = sorted(deduped.values(), key=sort_key, reverse=True)
+    raw_posts = sorted(deduped.values(), key=sort_key, reverse=True)
+    ordered_posts = merge_probable_duplicates(raw_posts)
 
     payload = {
-        "version": 2,
-        "generator_version": "0.21",
+        "version": 3,
+        "generator_version": "0.3",
         "fetched_at": datetime.now(timezone.utc).isoformat(),
         "source_count": len([s for s in config.get("sources", []) if s.get("enabled", True)]),
+        "raw_post_count": len(raw_posts),
+        "grouped_post_count": len(ordered_posts),
         "errors": errors,
         "posts": ordered_posts,
     }

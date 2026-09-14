@@ -4,27 +4,35 @@ Projecte públic i sense ànim de lucre per reunir informació local de Sóller 
 
 ## Versió
 
-**v0.21**
+**v0.3**
 
-## Novetats de la v0.21
+## Novetats de la v0.3
 
-- Neteja automàtica dels extractes RSS: elimina el títol i la data quan venen duplicats al resum.
-- Nova categoria **Serveis** per a residus, porta a porta, mobilitat, trànsit, aigua, sanejament, obres i altres serveis públics.
-- Classificació millorada amb puntuacions i prioritat per categories, en lloc d'assignar la primera paraula clau trobada.
-- Ja no s'utilitzen els dies de la setmana com a senyal automàtica d'Agenda.
-- Els avisos urgents continuen tenint prioritat sobre la resta de categories.
-- El punt visual de font oficial només apareix a les fonts marcades realment com a oficials.
-- Corregit el disparador del workflow d'actualització de fonts.
-- GitHub Pages es torna a publicar automàticament quan acaba una actualització de dades amb èxit.
+- Segona font real: **Sa Veu de Sóller** mitjançant el seu feed RSS públic.
+- El sistema combina publicacions de l'Ajuntament de Sóller i Sa Veu en una única portada cronològica.
+- Agrupació conservadora de possibles duplicats entre fonts diferents.
+- Només s'agrupen publicacions publicades dins una finestra de 72 hores i amb una similitud de títol molt alta.
+- Quan una publicació té una font relacionada, la targeta mostra **També a** amb un enllaç directe a l'altra publicació.
+- El cercador també té en compte les fonts i títols relacionats.
+- El sistema registra el nombre de publicacions brutes i el nombre final després de l'agrupació.
+- Es manté el cost addicional en **0 €** i no s'utilitza cap API d'IA de pagament.
+
+## Fonts actuals
+
+1. **Ajuntament de Sóller** — RSS oficial de notícies  
+   `https://ajsoller.net/ca/noticies/rss.xml`
+
+2. **Sa Veu de Sóller** — RSS públic del diari digital  
+   `https://saveu.cat/feed/`
 
 ## Arquitectura actual
 
 - `index.html`: estructura de la interfície.
 - `styles.css`: disseny visual responsive.
-- `app.js`: idiomes, filtres, cerca, càrrega de dades i compartició.
+- `app.js`: idiomes, filtres, cerca, càrrega de dades, fonts relacionades i compartició.
 - `manifest.webmanifest`: configuració inicial PWA.
 - `sources.json`: registre de fonts públiques.
-- `scripts/update_sources.py`: lector RSS/Atom, neteja i classificació.
+- `scripts/update_sources.py`: lector RSS/Atom, neteja, classificació i agrupació de duplicats probables.
 - `data/posts.json`: dades generades automàticament.
 - `.github/workflows/update-sources.yml`: actualització horària de les fonts.
 - `.github/workflows/deploy-pages.yml`: publicació automàtica a GitHub Pages.
@@ -33,15 +41,10 @@ Projecte públic i sense ànim de lucre per reunir informació local de Sóller 
 
 - Cost addicional objectiu: **0 €**.
 - Català com a idioma inicial de la interfície.
-- Respecte a la font: no es reprodueix l'article complet; es mostra un extracte breu i un enllaç directe a l'original.
-- Sense IA de pagament a la v0.21.
-
-## Font actual
-
-Ajuntament de Sóller — RSS oficial de notícies:
-
-`https://ajsoller.net/ca/noticies/rss.xml`
+- Respecte a les fonts: no es reprodueixen els articles complets; es mostra un extracte breu i un enllaç directe a l'original.
+- Sense IA de pagament a la v0.3.
+- La deduplicació és deliberadament conservadora per evitar unir notícies diferents.
 
 ## Estat
 
-La v0.21 continua sent una versió pilot. La classificació ha millorat, però seguirà necessitant ajustos a mesura que incorporem més fonts i casos reals.
+La v0.3 és encara una versió pilot. Amb dues fonts reals ja podem començar a observar casos de duplicació, diferències de classificació i qualitat dels extractes en un entorn más semblant al producte final.

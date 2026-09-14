@@ -14,8 +14,8 @@ const translations = {
     "hero.eyebrow": "Avui a Sóller",
     "hero.title": "La informació local, ordenada i accessible.",
     "hero.body": "Una portada única per descobrir avisos, serveis, notícies, agenda, cultura, esport, comerç i publicacions de fonts locals.",
-    "hero.statusTitle": "Font real connectada",
-    "hero.statusBody": "Ajuntament de Sóller · actualització automàtica",
+    "hero.statusTitle": "2 fonts reals connectades",
+    "hero.statusBody": "Ajuntament de Sóller + Sa Veu · actualització automàtica",
     "feed.eyebrow": "Actualitat",
     "feed.title": "Publicacions destacades",
     "feed.loading": "Carregant actualització...",
@@ -25,6 +25,8 @@ const translations = {
     "footer.nonprofit": "Projecte sense ànim de lucre",
     "card.original": "Veure original",
     "card.share": "Compartir",
+    "card.alsoAt": "También en",
+    "card.alsoAt": "També a",
     "empty": "No hi ha publicacions que coincideixin amb la cerca.",
     categories: { now: "Ara", news: "Notícies", agenda: "Agenda", alerts: "Avisos", services: "Serveis", culture: "Cultura", sports: "Esports", commerce: "Comerç", social: "Xarxes" }
   },
@@ -43,8 +45,8 @@ const translations = {
     "hero.eyebrow": "Hoy en Sóller",
     "hero.title": "La información local, ordenada y accesible.",
     "hero.body": "Una portada única para descubrir avisos, servicios, noticias, agenda, cultura, deporte, comercio y publicaciones de fuentes locales.",
-    "hero.statusTitle": "Fuente real conectada",
-    "hero.statusBody": "Ayuntamiento de Sóller · actualización automática",
+    "hero.statusTitle": "2 fuentes reales conectadas",
+    "hero.statusBody": "Ayuntamiento de Sóller + Sa Veu · actualización automática",
     "feed.eyebrow": "Actualidad",
     "feed.title": "Publicaciones destacadas",
     "feed.loading": "Cargando actualización...",
@@ -72,8 +74,8 @@ const translations = {
     "hero.eyebrow": "Today in Sóller",
     "hero.title": "Local information, organized and accessible.",
     "hero.body": "A single homepage for alerts, services, news, events, culture, sports, local businesses and posts from local sources.",
-    "hero.statusTitle": "Live source connected",
-    "hero.statusBody": "Sóller Town Council · automatic updates",
+    "hero.statusTitle": "2 live sources connected",
+    "hero.statusBody": "Sóller Town Council + Sa Veu · automatic updates",
     "feed.eyebrow": "Latest",
     "feed.title": "Featured posts",
     "feed.loading": "Loading update...",
@@ -83,6 +85,7 @@ const translations = {
     "footer.nonprofit": "Non-profit project",
     "card.original": "View original",
     "card.share": "Share",
+    "card.alsoAt": "Also at",
     "empty": "No posts match your search.",
     categories: { now: "Now", news: "News", agenda: "Events", alerts: "Alerts", services: "Services", culture: "Culture", sports: "Sports", commerce: "Local business", social: "Social" }
   }
@@ -188,7 +191,8 @@ function renderFeed() {
   const visiblePosts = posts.filter((post) => {
     const categoryMatches = currentCategory === "all"
       || (currentCategory === "now" ? isNowPost(post) : post.category === currentCategory);
-    const haystack = `${post.title || ""} ${post.summary || ""} ${post.source || ""}`.toLocaleLowerCase(currentLanguage);
+    const relatedText = Array.isArray(post.related_sources) ? post.related_sources.map((item) => `${item.source || ""} ${item.title || ""}`).join(" ") : "";
+    const haystack = `${post.title || ""} ${post.summary || ""} ${post.source || ""} ${relatedText}`.toLocaleLowerCase(currentLanguage);
     const searchMatches = !normalizedSearch || haystack.includes(normalizedSearch);
     return categoryMatches && searchMatches;
   });
@@ -201,6 +205,10 @@ function renderFeed() {
   feed.innerHTML = visiblePosts.map((post) => {
     const categoryLabel = translations[currentLanguage].categories[post.category] || post.category;
     const safeUrl = post.url || "#";
+    const relatedSources = Array.isArray(post.related_sources) ? post.related_sources : [];
+    const relatedHtml = relatedSources.length
+      ? `<div class="related-sources"><span>${t("card.alsoAt")}:</span>${relatedSources.map((item) => `<a href="${escapeAttribute(item.url || "#")}" target="_blank" rel="noopener noreferrer">${escapeHtml(item.source || "")}</a>`).join("")}</div>`
+      : "";
     return `
       <article class="card">
         <div class="card-media" aria-hidden="true">${iconFor(post.category)}</div>
@@ -212,6 +220,7 @@ function renderFeed() {
           <span class="badge">${escapeHtml(categoryLabel)}</span>
           <h3>${escapeHtml(post.title || "")}</h3>
           <p>${escapeHtml(post.summary || "")}</p>
+          ${relatedHtml}
           <div class="card-actions">
             <a class="origin-link" href="${escapeAttribute(safeUrl)}" target="_blank" rel="noopener noreferrer">${t("card.original")} →</a>
             <button class="muted-button" type="button" data-share-id="${escapeAttribute(post.id || "")}">${t("card.share")}</button>
