@@ -4,42 +4,42 @@ Projecte públic i sense ànim de lucre per reunir informació local de Sóller 
 
 ## Versió
 
-**v0.10**
+**v0.11**
 
-## Novetats de la v0.10
+## Novetats de la v0.11
 
-- Nova zona **Mobilitat ara** dins els accessos útils.
-- Incorporació de **VISICAR**, el visor oficial del Consell de Mallorca per consultar:
-  - incidències viàries,
-  - carreteres tallades,
-  - restriccions de circulació,
-  - actuacions programades.
-- Accés directe a **Alertes i avisos TIB** per comprovar retards, canvis de parada i alteracions del servei.
-- Sóller Ara no copia l'estat del trànsit ni els avisos: enllaça a les fonts oficials perquè la informació sigui la més actual possible.
-- Es manté l'accés a TIB Ara, Sóller centre 2 i les línies 203, 204, 231 i 232.
-- Recursos estàtics actualitzats a `v=0.10` per evitar problemes de caché.
+- Cinquena font automàtica: **AEMET · Avisos Mallorca**, a partir del canal RSS oficial d'avisos meteorològics.
+- Els avisos d'AEMET es classifiquen sempre com a **Avisos** i es filtren per referències a Mallorca / Serra de Tramuntana.
+- Nova zona **Emergències i meteorologia** amb accés directe a:
+  - avisos AEMET de Serra de Tramuntana,
+  - Emergències 112 Illes Balears.
+- Nova zona **Xarxes oficials d'avisos**:
+  - X · Emergències 112,
+  - Instagram · Emergències 112,
+  - Facebook · Emergències 112,
+  - X · AEMET Baleares,
+  - X · IBANAT.
+- Les xarxes socials són una font complementària: Sóller Ara **no copia ni raspa automàticament** les publicacions.
+- El botó **Xarxes** del menú porta ara directament a aquests perfils oficials, en lloc de mostrar un filtre buit.
+- Recursos estàtics actualitzats a `v=0.11`.
 
-## Fonts d'actualitat
+## Fonts automàtiques
 
 1. **Ajuntament de Sóller** — RSS oficial.
 2. **Sa Veu de Sóller** — RSS públic; ús conservador de titular/enllaç.
 3. **Setmanari Sóller** — pàgina pública d'últimes notícies; ús conservador de titular/enllaç.
 4. **Sóller 2010** — avisos públics amb verificació de data.
+5. **AEMET** — RSS oficial d'avisos meteorològics.
 
-## Mobilitat oficial
+## Xarxes i emergències
 
-- Ferrocarril de Sóller — horaris oficials.
-- TIB Ara — temps real, rutes i pròximes sortides.
-- TIB Alertes i avisos — incidències i modificacions del servei.
-- VISICAR — estat de la xarxa viària de Mallorca en temps real.
-- Sóller 2010 — ORA i aparcament.
-- Ajuntament de Sóller — Policia Local i Radio Taxis Sóller.
+Les administracions poden difondre una alerta primer a les xarxes socials. Per aquest motiu Sóller Ara manté accessos directes als perfils oficials d'Emergències 112, AEMET Baleares i IBANAT.
 
-## Fotografies i drets
+Aquesta capa no substitueix el 112, AEMET ni les fonts oficials. En una emergència s'ha de telefonar al **112**.
 
-No es mostren fotografies de tercers de manera automàtica.
+## Drets
 
-Només s'incorporaran quan disposem d'una llicència, permís escrit, domini públic verificat o material propi.
+AEMET autoritza l'ús i reproducció de la seva informació citant AEMET com a autora. Les xarxes socials es tracten únicament com a enllaços externs mentre no existeixi una API o autorització adequada per reutilitzar-ne el contingut.
 
 ## Cost
 

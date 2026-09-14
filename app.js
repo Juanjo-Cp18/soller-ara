@@ -14,8 +14,8 @@ const translations = {
     "hero.eyebrow": "Avui a Sóller",
     "hero.title": "La informació local, ordenada i accessible.",
     "hero.body": "Una portada única per descobrir avisos, serveis, notícies, agenda, cultura, esport, comerç i publicacions de fonts locals.",
-    "hero.statusTitle": "4 fonts reals connectades",
-    "hero.statusBody": "Ajuntament + Sa Veu + Setmanari + Sóller 2010",
+    "hero.statusTitle": "5 fonts reals connectades",
+    "hero.statusBody": "Fonts locals + AEMET",
     "feed.eyebrow": "Actualitat",
     "feed.title": "Publicacions destacades",
     "feed.loading": "Carregant actualització...",
@@ -39,6 +39,14 @@ const translations = {
     "mobility.visicar.body": "Talls, restriccions i incidències en temps real",
     "mobility.tib.title": "Alertes i avisos TIB",
     "mobility.tib.body": "Retards, canvis de parada i modificacions de servei",
+    "emergency.title": "Emergències i meteorologia",
+    "emergency.body": "Avisos oficials automàtics i accés directe a les xarxes que sovint publiquen actualitzacions immediates.",
+    "emergency.aemet.title": "AEMET · Serra de Tramuntana",
+    "emergency.aemet.body": "Avisos meteorològics oficials",
+    "emergency.112.title": "Emergències 112 Illes Balears",
+    "emergency.112.body": "Informació i prevenció oficial",
+    "social.official": "Xarxes oficials d'avisos:",
+    "social.note": "Sóller Ara no copia automàticament aquestes publicacions: les xarxes es mantenen com a canal complementari perquè moltes alertes es difonen primer allà.",
     "quick.ora.title": "ORA i aparcament",
     "quick.ora.body": "Informació oficial",
     "quick.police.title": "Policia Local",
@@ -67,8 +75,8 @@ const translations = {
     "hero.eyebrow": "Hoy en Sóller",
     "hero.title": "La información local, ordenada y accesible.",
     "hero.body": "Una portada única para descubrir avisos, servicios, noticias, agenda, cultura, deporte, comercio y publicaciones de fuentes locales.",
-    "hero.statusTitle": "4 fuentes reales conectadas",
-    "hero.statusBody": "Ayuntamiento + Sa Veu + Setmanari + Sóller 2010",
+    "hero.statusTitle": "5 fuentes reales conectadas",
+    "hero.statusBody": "Fuentes locales + AEMET",
     "feed.eyebrow": "Actualidad",
     "feed.title": "Publicaciones destacadas",
     "feed.loading": "Cargando actualización...",
@@ -92,6 +100,14 @@ const translations = {
     "mobility.visicar.body": "Cortes, restricciones e incidencias en tiempo real",
     "mobility.tib.title": "Alertas y avisos TIB",
     "mobility.tib.body": "Retrasos, cambios de parada y modificaciones del servicio",
+    "emergency.title": "Emergencias y meteorología",
+    "emergency.body": "Avisos oficiales automáticos y acceso directo a las redes que suelen publicar actualizaciones inmediatas.",
+    "emergency.aemet.title": "AEMET · Sierra de Tramuntana",
+    "emergency.aemet.body": "Avisos meteorológicos oficiales",
+    "emergency.112.title": "Emergencias 112 Illes Balears",
+    "emergency.112.body": "Información y prevención oficial",
+    "social.official": "Redes oficiales de avisos:",
+    "social.note": "Sóller Ara no copia automáticamente estas publicaciones: las redes se mantienen como canal complementario porque muchas alertas se difunden primero allí.",
     "quick.ora.title": "ORA y aparcamiento",
     "quick.ora.body": "Información oficial",
     "quick.police.title": "Policía Local",
@@ -120,8 +136,8 @@ const translations = {
     "hero.eyebrow": "Today in Sóller",
     "hero.title": "Local information, organized and accessible.",
     "hero.body": "A single homepage for alerts, services, news, events, culture, sports, local businesses and posts from local sources.",
-    "hero.statusTitle": "4 live sources connected",
-    "hero.statusBody": "Town Council + Sa Veu + Setmanari + Sóller 2010",
+    "hero.statusTitle": "5 live sources connected",
+    "hero.statusBody": "Local sources + AEMET",
     "feed.eyebrow": "Latest",
     "feed.title": "Featured posts",
     "feed.loading": "Loading update...",
@@ -145,6 +161,14 @@ const translations = {
     "mobility.visicar.body": "Road closures, restrictions and live incidents",
     "mobility.tib.title": "TIB alerts and notices",
     "mobility.tib.body": "Delays, stop changes and service updates",
+    "emergency.title": "Emergencies and weather",
+    "emergency.body": "Automatic official alerts plus direct access to social channels that often publish immediate updates.",
+    "emergency.aemet.title": "AEMET · Serra de Tramuntana",
+    "emergency.aemet.body": "Official weather warnings",
+    "emergency.112.title": "112 Emergencies · Balearic Islands",
+    "emergency.112.body": "Official information and prevention",
+    "social.official": "Official alert channels:",
+    "social.note": "Sóller Ara does not automatically copy these posts: social networks remain a complementary channel because many alerts appear there first.",
     "quick.ora.title": "ORA and parking",
     "quick.ora.body": "Official information",
     "quick.police.title": "Local Police",
@@ -451,6 +475,12 @@ document.querySelectorAll(".category").forEach((button) => {
   button.addEventListener("click", () => {
     document.querySelectorAll(".category").forEach((item) => item.classList.remove("active"));
     button.classList.add("active");
+
+    if (button.id === "socialNavButton") {
+      document.getElementById("officialSocial")?.scrollIntoView({ behavior: "smooth", block: "start" });
+      return;
+    }
+
     currentCategory = button.dataset.category;
     renderFeed();
   });

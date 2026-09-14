@@ -52,3 +52,16 @@ Els serveis externs com horaris de transport, TIB, VISICAR, ORA, aparcament o co
 ## Revisió abans del llançament públic
 
 Abans de promocionar Sóller Ara com a servei públic estable, és recomanable revisar aquesta política amb assessorament jurídic professional i obtenir, quan sigui possible, autoritzacions expresses dels mitjans locals.
+
+
+## Xarxes socials
+
+Els perfils oficials d'Emergències 112, AEMET, IBANAT i altres organismes es poden enllaçar com a canals complementaris d'informació.
+
+Sóller Ara no copia, incrusta ni emmagatzema automàticament publicacions de xarxes socials tret que existeixi una API oficial, una llicència o una autorització suficient que permeti aquesta reutilització.
+
+Els enllaços socials serveixen per facilitar l'accés a la publicació original i no substitueixen els canals oficials d'emergència.
+
+## AEMET
+
+AEMET indica a la seva web que l'ús i reproducció de la seva informació està autoritzat citant AEMET com a autora. Sóller Ara identifica sempre AEMET com a font dels avisos meteorològics.
