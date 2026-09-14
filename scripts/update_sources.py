@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Actualitza data/posts.json a partir de les fonts públiques configurades.
 
-v0.4: afegeix Setmanari Sóller com a font HTML controlada, mantenint RSS per a les altres fonts.
+v0.41: genera dades en JSON per al web i en JavaScript per permetre obrir la còpia local directament.
 """
 
 from __future__ import annotations
@@ -24,9 +24,10 @@ from xml.etree import ElementTree as ET
 ROOT = Path(__file__).resolve().parents[1]
 SOURCES_FILE = ROOT / "sources.json"
 OUTPUT_FILE = ROOT / "data" / "posts.json"
+JS_OUTPUT_FILE = ROOT / "data" / "posts.js"
 MAX_POSTS_PER_SOURCE = 40
 SUMMARY_LIMIT = 260
-USER_AGENT = "SollerAra/0.4 (+https://github.com/Juanjo-Cp18/soller-ara)"
+USER_AGENT = "SollerAra/0.41 (+https://github.com/Juanjo-Cp18/soller-ara)"
 RELATED_WINDOW_HOURS = 72
 
 CATEGORY_KEYWORDS = {
@@ -522,8 +523,8 @@ def main() -> int:
     ordered_posts, related_pair_count = annotate_related_posts(ordered_posts)
 
     payload = {
-        "version": 5,
-        "generator_version": "0.4",
+        "version": 6,
+        "generator_version": "0.41",
         "fetched_at": datetime.now(timezone.utc).isoformat(),
         "source_count": len([s for s in config.get("sources", []) if s.get("enabled", True)]),
         "post_count": len(ordered_posts),
@@ -533,7 +534,12 @@ def main() -> int:
     }
 
     OUTPUT_FILE.parent.mkdir(parents=True, exist_ok=True)
-    OUTPUT_FILE.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    json_payload = json.dumps(payload, ensure_ascii=False, indent=2)
+    OUTPUT_FILE.write_text(json_payload + "\n", encoding="utf-8")
+    JS_OUTPUT_FILE.write_text(
+        "window.SOLLER_ARA_DATA = " + json_payload + ";\n",
+        encoding="utf-8",
+    )
 
     if not ordered_posts:
         print("No s'ha obtingut cap publicació; es conserva un JSON vàlid però buit.", file=sys.stderr)

@@ -259,21 +259,52 @@ async function sharePost(postId) {
   }
 }
 
+function applyPostsPayload(payload) {
+  if (!payload || !Array.isArray(payload.posts)) {
+    throw new Error("Invalid posts payload");
+  }
+  posts = payload.posts;
+  fetchedAt = payload.fetched_at || null;
+  usingDemoData = false;
+}
+
 async function loadPosts() {
+  const embeddedPayload = window.SOLLER_ARA_DATA;
+
+  if (window.location.protocol === "file:" && embeddedPayload) {
+    try {
+      applyPostsPayload(embeddedPayload);
+      updateLastUpdated();
+      renderFeed();
+      return;
+    } catch (error) {
+      console.warn("No s'han pogut carregar les dades locals", error);
+    }
+  }
+
   try {
     const response = await fetch(`data/posts.json?v=${Date.now()}`, { cache: "no-store" });
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
     const payload = await response.json();
-    if (!Array.isArray(payload.posts)) throw new Error("Invalid posts payload");
-    posts = payload.posts;
-    fetchedAt = payload.fetched_at || null;
-    usingDemoData = false;
+    applyPostsPayload(payload);
   } catch (error) {
     console.warn("No s'ha pogut carregar data/posts.json", error);
-    posts = demoPosts;
-    fetchedAt = null;
-    usingDemoData = true;
+
+    if (embeddedPayload) {
+      try {
+        applyPostsPayload(embeddedPayload);
+      } catch (_) {
+        posts = demoPosts;
+        fetchedAt = null;
+        usingDemoData = true;
+      }
+    } else {
+      posts = demoPosts;
+      fetchedAt = null;
+      usingDemoData = true;
+    }
   }
+
   updateLastUpdated();
   renderFeed();
 }

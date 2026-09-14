@@ -4,21 +4,22 @@ Projecte públic i sense ànim de lucre per reunir informació local de Sóller 
 
 ## Versió
 
-**v0.4**
+**v0.41**
 
-## Novetats de la v0.4
+## Novetat de la v0.41: còpia local
 
-- Tercera font real: **Setmanari Sóller** (`elsoller.cat`).
-- Com que no hem localitzat un RSS públic del Setmanari Sóller, aquesta font s'integra mitjançant la seva pàgina pública d'últimes notícies.
-- El sistema recull només:
-  - enllaç de la notícia,
-  - titular,
-  - descripció/metadades públiques,
-  - data de publicació.
-- No es copia el cos complet de l'article.
-- Si l'estructura HTML del Setmanari Sóller canvia, aquesta font pot fallar sense impedir que l'Ajuntament i Sa Veu continuïn actualitzant-se.
-- Les tres fonts es mostren cronològicament en una única portada.
-- Es manté la regla de la v0.31: **cap notícia d'una font s'elimina o fusiona automàticament amb una altra**.
+A partir d'aquesta versió, una còpia completa del projecte es pot obrir directament des d'una carpeta del PC fent doble clic a `index.html`.
+
+El sistema genera les dades en dos formats:
+
+- `data/posts.json`: utilitzat principalment per la web publicada a GitHub Pages.
+- `data/posts.js`: còpia de les mateixes dades que el navegador pot carregar quan `index.html` s'obre com a fitxer local (`file://`).
+
+### Limitació important
+
+La còpia local mostra les notícies que contenia en el moment de descarregar el projecte, però **no s'actualitza automàticament cada hora per si sola**. L'actualització automàtica continua executant-se amb GitHub Actions a la versió publicada.
+
+Més endavant es pot preparar un actualitzador local per Windows/macOS si es considera útil.
 
 ## Fonts actuals
 
@@ -31,26 +32,27 @@ Projecte públic i sense ànim de lucre per reunir informació local de Sóller 
 3. **Setmanari Sóller** — pàgina pública d'últimes notícies  
    `https://www.elsoller.cat/ultimes.html`
 
+## Regles de contingut
+
+- Cap notícia d'una font s'elimina o fusiona automàticament amb una altra.
+- Un titular igual no implica necessàriament el mateix contingut.
+- Les publicacions només es poden marcar com a relacionades si coincideixen clarament tant en titular com en resum i proximitat temporal.
+- Fins i tot si estan relacionades, totes les publicacions continuen visibles separadament.
+- No es copia el cos complet dels articles; es conserva la font i l'enllaç original.
+
 ## Arquitectura actual
 
 - `index.html`: estructura de la interfície.
 - `styles.css`: disseny visual responsive.
-- `app.js`: idiomes, filtres, cerca, càrrega de dades, contingut relacionat i compartició.
+- `app.js`: idiomes, filtres, cerca, càrrega web/local, contingut relacionat i compartició.
 - `manifest.webmanifest`: configuració inicial PWA.
 - `sources.json`: registre de fonts públiques.
-- `scripts/update_sources.py`: lector RSS/Atom, lector HTML controlat, neteja, classificació i detecció conservadora de contingut relacionat.
-- `data/posts.json`: dades generades automàticament.
+- `scripts/update_sources.py`: lector RSS/Atom, lector HTML controlat, classificació i generació de dades.
+- `data/posts.json`: dades per a la web.
+- `data/posts.js`: dades compatibles amb obertura local.
 - `.github/workflows/update-sources.yml`: actualització horària de les fonts.
 - `.github/workflows/deploy-pages.yml`: publicació automàtica a GitHub Pages.
 
-## Principis
+## Cost
 
-- Cost addicional objectiu: **0 €**.
-- Català com a idioma inicial de la interfície.
-- Respecte a les fonts: no es reprodueixen els articles complets; es mostra un extracte breu i un enllaç directe a l'original.
-- Sense IA de pagament.
-- Prioritat a no perdre informació: davant el dubte, dues publicacions es mantenen separades.
-
-## Estat
-
-La v0.4 és una versió pilot amb tres fonts reals. La font del Setmanari Sóller és tècnicament més fràgil que les dues fonts RSS perquè depèn de l'estructura de la seva pàgina pública.
+Cost addicional actual: **0 €**.
