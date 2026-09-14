@@ -1,7 +1,7 @@
 window.SOLLER_ARA_DATA = {
   "version": 8,
   "generator_version": "0.6",
-  "fetched_at": "2026-09-14T16:39:41.858343+00:00",
+  "fetched_at": "2026-09-14T16:40:46.575614+00:00",
   "source_count": 4,
   "source_status": [
     {
@@ -37,11 +37,11 @@ window.SOLLER_ARA_DATA = {
       "source_type": "official",
       "method": "soller2010_news",
       "ok": true,
-      "count": 0,
+      "count": 6,
       "error": null
     }
   ],
-  "post_count": 42,
+  "post_count": 48,
   "related_pair_count": 0,
   "errors": [],
   "posts": [
@@ -631,6 +631,90 @@ window.SOLLER_ARA_DATA = {
       "title": "Acte de lliurament dels Premis Literaris Vall de Sóller",
       "summary": "Divendres vàrem celebrar una nova edició dels Premis Literaris Vall de Sóller, un certamen que va néixer l’any 1987 i que, gairebé quaranta anys després, continua donant veu a la creació literària en la nostra llengua. Va ser també una edició especialment…",
       "url": "https://ajsoller.net/ca/noticies/acte-de-lliurament-dels-premis-literaris-vall-de-soller",
+      "related_sources": []
+    },
+    {
+      "id": "ec4ea7da84ff721ad297",
+      "category": "services",
+      "source_id": "soller-2010",
+      "source": "Sóller 2010",
+      "source_type": "official",
+      "language": "ca",
+      "locality": "Sóller",
+      "published_at": "2026-08-06T12:00:00+00:00",
+      "title": "RECOLLIDA SELECTIVA Dies de recollida i com reciclar correctament Darrers avisos",
+      "summary": "Soller 2010",
+      "url": "https://soller2010.com/noticias/recollida-selectiva-dies-de-recollida-i-com-reciclar-correctament",
+      "related_sources": []
+    },
+    {
+      "id": "fdc39f5e64cd82ab3325",
+      "category": "news",
+      "source_id": "soller-2010",
+      "source": "Sóller 2010",
+      "source_type": "official",
+      "language": "ca",
+      "locality": "Sóller",
+      "published_at": "2026-05-15T12:00:00+00:00",
+      "title": "DIA 17 de MAIG - Dia mundial del Reciclatge Darrers avisos",
+      "summary": "Soller 2010",
+      "url": "https://soller2010.com/noticias/dia-17-de-maig-dia-mundial-del-reciclatge",
+      "related_sources": []
+    },
+    {
+      "id": "fb240169a5a6b8c487d6",
+      "category": "news",
+      "source_id": "soller-2010",
+      "source": "Sóller 2010",
+      "source_type": "official",
+      "language": "ca",
+      "locality": "Sóller",
+      "published_at": "2026-04-23T12:00:00+00:00",
+      "title": "INSTRUCCIONS DIPÒSIT CORRECTE VOLUMINOSOS Darrers avisos",
+      "summary": "Soller 2010",
+      "url": "https://soller2010.com/noticias/instruccions-diposit-correcte-voluminosos",
+      "related_sources": []
+    },
+    {
+      "id": "11368ee06224870dc117",
+      "category": "services",
+      "source_id": "soller-2010",
+      "source": "Sóller 2010",
+      "source_type": "official",
+      "language": "ca",
+      "locality": "Sóller",
+      "published_at": "2026-04-21T12:00:00+00:00",
+      "title": "MODIFICACIONS RECOLLIDA PORTA A PORTA DURANT FIRA I FIRÓ (8 a 11 MAIG) Darrers avisos",
+      "summary": "Soller 2010",
+      "url": "https://soller2010.com/noticias/modificacions-recollida-porta-a-porta-durant-fira-i-firo-8-a-11-maig",
+      "related_sources": []
+    },
+    {
+      "id": "1fb86269e0408f07146a",
+      "category": "news",
+      "source_id": "soller-2010",
+      "source": "Sóller 2010",
+      "source_type": "official",
+      "language": "ca",
+      "locality": "Sóller",
+      "published_at": "2026-04-08T12:00:00+00:00",
+      "title": "MEMÒRIA ANUAL 2025 Darrers avisos",
+      "summary": "Soller 2010",
+      "url": "https://soller2010.com/noticias/memoria-anual-2025",
+      "related_sources": []
+    },
+    {
+      "id": "5c22f4157bbc841e9f65",
+      "category": "news",
+      "source_id": "soller-2010",
+      "source": "Sóller 2010",
+      "source_type": "official",
+      "language": "ca",
+      "locality": "Sóller",
+      "published_at": "2026-03-24T12:00:00+00:00",
+      "title": "APERTURA PISCINES SON ANGELATS Darrers avisos",
+      "summary": "Soller 2010",
+      "url": "https://soller2010.com/noticias/apertura-piscines-son-angelats",
       "related_sources": []
     }
   ]
