@@ -25,8 +25,7 @@ const translations = {
     "footer.nonprofit": "Projecte sense ànim de lucre",
     "card.original": "Veure original",
     "card.share": "Compartir",
-    "card.alsoAt": "También en",
-    "card.alsoAt": "També a",
+    "card.related": "Contingut relacionat",
     "empty": "No hi ha publicacions que coincideixin amb la cerca.",
     categories: { now: "Ara", news: "Notícies", agenda: "Agenda", alerts: "Avisos", services: "Serveis", culture: "Cultura", sports: "Esports", commerce: "Comerç", social: "Xarxes" }
   },
@@ -56,6 +55,7 @@ const translations = {
     "footer.nonprofit": "Proyecto sin ánimo de lucro",
     "card.original": "Ver original",
     "card.share": "Compartir",
+    "card.related": "Contenido relacionado",
     "empty": "No hay publicaciones que coincidan con la búsqueda.",
     categories: { now: "Ahora", news: "Noticias", agenda: "Agenda", alerts: "Avisos", services: "Servicios", culture: "Cultura", sports: "Deportes", commerce: "Comercio", social: "Redes" }
   },
@@ -85,7 +85,7 @@ const translations = {
     "footer.nonprofit": "Non-profit project",
     "card.original": "View original",
     "card.share": "Share",
-    "card.alsoAt": "Also at",
+    "card.related": "Related content",
     "empty": "No posts match your search.",
     categories: { now: "Now", news: "News", agenda: "Events", alerts: "Alerts", services: "Services", culture: "Culture", sports: "Sports", commerce: "Local business", social: "Social" }
   }
@@ -207,7 +207,7 @@ function renderFeed() {
     const safeUrl = post.url || "#";
     const relatedSources = Array.isArray(post.related_sources) ? post.related_sources : [];
     const relatedHtml = relatedSources.length
-      ? `<div class="related-sources"><span>${t("card.alsoAt")}:</span>${relatedSources.map((item) => `<a href="${escapeAttribute(item.url || "#")}" target="_blank" rel="noopener noreferrer">${escapeHtml(item.source || "")}</a>`).join("")}</div>`
+      ? `<div class="related-sources"><span>${t("card.related")}:</span>${relatedSources.map((item) => `<a href="${escapeAttribute(item.url || "#")}" target="_blank" rel="noopener noreferrer">${escapeHtml(item.source || "")}</a>`).join("")}</div>`
       : "";
     return `
       <article class="card">
