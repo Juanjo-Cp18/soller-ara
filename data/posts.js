@@ -1,8 +1,37 @@
 window.SOLLER_ARA_DATA = {
-  "version": 6,
-  "generator_version": "0.41",
-  "fetched_at": "2026-09-14T16:32:12.144223+00:00",
+  "version": 7,
+  "generator_version": "0.5",
+  "fetched_at": "2026-09-14T16:34:52.635286+00:00",
   "source_count": 3,
+  "source_status": [
+    {
+      "source_id": "ajuntament-soller-noticies",
+      "name": "Ajuntament de Sóller",
+      "source_type": "official",
+      "method": "rss",
+      "ok": true,
+      "count": 10,
+      "error": null
+    },
+    {
+      "source_id": "sa-veu-soller",
+      "name": "Sa Veu de Sóller",
+      "source_type": "media",
+      "method": "rss",
+      "ok": true,
+      "count": 12,
+      "error": null
+    },
+    {
+      "source_id": "setmanari-soller",
+      "name": "Setmanari Sóller",
+      "source_type": "media",
+      "method": "html_latest",
+      "ok": true,
+      "count": 20,
+      "error": null
+    }
+  ],
   "post_count": 42,
   "related_pair_count": 0,
   "errors": [],
