@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "sources": [
     {
       "platform": "YouTube",
@@ -12,35 +12,35 @@
       "platform": "X",
       "name": "AEMET Baleares",
       "account": "@AEMET_Baleares",
-      "mode": "official_timeline_embed",
-      "status": "active"
+      "mode": "official_link",
+      "status": "api_pending"
     },
     {
       "platform": "X",
       "name": "IBANAT",
       "account": "@ibanat_IB",
-      "mode": "official_timeline_embed",
-      "status": "active"
+      "mode": "official_link",
+      "status": "api_pending"
     },
     {
       "platform": "X",
       "name": "SAMU 061 Illes Balears",
       "account": "@SAMU061IB",
-      "mode": "official_timeline_embed",
-      "status": "active"
+      "mode": "official_link",
+      "status": "api_pending"
     },
     {
       "platform": "Facebook",
       "name": "Policia Tutor de Sóller",
       "account": "policiatutorsoller",
-      "mode": "official_page_plugin",
-      "status": "active"
+      "mode": "official_link",
+      "status": "api_pending"
     },
     {
       "platform": "Instagram",
       "name": "Serveis Socials Sóller",
       "account": "@serveissocialssoller",
-      "mode": "profile_link",
+      "mode": "official_link",
       "status": "api_pending"
     }
   ]

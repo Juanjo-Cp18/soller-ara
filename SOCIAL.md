@@ -74,3 +74,13 @@ S'ha afegit una capa de visualització oficial que no depèn de scraping:
 Aquesta capa és diferent de les targetes socials automàtiques. Les timelines mostren contingut real servit directament per la plataforma, però Sóller Ara no pot llegir programàticament cada publicació per resumir-la sense l'accés API corresponent.
 
 La meta continua sent que les publicacions seleccionades de X, Facebook i Instagram acabin entrant com a targetes individuals a Tot/Ara/Xarxes. Per fer-ho de forma estable i conforme a les plataformes, s'activaran les API oficials quan disposem dels permisos necessaris.
+
+
+## v0.17 — Correcció dels embeds socials
+
+Les timelines i iframes globals de xarxes s'han retirat de la interfície perquè no ofereixen una experiència prou fiable. En concret, determinades pàgines de Facebook poden rebutjar la connexió i Instagram no ofereix un feed de perfil reutilitzable només amb un iframe.
+
+A partir d'ara:
+- una plataforma només compta com a integrada quan Sóller Ara pot obtenir publicacions individuals;
+- les plataformes no integrades es mantenen com a accessos directes verificats;
+- no es mostraran finestres buides o errors de connexió com si fossin contingut social.

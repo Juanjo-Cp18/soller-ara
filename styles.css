@@ -466,6 +466,77 @@ a { color: inherit; }
   text-decoration: underline;
 }
 
+.social-sources {
+  margin-top: 32px;
+  padding: 24px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+.social-sources-head {
+  max-width: 780px;
+}
+.social-sources-head h2 {
+  margin: 5px 0 8px;
+  font-size: 1.45rem;
+}
+.social-sources-head > p:last-child {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.55;
+}
+.social-source-grid {
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+.social-source-link {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: auto minmax(0,1fr) auto;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 14px;
+  border: 1px solid var(--border);
+  border-radius: 15px;
+  background: var(--bg);
+  text-decoration: none;
+}
+.social-source-link:hover {
+  border-color: var(--primary);
+}
+.social-source-link > span:nth-child(2) {
+  min-width: 0;
+  display: grid;
+  gap: 3px;
+}
+.social-source-link small {
+  color: var(--muted);
+  font-size: .78rem;
+}
+.social-source-active {
+  border-color: var(--primary);
+  background: var(--primary-soft);
+}
+.social-source-icon {
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  background: var(--surface);
+  color: var(--primary);
+  font-weight: 900;
+}
+.social-sources-note {
+  margin: 14px 0 0;
+  color: var(--muted);
+  font-size: .8rem;
+  line-height: 1.5;
+}
+
 .section-heading {
   margin: 38px 0 18px;
   display: flex;
@@ -631,7 +702,7 @@ a { color: inherit; }
   .hero h2 { font-size: 2.4rem; }
   .section-heading { align-items: stretch; flex-direction: column; }
   .quick-grid { grid-template-columns: 1fr; }
-  .mobility-now-links, .emergency-links, .live-social-grid { grid-template-columns: 1fr; }
+  .mobility-now-links, .emergency-links, .live-social-grid, .social-source-grid { grid-template-columns: 1fr; }
   .feed-controls { width: 100%; flex-direction: column; align-items: stretch; }
   .source-filter, .search { width: 100%; min-width: 0; }
   .feed { grid-template-columns: 1fr; }

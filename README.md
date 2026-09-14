@@ -4,28 +4,28 @@ Projecte públic i sense ànim de lucre per reunir informació local de Sóller 
 
 ## Versió
 
-**v0.16**
+**v0.17**
 
-## Novetats de la v0.16
+## Novetats de la v0.17
 
-- La secció **Xarxes** incorpora ara contingut social en directe mitjançant eines oficials de les plataformes.
-- Timelines oficials de X:
-  - AEMET Baleares
-  - IBANAT
-  - SAMU 061 Illes Balears
-- Timeline de Facebook:
-  - Policia Tutor de Sóller
-- Accés a l'Instagram oficial de Serveis Socials de Sóller, verificat des del web municipal.
-- Els vídeos de YouTube de l'Ajuntament continuen entrant com a targetes individuals dins **Tot / Ara / Xarxes**.
-- Les timelines de X/Facebook encara no es converteixen en targetes resumides de Tot/Ara perquè la lectura automàtica de publicacions requereix accés oficial a API/permisos.
-- Recursos estàtics actualitzats a `v=0.16`.
+- La portada s'obre ara directament a **Ara**.
+- **Tot** passa a ser la segona pestanya.
+- S'elimina el bloc d'iframes/timelines socials de la v0.16 perquè Facebook podia rebutjar la connexió i Instagram no mostrava publicacions reals.
+- **Xarxes** conserva les publicacions socials que sí funcionen de manera fiable: ara mateix, YouTube de l'Ajuntament.
+- Instagram, Facebook i X es mostren com a **fonts socials oficials amb accés directe**, no com si fossin feeds integrats.
+- No es considera una xarxa "integrada" fins que Sóller Ara pugui obtenir publicacions individuals de forma estable.
+- Recursos estàtics actualitzats a `v=0.17`.
 
-## Estat de les plataformes
+## Estat actual de Xarxes
 
-- **YouTube**: automàtic i integrat.
-- **X**: visualització oficial en directe; automatització individual pendent d'accés API.
-- **Facebook**: visualització oficial mitjançant Page Plugin; automatització individual pendent de permisos de Meta.
-- **Instagram**: compte oficial accessible; automatització individual pendent de l'API d'Instagram/Meta.
+- **YouTube**: automàtic, amb targetes i vídeo integrat.
+- **Instagram**: accés oficial; automatització pendent.
+- **Facebook**: accés oficial; automatització pendent.
+- **X**: accessos oficials; automatització pendent.
+
+## Criteri
+
+Preferim mostrar menys xarxes però que funcionin bé, abans que omplir la pàgina d'iframes que depenen de cookies, bloquejos o configuracions externes.
 
 ## Cost
 

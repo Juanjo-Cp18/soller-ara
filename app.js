@@ -56,6 +56,15 @@ const translations = {
     "liveSocial.body": "Aquest bloc mostra contingut públic directament des de X i Facebook. Encara no el convertim en resums individuals dins Tot/Ara perquè això requereix accés oficial a les API.",
     "liveSocial.policeTutor": "Policia Tutor de Sóller",
     "liveSocial.instagramNote": "Instagram oficial local verificat des del web municipal:",
+    "socialSources.eyebrow": "Fonts socials",
+    "socialSources.title": "Comptes oficials i contingut integrat",
+    "socialSources.body": "Les publicacions que podem obtenir de forma fiable apareixen com a targetes. La resta de comptes oficials es mantenen com a accessos directes fins que disposem d'una integració estable.",
+    "socialSources.youtube": "YouTube · publicacions integrades",
+    "socialSources.instagram": "Instagram · accés oficial",
+    "socialSources.facebook": "Facebook · accés oficial",
+    "socialSources.x": "X · accés oficial",
+    "socialSources.policeTutor": "Policia Tutor de Sóller",
+    "socialSources.note": "No es mostren finestres incrustades que puguin fallar o bloquejar-se. Només integrem publicacions quan la font es pot obtenir de manera estable.",
     "quick.ora.title": "ORA i aparcament",
     "quick.ora.body": "Informació oficial",
     "quick.police.title": "Policia Local",
@@ -126,6 +135,15 @@ const translations = {
     "liveSocial.body": "Este bloque muestra contenido público directamente desde X y Facebook. Todavía no lo convertimos en resúmenes individuales dentro de Todo/Ahora porque eso requiere acceso oficial a las API.",
     "liveSocial.policeTutor": "Policía Tutor de Sóller",
     "liveSocial.instagramNote": "Instagram oficial local verificado desde la web municipal:",
+    "socialSources.eyebrow": "Fuentes sociales",
+    "socialSources.title": "Cuentas oficiales y contenido integrado",
+    "socialSources.body": "Las publicaciones que podemos obtener de forma fiable aparecen como tarjetas. El resto de cuentas oficiales se mantienen como accesos directos hasta disponer de una integración estable.",
+    "socialSources.youtube": "YouTube · publicaciones integradas",
+    "socialSources.instagram": "Instagram · acceso oficial",
+    "socialSources.facebook": "Facebook · acceso oficial",
+    "socialSources.x": "X · acceso oficial",
+    "socialSources.policeTutor": "Policía Tutor de Sóller",
+    "socialSources.note": "No mostramos ventanas incrustadas que puedan fallar o bloquearse. Solo integramos publicaciones cuando la fuente se puede obtener de forma estable.",
     "quick.ora.title": "ORA y aparcamiento",
     "quick.ora.body": "Información oficial",
     "quick.police.title": "Policía Local",
@@ -196,6 +214,15 @@ const translations = {
     "liveSocial.body": "This block shows public content directly from X and Facebook. We do not yet convert it into individual summaries inside All/Now because that requires official API access.",
     "liveSocial.policeTutor": "Sóller Youth Liaison Police",
     "liveSocial.instagramNote": "Local official Instagram verified from the municipal website:",
+    "socialSources.eyebrow": "Social sources",
+    "socialSources.title": "Official accounts and integrated content",
+    "socialSources.body": "Posts we can retrieve reliably appear as cards. Other official accounts remain direct links until a stable integration is available.",
+    "socialSources.youtube": "YouTube · integrated posts",
+    "socialSources.instagram": "Instagram · official link",
+    "socialSources.facebook": "Facebook · official link",
+    "socialSources.x": "X · official link",
+    "socialSources.policeTutor": "Sóller Youth Liaison Police",
+    "socialSources.note": "We do not show embedded windows that may fail or be blocked. Posts are integrated only when the source can be retrieved reliably.",
     "quick.ora.title": "ORA and parking",
     "quick.ora.body": "Official information",
     "quick.police.title": "Local Police",
@@ -230,7 +257,7 @@ let posts = [];
 let fetchedAt = null;
 let usingDemoData = false;
 let currentLanguage = localStorage.getItem("sollerAraLanguage") || "ca";
-let currentCategory = "all";
+let currentCategory = "now";
 let currentSource = "all";
 let currentSearch = "";
 let sourceStatus = [];
@@ -242,7 +269,7 @@ const sourceSelect = document.getElementById("sourceSelect");
 const lastUpdated = document.getElementById("lastUpdated");
 const sourceHealthTitle = document.getElementById("sourceHealthTitle");
 const sourceHealthBody = document.getElementById("sourceHealthBody");
-const liveSocialFeeds = document.getElementById("liveSocialFeeds");
+const socialSources = document.getElementById("socialSources");
 
 function t(key) {
   return translations[currentLanguage][key] ?? translations.ca[key] ?? key;
@@ -375,8 +402,8 @@ function populateSourceSelect() {
 
 
 function renderFeed() {
-  if (liveSocialFeeds) {
-    liveSocialFeeds.hidden = currentCategory !== "social";
+  if (socialSources) {
+    socialSources.hidden = currentCategory !== "social";
   }
 
   const normalizedSearch = currentSearch.trim().toLocaleLowerCase(currentLanguage);
@@ -634,10 +661,6 @@ document.querySelectorAll(".category").forEach((button) => {
     button.classList.add("active");
     currentCategory = button.dataset.category;
     renderFeed();
-
-    if (currentCategory === "social") {
-      requestAnimationFrame(() => ensureXWidgets());
-    }
   });
 });
 
