@@ -1,12 +1,13 @@
 {
-  "version": 1,
-  "fetched_at": "2026-09-14T15:31:03.425817+00:00",
+  "version": 2,
+  "generator_version": "0.21",
+  "fetched_at": "2026-09-14T15:45:32.425890+00:00",
   "source_count": 1,
   "errors": [],
   "posts": [
     {
       "id": "bc76cf1c96b3669c334c",
-      "category": "agenda",
+      "category": "services",
       "source_id": "ajuntament-soller-noticies",
       "source": "Ajuntament de Sóller",
       "source_type": "official",
@@ -14,12 +15,12 @@
       "locality": "Sóller",
       "published_at": "2026-09-14T11:42:23+00:00",
       "title": "Avui ampliam el porta a porta",
-      "summary": "Avui ampliam el porta a porta 14-Setembre-2026 Els nous carrers s’incorporen avui al servei de recollida porta a porta. Recordau consultar el tríptic per saber quina fracció correspon treure cada dia. Avui com que és dilluns, heu de treure el poal amb les…",
+      "summary": "Els nous carrers s’incorporen avui al servei de recollida porta a porta. Recordau consultar el tríptic per saber quina fracció correspon treure cada dia. Avui com que és dilluns, heu de treure el poal amb les bosses corresponents d’orgànics i d’higiènics entre…",
       "url": "https://ajsoller.net/ca/noticies/avui-ampliam-el-porta-porta"
     },
     {
       "id": "dfa794476886f07af9f8",
-      "category": "agenda",
+      "category": "commerce",
       "source_id": "ajuntament-soller-noticies",
       "source": "Ajuntament de Sóller",
       "source_type": "official",
@@ -27,7 +28,7 @@
       "locality": "Sóller",
       "published_at": "2026-09-10T07:55:37+00:00",
       "title": "Reunió informativa sobre el Porta a Porta per a la restauració i els comerços (HoReCa)",
-      "summary": "Reunió informativa sobre el Porta a Porta per a la restauració i els comerços (HoReCa) 10-Setembre-2026 L’Ajuntament de Sóller organitza una reunió informativa adreçada als establiments de restauració i comerços per explicar el funcionament del servei de…",
+      "summary": "L’Ajuntament de Sóller organitza una reunió informativa adreçada als establiments de restauració i comerços per explicar el funcionament del servei de recollida Porta a Porta, informar sobre les novetats i resoldre els dubtes que puguin sorgir. - Dilluns 14 de…",
       "url": "https://ajsoller.net/ca/noticies/reunio-informativa-sobre-el-porta-porta-la-restauracio-i-els-comercos-horeca"
     },
     {
@@ -40,7 +41,7 @@
       "locality": "Sóller",
       "published_at": "2026-09-09T09:18:56+00:00",
       "title": "Fornalutx celebra, un any més, el dia de la seva patrona",
-      "summary": "Fornalutx celebra, un any més, el dia de la seva patrona 09-Setembre-2026 La celebració de la Nativitat de la Mare de Déu va tornar a reunir ahir els fornalutxencs i fornalutxenques. Gràcies per fer-nos partícips d’un dia tan vostre. Molts d’anys i bones…",
+      "summary": "La celebració de la Nativitat de la Mare de Déu va tornar a reunir ahir els fornalutxencs i fornalutxenques. Gràcies per fer-nos partícips d’un dia tan vostre. Molts d’anys i bones festes, Fornalutx!",
       "url": "https://ajsoller.net/ca/noticies/fornalutx-celebra-un-any-mes-el-dia-de-la-seva-patrona"
     },
     {
@@ -53,7 +54,7 @@
       "locality": "Sóller",
       "published_at": "2026-09-09T07:56:50+00:00",
       "title": "Emergències ha activat per avui l’alerta taronja (IG-1 del Pla Meteobal) per pluges i tempestes a totes les Illes Balears",
-      "summary": "Emergències ha activat per avui l’alerta taronja (IG-1 del Pla Meteobal) per pluges i tempestes a totes les Illes Balears 09-Setembre-2026 Degut a què es preveuen precipitacions intenses, demanam a la ciutadania que extremi les precaucions: ▪️ Evitau els…",
+      "summary": "Degut a què es preveuen precipitacions intenses, demanam a la ciutadania que extremi les precaucions: ▪️ Evitau els desplaçaments que no siguin necessaris. ▪️ Allunyau-vos dels torrents i de les zones baixes o inundables. ▪️ No travesseu zones inundades, ni a…",
       "url": "https://ajsoller.net/ca/noticies/emergencies-ha-activat-avui-lalerta-taronja-ig-1-del-pla-meteobal-pluges-i-tempestes-totes"
     },
     {
@@ -66,12 +67,12 @@
       "locality": "Sóller",
       "published_at": "2026-09-07T08:51:51+00:00",
       "title": "Anunci de la convocatòria del pròxim ple ordinari",
-      "summary": "Anunci de la convocatòria del pròxim ple ordinari 07-Setembre-2026 Tindrà lloc dimecres, 9 de setembre, a les 11:00h Documents adjunts Anunci de la convocatòria",
+      "summary": "Tindrà lloc dimecres, 9 de setembre, a les 11:00h",
       "url": "https://ajsoller.net/ca/noticies/anunci-de-la-convocatoria-del-proxim-ple-ordinari"
     },
     {
       "id": "99baa9bf4ff527ba42a8",
-      "category": "news",
+      "category": "services",
       "source_id": "ajuntament-soller-noticies",
       "source": "Ajuntament de Sóller",
       "source_type": "official",
@@ -79,12 +80,12 @@
       "locality": "Sóller",
       "published_at": "2026-09-07T05:37:04+00:00",
       "title": "El tinent de batle assisteix a la presentació de l’inici de les obres d’ampliació de la rotonda de la ITV de Son Castelló",
-      "summary": "El tinent de batle assisteix a la presentació de l’inici de les obres d’ampliació de la rotonda de la ITV de Son Castelló 07-Setembre-2026 El tinent de batle de Sóller, Carlos Darder, ha assistit avui a l’inici de les obres d’ampliació de la rotonda de la ITV…",
+      "summary": "El tinent de batle de Sóller, Carlos Darder, ha assistit avui a l’inici de les obres d’ampliació de la rotonda de la ITV de Son Castelló, en un acte encapçalat pel president del Consell de Mallorca, Llorenç Galmés, amb representants de les institucions i dels…",
       "url": "https://ajsoller.net/ca/noticies/el-tinent-de-batle-assisteix-la-presentacio-de-linici-de-les-obres-dampliacio-de-la"
     },
     {
       "id": "9a687d744e2e97e041f9",
-      "category": "news",
+      "category": "services",
       "source_id": "ajuntament-soller-noticies",
       "source": "Ajuntament de Sóller",
       "source_type": "official",
@@ -92,7 +93,7 @@
       "locality": "Sóller",
       "published_at": "2026-09-04T05:23:52+00:00",
       "title": "Sóller rebrà 779.094 euros de l’ITS per millorar les xarxes de pluvials i sanejament",
-      "summary": "Sóller rebrà 779.094 euros de l’ITS per millorar les xarxes de pluvials i sanejament 04-Setembre-2026 El batle de Sóller, Miquel Nadal, i el regidor de Desenvolupament Local, Lluís Cerezo, han assistit avui a la finca de Raixa a la presentació del paquet…",
+      "summary": "El batle de Sóller, Miquel Nadal, i el regidor de Desenvolupament Local, Lluís Cerezo, han assistit avui a la finca de Raixa a la presentació del paquet d’inversions que el Govern de les Illes Balears destinarà a reforçar les infraestructures del cicle de…",
       "url": "https://ajsoller.net/ca/noticies/soller-rebra-779094-euros-de-lits-millorar-les-xarxes-de-pluvials-i-sanejament"
     },
     {
@@ -105,12 +106,12 @@
       "locality": "Sóller",
       "published_at": "2026-09-03T05:11:11+00:00",
       "title": "La XIV Trobada d’Havaneres de Sóller tornarà a omplir Can Repic de música els dies 18 i 19 de setembre",
-      "summary": "La XIV Trobada d’Havaneres de Sóller tornarà a omplir Can Repic de música els dies 18 i 19 de setembre 03-Setembre-2026 Les Havaneres tornaran a sonar davant la mar els pròxims 18 i 19 de setembre, amb una nova edició de la Trobada d’Havaneres de Sóller, que…",
+      "summary": "Les Havaneres tornaran a sonar davant la mar els pròxims 18 i 19 de setembre, amb una nova edició de la Trobada d’Havaneres de Sóller, que convertirà un any més la platja de Can Repic en punt de trobada per a sollerics, solleriques i visitants. La XIV edició…",
       "url": "https://ajsoller.net/ca/noticies/la-xiv-trobada-dhavaneres-de-soller-tornara-omplir-can-repic-de-musica-els-dies-18-i-19-de"
     },
     {
       "id": "247ceb41248add167934",
-      "category": "agenda",
+      "category": "culture",
       "source_id": "ajuntament-soller-noticies",
       "source": "Ajuntament de Sóller",
       "source_type": "official",
@@ -118,12 +119,12 @@
       "locality": "Sóller",
       "published_at": "2026-08-25T09:20:34+00:00",
       "title": "La Sala Magna acull el concert del Joch de Ministrils del Consell de Mallorca",
-      "summary": "La Sala Magna acull el concert del Joch de Ministrils del Consell de Mallorca 25-Agost-2026 Dissabte capvespre, amb motiu de les Festes de Sant Baromeu, la sala magna va acollir el concert d'una de les músiques que forma part de la memòria de Mallorca. El Joch…",
+      "summary": "Dissabte capvespre, amb motiu de les Festes de Sant Baromeu, la sala magna va acollir el concert d'una de les músiques que forma part de la memòria de Mallorca. El Joch de Ministrils del Consell de Mallorca ha duit fins a Sóller una tradició musical que torna…",
       "url": "https://ajsoller.net/ca/noticies/la-sala-magna-acull-el-concert-del-joch-de-ministrils-del-consell-de-mallorca"
     },
     {
       "id": "4b9df60c4ae63552bdfb",
-      "category": "agenda",
+      "category": "culture",
       "source_id": "ajuntament-soller-noticies",
       "source": "Ajuntament de Sóller",
       "source_type": "official",
@@ -131,7 +132,7 @@
       "locality": "Sóller",
       "published_at": "2026-08-25T09:16:33+00:00",
       "title": "Acte de lliurament dels Premis Literaris Vall de Sóller",
-      "summary": "Acte de lliurament dels Premis Literaris Vall de Sóller 25-Agost-2026 Divendres vàrem celebrar una nova edició dels Premis Literaris Vall de Sóller, un certamen que va néixer l’any 1987 i que, gairebé quaranta anys després, continua donant veu a la creació…",
+      "summary": "Divendres vàrem celebrar una nova edició dels Premis Literaris Vall de Sóller, un certamen que va néixer l’any 1987 i que, gairebé quaranta anys després, continua donant veu a la creació literària en la nostra llengua. Va ser també una edició especialment…",
       "url": "https://ajsoller.net/ca/noticies/acte-de-lliurament-dels-premis-literaris-vall-de-soller"
     }
   ]
