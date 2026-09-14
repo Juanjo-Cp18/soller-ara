@@ -10,7 +10,7 @@ on:
     paths:
       - "sources.json"
       - "scripts/update_sources.py"
-      - ".github/workfows/update-sources.yml"
+      - ".github/workflows/update-sources.yml"
 
 permissions:
   contents: write
