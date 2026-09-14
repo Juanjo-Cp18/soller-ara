@@ -1,7 +1,7 @@
 window.SOLLER_ARA_DATA = {
-  "version": 9,
-  "generator_version": "0.61",
-  "fetched_at": "2026-09-14T16:42:29.141318+00:00",
+  "version": 10,
+  "generator_version": "0.7",
+  "fetched_at": "2026-09-14T16:47:54.550771+00:00",
   "source_count": 4,
   "source_status": [
     {
@@ -55,8 +55,11 @@ window.SOLLER_ARA_DATA = {
       "locality": "Sóller",
       "published_at": "2026-09-14T16:45:12+02:00",
       "title": "Deià adoptarà la recollida porta a porta a partir de dia 28 de setembre",
-      "summary": "L'ajuntament n'ha preparat reunions informatives els dies 14 i 15",
+      "summary": "",
       "url": "https://www.elsoller.cat/soller/local/2026/09/14/354543/deia-adoptara-recollida-porta-porta-partir-dia-setembre.html",
+      "content_policy": "headline_date_link_only",
+      "rights_status": "permission_pending",
+      "image_allowed": false,
       "related_sources": []
     },
     {
@@ -69,8 +72,11 @@ window.SOLLER_ARA_DATA = {
       "locality": "Sóller",
       "published_at": "2026-09-14T13:45:42+00:00",
       "title": "L’OCB insta l’Ajuntament a dedicar espais públics a Joan Alcover i a La Balanguera",
-      "summary": "L’Obra Cultural Balear (OCB) ha demanat a l’Ajuntament de Sóller que incorpori els noms de Joan Alcover i de La Balanguera al nomenclàtor municipal, en el marc de les commemoracions de l’Any Alcover i del centenari de la versió musicada de l’himne mallorquí…",
+      "summary": "",
       "url": "https://saveu.cat/noticies/locb-insta-lajuntament-a-dedicar-espais-publics-a-joan-alcover-i-a-la-balanguera/",
+      "content_policy": "headline_date_link_only",
+      "rights_status": "permission_pending",
+      "image_allowed": false,
       "related_sources": []
     },
     {
@@ -83,8 +89,11 @@ window.SOLLER_ARA_DATA = {
       "locality": "Sóller",
       "published_at": "2026-09-14T13:41:12+00:00",
       "title": "Anit arranca la recollida de fems porta a porta per a 623 habitatges",
-      "summary": "Els moradors d’un total de 623 habitatges del centre i la part alta de Sóller han de canviar els seus costums en relació a la gestió dels residus. A partir d’aquesta nit es posa en marxa la segona fase de la recollida porta a porta amb el qual mig Sóller deixa…",
+      "summary": "",
       "url": "https://saveu.cat/noticies/anit-arranca-la-recollida-de-fems-porta-a-porta-per-a-623-habitatges/",
+      "content_policy": "headline_date_link_only",
+      "rights_status": "permission_pending",
+      "image_allowed": false,
       "related_sources": []
     },
     {
@@ -97,8 +106,11 @@ window.SOLLER_ARA_DATA = {
       "locality": "Sóller",
       "published_at": "2026-09-14T13:34:27+00:00",
       "title": "Totes les nits d’agost varen ser tropicals",
-      "summary": "Sóller va viure un agost insòlitament càlid, en línia amb el comportament del conjunt de les Illes Balears, que han registrat el mes d’agost més calorós des de 1961 segons l’Agència Estatal de Meteorologia (AEMET). Al municipi, la persistència de la calor…",
+      "summary": "",
       "url": "https://saveu.cat/noticies/totes-les-nits-dagost-varen-ser-tropicals/",
+      "content_policy": "headline_date_link_only",
+      "rights_status": "permission_pending",
+      "image_allowed": false,
       "related_sources": []
     },
     {
@@ -111,8 +123,11 @@ window.SOLLER_ARA_DATA = {
       "locality": "Sóller",
       "published_at": "2026-09-14T11:42:23+00:00",
       "title": "Avui ampliam el porta a porta",
-      "summary": "Els nous carrers s’incorporen avui al servei de recollida porta a porta. Recordau consultar el tríptic per saber quina fracció correspon treure cada dia. Avui com que és dilluns, heu de treure el poal amb les bosses corresponents d’orgànics i d’higiènics entre…",
+      "summary": "Els nous carrers s’incorporen avui al servei de recollida porta a porta. Recordau consultar el tríptic per saber quina fracció correspon treure cada dia. Avui com que és dilluns, heu de treure el poal amb les bosses…",
       "url": "https://ajsoller.net/ca/noticies/avui-ampliam-el-porta-porta",
+      "content_policy": "short_factual_excerpt",
+      "rights_status": "public_source_reviewed",
+      "image_allowed": false,
       "related_sources": []
     },
     {
@@ -125,8 +140,11 @@ window.SOLLER_ARA_DATA = {
       "locality": "Sóller",
       "published_at": "2026-09-13T09:00:00+02:00",
       "title": "El Port, inclòs en el pla de conservació de zones marines",
-      "summary": "El Govern l’incorpora a l’inventari provisional d’espais objecte d’estudi",
+      "summary": "",
       "url": "https://www.elsoller.cat/soller/local/2026/09/13/354541/port-inclos-pla-conservacio-zones-marines.html",
+      "content_policy": "headline_date_link_only",
+      "rights_status": "permission_pending",
+      "image_allowed": false,
       "related_sources": []
     },
     {
@@ -139,8 +157,11 @@ window.SOLLER_ARA_DATA = {
       "locality": "Sóller",
       "published_at": "2026-09-13T07:00:00+00:00",
       "title": "L’Ajuntament té 25’5 milions al banc i suma 6’6 milions més de romanent",
-      "summary": "L’Ajuntament de Sóller compta actualment amb 24’5 milions d’euros acumulats a les diferents entitats bancàries amb les quals hi té comptes oberts. Es tracta de la quantitat més elevada de la història després d’encadenar diversos exercicis en els quals els…",
+      "summary": "",
       "url": "https://saveu.cat/noticies/lajuntament-te-255-milions-al-banc-i-suma-66-milions-mes-de-romanent/",
+      "content_policy": "headline_date_link_only",
+      "rights_status": "permission_pending",
+      "image_allowed": false,
       "related_sources": []
     },
     {
@@ -153,8 +174,11 @@ window.SOLLER_ARA_DATA = {
       "locality": "Sóller",
       "published_at": "2026-09-12T12:00:00+02:00",
       "title": "Jeroni Rullan coordinarà el proper Sóller Grindhouse",
-      "summary": "La revista ha anunciat que la nova publicació serà un monogràfic especial",
+      "summary": "",
       "url": "https://www.elsoller.cat/soller/societat-i-cultura/2026/09/12/354539/jeroni-rullan-coordinara-proper-soller-grindhouse.html",
+      "content_policy": "headline_date_link_only",
+      "rights_status": "permission_pending",
+      "image_allowed": false,
       "related_sources": []
     },
     {
@@ -167,8 +191,11 @@ window.SOLLER_ARA_DATA = {
       "locality": "Sóller",
       "published_at": "2026-09-12T10:00:00+02:00",
       "title": "La Vila demana a l’ecotaxa tres milions d’euros per al punt verd",
-      "summary": "El projecte preveu una nova deixalleria i una nau per als treballadors de Sóller 2010 al polígon de Son Angelats",
+      "summary": "",
       "url": "https://www.elsoller.cat/soller/local/2026/09/12/354537/vila-demana-ecotaxa-tres-milions-euros-per-punt-verd.html",
+      "content_policy": "headline_date_link_only",
+      "rights_status": "permission_pending",
+      "image_allowed": false,
       "related_sources": []
     },
     {
@@ -181,8 +208,11 @@ window.SOLLER_ARA_DATA = {
       "locality": "Sóller",
       "published_at": "2026-09-12T07:00:00+00:00",
       "title": "Dues alternatives per redirigir el trànsit pel centre durant les obres del Fantasio",
-      "summary": "L’Ajuntament de Sóller analitza actualment dues possibles solucions per reorganitzar la circulació al centre del municipi durant les obres de demolició del cinema Fantasio, una intervenció que el Govern preveu iniciar el mes d’octubre i que s’allargarà sis…",
+      "summary": "",
       "url": "https://saveu.cat/noticies/dues-alternatives-per-redirigir-el-transit-pel-centre-durant-les-obres-del-fantasio/",
+      "content_policy": "headline_date_link_only",
+      "rights_status": "permission_pending",
+      "image_allowed": false,
       "related_sources": []
     },
     {
@@ -195,8 +225,11 @@ window.SOLLER_ARA_DATA = {
       "locality": "Sóller",
       "published_at": "2026-09-11T17:00:00+02:00",
       "title": "Nervis, rialles i emoció en el primer dia de curs",
-      "summary": "Els centres sumen prop de 1.550 alumnes, amb novetats com el menjador de Ses Marjades, l’extensió de l’EOI i diversos projectes de salut, medi ambient i memòria local",
+      "summary": "",
       "url": "https://www.elsoller.cat/soller/reportatges/2026/09/11/354535/nervis-rialles-emocio-primer-dia-curs.html",
+      "content_policy": "headline_date_link_only",
+      "rights_status": "permission_pending",
+      "image_allowed": false,
       "related_sources": []
     },
     {
@@ -209,8 +242,11 @@ window.SOLLER_ARA_DATA = {
       "locality": "Sóller",
       "published_at": "2026-09-11T11:26:20+02:00",
       "title": "Comencen les festes de l'Alqueria des Comte",
-      "summary": "Hi ha activitats programades per a tot el cap de setmana",
+      "summary": "",
       "url": "https://www.elsoller.cat/soller/local/2026/09/11/354533/comencen-les-festes-alqueria-des-comte.html",
+      "content_policy": "headline_date_link_only",
+      "rights_status": "permission_pending",
+      "image_allowed": false,
       "related_sources": []
     },
     {
@@ -223,8 +259,11 @@ window.SOLLER_ARA_DATA = {
       "locality": "Sóller",
       "published_at": "2026-09-11T10:40:00+02:00",
       "title": "L’Aquàtics Sóller cadet es proclama mereixedor campió a Son Angelats",
-      "summary": "Els jugadors Alder Barbieri, MVP, i Jacopo Pansera, màxim golejador, destacaren en la primera «Waterpolo Challenge Cup» organitzada pel club de la Vall",
+      "summary": "",
       "url": "https://www.elsoller.cat/soller/esports/2026/09/11/354531/aquatics-soller-cadet-proclama-mereixedor-campio-son-angelats.html",
+      "content_policy": "headline_date_link_only",
+      "rights_status": "permission_pending",
+      "image_allowed": false,
       "related_sources": []
     },
     {
@@ -237,8 +276,11 @@ window.SOLLER_ARA_DATA = {
       "locality": "Sóller",
       "published_at": "2026-09-11T10:29:00+02:00",
       "title": "«La revista vol ser un punt de trobada»",
-      "summary": "Yolanda Marroig (Sóller, 1979), advocada i escriptora ha col·laborat en l’edició de la revista Garimau, publicació d’art i pensament creada per la psicòloga i filòsofa Maria Mercè Domínguez (Barcelona, 1959). La presentació de la revista es farà aquest…",
+      "summary": "",
       "url": "https://www.elsoller.cat/soller/societat-i-cultura/2026/09/11/354529/revista-vol-ser-punt-trobada.html",
+      "content_policy": "headline_date_link_only",
+      "rights_status": "permission_pending",
+      "image_allowed": false,
       "related_sources": []
     },
     {
@@ -251,8 +293,11 @@ window.SOLLER_ARA_DATA = {
       "locality": "Sóller",
       "published_at": "2026-09-11T08:30:00+00:00",
       "title": "Augmenta el reciclatge a Sóller",
-      "summary": "Durant el primer semestre d’aquest any, Sóller ha registrat una millora notable en els indicadors de gestió de residus. La taxa de reciclatge s’ha situat en el 21,71% del total del fems generat al municipi, una xifra que representa un increment significatiu…",
+      "summary": "",
       "url": "https://saveu.cat/noticies/augmenta-el-reciclatge-a-soller/",
+      "content_policy": "headline_date_link_only",
+      "rights_status": "permission_pending",
+      "image_allowed": false,
       "related_sources": []
     },
     {
@@ -265,8 +310,11 @@ window.SOLLER_ARA_DATA = {
       "locality": "Sóller",
       "published_at": "2026-09-11T07:10:14+00:00",
       "title": "“El col·legi Es Puig és un pilar de la identitat del municipi de Sóller”",
-      "summary": "El CEIP Es Puig afronta aquest curs amb una celebració molt especial: el seu 50è aniversari. Mig segle després de la seva inauguració, el centre continua adaptant-se als nous reptes educatius, des de la gestió de la diversitat i el benestar emocional dels…",
+      "summary": "",
       "url": "https://saveu.cat/entrevistes/el-collegies-puig-es-un-pilar-de-la-identitat-del-municipi-de-soller/",
+      "content_policy": "headline_date_link_only",
+      "rights_status": "permission_pending",
+      "image_allowed": false,
       "related_sources": []
     },
     {
@@ -279,8 +327,11 @@ window.SOLLER_ARA_DATA = {
       "locality": "Sóller",
       "published_at": "2026-09-10T14:01:00+00:00",
       "title": "Arranca amb calor el nou curs escolar",
-      "summary": "El curs escolar 2026-2027 ha començat a les Illes Balears amb la calor com una de les principals preocupacions de la comunitat educativa. La pluja d’ahir semblava que havia de pal·liar substancialment les elevades temperatures, però no ha estat així. Els…",
+      "summary": "",
       "url": "https://saveu.cat/noticies/arranca-amb-calor-el-nou-curs-escolar/",
+      "content_policy": "headline_date_link_only",
+      "rights_status": "permission_pending",
+      "image_allowed": false,
       "related_sources": []
     },
     {
@@ -293,8 +344,11 @@ window.SOLLER_ARA_DATA = {
       "locality": "Sóller",
       "published_at": "2026-09-10T14:00:00+00:00",
       "title": "El Consell planteja explorar els olivars com a atractius turístics",
-      "summary": "El Ple del Consell de Mallorca ha aprovat l’adhesió de la institució a l’Associació Espanyola de Municipis de l’Olivera (AEMO), un tràmit que obre el camí perquè l’illa s’incorpori al projecte Oleoturisme Espanya, una xarxa estatal que vol posar en valor els…",
+      "summary": "",
       "url": "https://saveu.cat/noticies/el-consell-planteja-explorar-els-olivars-com-a-atractius-turistics/",
+      "content_policy": "headline_date_link_only",
+      "rights_status": "permission_pending",
+      "image_allowed": false,
       "related_sources": []
     },
     {
@@ -307,8 +361,11 @@ window.SOLLER_ARA_DATA = {
       "locality": "Sóller",
       "published_at": "2026-09-10T07:55:37+00:00",
       "title": "Reunió informativa sobre el Porta a Porta per a la restauració i els comerços (HoReCa)",
-      "summary": "L’Ajuntament de Sóller organitza una reunió informativa adreçada als establiments de restauració i comerços per explicar el funcionament del servei de recollida Porta a Porta, informar sobre les novetats i resoldre els dubtes que puguin sorgir. - Dilluns 14 de…",
+      "summary": "L’Ajuntament de Sóller organitza una reunió informativa adreçada als establiments de restauració i comerços per explicar el funcionament del servei de recollida Porta a Porta, informar sobre les novetats i resoldre els…",
       "url": "https://ajsoller.net/ca/noticies/reunio-informativa-sobre-el-porta-porta-la-restauracio-i-els-comercos-horeca",
+      "content_policy": "short_factual_excerpt",
+      "rights_status": "public_source_reviewed",
+      "image_allowed": false,
       "related_sources": []
     },
     {
@@ -321,8 +378,11 @@ window.SOLLER_ARA_DATA = {
       "locality": "Sóller",
       "published_at": "2026-09-09T16:29:21+02:00",
       "title": "La pluja i el temporal arriben Sóller",
-      "summary": "Un episodi de pluja intensa i temporal marítim ha afectat Sóller i la Serra de Tramuntana, amb precipitacions que han caigut de manera molt desigual, però que han deixat registres destacats en nombroses estacions meteorològiques. Les dades recollides per les…",
+      "summary": "",
       "url": "https://www.elsoller.cat/soller/local/2026/09/09/354527/pluja-temporal-arriben-soller-1.html",
+      "content_policy": "headline_date_link_only",
+      "rights_status": "permission_pending",
+      "image_allowed": false,
       "related_sources": []
     },
     {
@@ -335,8 +395,11 @@ window.SOLLER_ARA_DATA = {
       "locality": "Sóller",
       "published_at": "2026-09-09T14:00:13+00:00",
       "title": "Una tempesta d’aigua i vent deixa una saó de 30 litres dins Sóller",
-      "summary": "Tal i com preveia l’AEMET, una important tempesta ha afectat la vall de Sóller entre les 14 i les 15 hores, deixant un registre important d’aigua i vent, i algunes incidències. I, d’altra banda, es preveu una nova arribada d’un front aproximadament a les 19…",
+      "summary": "",
       "url": "https://saveu.cat/noticies/una-tempesta-daigua-i-vent-deixa-una-sao-de-30-litres-dins-soller/",
+      "content_policy": "headline_date_link_only",
+      "rights_status": "permission_pending",
+      "image_allowed": false,
       "related_sources": []
     },
     {
@@ -349,8 +412,11 @@ window.SOLLER_ARA_DATA = {
       "locality": "Sóller",
       "published_at": "2026-09-09T13:27:56+00:00",
       "title": "El PP perd la votació per prorrogar 5 anys la concessió a Aqualia",
-      "summary": "El PP ha perdut avui una de les votacions més transcendentals de la legislatura, la de la pròrroga de la concessió a Aqualia dels serveis de gestió d’aigua potable i clavegueram per cinc anys més: de 2030 a 2035. El regidor no adscrit actualment a cap partit…",
+      "summary": "",
       "url": "https://saveu.cat/noticies/el-pp-perd-la-votacio-per-prorrogar-5-anys-la-concessio-a-aqualia/",
+      "content_policy": "headline_date_link_only",
+      "rights_status": "permission_pending",
+      "image_allowed": false,
       "related_sources": []
     },
     {
@@ -363,8 +429,11 @@ window.SOLLER_ARA_DATA = {
       "locality": "Sóller",
       "published_at": "2026-09-09T13:22:00+00:00",
       "title": "Els alumnes de les Illes Balears, cridats aquest dijous a iniciar el nou curs",
-      "summary": "Els alumnes d’educació infantil, primària i secundària de les Illes Balears estan cridats aquest dijous per començar el curs 2026-2027. Durant aquest estiu s’han duit a terme diverses obres de manteniment als centres públics, d’entre els que destaquen la de…",
+      "summary": "",
       "url": "https://saveu.cat/noticies/els-alumnes-de-les-illes-balears-cridats-aquest-dijous-a-iniciar-el-nou-curs/",
+      "content_policy": "headline_date_link_only",
+      "rights_status": "permission_pending",
+      "image_allowed": false,
       "related_sources": []
     },
     {
@@ -377,8 +446,11 @@ window.SOLLER_ARA_DATA = {
       "locality": "Sóller",
       "published_at": "2026-09-09T13:19:00+02:00",
       "title": "L’oposició i l'abstenció del regidor no adscrit, Pep Porcel tomben la pròrroga d’Aqualia",
-      "summary": "El PP es queda tot sol defensant l’allargament de la concessió",
+      "summary": "",
       "url": "https://www.elsoller.cat/soller/local/2026/09/09/354523/oposicio-abstencio-del-regidor-adscrit-tomben-prorroga-aqualia.html",
+      "content_policy": "headline_date_link_only",
+      "rights_status": "permission_pending",
+      "image_allowed": false,
       "related_sources": []
     },
     {
@@ -393,6 +465,9 @@ window.SOLLER_ARA_DATA = {
       "title": "Fornalutx celebra, un any més, el dia de la seva patrona",
       "summary": "La celebració de la Nativitat de la Mare de Déu va tornar a reunir ahir els fornalutxencs i fornalutxenques. Gràcies per fer-nos partícips d’un dia tan vostre. Molts d’anys i bones festes, Fornalutx!",
       "url": "https://ajsoller.net/ca/noticies/fornalutx-celebra-un-any-mes-el-dia-de-la-seva-patrona",
+      "content_policy": "short_factual_excerpt",
+      "rights_status": "public_source_reviewed",
+      "image_allowed": false,
       "related_sources": []
     },
     {
@@ -405,8 +480,11 @@ window.SOLLER_ARA_DATA = {
       "locality": "Sóller",
       "published_at": "2026-09-09T07:56:50+00:00",
       "title": "Emergències ha activat per avui l’alerta taronja (IG-1 del Pla Meteobal) per pluges i tempestes a totes les Illes Balears",
-      "summary": "Degut a què es preveuen precipitacions intenses, demanam a la ciutadania que extremi les precaucions: ▪️ Evitau els desplaçaments que no siguin necessaris. ▪️ Allunyau-vos dels torrents i de les zones baixes o inundables. ▪️ No travesseu zones inundades, ni a…",
+      "summary": "Degut a què es preveuen precipitacions intenses, demanam a la ciutadania que extremi les precaucions: ▪️ Evitau els desplaçaments que no siguin necessaris. ▪️ Allunyau-vos dels torrents i de les zones baixes o…",
       "url": "https://ajsoller.net/ca/noticies/emergencies-ha-activat-avui-lalerta-taronja-ig-1-del-pla-meteobal-pluges-i-tempestes-totes",
+      "content_policy": "short_factual_excerpt",
+      "rights_status": "public_source_reviewed",
+      "image_allowed": false,
       "related_sources": []
     },
     {
@@ -419,8 +497,11 @@ window.SOLLER_ARA_DATA = {
       "locality": "Sóller",
       "published_at": "2026-09-08T12:35:00+02:00",
       "title": "Sóller és el destí turístic més visitat en cotxe per turistes internacionals a Espanya",
-      "summary": "Sóller ha rebut un volum d'estrangers en cotxe que multiplica per quatre a Marbella",
+      "summary": "",
       "url": "https://www.elsoller.cat/soller/local/2026/09/08/354521/soller-desti-turistic-mes-visitat-cotxe-per-turistes-internacionals-espanya.html",
+      "content_policy": "headline_date_link_only",
+      "rights_status": "permission_pending",
+      "image_allowed": false,
       "related_sources": []
     },
     {
@@ -433,8 +514,11 @@ window.SOLLER_ARA_DATA = {
       "locality": "Sóller",
       "published_at": "2026-09-08T10:15:00+02:00",
       "title": "Mor un ciclista de 66 anys al Coll de Sóller",
-      "summary": "Un home de 66 anys i nacionalitat estrangera ha mort avui pujant en bicicleta al Coll de Sóller.",
+      "summary": "",
       "url": "https://www.elsoller.cat/soller/local/2026/09/08/354519/mor-ciclista-anys-coll-soller.html",
+      "content_policy": "headline_date_link_only",
+      "rights_status": "permission_pending",
+      "image_allowed": false,
       "related_sources": []
     },
     {
@@ -447,8 +531,11 @@ window.SOLLER_ARA_DATA = {
       "locality": "Sóller",
       "published_at": "2026-09-08T09:35:00+02:00",
       "title": "Cultura en Sec s’atribueix la penjada dels cartells a Sóller com una acció artística per remoure consciències",
-      "summary": "El nou moviment cultural Cultura en Sec ha reivindicat l’autoria de la penjada de cartells apareguts avui a diferents edificis i espais culturals de Sóller, en una acció que defineixen com a artística i de caràcter social.",
+      "summary": "",
       "url": "https://www.elsoller.cat/soller/local/2026/09/08/354517/cultura-sec-atribueix-penjada-dels-cartells-soller-com-accio-artistica-per-remoure-consciencies.html",
+      "content_policy": "headline_date_link_only",
+      "rights_status": "permission_pending",
+      "image_allowed": false,
       "related_sources": []
     },
     {
@@ -461,8 +548,11 @@ window.SOLLER_ARA_DATA = {
       "locality": "Sóller",
       "published_at": "2026-09-08T08:35:00+02:00",
       "title": "Apareixen cartells reivindicatius aferrats en diversos espais culturals",
-      "summary": "Els missatges, de contingut diferent, s'han penjat en edificis com les Escolàpies i Santa Teresa",
+      "summary": "",
       "url": "https://www.elsoller.cat/soller/local/2026/09/08/354515/apareixen-cartells-aferrats-diversos-espais-culturals.html",
+      "content_policy": "headline_date_link_only",
+      "rights_status": "permission_pending",
+      "image_allowed": false,
       "related_sources": []
     },
     {
@@ -475,8 +565,11 @@ window.SOLLER_ARA_DATA = {
       "locality": "Sóller",
       "published_at": "2026-09-07T13:21:00+02:00",
       "title": "Arranca el muntatge de la coberta que protegirà la Fàbrica Nova",
-      "summary": "La Fàbrica Nova entra en una nova fase dels treballs de recuperació. Avui ha començat el muntatge de la coberta que protegirà l’interior de l’edifici de la pluja i de les inclemències meteorològiques. Una gran grua ha aixecat l'estructura metàl·lica que ja…",
+      "summary": "",
       "url": "https://www.elsoller.cat/soller/local/2026/09/07/354513/arranca-muntatge-coberta-protegira-fabrica-nova.html",
+      "content_policy": "headline_date_link_only",
+      "rights_status": "permission_pending",
+      "image_allowed": false,
       "related_sources": []
     },
     {
@@ -489,8 +582,11 @@ window.SOLLER_ARA_DATA = {
       "locality": "Sóller",
       "published_at": "2026-09-07T10:04:00+02:00",
       "title": "Empitjoren les reserves d’aigua a les Balears i la Tramuntana Nord es manté en prealerta",
-      "summary": "Les reserves de Mallorca baixen fins al 38% després d’un agost extremadament càlid i sec",
+      "summary": "",
       "url": "https://www.elsoller.cat/soller/local/2026/09/07/354511/empitjoren-les-reserves-aigua-les-balears-tramuntana-nord-mante-prealerta.html",
+      "content_policy": "headline_date_link_only",
+      "rights_status": "permission_pending",
+      "image_allowed": false,
       "related_sources": []
     },
     {
@@ -505,6 +601,9 @@ window.SOLLER_ARA_DATA = {
       "title": "Anunci de la convocatòria del pròxim ple ordinari",
       "summary": "Tindrà lloc dimecres, 9 de setembre, a les 11:00h",
       "url": "https://ajsoller.net/ca/noticies/anunci-de-la-convocatoria-del-proxim-ple-ordinari",
+      "content_policy": "short_factual_excerpt",
+      "rights_status": "public_source_reviewed",
+      "image_allowed": false,
       "related_sources": []
     },
     {
@@ -517,8 +616,11 @@ window.SOLLER_ARA_DATA = {
       "locality": "Sóller",
       "published_at": "2026-09-07T05:37:04+00:00",
       "title": "El tinent de batle assisteix a la presentació de l’inici de les obres d’ampliació de la rotonda de la ITV de Son Castelló",
-      "summary": "El tinent de batle de Sóller, Carlos Darder, ha assistit avui a l’inici de les obres d’ampliació de la rotonda de la ITV de Son Castelló, en un acte encapçalat pel president del Consell de Mallorca, Llorenç Galmés, amb representants de les institucions i dels…",
+      "summary": "El tinent de batle de Sóller, Carlos Darder, ha assistit avui a l’inici de les obres d’ampliació de la rotonda de la ITV de Son Castelló, en un acte encapçalat pel president del Consell de Mallorca, Llorenç Galmés, amb…",
       "url": "https://ajsoller.net/ca/noticies/el-tinent-de-batle-assisteix-la-presentacio-de-linici-de-les-obres-dampliacio-de-la",
+      "content_policy": "short_factual_excerpt",
+      "rights_status": "public_source_reviewed",
+      "image_allowed": false,
       "related_sources": []
     },
     {
@@ -531,8 +633,11 @@ window.SOLLER_ARA_DATA = {
       "locality": "Sóller",
       "published_at": "2026-09-06T12:38:00+02:00",
       "title": "Pere A. Borràs i la intractable Leonor Font s'imposen a la Cursa Popular de Sóller",
-      "summary": "El solleric Felip Marquès va ser el segon classificat i Clara López la primera fèmina sollerica ;Marc Gomila i Charlotte Ulrrich guanyen la Minicursa",
+      "summary": "",
       "url": "https://www.elsoller.cat/soller/esports/2026/09/06/354509/pere-borras-intractable-leonor-font-imposen-cursa-popular-soller.html",
+      "content_policy": "headline_date_link_only",
+      "rights_status": "permission_pending",
+      "image_allowed": false,
       "related_sources": []
     },
     {
@@ -545,8 +650,11 @@ window.SOLLER_ARA_DATA = {
       "locality": "Sóller",
       "published_at": "2026-09-06T08:03:00+02:00",
       "title": "Veïnats denuncien zones de risc dins els torrents de Biniaraix i el del Barranc",
-      "summary": "Exsecallades i vegetació sobreabundant omplen trams estrets dels torrents suposant perill poc abans de la temporada de pluges",
+      "summary": "",
       "url": "https://www.elsoller.cat/soller/local/2026/09/06/354505/veinats-denuncien-zones-risc-dins-els-torrents-biniaraix-del-barranc.html",
+      "content_policy": "headline_date_link_only",
+      "rights_status": "permission_pending",
+      "image_allowed": false,
       "related_sources": []
     },
     {
@@ -559,8 +667,11 @@ window.SOLLER_ARA_DATA = {
       "locality": "Sóller",
       "published_at": "2026-09-05T12:00:00+02:00",
       "title": "La Nit de l’Art transforma Fornalutx en un gran escenari expositiu",
-      "summary": "Prop de 45 artistes de totes les disciplines i diverses actuacions ompliren els carrers i espais del poble en una segona edició marcada per la gran afluència de públic",
+      "summary": "",
       "url": "https://www.elsoller.cat/soller/reportatges/2026/09/05/354503/nit-art-transforma-fornalutx-gran-escenari-expositiu.html",
+      "content_policy": "headline_date_link_only",
+      "rights_status": "permission_pending",
+      "image_allowed": false,
       "related_sources": []
     },
     {
@@ -573,8 +684,11 @@ window.SOLLER_ARA_DATA = {
       "locality": "Sóller",
       "published_at": "2026-09-04T17:26:00+02:00",
       "title": "Denuncien l’abocament d'aigua d’una piscina privada al torrent que desemboca a Can Repic",
-      "summary": "Un veïnat de la zona de Can Repic ha alertat de l’abocament de l’aigua d’una piscina privada al torrent que desemboca a la platja de Can Repic, a uns 50 metres de la zona de bany.",
+      "summary": "",
       "url": "https://www.elsoller.cat/soller/local/2026/09/04/354507/denuncien-abocament-aigua-piscina-privada-torrent-desemboca-can-repic.html",
+      "content_policy": "headline_date_link_only",
+      "rights_status": "permission_pending",
+      "image_allowed": false,
       "related_sources": []
     },
     {
@@ -587,8 +701,11 @@ window.SOLLER_ARA_DATA = {
       "locality": "Sóller",
       "published_at": "2026-09-04T05:23:52+00:00",
       "title": "Sóller rebrà 779.094 euros de l’ITS per millorar les xarxes de pluvials i sanejament",
-      "summary": "El batle de Sóller, Miquel Nadal, i el regidor de Desenvolupament Local, Lluís Cerezo, han assistit avui a la finca de Raixa a la presentació del paquet d’inversions que el Govern de les Illes Balears destinarà a reforçar les infraestructures del cicle de…",
+      "summary": "El batle de Sóller, Miquel Nadal, i el regidor de Desenvolupament Local, Lluís Cerezo, han assistit avui a la finca de Raixa a la presentació del paquet d’inversions que el Govern de les Illes Balears destinarà a…",
       "url": "https://ajsoller.net/ca/noticies/soller-rebra-779094-euros-de-lits-millorar-les-xarxes-de-pluvials-i-sanejament",
+      "content_policy": "short_factual_excerpt",
+      "rights_status": "public_source_reviewed",
+      "image_allowed": false,
       "related_sources": []
     },
     {
@@ -601,8 +718,11 @@ window.SOLLER_ARA_DATA = {
       "locality": "Sóller",
       "published_at": "2026-09-03T05:11:11+00:00",
       "title": "La XIV Trobada d’Havaneres de Sóller tornarà a omplir Can Repic de música els dies 18 i 19 de setembre",
-      "summary": "Les Havaneres tornaran a sonar davant la mar els pròxims 18 i 19 de setembre, amb una nova edició de la Trobada d’Havaneres de Sóller, que convertirà un any més la platja de Can Repic en punt de trobada per a sollerics, solleriques i visitants. La XIV edició…",
+      "summary": "Les Havaneres tornaran a sonar davant la mar els pròxims 18 i 19 de setembre, amb una nova edició de la Trobada d’Havaneres de Sóller, que convertirà un any més la platja de Can Repic en punt de trobada per a sollerics…",
       "url": "https://ajsoller.net/ca/noticies/la-xiv-trobada-dhavaneres-de-soller-tornara-omplir-can-repic-de-musica-els-dies-18-i-19-de",
+      "content_policy": "short_factual_excerpt",
+      "rights_status": "public_source_reviewed",
+      "image_allowed": false,
       "related_sources": []
     },
     {
@@ -615,8 +735,11 @@ window.SOLLER_ARA_DATA = {
       "locality": "Sóller",
       "published_at": "2026-08-25T09:20:34+00:00",
       "title": "La Sala Magna acull el concert del Joch de Ministrils del Consell de Mallorca",
-      "summary": "Dissabte capvespre, amb motiu de les Festes de Sant Baromeu, la sala magna va acollir el concert d'una de les músiques que forma part de la memòria de Mallorca. El Joch de Ministrils del Consell de Mallorca ha duit fins a Sóller una tradició musical que torna…",
+      "summary": "Dissabte capvespre, amb motiu de les Festes de Sant Baromeu, la sala magna va acollir el concert d'una de les músiques que forma part de la memòria de Mallorca. El Joch de Ministrils del Consell de Mallorca ha duit fins…",
       "url": "https://ajsoller.net/ca/noticies/la-sala-magna-acull-el-concert-del-joch-de-ministrils-del-consell-de-mallorca",
+      "content_policy": "short_factual_excerpt",
+      "rights_status": "public_source_reviewed",
+      "image_allowed": false,
       "related_sources": []
     },
     {
@@ -629,8 +752,11 @@ window.SOLLER_ARA_DATA = {
       "locality": "Sóller",
       "published_at": "2026-08-25T09:16:33+00:00",
       "title": "Acte de lliurament dels Premis Literaris Vall de Sóller",
-      "summary": "Divendres vàrem celebrar una nova edició dels Premis Literaris Vall de Sóller, un certamen que va néixer l’any 1987 i que, gairebé quaranta anys després, continua donant veu a la creació literària en la nostra llengua. Va ser també una edició especialment…",
+      "summary": "Divendres vàrem celebrar una nova edició dels Premis Literaris Vall de Sóller, un certamen que va néixer l’any 1987 i que, gairebé quaranta anys després, continua donant veu a la creació literària en la nostra llengua…",
       "url": "https://ajsoller.net/ca/noticies/acte-de-lliurament-dels-premis-literaris-vall-de-soller",
+      "content_policy": "short_factual_excerpt",
+      "rights_status": "public_source_reviewed",
+      "image_allowed": false,
       "related_sources": []
     },
     {
@@ -645,6 +771,9 @@ window.SOLLER_ARA_DATA = {
       "title": "RECOLLIDA SELECTIVA Dies de recollida i com reciclar correctament",
       "summary": "",
       "url": "https://soller2010.com/noticias/recollida-selectiva-dies-de-recollida-i-com-reciclar-correctament",
+      "content_policy": "short_factual_excerpt",
+      "rights_status": "public_source_reviewed",
+      "image_allowed": false,
       "related_sources": []
     },
     {
@@ -659,6 +788,9 @@ window.SOLLER_ARA_DATA = {
       "title": "DIA 17 de MAIG - Dia mundial del Reciclatge",
       "summary": "",
       "url": "https://soller2010.com/noticias/dia-17-de-maig-dia-mundial-del-reciclatge",
+      "content_policy": "short_factual_excerpt",
+      "rights_status": "public_source_reviewed",
+      "image_allowed": false,
       "related_sources": []
     },
     {
@@ -673,6 +805,9 @@ window.SOLLER_ARA_DATA = {
       "title": "INSTRUCCIONS DIPÒSIT CORRECTE VOLUMINOSOS",
       "summary": "",
       "url": "https://soller2010.com/noticias/instruccions-diposit-correcte-voluminosos",
+      "content_policy": "short_factual_excerpt",
+      "rights_status": "public_source_reviewed",
+      "image_allowed": false,
       "related_sources": []
     },
     {
@@ -687,6 +822,9 @@ window.SOLLER_ARA_DATA = {
       "title": "MODIFICACIONS RECOLLIDA PORTA A PORTA DURANT FIRA I FIRÓ (8 a 11 MAIG)",
       "summary": "",
       "url": "https://soller2010.com/noticias/modificacions-recollida-porta-a-porta-durant-fira-i-firo-8-a-11-maig",
+      "content_policy": "short_factual_excerpt",
+      "rights_status": "public_source_reviewed",
+      "image_allowed": false,
       "related_sources": []
     },
     {
@@ -701,6 +839,9 @@ window.SOLLER_ARA_DATA = {
       "title": "MEMÒRIA ANUAL 2025",
       "summary": "",
       "url": "https://soller2010.com/noticias/memoria-anual-2025",
+      "content_policy": "short_factual_excerpt",
+      "rights_status": "public_source_reviewed",
+      "image_allowed": false,
       "related_sources": []
     },
     {
@@ -715,6 +856,9 @@ window.SOLLER_ARA_DATA = {
       "title": "APERTURA PISCINES SON ANGELATS",
       "summary": "",
       "url": "https://soller2010.com/noticias/apertura-piscines-son-angelats",
+      "content_policy": "short_factual_excerpt",
+      "rights_status": "public_source_reviewed",
+      "image_allowed": false,
       "related_sources": []
     }
   ]
