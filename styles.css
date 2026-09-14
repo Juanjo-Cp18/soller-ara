@@ -130,6 +130,7 @@ a { color: inherit; }
   gap: 20px;
 }
 .section-heading h2 { margin: 5px 0 0; font-size: 1.7rem; }
+.last-updated { margin: 6px 0 0; color: var(--muted); font-size: .84rem; }
 .search {
   width: min(320px, 100%);
   background: var(--surface);
@@ -155,7 +156,7 @@ a { color: inherit; }
   flex-direction: column;
 }
 .card-media {
-  min-height: 190px;
+  min-height: 150px;
   display: grid;
   place-items: center;
   background: linear-gradient(135deg, #d8ece6, #edf6f3);
@@ -164,6 +165,9 @@ a { color: inherit; }
 }
 .card-body { padding: 20px; display: grid; gap: 12px; }
 .meta { display: flex; align-items: center; justify-content: space-between; gap: 10px; color: var(--muted); font-size: .84rem; }
+.source-wrap { display: flex; align-items: center; gap: 8px; min-width: 0; }
+.source-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.official-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--primary); flex: 0 0 auto; }
 .badge {
   display: inline-flex;
   align-items: center;

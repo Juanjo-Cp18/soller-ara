@@ -13,13 +13,15 @@ const translations = {
     "hero.eyebrow": "Avui a Sóller",
     "hero.title": "La informació local, ordenada i accessible.",
     "hero.body": "Una portada única per descobrir avisos, notícies, agenda, cultura, esport, comerç i publicacions de fonts locals.",
-    "hero.statusTitle": "Estat del projecte",
-    "hero.statusBody": "Versió inicial de demostració · v0.1",
+    "hero.statusTitle": "Font real connectada",
+    "hero.statusBody": "Ajuntament de Sóller · actualització automàtica",
     "feed.eyebrow": "Actualitat",
     "feed.title": "Publicacions destacades",
+    "feed.loading": "Carregant actualització...",
+    "feed.updated": "Darrera actualització",
+    "feed.demo": "Dades de demostració: la font automàtica encara no està disponible.",
     "search.placeholder": "Cercar...",
     "footer.nonprofit": "Projecte sense ànim de lucre",
-    "card.source": "Font",
     "card.original": "Veure original",
     "card.share": "Compartir",
     "empty": "No hi ha publicacions que coincideixin amb la cerca.",
@@ -39,13 +41,15 @@ const translations = {
     "hero.eyebrow": "Hoy en Sóller",
     "hero.title": "La información local, ordenada y accesible.",
     "hero.body": "Una portada única para descubrir avisos, noticias, agenda, cultura, deporte, comercio y publicaciones de fuentes locales.",
-    "hero.statusTitle": "Estado del proyecto",
-    "hero.statusBody": "Versión inicial de demostración · v0.1",
+    "hero.statusTitle": "Fuente real conectada",
+    "hero.statusBody": "Ayuntamiento de Sóller · actualización automática",
     "feed.eyebrow": "Actualidad",
     "feed.title": "Publicaciones destacadas",
+    "feed.loading": "Cargando actualización...",
+    "feed.updated": "Última actualización",
+    "feed.demo": "Datos de demostración: la fuente automática aún no está disponible.",
     "search.placeholder": "Buscar...",
     "footer.nonprofit": "Proyecto sin ánimo de lucro",
-    "card.source": "Fuente",
     "card.original": "Ver original",
     "card.share": "Compartir",
     "empty": "No hay publicaciones que coincidan con la búsqueda.",
@@ -65,13 +69,15 @@ const translations = {
     "hero.eyebrow": "Today in Sóller",
     "hero.title": "Local information, organized and accessible.",
     "hero.body": "A single homepage for alerts, news, events, culture, sports, local businesses and posts from local sources.",
-    "hero.statusTitle": "Project status",
-    "hero.statusBody": "Initial demo version · v0.1",
+    "hero.statusTitle": "Live source connected",
+    "hero.statusBody": "Sóller Town Council · automatic updates",
     "feed.eyebrow": "Latest",
     "feed.title": "Featured posts",
+    "feed.loading": "Loading update...",
+    "feed.updated": "Last updated",
+    "feed.demo": "Demo data: the automatic source is not available yet.",
     "search.placeholder": "Search...",
     "footer.nonprofit": "Non-profit project",
-    "card.source": "Source",
     "card.original": "View original",
     "card.share": "Share",
     "empty": "No posts match your search.",
@@ -79,53 +85,24 @@ const translations = {
   }
 };
 
-const posts = [
+const demoPosts = [
   {
     id: "demo-1",
-    category: "alerts",
-    icon: "🚧",
-    source: "Ajuntament de Sóller",
-    time: "09:20",
-    url: "#",
-    ca: { title: "Avís de mobilitat al centre", summary: "Exemple de com es mostraria un avís oficial amb la seva font i accés a la publicació original." },
-    es: { title: "Aviso de movilidad en el centro", summary: "Ejemplo de cómo se mostraría un aviso oficial con su fuente y acceso a la publicación original." },
-    en: { title: "Town-centre mobility notice", summary: "Example of how an official notice would appear with its source and a link to the original publication." }
-  },
-  {
-    id: "demo-2",
-    category: "agenda",
-    icon: "📅",
-    source: "Agenda local",
-    time: "11:00",
-    url: "#",
-    ca: { title: "Activitat cultural aquest cap de setmana", summary: "Les activitats podran ordenar-se per data, categoria, localitat i font d'origen." },
-    es: { title: "Actividad cultural este fin de semana", summary: "Las actividades podrán ordenarse por fecha, categoría, localidad y fuente de origen." },
-    en: { title: "Cultural event this weekend", summary: "Events can be organized by date, category, town and original source." }
-  },
-  {
-    id: "demo-3",
     category: "news",
-    icon: "📰",
-    source: "Mitjà local",
-    time: "12:40",
-    url: "#",
-    ca: { title: "Actualitat local reunida en una sola portada", summary: "La futura versió connectarà fonts reals i evitarà duplicats sempre que sigui possible." },
-    es: { title: "Actualidad local reunida en una sola portada", summary: "La futura versión conectará fuentes reales y evitará duplicados siempre que sea posible." },
-    en: { title: "Local news brought together on one homepage", summary: "A future version will connect real sources and avoid duplicate stories whenever possible." }
-  },
-  {
-    id: "demo-4",
-    category: "commerce",
-    icon: "🏪",
-    source: "Comerç local",
-    time: "14:10",
-    url: "#",
-    ca: { title: "Espai per a informació de comerços i associacions", summary: "Aquesta secció podrà mostrar comunicats públics de comerços, entitats i associacions locals." },
-    es: { title: "Espacio para información de comercios y asociaciones", summary: "Esta sección podrá mostrar comunicados públicos de comercios, entidades y asociaciones locales." },
-    en: { title: "A space for local businesses and associations", summary: "This section can show public updates from local businesses, organisations and associations." }
+    source: "Ajuntament de Sóller",
+    source_type: "official",
+    language: "ca",
+    locality: "Sóller",
+    published_at: "2026-09-10T09:00:00+02:00",
+    title: "Reunió informativa sobre el Porta a Porta per a la restauració i els comerços (HoReCa)",
+    summary: "Exemple provisional mentre es completa la primera actualització automàtica de la font oficial.",
+    url: "https://ajsoller.net/ca/noticies/reunio-informativa-sobre-el-porta-porta-la-restauracio-i-els-comercos-horeca"
   }
 ];
 
+let posts = [];
+let fetchedAt = null;
+let usingDemoData = false;
 let currentLanguage = localStorage.getItem("sollerAraLanguage") || "ca";
 let currentCategory = "all";
 let currentSearch = "";
@@ -133,9 +110,37 @@ let currentSearch = "";
 const languageSelect = document.getElementById("languageSelect");
 const feed = document.getElementById("feed");
 const searchInput = document.getElementById("searchInput");
+const lastUpdated = document.getElementById("lastUpdated");
 
 function t(key) {
   return translations[currentLanguage][key] ?? translations.ca[key] ?? key;
+}
+
+function formatDate(value) {
+  if (!value) return "";
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return value;
+  const locale = currentLanguage === "ca" ? "ca-ES" : currentLanguage === "es" ? "es-ES" : "en-GB";
+  return new Intl.DateTimeFormat(locale, { day: "2-digit", month: "short", year: "numeric" }).format(date);
+}
+
+function isNowPost(post) {
+  if (post.category === "alerts") return true;
+  if (!post.published_at) return false;
+  const age = Date.now() - new Date(post.published_at).getTime();
+  return age >= 0 && age <= 72 * 60 * 60 * 1000;
+}
+
+function iconFor(category) {
+  return {
+    alerts: "🚨",
+    agenda: "📅",
+    culture: "🎭",
+    sports: "⚽",
+    commerce: "🏪",
+    social: "📱",
+    news: "📰"
+  }[category] || "📰";
 }
 
 function applyTranslations() {
@@ -150,15 +155,36 @@ function applyTranslations() {
     element.placeholder = t(element.dataset.i18nPlaceholder);
   });
 
+  updateLastUpdated();
   renderFeed();
+}
+
+function updateLastUpdated() {
+  if (usingDemoData) {
+    lastUpdated.textContent = t("feed.demo");
+    return;
+  }
+  if (!fetchedAt) {
+    lastUpdated.textContent = t("feed.loading");
+    return;
+  }
+  const date = new Date(fetchedAt);
+  const locale = currentLanguage === "ca" ? "ca-ES" : currentLanguage === "es" ? "es-ES" : "en-GB";
+  const formatted = new Intl.DateTimeFormat(locale, {
+    day: "2-digit",
+    month: "short",
+    hour: "2-digit",
+    minute: "2-digit"
+  }).format(date);
+  lastUpdated.textContent = `${t("feed.updated")}: ${formatted}`;
 }
 
 function renderFeed() {
   const normalizedSearch = currentSearch.trim().toLocaleLowerCase(currentLanguage);
   const visiblePosts = posts.filter((post) => {
-    const categoryMatches = currentCategory === "all" || post.category === currentCategory;
-    const localized = post[currentLanguage] || post.ca;
-    const haystack = `${localized.title} ${localized.summary} ${post.source}`.toLocaleLowerCase(currentLanguage);
+    const categoryMatches = currentCategory === "all"
+      || (currentCategory === "now" ? isNowPost(post) : post.category === currentCategory);
+    const haystack = `${post.title || ""} ${post.summary || ""} ${post.source || ""}`.toLocaleLowerCase(currentLanguage);
     const searchMatches = !normalizedSearch || haystack.includes(normalizedSearch);
     return categoryMatches && searchMatches;
   });
@@ -169,19 +195,22 @@ function renderFeed() {
   }
 
   feed.innerHTML = visiblePosts.map((post) => {
-    const localized = post[currentLanguage] || post.ca;
     const categoryLabel = translations[currentLanguage].categories[post.category] || post.category;
+    const safeUrl = post.url || "#";
     return `
       <article class="card">
-        <div class="card-media" aria-hidden="true">${post.icon}</div>
+        <div class="card-media" aria-hidden="true">${iconFor(post.category)}</div>
         <div class="card-body">
-          <div class="meta"><span>${post.source}</span><span>${post.time}</span></div>
-          <span class="badge">${categoryLabel}</span>
-          <h3>${localized.title}</h3>
-          <p>${localized.summary}</p>
+          <div class="meta">
+            <span class="source-wrap"><span class="official-dot" aria-hidden="true"></span><span class="source-name">${escapeHtml(post.source || "")}</span></span>
+            <span>${formatDate(post.published_at)}</span>
+          </div>
+          <span class="badge">${escapeHtml(categoryLabel)}</span>
+          <h3>${escapeHtml(post.title || "")}</h3>
+          <p>${escapeHtml(post.summary || "")}</p>
           <div class="card-actions">
-            <a class="origin-link" href="${post.url}" aria-label="${t("card.original")}">${t("card.original")} →</a>
-            <button class="muted-button" type="button" data-share-id="${post.id}">${t("card.share")}</button>
+            <a class="origin-link" href="${escapeAttribute(safeUrl)}" target="_blank" rel="noopener noreferrer">${t("card.original")} →</a>
+            <button class="muted-button" type="button" data-share-id="${escapeAttribute(post.id || "")}">${t("card.share")}</button>
           </div>
         </div>
       </article>`;
@@ -192,17 +221,48 @@ function renderFeed() {
   });
 }
 
+function escapeHtml(value) {
+  return String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+
+function escapeAttribute(value) {
+  return escapeHtml(value);
+}
+
 async function sharePost(postId) {
   const post = posts.find((item) => item.id === postId);
   if (!post) return;
-  const localized = post[currentLanguage] || post.ca;
-  const shareData = { title: localized.title, text: localized.summary, url: window.location.href };
+  const shareData = { title: post.title, text: post.summary, url: post.url || window.location.href };
 
   if (navigator.share) {
     try { await navigator.share(shareData); } catch (_) {}
   } else if (navigator.clipboard) {
-    await navigator.clipboard.writeText(`${localized.title}\n${window.location.href}`);
+    await navigator.clipboard.writeText(`${post.title}\n${post.url || window.location.href}`);
   }
+}
+
+async function loadPosts() {
+  try {
+    const response = await fetch(`data/posts.json?v=${Date.now()}`, { cache: "no-store" });
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    const payload = await response.json();
+    if (!Array.isArray(payload.posts)) throw new Error("Invalid posts payload");
+    posts = payload.posts;
+    fetchedAt = payload.fetched_at || null;
+    usingDemoData = false;
+  } catch (error) {
+    console.warn("No s'ha pogut carregar data/posts.json", error);
+    posts = demoPosts;
+    fetchedAt = null;
+    usingDemoData = true;
+  }
+  updateLastUpdated();
+  renderFeed();
 }
 
 languageSelect.addEventListener("change", (event) => {
@@ -226,3 +286,4 @@ document.querySelectorAll(".category").forEach((button) => {
 });
 
 applyTranslations();
+loadPosts();

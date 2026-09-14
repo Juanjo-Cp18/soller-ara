@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "sources": [
+    {
+      "id": "ajuntament-soller-noticies",
+      "name": "Ajuntament de Sóller",
+      "type": "rss",
+      "url": "https://ajsoller.net/ca/noticies/rss.xml",
+      "language": "ca",
+      "locality": "Sóller",
+      "source_type": "official",
+      "enabled": true
+    }
+  ]
+}

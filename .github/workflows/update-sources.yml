@@ -1,0 +1,47 @@
+name: Actualitzar fonts de Sóller Ara
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "7 * * * *"
+  push:
+    branches:
+      - main
+    paths:
+      - "sources.json"
+      - "scripts/update_sources.py"
+      - ".github/workfows/update-sources.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: "update-sources"
+  cancel-in-progress: true
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Configurar Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+
+      - name: Actualitzar fonts
+        run: python scripts/update_sources.py
+
+      - name: Guardar dades actualitzades
+        run: |
+          if git diff --quiet -- data/posts.json; then
+            echo "No hi ha canvis a data/posts.json"
+            exit 0
+          fi
+          git config user.name "soller-ara-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add data/posts.json
+          git commit -m "data: actualitzar fonts automàticament"
+          git push
