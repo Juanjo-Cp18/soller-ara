@@ -1,10 +1,10 @@
 {
-  "version": 3,
-  "generator_version": "0.3",
-  "fetched_at": "2026-09-14T15:53:42.112694+00:00",
+  "version": 4,
+  "generator_version": "0.31",
+  "fetched_at": "2026-09-14T15:55:56.124400+00:00",
   "source_count": 2,
-  "raw_post_count": 22,
-  "grouped_post_count": 22,
+  "post_count": 22,
+  "related_pair_count": 0,
   "errors": [],
   "posts": [
     {
@@ -19,8 +19,7 @@
       "title": "L’OCB insta l’Ajuntament a dedicar espais públics a Joan Alcover i a La Balanguera",
       "summary": "L’Obra Cultural Balear (OCB) ha demanat a l’Ajuntament de Sóller que incorpori els noms de Joan Alcover i de La Balanguera al nomenclàtor municipal, en el marc de les commemoracions de l’Any Alcover i del centenari de la versió musicada de l’himne mallorquí…",
       "url": "https://saveu.cat/noticies/locb-insta-lajuntament-a-dedicar-espais-publics-a-joan-alcover-i-a-la-balanguera/",
-      "related_sources": [],
-      "source_count": 1
+      "related_sources": []
     },
     {
       "id": "9e6d3a81c8e3fbc4c2b2",
@@ -34,8 +33,7 @@
       "title": "Anit arranca la recollida de fems porta a porta per a 623 habitatges",
       "summary": "Els moradors d’un total de 623 habitatges del centre i la part alta de Sóller han de canviar els seus costums en relació a la gestió dels residus. A partir d’aquesta nit es posa en marxa la segona fase de la recollida porta a porta amb el qual mig Sóller deixa…",
       "url": "https://saveu.cat/noticies/anit-arranca-la-recollida-de-fems-porta-a-porta-per-a-623-habitatges/",
-      "related_sources": [],
-      "source_count": 1
+      "related_sources": []
     },
     {
       "id": "acdd30a31d9fddc10bf7",
@@ -49,8 +47,7 @@
       "title": "Totes les nits d’agost varen ser tropicals",
       "summary": "Sóller va viure un agost insòlitament càlid, en línia amb el comportament del conjunt de les Illes Balears, que han registrat el mes d’agost més calorós des de 1961 segons l’Agència Estatal de Meteorologia (AEMET). Al municipi, la persistència de la calor…",
       "url": "https://saveu.cat/noticies/totes-les-nits-dagost-varen-ser-tropicals/",
-      "related_sources": [],
-      "source_count": 1
+      "related_sources": []
     },
     {
       "id": "bc76cf1c96b3669c334c",
@@ -64,8 +61,7 @@
       "title": "Avui ampliam el porta a porta",
       "summary": "Els nous carrers s’incorporen avui al servei de recollida porta a porta. Recordau consultar el tríptic per saber quina fracció correspon treure cada dia. Avui com que és dilluns, heu de treure el poal amb les bosses corresponents d’orgànics i d’higiènics entre…",
       "url": "https://ajsoller.net/ca/noticies/avui-ampliam-el-porta-porta",
-      "related_sources": [],
-      "source_count": 1
+      "related_sources": []
     },
     {
       "id": "3a78459dcc89fa0e0ecf",
@@ -79,8 +75,7 @@
       "title": "L’Ajuntament té 25’5 milions al banc i suma 6’6 milions més de romanent",
       "summary": "L’Ajuntament de Sóller compta actualment amb 24’5 milions d’euros acumulats a les diferents entitats bancàries amb les quals hi té comptes oberts. Es tracta de la quantitat més elevada de la història després d’encadenar diversos exercicis en els quals els…",
       "url": "https://saveu.cat/noticies/lajuntament-te-255-milions-al-banc-i-suma-66-milions-mes-de-romanent/",
-      "related_sources": [],
-      "source_count": 1
+      "related_sources": []
     },
     {
       "id": "df0d3e4039ac69bb1a25",
@@ -94,8 +89,7 @@
       "title": "Dues alternatives per redirigir el trànsit pel centre durant les obres del Fantasio",
       "summary": "L’Ajuntament de Sóller analitza actualment dues possibles solucions per reorganitzar la circulació al centre del municipi durant les obres de demolició del cinema Fantasio, una intervenció que el Govern preveu iniciar el mes d’octubre i que s’allargarà sis…",
       "url": "https://saveu.cat/noticies/dues-alternatives-per-redirigir-el-transit-pel-centre-durant-les-obres-del-fantasio/",
-      "related_sources": [],
-      "source_count": 1
+      "related_sources": []
     },
     {
       "id": "47d43b43f25d2975157f",
@@ -109,8 +103,7 @@
       "title": "Augmenta el reciclatge a Sóller",
       "summary": "Durant el primer semestre d’aquest any, Sóller ha registrat una millora notable en els indicadors de gestió de residus. La taxa de reciclatge s’ha situat en el 21,71% del total del fems generat al municipi, una xifra que representa un increment significatiu…",
       "url": "https://saveu.cat/noticies/augmenta-el-reciclatge-a-soller/",
-      "related_sources": [],
-      "source_count": 1
+      "related_sources": []
     },
     {
       "id": "85a49ee8a5669265d2dc",
@@ -124,8 +117,7 @@
       "title": "“El col·legi Es Puig és un pilar de la identitat del municipi de Sóller”",
       "summary": "El CEIP Es Puig afronta aquest curs amb una celebració molt especial: el seu 50è aniversari. Mig segle després de la seva inauguració, el centre continua adaptant-se als nous reptes educatius, des de la gestió de la diversitat i el benestar emocional dels…",
       "url": "https://saveu.cat/entrevistes/el-collegies-puig-es-un-pilar-de-la-identitat-del-municipi-de-soller/",
-      "related_sources": [],
-      "source_count": 1
+      "related_sources": []
     },
     {
       "id": "02a697ab68068eae8760",
@@ -139,8 +131,7 @@
       "title": "Arranca amb calor el nou curs escolar",
       "summary": "El curs escolar 2026-2027 ha començat a les Illes Balears amb la calor com una de les principals preocupacions de la comunitat educativa. La pluja d’ahir semblava que havia de pal·liar substancialment les elevades temperatures, però no ha estat així. Els…",
       "url": "https://saveu.cat/noticies/arranca-amb-calor-el-nou-curs-escolar/",
-      "related_sources": [],
-      "source_count": 1
+      "related_sources": []
     },
     {
       "id": "ac672d2c170105cb9392",
@@ -154,8 +145,7 @@
       "title": "El Consell planteja explorar els olivars com a atractius turístics",
       "summary": "El Ple del Consell de Mallorca ha aprovat l’adhesió de la institució a l’Associació Espanyola de Municipis de l’Olivera (AEMO), un tràmit que obre el camí perquè l’illa s’incorpori al projecte Oleoturisme Espanya, una xarxa estatal que vol posar en valor els…",
       "url": "https://saveu.cat/noticies/el-consell-planteja-explorar-els-olivars-com-a-atractius-turistics/",
-      "related_sources": [],
-      "source_count": 1
+      "related_sources": []
     },
     {
       "id": "dfa794476886f07af9f8",
@@ -169,8 +159,7 @@
       "title": "Reunió informativa sobre el Porta a Porta per a la restauració i els comerços (HoReCa)",
       "summary": "L’Ajuntament de Sóller organitza una reunió informativa adreçada als establiments de restauració i comerços per explicar el funcionament del servei de recollida Porta a Porta, informar sobre les novetats i resoldre els dubtes que puguin sorgir. - Dilluns 14 de…",
       "url": "https://ajsoller.net/ca/noticies/reunio-informativa-sobre-el-porta-porta-la-restauracio-i-els-comercos-horeca",
-      "related_sources": [],
-      "source_count": 1
+      "related_sources": []
     },
     {
       "id": "9c2cae1aa938f861810e",
@@ -184,8 +173,7 @@
       "title": "Una tempesta d’aigua i vent deixa una saó de 30 litres dins Sóller",
       "summary": "Tal i com preveia l’AEMET, una important tempesta ha afectat la vall de Sóller entre les 14 i les 15 hores, deixant un registre important d’aigua i vent, i algunes incidències. I, d’altra banda, es preveu una nova arribada d’un front aproximadament a les 19…",
       "url": "https://saveu.cat/noticies/una-tempesta-daigua-i-vent-deixa-una-sao-de-30-litres-dins-soller/",
-      "related_sources": [],
-      "source_count": 1
+      "related_sources": []
     },
     {
       "id": "8afac3cf2f5b7c0a6676",
@@ -199,8 +187,7 @@
       "title": "El PP perd la votació per prorrogar 5 anys la concessió a Aqualia",
       "summary": "El PP ha perdut avui una de les votacions més transcendentals de la legislatura, la de la pròrroga de la concessió a Aqualia dels serveis de gestió d’aigua potable i clavegueram per cinc anys més: de 2030 a 2035. El regidor no adscrit actualment a cap partit…",
       "url": "https://saveu.cat/noticies/el-pp-perd-la-votacio-per-prorrogar-5-anys-la-concessio-a-aqualia/",
-      "related_sources": [],
-      "source_count": 1
+      "related_sources": []
     },
     {
       "id": "ce928de0be0786ceff89",
@@ -214,8 +201,7 @@
       "title": "Els alumnes de les Illes Balears, cridats aquest dijous a iniciar el nou curs",
       "summary": "Els alumnes d’educació infantil, primària i secundària de les Illes Balears estan cridats aquest dijous per començar el curs 2026-2027. Durant aquest estiu s’han duit a terme diverses obres de manteniment als centres públics, d’entre els que destaquen la de…",
       "url": "https://saveu.cat/noticies/els-alumnes-de-les-illes-balears-cridats-aquest-dijous-a-iniciar-el-nou-curs/",
-      "related_sources": [],
-      "source_count": 1
+      "related_sources": []
     },
     {
       "id": "44a1dc702fc12b8cc975",
@@ -229,8 +215,7 @@
       "title": "Fornalutx celebra, un any més, el dia de la seva patrona",
       "summary": "La celebració de la Nativitat de la Mare de Déu va tornar a reunir ahir els fornalutxencs i fornalutxenques. Gràcies per fer-nos partícips d’un dia tan vostre. Molts d’anys i bones festes, Fornalutx!",
       "url": "https://ajsoller.net/ca/noticies/fornalutx-celebra-un-any-mes-el-dia-de-la-seva-patrona",
-      "related_sources": [],
-      "source_count": 1
+      "related_sources": []
     },
     {
       "id": "897775e8c7786d03953b",
@@ -244,8 +229,7 @@
       "title": "Emergències ha activat per avui l’alerta taronja (IG-1 del Pla Meteobal) per pluges i tempestes a totes les Illes Balears",
       "summary": "Degut a què es preveuen precipitacions intenses, demanam a la ciutadania que extremi les precaucions: ▪️ Evitau els desplaçaments que no siguin necessaris. ▪️ Allunyau-vos dels torrents i de les zones baixes o inundables. ▪️ No travesseu zones inundades, ni a…",
       "url": "https://ajsoller.net/ca/noticies/emergencies-ha-activat-avui-lalerta-taronja-ig-1-del-pla-meteobal-pluges-i-tempestes-totes",
-      "related_sources": [],
-      "source_count": 1
+      "related_sources": []
     },
     {
       "id": "7ce73fcaa5e6876daf0f",
@@ -259,8 +243,7 @@
       "title": "Anunci de la convocatòria del pròxim ple ordinari",
       "summary": "Tindrà lloc dimecres, 9 de setembre, a les 11:00h",
       "url": "https://ajsoller.net/ca/noticies/anunci-de-la-convocatoria-del-proxim-ple-ordinari",
-      "related_sources": [],
-      "source_count": 1
+      "related_sources": []
     },
     {
       "id": "99baa9bf4ff527ba42a8",
@@ -274,8 +257,7 @@
       "title": "El tinent de batle assisteix a la presentació de l’inici de les obres d’ampliació de la rotonda de la ITV de Son Castelló",
       "summary": "El tinent de batle de Sóller, Carlos Darder, ha assistit avui a l’inici de les obres d’ampliació de la rotonda de la ITV de Son Castelló, en un acte encapçalat pel president del Consell de Mallorca, Llorenç Galmés, amb representants de les institucions i dels…",
       "url": "https://ajsoller.net/ca/noticies/el-tinent-de-batle-assisteix-la-presentacio-de-linici-de-les-obres-dampliacio-de-la",
-      "related_sources": [],
-      "source_count": 1
+      "related_sources": []
     },
     {
       "id": "9a687d744e2e97e041f9",
@@ -289,8 +271,7 @@
       "title": "Sóller rebrà 779.094 euros de l’ITS per millorar les xarxes de pluvials i sanejament",
       "summary": "El batle de Sóller, Miquel Nadal, i el regidor de Desenvolupament Local, Lluís Cerezo, han assistit avui a la finca de Raixa a la presentació del paquet d’inversions que el Govern de les Illes Balears destinarà a reforçar les infraestructures del cicle de…",
       "url": "https://ajsoller.net/ca/noticies/soller-rebra-779094-euros-de-lits-millorar-les-xarxes-de-pluvials-i-sanejament",
-      "related_sources": [],
-      "source_count": 1
+      "related_sources": []
     },
     {
       "id": "609a3dd531d4213ada25",
@@ -304,8 +285,7 @@
       "title": "La XIV Trobada d’Havaneres de Sóller tornarà a omplir Can Repic de música els dies 18 i 19 de setembre",
       "summary": "Les Havaneres tornaran a sonar davant la mar els pròxims 18 i 19 de setembre, amb una nova edició de la Trobada d’Havaneres de Sóller, que convertirà un any més la platja de Can Repic en punt de trobada per a sollerics, solleriques i visitants. La XIV edició…",
       "url": "https://ajsoller.net/ca/noticies/la-xiv-trobada-dhavaneres-de-soller-tornara-omplir-can-repic-de-musica-els-dies-18-i-19-de",
-      "related_sources": [],
-      "source_count": 1
+      "related_sources": []
     },
     {
       "id": "247ceb41248add167934",
@@ -319,8 +299,7 @@
       "title": "La Sala Magna acull el concert del Joch de Ministrils del Consell de Mallorca",
       "summary": "Dissabte capvespre, amb motiu de les Festes de Sant Baromeu, la sala magna va acollir el concert d'una de les músiques que forma part de la memòria de Mallorca. El Joch de Ministrils del Consell de Mallorca ha duit fins a Sóller una tradició musical que torna…",
       "url": "https://ajsoller.net/ca/noticies/la-sala-magna-acull-el-concert-del-joch-de-ministrils-del-consell-de-mallorca",
-      "related_sources": [],
-      "source_count": 1
+      "related_sources": []
     },
     {
       "id": "4b9df60c4ae63552bdfb",
@@ -334,8 +313,7 @@
       "title": "Acte de lliurament dels Premis Literaris Vall de Sóller",
       "summary": "Divendres vàrem celebrar una nova edició dels Premis Literaris Vall de Sóller, un certamen que va néixer l’any 1987 i que, gairebé quaranta anys després, continua donant veu a la creació literària en la nostra llengua. Va ser també una edició especialment…",
       "url": "https://ajsoller.net/ca/noticies/acte-de-lliurament-dels-premis-literaris-vall-de-soller",
-      "related_sources": [],
-      "source_count": 1
+      "related_sources": []
     }
   ]
 }
