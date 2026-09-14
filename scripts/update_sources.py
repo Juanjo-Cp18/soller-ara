@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Actualitza data/posts.json a partir de les fonts públiques configurades.
 
-v0.31: conserva sempre totes les publicacions i només marca continguts probablement relacionats.
+v0.4: afegeix Setmanari Sóller com a font HTML controlada, mantenint RSS per a les altres fonts.
 """
 
 from __future__ import annotations
@@ -14,8 +14,10 @@ import sys
 import unicodedata
 from difflib import SequenceMatcher
 from datetime import datetime, timezone
+from html.parser import HTMLParser
 from email.utils import parsedate_to_datetime
 from pathlib import Path
+from urllib.parse import urljoin, urlparse
 from urllib.request import Request, urlopen
 from xml.etree import ElementTree as ET
 
@@ -24,7 +26,7 @@ SOURCES_FILE = ROOT / "sources.json"
 OUTPUT_FILE = ROOT / "data" / "posts.json"
 MAX_POSTS_PER_SOURCE = 40
 SUMMARY_LIMIT = 260
-USER_AGENT = "SollerAra/0.31 (+https://github.com/Juanjo-Cp18/soller-ara)"
+USER_AGENT = "SollerAra/0.4 (+https://github.com/Juanjo-Cp18/soller-ara)"
 RELATED_WINDOW_HOURS = 72
 
 CATEGORY_KEYWORDS = {
@@ -325,18 +327,172 @@ def build_post(source: dict, title: str, summary: str, url: str, published_at: s
     }
 
 
-def fetch_source(source: dict) -> list[dict]:
-    request = Request(
-        source["url"],
-        headers={
-            "User-Agent": USER_AGENT,
-            "Accept": "application/rss+xml, application/atom+xml, application/xml, text/xml;q=0.9, */*;q=0.8",
-        },
-    )
+
+ARTICLE_URL_RE = re.compile(r"/\\d{4}/\\d{2}/\\d{2}/\\d+/[^/?#]+\\.html$", re.I)
+
+
+class LatestArticleLinkParser(HTMLParser):
+    def __init__(self, base_url: str):
+        super().__init__(convert_charrefs=True)
+        self.base_url = base_url
+        self.current_href: str | None = None
+        self.current_text: list[str] = []
+        self.links: list[tuple[str, str]] = []
+
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        if tag.lower() != "a":
+            return
+        href = dict(attrs).get("href")
+        if not href:
+            return
+        self.current_href = urljoin(self.base_url, href)
+        self.current_text = []
+
+    def handle_data(self, data: str) -> None:
+        if self.current_href:
+            self.current_text.append(data)
+
+    def handle_endtag(self, tag: str) -> None:
+        if tag.lower() != "a" or not self.current_href:
+            return
+
+        title = clean_text(" ".join(self.current_text))
+        parsed = urlparse(self.current_href)
+        if (
+            parsed.netloc.endswith("elsoller.cat")
+            and ARTICLE_URL_RE.search(parsed.path)
+            and len(title) >= 8
+        ):
+            clean_url = parsed._replace(query="", fragment="").geturl()
+            self.links.append((clean_url, title))
+
+        self.current_href = None
+        self.current_text = []
+
+
+class ArticleMetaParser(HTMLParser):
+    def __init__(self):
+        super().__init__(convert_charrefs=True)
+        self.meta: dict[str, str] = {}
+        self.in_h1 = False
+        self.h1_parts: list[str] = []
+
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        attrs_dict = {k.lower(): (v or "") for k, v in attrs}
+        tag = tag.lower()
+
+        if tag == "meta":
+            key = (attrs_dict.get("property") or attrs_dict.get("name") or "").lower()
+            content = attrs_dict.get("content", "").strip()
+            if key and content and key not in self.meta:
+                self.meta[key] = content
+        elif tag == "h1":
+            self.in_h1 = True
+
+    def handle_data(self, data: str) -> None:
+        if self.in_h1:
+            self.h1_parts.append(data)
+
+    def handle_endtag(self, tag: str) -> None:
+        if tag.lower() == "h1":
+            self.in_h1 = False
+
+    @property
+    def h1(self) -> str:
+        return clean_text(" ".join(self.h1_parts))
+
+
+def fetch_bytes(url: str, accept: str) -> tuple[bytes, str]:
+    request = Request(url, headers={"User-Agent": USER_AGENT, "Accept": accept})
     with urlopen(request, timeout=30) as response:
         payload = response.read()
+        charset = response.headers.get_content_charset() or "utf-8"
+    return payload, charset
+
+
+def date_from_article_url(url: str) -> str | None:
+    match = re.search(r"/(\\d{4})/(\\d{2})/(\\d{2})/", url)
+    if not match:
+        return None
+    try:
+        year, month, day = map(int, match.groups())
+        return datetime(year, month, day, 12, 0, tzinfo=timezone.utc).isoformat()
+    except ValueError:
+        return None
+
+
+def fetch_html_latest(source: dict) -> list[dict]:
+    payload, charset = fetch_bytes(source["url"], "text/html,application/xhtml+xml;q=0.9,*/*;q=0.8")
+    html_text = payload.decode(charset, errors="replace")
+
+    listing = LatestArticleLinkParser(source["url"])
+    listing.feed(html_text)
+
+    unique_links: list[tuple[str, str]] = []
+    seen: set[str] = set()
+    for url, title in listing.links:
+        if url in seen:
+            continue
+        seen.add(url)
+        unique_links.append((url, title))
+
+    max_items = int(source.get("max_items", 20))
+    posts: list[dict] = []
+
+    for url, listing_title in unique_links[:max_items]:
+        title = listing_title
+        summary = ""
+        published_at = date_from_article_url(url)
+
+        try:
+            article_payload, article_charset = fetch_bytes(
+                url,
+                "text/html,application/xhtml+xml;q=0.9,*/*;q=0.8",
+            )
+            article_html = article_payload.decode(article_charset, errors="replace")
+            parser = ArticleMetaParser()
+            parser.feed(article_html)
+
+            title = clean_text(
+                parser.meta.get("og:title")
+                or parser.meta.get("twitter:title")
+                or parser.h1
+                or listing_title
+            )
+            summary = clean_summary(
+                title,
+                parser.meta.get("description")
+                or parser.meta.get("og:description")
+                or parser.meta.get("twitter:description")
+                or "",
+            )
+            published_at = (
+                parse_date(parser.meta.get("article:published_time"))
+                or parse_date(parser.meta.get("datepublished"))
+                or parse_date(parser.meta.get("date"))
+                or published_at
+            )
+        except Exception as exc:
+            print(f"AVÍS {source['name']} article {url}: {exc}", file=sys.stderr)
+
+        if not title:
+            continue
+        posts.append(build_post(source, title, summary, url, published_at))
+
+    return posts
+
+
+def fetch_source(source: dict) -> list[dict]:
     if source["type"] in ("rss", "atom"):
+        payload, _ = fetch_bytes(
+            source["url"],
+            "application/rss+xml, application/atom+xml, application/xml, text/xml;q=0.9, */*;q=0.8",
+        )
         return parse_rss(payload, source)
+
+    if source["type"] == "html_latest":
+        return fetch_html_latest(source)
+
     raise ValueError(f"Tipus de font no suportat: {source['type']}")
 
 
@@ -366,8 +522,8 @@ def main() -> int:
     ordered_posts, related_pair_count = annotate_related_posts(ordered_posts)
 
     payload = {
-        "version": 4,
-        "generator_version": "0.31",
+        "version": 5,
+        "generator_version": "0.4",
         "fetched_at": datetime.now(timezone.utc).isoformat(),
         "source_count": len([s for s in config.get("sources", []) if s.get("enabled", True)]),
         "post_count": len(ordered_posts),

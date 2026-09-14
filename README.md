@@ -4,30 +4,32 @@ Projecte públic i sense ànim de lucre per reunir informació local de Sóller 
 
 ## Versió
 
-**v0.31**
+**v0.4**
 
-## Canvi important de la v0.31
+## Novetats de la v0.4
 
-- **Cap publicació d'una font s'elimina ni es fusiona automàticament amb una altra.**
-- Un mateix titular pot correspondre a continguts diferents; per tant, la similitud del títol per si sola no es considera suficient.
-- Cada notícia conserva sempre la seva pròpia targeta, font, resum i enllaç original.
-- El sistema només pot marcar dues publicacions com a **contingut relacionat** quan coincideixen molt tant el titular com el resum i s'han publicat dins una finestra de 72 hores.
-- Encara que dues publicacions es marquin com a relacionades, totes dues continuen visibles per separat.
-
-## Novetats iniciades a la v0.3
-
-- Segona font real: **Sa Veu de Sóller** mitjançant el seu feed RSS públic.
-- El sistema combina publicacions de l'Ajuntament de Sóller i Sa Veu en una única portada cronològica.
-- El cercador també té en compte els continguts relacionats.
-- Es manté el cost addicional en **0 €** i no s'utilitza cap API d'IA de pagament.
+- Tercera font real: **Setmanari Sóller** (`elsoller.cat`).
+- Com que no hem localitzat un RSS públic del Setmanari Sóller, aquesta font s'integra mitjançant la seva pàgina pública d'últimes notícies.
+- El sistema recull només:
+  - enllaç de la notícia,
+  - titular,
+  - descripció/metadades públiques,
+  - data de publicació.
+- No es copia el cos complet de l'article.
+- Si l'estructura HTML del Setmanari Sóller canvia, aquesta font pot fallar sense impedir que l'Ajuntament i Sa Veu continuïn actualitzant-se.
+- Les tres fonts es mostren cronològicament en una única portada.
+- Es manté la regla de la v0.31: **cap notícia d'una font s'elimina o fusiona automàticament amb una altra**.
 
 ## Fonts actuals
 
-1. **Ajuntament de Sóller** — RSS oficial de notícies  
+1. **Ajuntament de Sóller** — RSS oficial  
    `https://ajsoller.net/ca/noticies/rss.xml`
 
-2. **Sa Veu de Sóller** — RSS públic del diari digital  
+2. **Sa Veu de Sóller** — RSS públic  
    `https://saveu.cat/feed/`
+
+3. **Setmanari Sóller** — pàgina pública d'últimes notícies  
+   `https://www.elsoller.cat/ultimes.html`
 
 ## Arquitectura actual
 
@@ -36,7 +38,7 @@ Projecte públic i sense ànim de lucre per reunir informació local de Sóller 
 - `app.js`: idiomes, filtres, cerca, càrrega de dades, contingut relacionat i compartició.
 - `manifest.webmanifest`: configuració inicial PWA.
 - `sources.json`: registre de fonts públiques.
-- `scripts/update_sources.py`: lector RSS/Atom, neteja, classificació i detecció conservadora de contingut relacionat.
+- `scripts/update_sources.py`: lector RSS/Atom, lector HTML controlat, neteja, classificació i detecció conservadora de contingut relacionat.
 - `data/posts.json`: dades generades automàticament.
 - `.github/workflows/update-sources.yml`: actualització horària de les fonts.
 - `.github/workflows/deploy-pages.yml`: publicació automàtica a GitHub Pages.
@@ -51,4 +53,4 @@ Projecte públic i sense ànim de lucre per reunir informació local de Sóller 
 
 ## Estat
 
-La v0.31 és una versió pilot amb dues fonts reals. La detecció de continguts relacionats és deliberadament restrictiva i s'anirà ajustant només amb casos reals verificats.
+La v0.4 és una versió pilot amb tres fonts reals. La font del Setmanari Sóller és tècnicament més fràgil que les dues fonts RSS perquè depèn de l'estructura de la seva pàgina pública.

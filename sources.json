@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "sources": [
     {
       "id": "ajuntament-soller-noticies",
@@ -19,6 +19,17 @@
       "language": "ca",
       "locality": "Sóller",
       "source_type": "media",
+      "enabled": true
+    },
+    {
+      "id": "setmanari-soller",
+      "name": "Setmanari Sóller",
+      "type": "html_latest",
+      "url": "https://www.elsoller.cat/ultimes.html",
+      "language": "ca",
+      "locality": "Sóller",
+      "source_type": "media",
+      "max_items": 20,
       "enabled": true
     }
   ]
