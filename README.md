@@ -4,7 +4,14 @@ Projecte públic i sense ànim de lucre per reunir informació local de Sóller 
 
 ## Versió
 
-**v0.27**
+**v0.28**
+
+## Novetats de la v0.28
+
+- Confirmada la primera publicació real a Instagram `@soller.ara` des de GitHub Actions.
+- Nou workflow manual **Meta · prova privada Facebook**.
+- La prova de Facebook és només lectura: comprova `pages_manage_posts` i la tasca `CREATE_CONTENT` sense publicar res.
+- Cap token ni Page Access Token s'imprimeix als logs.
 
 ## Novetats de la v0.27
 
