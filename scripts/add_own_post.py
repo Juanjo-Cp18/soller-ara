@@ -14,14 +14,17 @@ import json
 import os
 import re
 import sys
+import textwrap
 from datetime import datetime, timezone
 from pathlib import Path
+from PIL import Image, ImageDraw, ImageFont
 
 ROOT = Path(__file__).resolve().parents[1]
 MANUAL_FILE = ROOT / "data" / "manual_posts.json"
 POSTS_FILE = ROOT / "data" / "posts.json"
 POSTS_JS_FILE = ROOT / "data" / "posts.js"
 DETAIL_DIR = ROOT / "noticies"
+GENERATED_DIR = ROOT / "assets" / "generated"
 SITE_URL = "https://juanjo-cp18.github.io/soller-ara"
 
 TITLE = os.environ.get("POST_TITLE", "").strip()
@@ -39,6 +42,81 @@ ALLOWED_CATEGORIES = {
 def stable_id(title: str, published_at: str) -> str:
     raw = f"{published_at}|{title}".encode("utf-8")
     return "soller-ara-" + hashlib.sha1(raw).hexdigest()[:16]
+
+
+def load_font(size: int, bold: bool = False):
+    candidates = [
+        "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf" if bold else "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
+        "/usr/share/fonts/truetype/liberation2/LiberationSans-Bold.ttf" if bold else "/usr/share/fonts/truetype/liberation2/LiberationSans-Regular.ttf",
+    ]
+    for candidate in candidates:
+        try:
+            return ImageFont.truetype(candidate, size=size)
+        except OSError:
+            continue
+    return ImageFont.load_default()
+
+
+def wrap_text(draw: ImageDraw.ImageDraw, text: str, font, max_width: int) -> list[str]:
+    words = text.split()
+    lines: list[str] = []
+    current = ""
+    for word in words:
+        candidate = word if not current else f"{current} {word}"
+        box = draw.textbbox((0, 0), candidate, font=font)
+        if box[2] - box[0] <= max_width:
+            current = candidate
+        else:
+            if current:
+                lines.append(current)
+            current = word
+    if current:
+        lines.append(current)
+    return lines
+
+
+def generate_social_card(post_id: str, title: str, category: str) -> str:
+    GENERATED_DIR.mkdir(parents=True, exist_ok=True)
+    width, height = 1080, 1350
+    image = Image.new("RGB", (width, height), "#f6f7f5")
+    draw = ImageDraw.Draw(image)
+
+    primary = "#0f766e"
+    text_color = "#1e2927"
+    muted = "#64716f"
+    surface = "#ffffff"
+
+    draw.rounded_rectangle((70, 70, width - 70, height - 70), radius=52, fill=surface)
+    draw.rounded_rectangle((110, 110, 270, 270), radius=42, fill=primary)
+
+    brand_font = load_font(68, bold=True)
+    category_font = load_font(38, bold=True)
+    title_font = load_font(72, bold=True)
+    footer_font = load_font(34, bold=False)
+
+    draw.text((142, 148), "SA", font=brand_font, fill="#ffffff")
+    draw.text((310, 140), "SÓLLER ARA", font=category_font, fill=primary)
+    draw.text((310, 200), category.upper(), font=footer_font, fill=muted)
+
+    lines = wrap_text(draw, title, title_font, width - 220)
+    max_lines = 7
+    if len(lines) > max_lines:
+        lines = lines[:max_lines]
+        lines[-1] = lines[-1].rstrip(" .,:;") + "…"
+
+    y = 390
+    line_gap = 24
+    for line in lines:
+        draw.text((110, y), line, font=title_font, fill=text_color)
+        box = draw.textbbox((0, 0), line, font=title_font)
+        y += (box[3] - box[1]) + line_gap
+
+    draw.line((110, height - 240, width - 110, height - 240), fill="#dde5e2", width=3)
+    draw.text((110, height - 190), "soller-ara · Informació local", font=footer_font, fill=muted)
+
+    path = GENERATED_DIR / f"{post_id}.jpg"
+    image.save(path, "JPEG", quality=92, optimize=True)
+    return f"{SITE_URL}/assets/generated/{post_id}.jpg"
 
 
 def main() -> int:
@@ -59,6 +137,7 @@ def main() -> int:
     post_id = stable_id(TITLE, now)
 
     post_url = f"{SITE_URL}/noticies/{post_id}.html"
+    final_image_url = IMAGE_URL or generate_social_card(post_id, TITLE, CATEGORY)
 
     post = {
         "id": post_id,
@@ -74,17 +153,17 @@ def main() -> int:
         "url": post_url,
         "content_policy": "owned_content",
         "rights_status": "owned",
-        "image_allowed": bool(IMAGE_URL),
+        "image_allowed": bool(final_image_url),
     }
-    if IMAGE_URL:
-        post["media_url"] = IMAGE_URL
+    if final_image_url:
+        post["media_url"] = final_image_url
         post["media_type"] = "image"
 
     DETAIL_DIR.mkdir(parents=True, exist_ok=True)
     safe_title = html.escape(TITLE, quote=True)
     safe_body = html.escape(BODY, quote=True)
     safe_url = html.escape(post_url, quote=True)
-    safe_image = html.escape(IMAGE_URL, quote=True) if IMAGE_URL else ""
+    safe_image = html.escape(final_image_url, quote=True) if final_image_url else ""
     image_meta = (
         f'<meta property="og:image" content="{safe_image}" />\n'
         f'  <meta name="twitter:image" content="{safe_image}" />'
@@ -143,7 +222,7 @@ def main() -> int:
     if github_env:
         with open(github_env, "a", encoding="utf-8") as env_file:
             env_file.write(f"OWN_POST_ID={post_id}\n")
-            env_file.write(f"OWN_POST_URL={post_url}\n")
+            env_file.write(f"OWN_POST_URL={post_url}\n")\n            env_file.write(f"OWN_IMAGE_URL={final_image_url}\n")
 
     if MANUAL_FILE.exists():
         manual = json.loads(MANUAL_FILE.read_text(encoding="utf-8"))
@@ -161,8 +240,8 @@ def main() -> int:
         payload = json.loads(POSTS_FILE.read_text(encoding="utf-8"))
     else:
         payload = {
-            "version": 37,
-            "generator_version": "0.37",
+            "version": 38,
+            "generator_version": "0.38",
             "fetched_at": now,
             "source_count": 0,
             "source_status": [],
