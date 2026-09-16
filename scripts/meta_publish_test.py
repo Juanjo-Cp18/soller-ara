@@ -22,7 +22,7 @@ CAPTION = os.environ.get(
     "PUBLISH_CAPTION",
     "Prova de publicació de Sóller Ara. Aquesta publicació forma part de la configuració tècnica inicial del projecte.",
 ).strip()
-IMAGE_URL = "https://juanjo-cp18.github.io/soller-ara/assets/meta-test-v2.jpg"
+IMAGE_URL = "https://soller-ara.github.io/soller-ara/assets/meta-test-v2.jpg"
 
 
 def graph(path: str, method: str = "GET", params: dict | None = None, token: str | None = None) -> dict:
