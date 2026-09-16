@@ -23,7 +23,7 @@ IMAGE_URL = os.environ.get("POST_IMAGE_URL", "").strip()
 DO_FACEBOOK = os.environ.get("PUBLISH_FACEBOOK", "false").lower() == "true"
 DO_INSTAGRAM = os.environ.get("PUBLISH_INSTAGRAM", "false").lower() == "true"
 CONFIRMATION = os.environ.get("PUBLISH_CONFIRMATION", "").strip()
-APP_URL = "https://juanjo-cp18.github.io/soller-ara/"
+POST_URL = os.environ.get("POST_URL", "").strip() or "https://juanjo-cp18.github.io/soller-ara/"
 
 
 def graph(path: str, method: str = "GET", params: dict | None = None, token: str | None = None) -> dict:
@@ -101,21 +101,16 @@ def discover_accounts() -> tuple[str, str, str, str]:
 
 
 def publish_facebook(page_id: str, page_token: str) -> None:
-    message = f"{TITLE}\n\n{BODY}\n\n{APP_URL}".strip()
-    if IMAGE_URL:
-        result = graph(
-            f"{page_id}/photos",
-            method="POST",
-            params={"url": IMAGE_URL, "caption": message, "published": "true"},
-            token=page_token,
-        )
-    else:
-        result = graph(
-            f"{page_id}/feed",
-            method="POST",
-            params={"message": message},
-            token=page_token,
-        )
+    message = f"{TITLE}\n\n{BODY}".strip()
+    result = graph(
+        f"{page_id}/feed",
+        method="POST",
+        params={
+            "message": message,
+            "link": POST_URL,
+        },
+        token=page_token,
+    )
     identifier = result.get("post_id") or result.get("id")
     if not identifier:
         raise RuntimeError("Facebook no ha retornat identificador de publicació.")
@@ -130,7 +125,7 @@ def publish_instagram(ig_id: str, ig_username: str, page_token: str) -> None:
             "Instagram necessita una imatge pública. Afegeix POST_IMAGE_URL o desactiva Instagram."
         )
 
-    caption = f"{TITLE}\n\n{BODY}\n\n#Sóller #SollerAra".strip()
+    caption = f"{TITLE}\n\n{BODY}\n\n{POST_URL}\n\n#Sóller #SollerAra".strip()
     container = graph(
         f"{ig_id}/media",
         method="POST",
