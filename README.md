@@ -4,7 +4,14 @@ Projecte públic i sense ànim de lucre per reunir informació local de Sóller 
 
 ## Versió
 
-**v0.21**
+**v0.23**
+
+## Novetats de la v0.23
+
+- Nou workflow manual **Meta · prova privada Instagram**.
+- La prova crea només un contenidor tècnic a `@soller.ara`; no executa `/media_publish` i, per tant, no publica res.
+- Serveix per validar de forma segura el permís `instagram_content_publish` amb el token de sistema guardat a GitHub Secrets.
+- S'afegeix una imatge de prova pròpia del projecte per evitar reutilitzar contingut de tercers.
 
 ## Novetats de la v0.21
 
