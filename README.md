@@ -4,7 +4,17 @@ Projecte públic i sense ànim de lucre per reunir informació local de Sóller 
 
 ## Versió
 
-**v0.29**
+**v0.30**
+
+## Novetats de la v0.30
+
+- La prioritat passa de publicar a **recopilar informació**.
+- Nova prova de només lectura per comprovar si l'accés actual de Meta permet:
+  - cercar publicacions recents amb `#soller`;
+  - llegir publicacions que etiquetin `@soller.ara`.
+- La prova s'executa automàticament una vegada en pujar aquesta versió i també es pot llançar manualment.
+- Business Discovery de comptes concrets continua separat i pendent d'accés avançat.
+- Cap contingut social de tercers es publica automàticament a Sóller Ara durant aquesta prova.
 
 ## Novetats de la v0.29
 

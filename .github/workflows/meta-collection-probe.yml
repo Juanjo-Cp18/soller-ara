@@ -1,0 +1,31 @@
+name: Meta · provar recopilació social
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - "scripts/meta_collection_probe.py"
+      - ".github/workflows/meta-collection-probe.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  collection-probe:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Configurar Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+
+      - name: Provar recopilació social
+        env:
+          META_ACCESS_TOKEN: ${{ secrets.META_ACCESS_TOKEN }}
+          META_GRAPH_VERSION: "v26.0"
+        run: python scripts/meta_collection_probe.py
