@@ -505,6 +505,13 @@ function extractTikTokId(url) {
 }
 
 function renderSocialEmbed(post) {
+  if (post.source_type === "own" && post.media_type === "image" && post.media_url) {
+    return `
+      <div class="social-embed social-embed-image own-post-image">
+        <img src="${escapeAttribute(post.media_url)}" alt="" loading="lazy" />
+      </div>`;
+  }
+
   if (post.source_type !== "social" || !post.url) return "";
 
   const platform = String(post.platform || "").toLowerCase();
