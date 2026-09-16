@@ -1,7 +1,7 @@
 {
-  "version": 35,
-  "generator_version": "0.35",
-  "fetched_at": "2026-09-16T10:54:28.334857+00:00",
+  "version": 36,
+  "generator_version": "0.36",
+  "fetched_at": "2026-09-16T10:58:01.551841+00:00",
   "source_count": 14,
   "source_status": [
     {
@@ -63,9 +63,9 @@
       "name": "Govern de les Illes Balears",
       "source_type": "official",
       "method": "rss",
-      "ok": false,
+      "ok": true,
       "count": 0,
-      "error": "[Errno 104] Connection reset by peer"
+      "error": null
     },
     {
       "source_id": "ib3-noticies-soller",
@@ -116,7 +116,7 @@
       "source_id": "tib-avisos-soller",
       "name": "TIB · Avisos",
       "source_type": "official",
-      "method": "freenewsapi_search",
+      "method": "html_listing_regex",
       "ok": true,
       "count": 0,
       "error": null
@@ -125,7 +125,7 @@
       "source_id": "consell-mallorca-soller",
       "name": "Consell de Mallorca",
       "source_type": "official",
-      "method": "freenewsapi_search",
+      "method": "html_listing_regex",
       "ok": true,
       "count": 0,
       "error": null
@@ -155,12 +155,7 @@
   ],
   "post_count": 116,
   "related_pair_count": 0,
-  "errors": [
-    {
-      "source_id": "goib-noticies-soller",
-      "error": "[Errno 104] Connection reset by peer"
-    }
-  ],
+  "errors": [],
   "posts": [
     {
       "id": "85f85df365d3bcdba1c3",
