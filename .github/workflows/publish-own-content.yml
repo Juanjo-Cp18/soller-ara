@@ -111,3 +111,17 @@ jobs:
           PUBLISH_FACEBOOK: ${{ inputs.facebook }}
           PUBLISH_INSTAGRAM: ${{ inputs.instagram }}
         run: python scripts/publish_own_social.py
+
+      - name: Guardar registre de xarxes
+        if: ${{ always() && (inputs.facebook || inputs.instagram) }}
+        run: |
+          git add data/social_publish_log.json
+          if git diff --cached --quiet; then
+            echo "No hi ha canvis al registre social"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "data: registrar distribució social"
+          git pull --rebase origin main
+          git push origin HEAD:main
