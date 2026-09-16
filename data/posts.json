@@ -153,7 +153,7 @@
       "error": "(#10) Application does not have permission for this action [type=OAuthException, code=10, subcode=None]"
     }
   ],
-  "post_count": 102,
+  "post_count": 103,
   "related_pair_count": 0,
   "errors": [
     {
@@ -2174,6 +2174,26 @@
       "title": "MODIFICACIONS RECOLLIDA PORTA A PORTA DURANT FIRA I FIRÓ (8 a 11 MAIG)",
       "summary": "",
       "url": "https://soller2010.com/noticias/modificacions-recollida-porta-a-porta-durant-fira-i-firo-8-a-11-maig",
+      "platform": null,
+      "account": null,
+      "media_type": null,
+      "content_policy": "short_factual_excerpt",
+      "rights_status": "public_source_reviewed",
+      "image_allowed": false,
+      "related_sources": []
+    },
+    {
+      "id": "6206251d2ac58fbb3de3",
+      "category": "news",
+      "source_id": "soller-2010",
+      "source": "Sóller 2010",
+      "source_type": "official",
+      "language": "ca",
+      "locality": "Sóller",
+      "published_at": "2026-04-08T12:00:00+00:00",
+      "title": "MEMÒRIA ANUAL 2025",
+      "summary": "",
+      "url": "https://soller2010.com/noticias/memoria-anual-2025",
       "platform": null,
       "account": null,
       "media_type": null,
