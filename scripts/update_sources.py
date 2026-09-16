@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Actualitza data/posts.json a partir de les fonts públiques configurades.
 
-v0.20: descobreix automàticament l'Instagram Business ID a partir del token de Meta.
+v0.21: valida el compte propi de Meta i millora el diagnòstic de Business Discovery.
 """
 
 from __future__ import annotations
@@ -19,6 +19,7 @@ from html.parser import HTMLParser
 from email.utils import parsedate_to_datetime
 from pathlib import Path
 from urllib.parse import urlencode, urljoin, urlparse
+from urllib.error import HTTPError
 from urllib.request import Request, urlopen
 from xml.etree import ElementTree as ET
 
@@ -29,7 +30,7 @@ OUTPUT_FILE = ROOT / "data" / "posts.json"
 JS_OUTPUT_FILE = ROOT / "data" / "posts.js"
 MAX_POSTS_PER_SOURCE = 40
 SUMMARY_LIMIT = 260
-USER_AGENT = "SollerAra/0.20 (+https://github.com/Juanjo-Cp18/soller-ara)"
+USER_AGENT = "SollerAra/0.21 (+https://github.com/Juanjo-Cp18/soller-ara)"
 RELATED_WINDOW_HOURS = 72
 
 CATEGORY_KEYWORDS = {
@@ -475,8 +476,22 @@ def fetch_json_bearer(url: str, token: str) -> dict:
             "Authorization": f"Bearer {token}",
         },
     )
-    with urlopen(request, timeout=30) as response:
-        payload = response.read()
+    try:
+        with urlopen(request, timeout=30) as response:
+            payload = response.read()
+    except HTTPError as exc:
+        raw = exc.read().decode("utf-8", errors="replace")
+        try:
+            body = json.loads(raw)
+            meta_error = body.get("error") or {}
+            message = clean_text(str(meta_error.get("message") or "Meta API error"))
+            code = meta_error.get("code")
+            subcode = meta_error.get("error_subcode")
+            error_type = meta_error.get("type")
+            details = f"{message} [type={error_type}, code={code}, subcode={subcode}]"
+        except Exception:
+            details = f"HTTP {exc.code}: resposta de Meta no interpretable"
+        raise RuntimeError(details) from exc
     return json.loads(payload.decode("utf-8", errors="replace"))
 
 
@@ -540,6 +555,18 @@ def discover_meta_instagram_account(token: str, graph_version: str) -> dict | No
         return candidates[0]
 
     return None
+
+
+def validate_meta_own_account(token: str, ig_user_id: str, graph_version: str) -> dict:
+    query = urlencode({"fields": "id,username,account_type,media_count"})
+    endpoint = f"https://graph.facebook.com/{graph_version}/{ig_user_id}?{query}"
+    payload = fetch_json_bearer(endpoint, token)
+    return {
+        "id": str(payload.get("id") or ""),
+        "username": payload.get("username"),
+        "account_type": payload.get("account_type"),
+        "media_count": payload.get("media_count"),
+    }
 
 
 def fetch_meta_instagram_source(source: dict, token: str, ig_user_id: str, graph_version: str) -> list[dict]:
@@ -659,6 +686,17 @@ def fetch_optional_meta_social_sources() -> tuple[list[dict], list[dict], list[d
                 "error": None,
             })
         return posts, source_status, integration_status
+
+    try:
+        own = validate_meta_own_account(token, ig_user_id, graph_version)
+        print(
+            "META_OWN_ACCOUNT OK "
+            f"instagram=@{own.get('username') or '?'} "
+            f"account_type={own.get('account_type') or '?'} "
+            f"media_count={own.get('media_count')}"
+        )
+    except Exception as exc:
+        print(f"META_OWN_ACCOUNT ERROR: {exc}", file=sys.stderr)
 
     for source in targets:
         source_id = f"instagram-{str(source.get('username') or source.get('account') or '').lstrip('@')}"
@@ -1016,13 +1054,10 @@ def main() -> int:
 
     meta_posts, meta_source_status, social_integration_status = fetch_optional_meta_social_sources()
     posts.extend(meta_posts)
-    source_status.extend(meta_source_status)
-    for status in meta_source_status:
-        if not status.get("ok"):
-            errors.append({
-                "source_id": status.get("source_id"),
-                "error": status.get("error"),
-            })
+    # Les integracions socials opcionals només entren a la salut general quan funcionen.
+    # Els errors/pending es documenten a social_integration_status sense fer aparèixer
+    # les sis fonts estables com a caigudes.
+    source_status.extend(status for status in meta_source_status if status.get("ok"))
 
     # Només elimina duplicats exactes de la mateixa entrada. Mai elimina una publicació d'una altra font.
     deduped = {post["id"]: post for post in posts}
@@ -1030,8 +1065,8 @@ def main() -> int:
     ordered_posts, related_pair_count = annotate_related_posts(ordered_posts)
 
     payload = {
-        "version": 20,
-        "generator_version": "0.20",
+        "version": 21,
+        "generator_version": "0.21",
         "fetched_at": datetime.now(timezone.utc).isoformat(),
         "source_count": len(source_status),
         "source_status": source_status,

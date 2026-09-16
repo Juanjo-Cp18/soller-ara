@@ -4,7 +4,14 @@ Projecte públic i sense ànim de lucre per reunir informació local de Sóller 
 
 ## Versió
 
-**v0.20**
+**v0.21**
+
+## Novetats de la v0.21
+
+- Valida el compte propi `@soller.ara` amb Meta després del descobriment automàtic.
+- Els errors de Meta ara mostren només el missatge/codi segur retornat per l'API; mai el token.
+- Les integracions socials encara en proves no fan aparèixer les sis fonts estables com a caigudes.
+- Business Discovery continua en diagnòstic fins saber exactament quin requisit de Meta falta.
 
 ## Novetats de la v0.20
 
