@@ -9,6 +9,7 @@ immediatament sense esperar la següent recopilació horària.
 from __future__ import annotations
 
 import hashlib
+import html
 import json
 import os
 import re
@@ -20,6 +21,8 @@ ROOT = Path(__file__).resolve().parents[1]
 MANUAL_FILE = ROOT / "data" / "manual_posts.json"
 POSTS_FILE = ROOT / "data" / "posts.json"
 POSTS_JS_FILE = ROOT / "data" / "posts.js"
+DETAIL_DIR = ROOT / "noticies"
+SITE_URL = "https://juanjo-cp18.github.io/soller-ara"
 
 TITLE = os.environ.get("POST_TITLE", "").strip()
 BODY = os.environ.get("POST_BODY", "").strip()
@@ -55,6 +58,8 @@ def main() -> int:
     now = datetime.now(timezone.utc).isoformat()
     post_id = stable_id(TITLE, now)
 
+    post_url = f"{SITE_URL}/noticies/{post_id}.html"
+
     post = {
         "id": post_id,
         "category": CATEGORY,
@@ -66,7 +71,7 @@ def main() -> int:
         "published_at": now,
         "title": TITLE,
         "summary": BODY,
-        "url": "https://juanjo-cp18.github.io/soller-ara/",
+        "url": post_url,
         "content_policy": "owned_content",
         "rights_status": "owned",
         "image_allowed": bool(IMAGE_URL),
@@ -74,6 +79,71 @@ def main() -> int:
     if IMAGE_URL:
         post["media_url"] = IMAGE_URL
         post["media_type"] = "image"
+
+    DETAIL_DIR.mkdir(parents=True, exist_ok=True)
+    safe_title = html.escape(TITLE, quote=True)
+    safe_body = html.escape(BODY, quote=True)
+    safe_url = html.escape(post_url, quote=True)
+    safe_image = html.escape(IMAGE_URL, quote=True) if IMAGE_URL else ""
+    image_meta = (
+        f'<meta property="og:image" content="{safe_image}" />\n'
+        f'  <meta name="twitter:image" content="{safe_image}" />'
+        if safe_image else ""
+    )
+    image_html = (
+        f'<img class="article-image" src="{safe_image}" alt="" />'
+        if safe_image else ""
+    )
+    detail_html = f"""<!doctype html>
+<html lang="{html.escape(LANGUAGE, quote=True)}">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0f766e" />
+  <title>{safe_title} · Sóller Ara</title>
+  <meta name="description" content="{safe_body[:280]}" />
+  <link rel="canonical" href="{safe_url}" />
+  <link rel="stylesheet" href="../styles.css?v=0.38" />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Sóller Ara" />
+  <meta property="og:title" content="{safe_title}" />
+  <meta property="og:description" content="{safe_body[:280]}" />
+  <meta property="og:url" content="{safe_url}" />
+  {image_meta}
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="{safe_title}" />
+  <meta name="twitter:description" content="{safe_body[:280]}" />
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand-wrap" href="../index.html" style="text-decoration:none">
+      <div class="brand-mark" aria-hidden="true">SA</div>
+      <div><h1>Sóller Ara</h1><p>Tot el que passa a Sóller, en un sol lloc.</p></div>
+    </a>
+  </header>
+  <main class="legal-page">
+    <a class="legal-back" href="../index.html">← Tornar a Sóller Ara</a>
+    <article class="legal-card own-article">
+      <p class="eyebrow">Sóller Ara</p>
+      <h1>{safe_title}</h1>
+      <p class="article-date">{now}</p>
+      {image_html}
+      <div class="article-body"><p>{safe_body}</p></div>
+      <p><a class="origin-link" href="../index.html">Veure més informació a Sóller Ara →</a></p>
+    </article>
+  </main>
+  <footer class="footer"><p>© 2026 Sóller Ara · Projecte sense ànim de lucre</p></footer>
+</body>
+</html>
+"""
+    detail_path = DETAIL_DIR / f"{post_id}.html"
+    detail_path.write_text(detail_html, encoding="utf-8")
+
+    github_env = os.environ.get("GITHUB_ENV")
+    if github_env:
+        with open(github_env, "a", encoding="utf-8") as env_file:
+            env_file.write(f"OWN_POST_ID={post_id}\n")
+            env_file.write(f"OWN_POST_URL={post_url}\n")
 
     if MANUAL_FILE.exists():
         manual = json.loads(MANUAL_FILE.read_text(encoding="utf-8"))
