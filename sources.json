@@ -1,5 +1,5 @@
 {
-  "version": 17,
+  "version": 18,
   "sources": [
     {
       "id": "ajuntament-soller-noticies",
@@ -247,7 +247,7 @@
       "locality": "Sóller / Port de Sóller / Fornalutx",
       "source_type": "official",
       "allowed_host": "tib.org",
-      "article_url_regex": "^/ca/w/[^/?#]+$",
+      "article_url_regex": "^/ca/(?:w/[^/?#]+|avisos/-/asset_publisher/[^/]+/content/[^/?#]+)$",
       "max_items": 40,
       "max_age_days": 120,
       "include_keywords": [
