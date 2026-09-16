@@ -34,6 +34,38 @@
     element.className = "message" + (kind ? " " + kind : "");
   }
 
+
+  async function readPublicState() {
+    const stamp = Date.now();
+    const [postsResponse, moderationResponse] = await Promise.all([
+      fetch("../data/posts.json?v=" + stamp, { cache: "no-store" }),
+      fetch("../data/moderation.json?v=" + stamp, { cache: "no-store" }),
+    ]);
+
+    if (!postsResponse.ok || !moderationResponse.ok) {
+      throw new Error("No se ha podido leer el estado público actualizado.");
+    }
+
+    const [posts, moderation] = await Promise.all([
+      postsResponse.json(),
+      moderationResponse.json(),
+    ]);
+
+    return { posts, moderation };
+  }
+
+  async function mergePublicState(data) {
+    try {
+      const publicState = await readPublicState();
+      data.posts = publicState.posts;
+      data.moderation = publicState.moderation;
+    } catch (_) {
+      // Si GitHub Pages está desplegando todavía, conservamos temporalmente
+      // el estado recibido del backend y volveremos a intentarlo en el siguiente refresco.
+    }
+    return data;
+  }
+
   async function api(path, options = {}) {
     if (!API) throw new Error("Backend de Administración no configurado.");
 
@@ -283,6 +315,7 @@
     refreshButton.textContent = "Actualizando…";
     try {
       statusPayload = await api("/api/status");
+      statusPayload = await mergePublicState(statusPayload);
       renderMetrics(statusPayload);
       renderSources(statusPayload);
       renderSocial(statusPayload);
@@ -316,6 +349,7 @@
     for (let attempt = 1; attempt <= attempts; attempt++) {
       await new Promise((resolve) => setTimeout(resolve, 2500));
       const data = await api("/api/status");
+      await mergePublicState(data);
       statusPayload = data;
       renderMetrics(data);
       renderSources(data);
