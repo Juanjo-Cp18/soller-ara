@@ -4,7 +4,14 @@ Projecte públic i sense ànim de lucre per reunir informació local de Sóller 
 
 ## Versió
 
-**v0.25**
+**v0.26**
+
+## Novetats de la v0.26
+
+- La publicació d'Instagram obté primer el **Page Access Token** de la pàgina Sóller Ara.
+- Les crides `/media`, estat del contenidor i `/media_publish` utilitzen aquest token de pàgina.
+- La imatge de prova es serveix des de GitHub Pages, no des de `raw.githubusercontent.com`.
+- El token de pàgina només viu durant l'execució de GitHub Actions i no s'imprimeix als logs.
 
 ## Novetats de la v0.25
 

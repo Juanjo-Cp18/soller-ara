@@ -22,10 +22,10 @@ CAPTION = os.environ.get(
     "PUBLISH_CAPTION",
     "Prova de publicació de Sóller Ara. Aquesta publicació forma part de la configuració tècnica inicial del projecte.",
 ).strip()
-IMAGE_URL = "https://raw.githubusercontent.com/Juanjo-Cp18/soller-ara/main/assets/meta-test.jpg"
+IMAGE_URL = "https://juanjo-cp18.github.io/soller-ara/assets/meta-test.jpg"
 
 
-def graph(path: str, method: str = "GET", params: dict | None = None) -> dict:
+def graph(path: str, method: str = "GET", params: dict | None = None, token: str | None = None) -> dict:
     url = f"https://graph.facebook.com/{GRAPH_VERSION}/{path.lstrip('/')}"
     data = None
 
@@ -34,14 +34,16 @@ def graph(path: str, method: str = "GET", params: dict | None = None) -> dict:
     elif method == "POST":
         data = urlencode(params or {}).encode("utf-8")
 
+    active_token = token or TOKEN
+
     request = Request(
         url,
         data=data,
         method=method,
         headers={
-            "Authorization": f"Bearer {TOKEN}",
+            "Authorization": f"Bearer {active_token}",
             "Accept": "application/json",
-            "User-Agent": "SollerAra-InstagramPublish/0.25",
+            "User-Agent": "SollerAra-InstagramPublish/0.26",
         },
     )
 
@@ -61,50 +63,37 @@ def graph(path: str, method: str = "GET", params: dict | None = None) -> dict:
             raise RuntimeError(f"HTTP {exc.code}: resposta no interpretable") from exc
 
 
-def discover_instagram() -> tuple[str, str]:
+def discover_instagram() -> tuple[str, str, str]:
     payload = graph(
         "me/accounts",
-        params={"fields": "id,name,instagram_business_account{id,username}"},
+        params={"fields": "id,name,access_token,instagram_business_account{id,username}"},
     )
 
     candidates = []
     for page in payload.get("data") or []:
         instagram = page.get("instagram_business_account") or {}
-        if instagram.get("id"):
+        page_token = str(page.get("access_token") or "")
+        if instagram.get("id") and page_token:
             candidates.append(
                 (
                     page.get("name") or "",
                     str(instagram["id"]),
                     instagram.get("username") or "",
+                    page_token,
                 )
             )
 
-    for page_name, ig_id, username in candidates:
+    for page_name, ig_id, username, page_token in candidates:
         if page_name.casefold() in {"soller ara", "sóller ara"}:
-            return ig_id, username
+            return ig_id, username, page_token
 
     if len(candidates) == 1:
-        _, ig_id, username = candidates[0]
-        return ig_id, username
+        _, ig_id, username, page_token = candidates[0]
+        return ig_id, username, page_token
 
-    raise RuntimeError("No s'ha pogut identificar de forma única l'Instagram de Sóller Ara.")
-
-
-def wait_until_ready(container_id: str) -> None:
-    for attempt in range(12):
-        payload = graph(container_id, params={"fields": "status_code,status"})
-        status = str(payload.get("status_code") or "").upper()
-
-        if status == "FINISHED":
-            print("OK contenidor preparat per publicar.")
-            return
-        if status in {"ERROR", "EXPIRED"}:
-            raise RuntimeError(f"El contenidor ha fallat amb status_code={status}")
-
-        print(f"Esperant contenidor... intent {attempt + 1}/12, estat={status or 'desconegut'}")
-        time.sleep(5)
-
-    raise RuntimeError("El contenidor no ha quedat preparat dins del temps d'espera.")
+    raise RuntimeError(
+        "No s'ha pogut identificar de forma única l'Instagram de Sóller Ara amb un Page Access Token."
+    )
 
 
 def main() -> int:
@@ -117,8 +106,9 @@ def main() -> int:
         return 2
 
     try:
-        ig_id, username = discover_instagram()
+        ig_id, username, page_token = discover_instagram()
         print(f"OK compte detectat: @{username or '?'}")
+        print("OK Page Access Token obtingut per a la publicació.")
 
         container = graph(
             f"{ig_id}/media",
@@ -127,6 +117,7 @@ def main() -> int:
                 "image_url": IMAGE_URL,
                 "caption": CAPTION,
             },
+            token=page_token,
         )
 
         container_id = str(container.get("id") or "")
@@ -134,12 +125,30 @@ def main() -> int:
             raise RuntimeError("Meta no ha retornat cap identificador de contenidor.")
 
         print(f"OK contenidor creat: {container_id}")
-        wait_until_ready(container_id)
+        for attempt in range(12):
+            payload = graph(
+                container_id,
+                params={"fields": "status_code,status"},
+                token=page_token,
+            )
+            status = str(payload.get("status_code") or "").upper()
+
+            if status == "FINISHED":
+                print("OK contenidor preparat per publicar.")
+                break
+            if status in {"ERROR", "EXPIRED"}:
+                raise RuntimeError(f"El contenidor ha fallat amb status_code={status}")
+
+            print(f"Esperant contenidor... intent {attempt + 1}/12, estat={status or 'desconegut'}")
+            time.sleep(5)
+        else:
+            raise RuntimeError("El contenidor no ha quedat preparat dins del temps d'espera.")
 
         published = graph(
             f"{ig_id}/media_publish",
             method="POST",
             params={"creation_id": container_id},
+            token=page_token,
         )
 
         media_id = str(published.get("id") or "")
