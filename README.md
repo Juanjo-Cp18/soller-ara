@@ -4,7 +4,14 @@ Projecte públic i sense ànim de lucre per reunir informació local de Sóller 
 
 ## Versió
 
-**v0.36**
+**v0.37**
+
+## Novetats de la v0.37
+
+- TIB mostra ara el títol complet de l'avís i intenta extreure el primer paràgraf informatiu de la pàgina oficial.
+- Consell de Mallorca passa a revisar les primeres pàgines de **Totes les notícies**, amb prefiltre per URL abans de descarregar articles.
+- El prefiltre local inclou Sóller, Fornalutx, Biniaraix, Serra de Tramuntana, Fàbrica Nova i Torre Picada.
+- Es manté el fallback específic per HTML Liferay.
 
 ## Novetats de la v0.36
 
