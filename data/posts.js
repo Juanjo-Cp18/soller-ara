@@ -1,8 +1,8 @@
 window.SOLLER_ARA_DATA = {
-  "version": 20,
-  "generator_version": "0.20",
-  "fetched_at": "2026-09-16T07:38:37.748235+00:00",
-  "source_count": 8,
+  "version": 21,
+  "generator_version": "0.21",
+  "fetched_at": "2026-09-16T07:40:27.262275+00:00",
+  "source_count": 6,
   "source_status": [
     {
       "source_id": "ajuntament-soller-noticies",
@@ -57,24 +57,6 @@ window.SOLLER_ARA_DATA = {
       "ok": true,
       "count": 1,
       "error": null
-    },
-    {
-      "source_id": "instagram-serveissocialssoller",
-      "name": "Serveis Socials Sóller",
-      "source_type": "social",
-      "method": "meta_business_discovery",
-      "ok": false,
-      "count": 0,
-      "error": "HTTP Error 400: Bad Request"
-    },
-    {
-      "source_id": "instagram-emergencies112_ib",
-      "name": "Emergències 112 Illes Balears",
-      "source_type": "social",
-      "method": "meta_business_discovery",
-      "ok": false,
-      "count": 0,
-      "error": "HTTP Error 400: Bad Request"
     }
   ],
   "social_integration_status": [
@@ -86,7 +68,7 @@ window.SOLLER_ARA_DATA = {
       "ok": false,
       "count": 0,
       "status": "error",
-      "error": "HTTP Error 400: Bad Request"
+      "error": "(#10) Application does not have permission for this action [type=OAuthException, code=10, subcode=None]"
     },
     {
       "platform": "Instagram",
@@ -96,21 +78,12 @@ window.SOLLER_ARA_DATA = {
       "ok": false,
       "count": 0,
       "status": "error",
-      "error": "HTTP Error 400: Bad Request"
+      "error": "(#10) Application does not have permission for this action [type=OAuthException, code=10, subcode=None]"
     }
   ],
   "post_count": 49,
   "related_pair_count": 0,
-  "errors": [
-    {
-      "source_id": "instagram-serveissocialssoller",
-      "error": "HTTP Error 400: Bad Request"
-    },
-    {
-      "source_id": "instagram-emergencies112_ib",
-      "error": "HTTP Error 400: Bad Request"
-    }
-  ],
+  "errors": [],
   "posts": [
     {
       "id": "d9c2b785947343336af2",
