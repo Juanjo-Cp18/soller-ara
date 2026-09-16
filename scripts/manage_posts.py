@@ -24,7 +24,6 @@ POSTS_JS_FILE = ROOT / "data" / "posts.js"
 ACTION = os.environ.get("MODERATION_ACTION", "").strip()
 POST_ID = os.environ.get("POST_ID", "").strip()
 CONFIRMATION = os.environ.get("MODERATION_CONFIRMATION", "").strip()
-NOTE = os.environ.get("MODERATION_NOTE", "").strip()
 
 
 def load_json(path: Path, fallback: dict) -> dict:
@@ -105,8 +104,6 @@ def hide() -> None:
     hidden = moderation.setdefault("hidden_post_ids", [])
     if POST_ID not in hidden:
         hidden.append(POST_ID)
-    if NOTE:
-        moderation.setdefault("notes", {})[POST_ID] = NOTE
     save_json(MODERATION_FILE, moderation)
     refresh_generated_feed()
     print(f"RESULTAT: publicació ocultada: {POST_ID}")
