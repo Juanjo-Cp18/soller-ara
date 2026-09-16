@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Actualitza data/posts.json a partir de les fonts públiques configurades.
 
-v0.33: amplia la recopilació amb mitjans de Mallorca i llistats HTML específics de Sóller.
+v0.34: incorpora avisos TIB i millora la classificació temàtica.
 """
 
 from __future__ import annotations
@@ -30,7 +30,7 @@ OUTPUT_FILE = ROOT / "data" / "posts.json"
 JS_OUTPUT_FILE = ROOT / "data" / "posts.js"
 MAX_POSTS_PER_SOURCE = 40
 SUMMARY_LIMIT = 260
-USER_AGENT = "SollerAra/0.33 (+https://github.com/Juanjo-Cp18/soller-ara)"
+USER_AGENT = "SollerAra/0.34 (+https://github.com/Juanjo-Cp18/soller-ara)"
 RELATED_WINDOW_HOURS = 72
 
 CATEGORY_KEYWORDS = {
@@ -76,6 +76,23 @@ CATEGORY_KEYWORDS = {
 }
 
 CATEGORY_PRIORITY = ["alerts", "services", "culture", "sports", "commerce", "agenda", "news"]
+
+NEWS_TITLE_PATTERNS = [
+    "detingut", "detenido", "detenida", "detenció", "detencion",
+    "robat", "roba ", "robar", "robatori", "robo ", "furt", "hurto",
+    "ferit", "ferida", "herido", "herida", "mor ", "muere", "mort ",
+    "accident", "accidente", "col·lisió", "colision", "xoc ", "choque",
+    "manifestació", "manifestacion", "manifestación", "protesta",
+    "massificació", "masificacion", "masificación", "turistificació",
+    "turistificacion", "turistificación", "pintades", "pintadas",
+]
+
+CULTURE_TITLE_PATTERNS = [
+    "art sóller", "art soller", "artista", "artistes", "artistas",
+    "exposició", "exposicion", "exposición", "teatre", "teatro",
+    "concert", "concierto", "havaneres", "habaneras",
+]
+
 
 DATE_PREFIX_RE = re.compile(
     r"""^\s*(?:
@@ -158,6 +175,15 @@ def category_score(text: str, keywords: list[tuple[str, int]], title: str) -> in
 
 
 def categorize(title: str, summary: str) -> str:
+    title_folded = clean_text(title).casefold()
+
+    # El titular és la senyal més fiable. Evitam que metadades secundàries
+    # converteixin successos o protestes en esports/cultura per coincidències accidentals.
+    if any(pattern in title_folded for pattern in NEWS_TITLE_PATTERNS):
+        return "news"
+    if any(pattern in title_folded for pattern in CULTURE_TITLE_PATTERNS):
+        return "culture"
+
     combined = f"{title} {summary}"
     scores = {
         category: category_score(combined, keywords, title)
@@ -330,7 +356,7 @@ def build_post(source: dict, title: str, summary: str, url: str, published_at: s
 
     return {
         "id": stable_id(source["id"], url, title),
-        "category": categorize(title, summary),
+        "category": source.get("force_category") or categorize(title, summary),
         "source_id": source["id"],
         "source": source["name"],
         "source_type": source_type,
@@ -1372,8 +1398,8 @@ def main() -> int:
     ordered_posts, related_pair_count = annotate_related_posts(ordered_posts)
 
     payload = {
-        "version": 33,
-        "generator_version": "0.33",
+        "version": 34,
+        "generator_version": "0.34",
         "fetched_at": datetime.now(timezone.utc).isoformat(),
         "source_count": len(source_status),
         "source_status": source_status,
