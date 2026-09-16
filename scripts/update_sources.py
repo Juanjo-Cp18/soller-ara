@@ -963,6 +963,24 @@ def fetch_html_listing_regex(source: dict) -> list[dict]:
     parser = RegexListingLinkParser(source["url"], allowed_host, article_url_regex)
     parser.feed(listing_html)
 
+    if not parser.links and source.get("diagnostic_links"):
+        raw_hrefs = re.findall(r'''href=["']([^"']+)["']''', listing_html, flags=re.I)
+        candidates: list[str] = []
+        seen_candidates: set[str] = set()
+        for href in raw_hrefs:
+            absolute = urljoin(source["url"], html.unescape(href))
+            parsed_candidate = urlparse(absolute)
+            host = parsed_candidate.netloc.casefold()
+            if host not in {allowed_host.casefold(), f"www.{allowed_host.casefold()}"}:
+                continue
+            clean_candidate = parsed_candidate._replace(fragment="").geturl()
+            if clean_candidate in seen_candidates:
+                continue
+            seen_candidates.add(clean_candidate)
+            candidates.append(clean_candidate)
+        for candidate in candidates[:40]:
+            print(f"DIAGNOSTIC_LINK {source.get('id')}: {candidate}", file=sys.stderr)
+
     unique_links: list[tuple[str, str]] = []
     seen: set[str] = set()
     for url, title in parser.links:
