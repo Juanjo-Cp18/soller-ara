@@ -21,7 +21,7 @@ Sóller Ara publica també `/enllacos.html`, una pàgina que llegeix `data/manua
 
 URL preparada per utilitzar una sola vegada a la bio d'Instagram:
 
-`https://juanjo-cp18.github.io/soller-ara/enllacos.html`
+`https://soller-ara.github.io/soller-ara/enllacos.html`
 
 Cada targeta d'aquesta pàgina apunta a la URL individual de la notícia. El caption d'Instagram conserva també l'URL exacta de la notícia, encara que la seva clicabilitat depèn de les funcions habilitades al compte.
 
