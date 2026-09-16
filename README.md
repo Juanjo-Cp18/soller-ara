@@ -6,6 +6,15 @@ Projecte públic i sense ànim de lucre per reunir informació local de Sóller 
 
 **v0.38**
 
+## Publicacions pròpies i enllaç directe a xarxes
+
+- Cada publicació pròpia de Sóller Ara genera una pàgina individual a `/noticies/<id>.html`.
+- Aquesta pàgina inclou metadades Open Graph perquè Facebook pugui mostrar una previsualització amb el titular i la imatge.
+- Facebook publica l'entrada amb l'enllaç directe a la notícia individual, no a la portada.
+- Instagram rep la mateixa URL dins el text de la publicació. La capacitat que aquest URL sigui clicable depèn de les funcions disponibles al compte d'Instagram; Meta està provant enllaços clicables en captions per a determinats comptes Meta Verified.
+- Fins que s'instal·li el token nou a GitHub, els selectors de Facebook i Instagram queden desactivats per defecte al workflow manual.
+- Després de substituir `META_ACCESS_TOKEN`, cal executar primer les comprovacions de lectura/publicació abans d'activar la distribució simultània com a flux habitual.
+
 ## Novetats de la v0.38
 
 - Sóller Ara admet ara **publicacions pròpies** persistents, que no desapareixen quan s'actualitzen les fonts externes.
