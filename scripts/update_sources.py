@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Actualitza data/posts.json a partir de les fonts públiques configurades.
 
-v0.39: consolida publicació pròpia amb URL individual, targeta social i distribució Meta.
+v0.40: incorpora moderació persistent i control editorial de publicacions.
 """
 
 from __future__ import annotations
@@ -29,9 +29,10 @@ SOCIAL_SOURCES_FILE = ROOT / "social_sources.json"
 OUTPUT_FILE = ROOT / "data" / "posts.json"
 JS_OUTPUT_FILE = ROOT / "data" / "posts.js"
 MANUAL_POSTS_FILE = ROOT / "data" / "manual_posts.json"
+MODERATION_FILE = ROOT / "data" / "moderation.json"
 MAX_POSTS_PER_SOURCE = 40
 SUMMARY_LIMIT = 260
-USER_AGENT = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0 Safari/537.36 SollerAra/0.39"
+USER_AGENT = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0 Safari/537.36 SollerAra/0.40"
 RELATED_WINDOW_HOURS = 72
 
 CATEGORY_KEYWORDS = {
@@ -1456,6 +1457,20 @@ def filter_by_max_age(source: dict, posts: list[dict]) -> list[dict]:
     return filtered
 
 
+def load_hidden_post_ids() -> set[str]:
+    if not MODERATION_FILE.exists():
+        return set()
+    try:
+        payload = json.loads(MODERATION_FILE.read_text(encoding="utf-8"))
+    except Exception as exc:
+        print(f"ERROR moderació: {exc}", file=sys.stderr)
+        return set()
+    return {
+        str(item) for item in (payload.get("hidden_post_ids") or [])
+        if str(item).strip()
+    }
+
+
 def load_manual_posts() -> list[dict]:
     if not MANUAL_POSTS_FILE.exists():
         return []
@@ -1542,13 +1557,17 @@ def main() -> int:
     source_status.extend(status for status in meta_source_status if status.get("ok"))
 
     # Només elimina duplicats exactes de la mateixa entrada. Mai elimina una publicació d'una altra font.
-    deduped = {post["id"]: post for post in posts}
+    hidden_post_ids = load_hidden_post_ids()
+    deduped = {
+        post["id"]: post for post in posts
+        if post.get("id") not in hidden_post_ids
+    }
     ordered_posts = sorted(deduped.values(), key=sort_key, reverse=True)
     ordered_posts, related_pair_count = annotate_related_posts(ordered_posts)
 
     payload = {
-        "version": 39,
-        "generator_version": "0.39",
+        "version": 40,
+        "generator_version": "0.40",
         "fetched_at": datetime.now(timezone.utc).isoformat(),
         "source_count": len(source_status),
         "source_status": source_status,
