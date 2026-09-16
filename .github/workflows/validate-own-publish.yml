@@ -8,6 +8,7 @@ on:
       - "scripts/add_own_post.py"
       - "scripts/publish_own_social.py"
       - "scripts/wait_publication_ready.py"
+      - "scripts/manage_posts.py"
       - ".github/workflows/publish-own-content.yml"
       - ".github/workflows/validate-own-publish.yml"
   workflow_dispatch:
@@ -31,7 +32,7 @@ jobs:
         run: python -m pip install pillow
 
       - name: Validar sintaxi
-        run: python -m py_compile scripts/add_own_post.py scripts/publish_own_social.py scripts/wait_publication_ready.py
+        run: python -m py_compile scripts/add_own_post.py scripts/publish_own_social.py scripts/wait_publication_ready.py scripts/manage_posts.py
 
       - name: Generar publicació de prova local
         env:
