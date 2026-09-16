@@ -24,6 +24,14 @@ Per a Instagram/Facebook, la finalitat és detectar publicacions noves de compte
 
 Això indica que el bloqueig actual és de permisos/revisió, no de connectivitat.
 
+## URLs públiques verificades
+
+- Sóller Ara: https://juanjo-cp18.github.io/soller-ara/
+- Política de privacitat: https://juanjo-cp18.github.io/soller-ara/privacy.html
+- Eliminació de dades: https://juanjo-cp18.github.io/soller-ara/data-deletion.html
+
+Aquestes pàgines es despleguen mitjançant GitHub Pages i el workflow de desplegament ha finalitzat correctament.
+
 ## Material que hem de tenir preparat per a App Review
 
 1. Descripció clara del cas d'ús.
