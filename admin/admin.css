@@ -55,3 +55,10 @@ fieldset{border:1px solid var(--border);border-radius:14px;padding:13px 15px}leg
 .empty{padding:24px;text-align:center;color:var(--muted)}
 @media(max-width:900px){.metrics{grid-template-columns:1fr 1fr}.panel-grid,.moderation-layout{grid-template-columns:1fr}}
 @media(max-width:620px){.admin-app{padding:10px}.admin-header{border-radius:16px}.status-pill{display:none}.metrics{grid-template-columns:1fr 1fr}.form-row{grid-template-columns:1fr}.module-heading{align-items:stretch;flex-direction:column}.search-input{max-width:none}}
+
+.public-link{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  text-decoration:none;
+}
