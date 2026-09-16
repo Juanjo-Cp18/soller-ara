@@ -12,6 +12,7 @@ from __future__ import annotations
 import json
 import os
 import sys
+from datetime import datetime, timezone
 from pathlib import Path
 from urllib.parse import urlparse
 
@@ -93,15 +94,51 @@ def delete_own() -> None:
     ]
     notes = moderation.setdefault("notes", {})
     notes.pop(POST_ID, None)
+    moderation.setdefault("hidden_posts", {}).pop(POST_ID, None)
     save_json(MODERATION_FILE, moderation)
 
     refresh_generated_feed()
     print(f"RESULTAT: publicació pròpia eliminada: {POST_ID}")
 
 
+def post_timestamp(post: dict) -> float:
+    value = str(post.get("published_at") or "")
+    try:
+        parsed = datetime.fromisoformat(value.replace("Z", "+00:00"))
+        if parsed.tzinfo is None:
+            parsed = parsed.replace(tzinfo=timezone.utc)
+        return parsed.astimezone(timezone.utc).timestamp()
+    except ValueError:
+        return float("-inf")
+
+
+def restore_archived_post(post: dict) -> None:
+    payload = load_json(POSTS_FILE, {"posts": []})
+    posts = payload.get("posts") or []
+    if not any(item.get("id") == POST_ID for item in posts):
+        posts.append(post)
+        posts.sort(key=post_timestamp, reverse=True)
+    payload["posts"] = posts
+    payload["post_count"] = len(posts)
+
+    json_payload = json.dumps(payload, ensure_ascii=False, indent=2)
+    POSTS_FILE.write_text(json_payload + "\n", encoding="utf-8")
+    POSTS_JS_FILE.write_text("window.SOLLER_ARA_DATA = " + json_payload + ";\n", encoding="utf-8")
+
+
 def hide() -> None:
-    moderation = load_json(MODERATION_FILE, {"version": 1, "hidden_post_ids": [], "notes": {}})
+    moderation = load_json(
+        MODERATION_FILE,
+        {"version": 1, "hidden_post_ids": [], "notes": {}, "hidden_posts": {}},
+    )
     hidden = moderation.setdefault("hidden_post_ids", [])
+    archived = moderation.setdefault("hidden_posts", {})
+
+    payload = load_json(POSTS_FILE, {"posts": []})
+    target = next((item for item in (payload.get("posts") or []) if item.get("id") == POST_ID), None)
+    if target is not None:
+        archived[POST_ID] = target
+
     if POST_ID not in hidden:
         hidden.append(POST_ID)
     save_json(MODERATION_FILE, moderation)
@@ -110,13 +147,22 @@ def hide() -> None:
 
 
 def unhide() -> None:
-    moderation = load_json(MODERATION_FILE, {"version": 1, "hidden_post_ids": [], "notes": {}})
+    moderation = load_json(
+        MODERATION_FILE,
+        {"version": 1, "hidden_post_ids": [], "notes": {}, "hidden_posts": {}},
+    )
     moderation["hidden_post_ids"] = [
         item for item in (moderation.get("hidden_post_ids") or []) if item != POST_ID
     ]
     moderation.setdefault("notes", {}).pop(POST_ID, None)
+    archived = moderation.setdefault("hidden_posts", {}).pop(POST_ID, None)
     save_json(MODERATION_FILE, moderation)
-    print(f"RESULTAT: publicació reactivada: {POST_ID}. Tornarà a aparèixer a la pròxima actualització si la font encara la serveix.")
+
+    if archived is not None:
+        restore_archived_post(archived)
+        print(f"RESULTAT: publicació restaurada immediatament: {POST_ID}")
+    else:
+        print(f"RESULTAT: publicació reactivada: {POST_ID}. Es recuperarà de la font a la pròxima actualització.")
 
 
 def main() -> int:
