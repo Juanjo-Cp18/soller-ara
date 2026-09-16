@@ -1,5 +1,5 @@
 {
-  "version": 15,
+  "version": 16,
   "sources": [
     {
       "id": "ajuntament-soller-noticies",
@@ -173,6 +173,21 @@
         "Port de Sóller",
         "Fornalutx",
         "Biniaraix"
+      ],
+      "include_keywords": [
+        "Sóller",
+        "Soller",
+        "Port de Sóller",
+        "Port de Soller",
+        "Vall de Sóller",
+        "Vall de Soller",
+        "Fornalutx",
+        "Biniaraix",
+        "Ferrocarril de Sóller",
+        "Tren de Sóller",
+        "Túnel de Sóller",
+        "Tunel de Soller",
+        "Serra de Tramuntana"
       ]
     },
     {
