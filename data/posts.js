@@ -1,7 +1,7 @@
 window.SOLLER_ARA_DATA = {
   "version": 32,
   "generator_version": "0.32",
-  "fetched_at": "2026-09-16T10:12:06.587933+00:00",
+  "fetched_at": "2026-09-16T10:13:44.563608+00:00",
   "source_count": 9,
   "source_status": [
     {
@@ -71,10 +71,10 @@ window.SOLLER_ARA_DATA = {
       "source_id": "ib3-noticies-soller",
       "name": "IB3 Notícies",
       "source_type": "media",
-      "method": "rss",
-      "ok": true,
+      "method": "html_search",
+      "ok": false,
       "count": 0,
-      "error": null
+      "error": "'ascii' codec can't encode character '\\xf3' in position 9: ordinal not in range(128)"
     },
     {
       "source_id": "dbalears-soller",
@@ -110,7 +110,12 @@ window.SOLLER_ARA_DATA = {
   ],
   "post_count": 56,
   "related_pair_count": 0,
-  "errors": [],
+  "errors": [
+    {
+      "source_id": "ib3-noticies-soller",
+      "error": "'ascii' codec can't encode character '\\xf3' in position 9: ordinal not in range(128)"
+    }
+  ],
   "posts": [
     {
       "id": "ed3f24c0385e90b103ed",
