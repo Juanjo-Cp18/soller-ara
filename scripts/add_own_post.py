@@ -32,6 +32,7 @@ CATEGORY = os.environ.get("POST_CATEGORY", "news").strip() or "news"
 LANGUAGE = os.environ.get("POST_LANGUAGE", "ca").strip() or "ca"
 IMAGE_URL = os.environ.get("POST_IMAGE_URL", "").strip()
 CONFIRMATION = os.environ.get("PUBLISH_CONFIRMATION", "").strip()
+PUBLISH_KEY = (os.environ.get("PUBLISH_KEY", "").strip() or os.environ.get("GITHUB_RUN_ID", "").strip())
 
 ALLOWED_CATEGORIES = {
     "news", "agenda", "alerts", "services", "culture", "sports", "commerce"
@@ -40,6 +41,11 @@ ALLOWED_CATEGORIES = {
 
 def stable_id(title: str, published_at: str) -> str:
     raw = f"{published_at}|{title}".encode("utf-8")
+    return "soller-ara-" + hashlib.sha1(raw).hexdigest()[:16]
+
+
+def stable_id_from_key(key: str) -> str:
+    raw = f"publish-key|{key}".encode("utf-8")
     return "soller-ara-" + hashlib.sha1(raw).hexdigest()[:16]
 
 
@@ -133,7 +139,7 @@ def main() -> int:
         return 2
 
     now = datetime.now(timezone.utc).isoformat()
-    post_id = stable_id(TITLE, now)
+    post_id = stable_id_from_key(PUBLISH_KEY) if PUBLISH_KEY else stable_id(TITLE, now)
 
     post_url = f"{SITE_URL}/noticies/{post_id}.html"
     final_image_url = IMAGE_URL or generate_social_card(post_id, TITLE, CATEGORY)
@@ -231,6 +237,7 @@ def main() -> int:
         manual = {"version": 1, "posts": []}
 
     manual_posts = manual.get("posts") or []
+    manual_posts = [item for item in manual_posts if item.get("id") != post_id]
     manual_posts.append(post)
     manual["posts"] = manual_posts
     MANUAL_FILE.parent.mkdir(parents=True, exist_ok=True)
