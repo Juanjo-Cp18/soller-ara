@@ -1,8 +1,8 @@
 window.SOLLER_ARA_DATA = {
-  "version": 19,
-  "generator_version": "0.19",
-  "fetched_at": "2026-09-16T05:54:42.035223+00:00",
-  "source_count": 6,
+  "version": 20,
+  "generator_version": "0.20",
+  "fetched_at": "2026-09-16T07:38:37.748235+00:00",
+  "source_count": 8,
   "source_status": [
     {
       "source_id": "ajuntament-soller-noticies",
@@ -54,9 +54,27 @@ window.SOLLER_ARA_DATA = {
       "name": "Ajuntament de Sóller · YouTube",
       "source_type": "social",
       "method": "youtube_channel",
+      "ok": true,
+      "count": 1,
+      "error": null
+    },
+    {
+      "source_id": "instagram-serveissocialssoller",
+      "name": "Serveis Socials Sóller",
+      "source_type": "social",
+      "method": "meta_business_discovery",
       "ok": false,
       "count": 0,
-      "error": "HTTP Error 404: Not Found"
+      "error": "HTTP Error 400: Bad Request"
+    },
+    {
+      "source_id": "instagram-emergencies112_ib",
+      "name": "Emergències 112 Illes Balears",
+      "source_type": "social",
+      "method": "meta_business_discovery",
+      "ok": false,
+      "count": 0,
+      "error": "HTTP Error 400: Bad Request"
     }
   ],
   "social_integration_status": [
@@ -64,29 +82,33 @@ window.SOLLER_ARA_DATA = {
       "platform": "Instagram",
       "name": "Serveis Socials Sóller",
       "account": "@serveissocialssoller",
-      "configured": false,
+      "configured": true,
       "ok": false,
       "count": 0,
-      "status": "credentials_required",
-      "error": null
+      "status": "error",
+      "error": "HTTP Error 400: Bad Request"
     },
     {
       "platform": "Instagram",
       "name": "Emergències 112 Illes Balears",
       "account": "@emergencies112_ib",
-      "configured": false,
+      "configured": true,
       "ok": false,
       "count": 0,
-      "status": "credentials_required",
-      "error": null
+      "status": "error",
+      "error": "HTTP Error 400: Bad Request"
     }
   ],
-  "post_count": 48,
+  "post_count": 49,
   "related_pair_count": 0,
   "errors": [
     {
-      "source_id": "youtube-ajuntament-soller",
-      "error": "HTTP Error 404: Not Found"
+      "source_id": "instagram-serveissocialssoller",
+      "error": "HTTP Error 400: Bad Request"
+    },
+    {
+      "source_id": "instagram-emergencies112_ib",
+      "error": "HTTP Error 400: Bad Request"
     }
   ],
   "posts": [
@@ -687,6 +709,26 @@ window.SOLLER_ARA_DATA = {
       "media_type": null,
       "content_policy": "headline_date_link_only",
       "rights_status": "permission_pending",
+      "image_allowed": false,
+      "related_sources": []
+    },
+    {
+      "id": "afc2f48c871c4c51a1c9",
+      "category": "news",
+      "source_id": "youtube-ajuntament-soller",
+      "source": "Ajuntament de Sóller · YouTube",
+      "source_type": "social",
+      "language": "ca",
+      "locality": "Sóller",
+      "published_at": "2026-09-09T12:39:11+00:00",
+      "title": "Sessió plenària ordinària de l'Ajuntament de Sóller, celebrada el 9 de setembre de 2026.",
+      "summary": "Vídeo publicat per Ajuntament de Sóller · YouTube relacionat amb una sessió plenària o activitat municipal.",
+      "url": "https://www.youtube.com/watch?v=Ej0M-wttjM0",
+      "platform": "YouTube",
+      "account": "@ajuntamentdesoller_",
+      "media_type": "video",
+      "content_policy": "generated_social_summary",
+      "rights_status": "platform_embed",
       "image_allowed": false,
       "related_sources": []
     },
