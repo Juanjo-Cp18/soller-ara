@@ -4,7 +4,16 @@ Projecte públic i sense ànim de lucre per reunir informació local de Sóller 
 
 ## Versió
 
-**v0.37**
+**v0.38**
+
+## Novetats de la v0.38
+
+- Sóller Ara admet ara **publicacions pròpies** persistents, que no desapareixen quan s'actualitzen les fonts externes.
+- S'afegeix el workflow **Sóller Ara · publicar contingut propi** per crear una entrada pròpia i, opcionalment, publicar-la també a les xarxes pròpies.
+- Facebook pot publicar text o text + imatge.
+- Instagram es pot seleccionar quan la publicació té una imatge pública; si no hi ha imatge, el flux ho impedeix per evitar una publicació incompleta.
+- Les credencials de Meta continuen guardades únicament com a secrets de GitHub i mai s'envien al navegador.
+- Les targetes pròpies no mostren l'enllaç «Original», perquè Sóller Ara és la font original.
 
 ## Novetats de la v0.37
 
