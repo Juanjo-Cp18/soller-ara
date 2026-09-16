@@ -15,10 +15,6 @@ on:
         description: 'ID de la publicació'
         required: true
         type: string
-      note:
-        description: 'Nota interna opcional'
-        required: false
-        type: string
       confirmation:
         description: 'Escriu CONFIRMAR'
         required: true
@@ -45,7 +41,6 @@ jobs:
         env:
           MODERATION_ACTION: ${{ inputs.action }}
           POST_ID: ${{ inputs.post_id }}
-          MODERATION_NOTE: ${{ inputs.note }}
           MODERATION_CONFIRMATION: ${{ inputs.confirmation }}
         run: python scripts/manage_posts.py
 
