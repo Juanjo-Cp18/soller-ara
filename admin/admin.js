@@ -17,8 +17,15 @@
   const postSearch = document.getElementById("postSearch");
   const previewTitle = document.getElementById("previewTitle");
   const previewBody = document.getElementById("previewBody");
+  const publishHeading = document.getElementById("publishHeading");
+  const editModeNote = document.getElementById("editModeNote");
+  const publishSubmitButton = document.getElementById("publishSubmitButton");
+  const cancelEditButton = document.getElementById("cancelEditButton");
+  const facebookInput = publishForm.querySelector('input[name="facebook"]');
+  const instagramInput = publishForm.querySelector('input[name="instagram"]');
 
   let statusPayload = null;
+  let editPostId = "";
 
   function getToken() {
     return sessionStorage.getItem(TOKEN_KEY) || "";
@@ -233,7 +240,8 @@
             <div class="post-actions">
               ${post.url ? `<a class="button-link" href="${escapeHtml(post.url)}" target="_blank" rel="noopener">Abrir</a>` : ""}
               ${own
-                ? `<button class="danger" type="button" data-action="delete-own" data-post-id="${escapeHtml(post.id)}">Eliminar</button>`
+                ? `<button type="button" data-edit-id="${escapeHtml(post.id)}">Editar</button>
+                   <button class="danger" type="button" data-action="delete-own" data-post-id="${escapeHtml(post.id)}">Eliminar</button>`
                 : `<button type="button" data-action="hide" data-post-id="${escapeHtml(post.id)}">Ocultar</button>`
               }
             </div>
@@ -244,6 +252,9 @@
 
     target.querySelectorAll("[data-action]").forEach((button) => {
       button.addEventListener("click", () => moderate(button.dataset.action, button.dataset.postId));
+    });
+    target.querySelectorAll("[data-edit-id]").forEach((button) => {
+      button.addEventListener("click", () => startEdit(button.dataset.editId));
     });
 
     renderHidden();
@@ -279,6 +290,82 @@
     });
   }
 
+
+  function openModule(viewId) {
+    document.querySelectorAll(".nav-button").forEach((item) => {
+      item.classList.toggle("active", item.dataset.view === viewId);
+    });
+    document.querySelectorAll(".module").forEach((item) => {
+      item.classList.toggle("active", item.id === viewId);
+    });
+  }
+
+  function resetEditMode(resetForm = false) {
+    editPostId = "";
+    publishHeading.textContent = "Nueva publicación";
+    editModeNote.hidden = true;
+    publishSubmitButton.textContent = "Publicar";
+    cancelEditButton.hidden = true;
+    facebookInput.disabled = false;
+    instagramInput.disabled = false;
+
+    if (resetForm) {
+      publishForm.reset();
+      previewTitle.textContent = "Título de la publicación";
+      previewBody.textContent = "El texto aparecerá aquí.";
+    }
+    setMessage(publishMessage, "");
+  }
+
+  function startEdit(postId) {
+    const posts = Array.isArray(statusPayload?.posts?.posts) ? statusPayload.posts.posts : [];
+    const post = posts.find((item) => item.id === postId && item.source_type === "own");
+    if (!post) {
+      setMessage(moderationMessage, "No se ha podido cargar esta publicación propia.", "error");
+      return;
+    }
+
+    editPostId = postId;
+    publishForm.elements.title.value = post.title || "";
+    publishForm.elements.body.value = post.summary || "";
+    publishForm.elements.category.value = post.category || "news";
+    publishForm.elements.language.value = post.language || "ca";
+    const mediaUrl = String(post.media_url || "");
+    publishForm.elements.image_url.value = mediaUrl.includes("/assets/generated/") ? "" : mediaUrl;
+    facebookInput.checked = false;
+    instagramInput.checked = false;
+    facebookInput.disabled = true;
+    instagramInput.disabled = true;
+
+    publishHeading.textContent = "Editar publicación";
+    editModeNote.hidden = false;
+    publishSubmitButton.textContent = "Guardar cambios";
+    cancelEditButton.hidden = false;
+    previewTitle.textContent = post.title || "Título de la publicación";
+    previewBody.textContent = post.summary || "El texto aparecerá aquí.";
+    setMessage(publishMessage, "");
+    openModule("publish");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  async function waitForOwnEdit(postId, expected) {
+    for (let attempt = 1; attempt <= 15; attempt++) {
+      await new Promise((resolve) => setTimeout(resolve, 2500));
+      const publicState = await readPublicState();
+      const post = (publicState.posts?.posts || []).find((item) => item.id === postId);
+      if (
+        post &&
+        post.title === expected.title &&
+        post.summary === expected.body &&
+        post.category === expected.category &&
+        post.language === expected.language
+      ) {
+        return true;
+      }
+      setMessage(publishMessage, "Guardando cambios… " + attempt + "/15");
+    }
+    return false;
+  }
 
   async function runSystemCheck() {
     systemCheckButton.disabled = true;
@@ -430,12 +517,12 @@
   postSearch.addEventListener("input", renderPosts);
 
   document.querySelectorAll(".nav-button").forEach((button) => {
-    button.addEventListener("click", () => {
-      document.querySelectorAll(".nav-button").forEach((item) => item.classList.remove("active"));
-      document.querySelectorAll(".module").forEach((item) => item.classList.remove("active"));
-      button.classList.add("active");
-      document.getElementById(button.dataset.view).classList.add("active");
-    });
+    button.addEventListener("click", () => openModule(button.dataset.view));
+  });
+
+  cancelEditButton.addEventListener("click", () => {
+    resetEditMode(true);
+    openModule("moderation");
   });
 
   publishForm.addEventListener("input", () => {
@@ -459,28 +546,51 @@
 
     if (!payload.title || !payload.body) return;
 
-    if (!confirm("¿Publicar ahora en Sóller Ara" +
+    const editing = Boolean(editPostId);
+    if (editing) {
+      payload.post_id = editPostId;
+      payload.facebook = false;
+      payload.instagram = false;
+      if (!confirm("¿Guardar los cambios de esta publicación en Sóller Ara?")) return;
+    } else if (!confirm("¿Publicar ahora en Sóller Ara" +
       (payload.facebook ? ", Facebook" : "") +
-      (payload.instagram ? " e Instagram" : "") + "?")) return;
+      (payload.instagram ? " e Instagram" : "") + "?")) {
+      return;
+    }
 
-    setMessage(publishMessage, "Enviando publicación…");
-    const submitButton = publishForm.querySelector('button[type="submit"]');
-    submitButton.disabled = true;
+    setMessage(publishMessage, editing ? "Enviando cambios…" : "Enviando publicación…");
+    publishSubmitButton.disabled = true;
 
     try {
-      const result = await api("/api/publish", {
-        method: "POST",
-        body: JSON.stringify(payload),
-      });
-      setMessage(publishMessage, "Publicación enviada. Workflow: " + (result.workflow || "iniciado") + ".", "success");
-      publishForm.reset();
-      previewTitle.textContent = "Título de la publicación";
-      previewBody.textContent = "El texto aparecerá aquí.";
-      setTimeout(loadStatus, 4500);
+      if (editing) {
+        await api("/api/edit", {
+          method: "POST",
+          body: JSON.stringify(payload),
+        });
+        const applied = await waitForOwnEdit(editPostId, payload);
+        if (!applied) {
+          setMessage(publishMessage, "Los cambios están tardando más de lo previsto. Actualiza en unos segundos.", "error");
+          return;
+        }
+        setMessage(publishMessage, "Publicación actualizada correctamente.", "success");
+        resetEditMode(true);
+        await loadStatus();
+        openModule("moderation");
+      } else {
+        const result = await api("/api/publish", {
+          method: "POST",
+          body: JSON.stringify(payload),
+        });
+        setMessage(publishMessage, "Publicación enviada. Workflow: " + (result.workflow || "iniciado") + ".", "success");
+        publishForm.reset();
+        previewTitle.textContent = "Título de la publicación";
+        previewBody.textContent = "El texto aparecerá aquí.";
+        setTimeout(loadStatus, 4500);
+      }
     } catch (error) {
       setMessage(publishMessage, error.message, "error");
     } finally {
-      submitButton.disabled = false;
+      publishSubmitButton.disabled = false;
     }
   });
 
