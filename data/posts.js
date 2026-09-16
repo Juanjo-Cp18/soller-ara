@@ -1,7 +1,7 @@
 window.SOLLER_ARA_DATA = {
-  "version": 36,
-  "generator_version": "0.36",
-  "fetched_at": "2026-09-16T11:08:26.763792+00:00",
+  "version": 37,
+  "generator_version": "0.37",
+  "fetched_at": "2026-09-16T11:12:12.676884+00:00",
   "source_count": 14,
   "source_status": [
     {
@@ -127,7 +127,7 @@ window.SOLLER_ARA_DATA = {
       "source_type": "official",
       "method": "html_listing_regex",
       "ok": true,
-      "count": 0,
+      "count": 1,
       "error": null
     }
   ],
@@ -153,7 +153,7 @@ window.SOLLER_ARA_DATA = {
       "error": "(#10) Application does not have permission for this action [type=OAuthException, code=10, subcode=None]"
     }
   ],
-  "post_count": 118,
+  "post_count": 119,
   "related_pair_count": 0,
   "errors": [],
   "posts": [
@@ -1278,6 +1278,26 @@ window.SOLLER_ARA_DATA = {
       "related_sources": []
     },
     {
+      "id": "438de50cdf741299940d",
+      "category": "news",
+      "source_id": "consell-mallorca-soller",
+      "source": "Consell de Mallorca",
+      "source_type": "official",
+      "language": "ca",
+      "locality": "Sóller / Fornalutx / Serra de Tramuntana",
+      "published_at": "2026-09-07T12:00:00+00:00",
+      "title": "El Consell de Mallorca convoca la octava edición del Certamen de Fotografía Serra de Tramuntana Patrimonio Mundial",
+      "summary": "",
+      "url": "https://www.conselldemallorca.es/es/todas-las-noticias/-/asset_publisher/bqOupoVYvgPA/content/el-consell-de-mallorca-convoca-la-vuitena-edici%C3%B3-del-certamen-de-fotografia-serra-de-tramuntana-patrimoni-mundial/695139",
+      "platform": null,
+      "account": null,
+      "media_type": null,
+      "content_policy": "short_factual_excerpt",
+      "rights_status": "official_public_source",
+      "image_allowed": false,
+      "related_sources": []
+    },
+    {
       "id": "bbe4bba56cdb082982ea",
       "category": "news",
       "source_id": "setmanari-soller",
@@ -2398,7 +2418,7 @@ window.SOLLER_ARA_DATA = {
       "related_sources": []
     },
     {
-      "id": "1e8909c548e1bd59d8f9",
+      "id": "73e29e0bc47f531405ce",
       "category": "alerts",
       "source_id": "tib-avisos-soller",
       "source": "TIB · Avisos",
@@ -2406,8 +2426,8 @@ window.SOLLER_ARA_DATA = {
       "language": "ca",
       "locality": "Sóller / Port de Sóller / Fornalutx",
       "published_at": "2026-06-26T12:00:00+00:00",
-      "title": "Avís prova pilot 203",
-      "summary": "Aviso: Prueba piloto: reserva de plaza línea 203 Port de Sóller–Deià–Valldemossa–Palma Avisos e incidencias o alteraciones en los servicios de transporte público TIB de Mallorca: bus, tren, metro y bicicleta pública.",
+      "title": "Prueba piloto: reserva de plaza línea 203 Port de Sóller–Deià–Valldemossa–Palma",
+      "summary": "Reserva de plaza en la línea 203 Port de Sóller–Deià–Valldemossa–Palma para la salida de las 15 h desde el Puerto de Sóller .",
       "url": "https://www.tib.org/es/w/avis-prova-pilot-203",
       "platform": null,
       "account": null,
