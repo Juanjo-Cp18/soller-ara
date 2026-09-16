@@ -9,6 +9,8 @@
   const setupMessage = document.getElementById("setupMessage");
   const logoutButton = document.getElementById("logoutButton");
   const refreshButton = document.getElementById("refreshButton");
+  const systemCheckButton = document.getElementById("systemCheckButton");
+  const systemCheckResult = document.getElementById("systemCheckResult");
   const publishForm = document.getElementById("publishForm");
   const publishMessage = document.getElementById("publishMessage");
   const moderationMessage = document.getElementById("moderationMessage");
@@ -241,6 +243,36 @@
     });
   }
 
+
+  async function runSystemCheck() {
+    systemCheckButton.disabled = true;
+    systemCheckButton.textContent = "Comprobando…";
+    systemCheckResult.hidden = false;
+    systemCheckResult.innerHTML = "<p>Comprobando Cloudflare, GitHub y workflows…</p>";
+
+    try {
+      const result = await api("/api/check");
+      const checks = Array.isArray(result.checks) ? result.checks : [];
+      systemCheckResult.innerHTML = `
+        <h3>Comprobación del sistema</h3>
+        ${checks.map((item) => `
+          <div class="status-line">
+            <div>
+              <strong>${escapeHtml(item.name || "Comprobación")}</strong><br />
+              <small>${escapeHtml(item.detail || "")}</small>
+            </div>
+            <span class="${item.ok ? "ok" : "bad"}">${item.ok ? "OK" : "ERROR"}</span>
+          </div>
+        `).join("")}
+      `;
+    } catch (error) {
+      systemCheckResult.innerHTML = '<p class="bad">' + escapeHtml(error.message) + '</p>';
+    } finally {
+      systemCheckButton.disabled = false;
+      systemCheckButton.textContent = "Comprobar sistema";
+    }
+  }
+
   async function loadStatus() {
     const buttonText = refreshButton.textContent;
     refreshButton.disabled = true;
@@ -308,6 +340,7 @@
   });
 
   refreshButton.addEventListener("click", loadStatus);
+  systemCheckButton.addEventListener("click", runSystemCheck);
   postSearch.addEventListener("input", renderPosts);
 
   document.querySelectorAll(".nav-button").forEach((button) => {
