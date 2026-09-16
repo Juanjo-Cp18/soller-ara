@@ -1,5 +1,5 @@
 {
-  "version": 20,
+  "version": 21,
   "sources": [
     {
       "id": "ajuntament-soller-noticies",
@@ -275,13 +275,13 @@
       "rights_status": "official_public_source",
       "allowed_host": "tib.org",
       "article_url_regex": "^/es/w/[^/?#]+$",
-      "diagnostic_links": true
+      "extract_first_paragraph": true
     },
     {
       "id": "consell-mallorca-soller",
       "name": "Consell de Mallorca",
       "type": "html_listing_regex",
-      "url": "https://www.conselldemallorca.es/es/sala-de-prensa",
+      "url": "https://www.conselldemallorca.es/es/todas-las-noticias",
       "language": "ca",
       "locality": "Sóller / Fornalutx / Serra de Tramuntana",
       "source_type": "official",
@@ -297,7 +297,7 @@
         "Fabrica Nova",
         "Torre Picada"
       ],
-      "max_items": 80,
+      "max_items": 30,
       "max_age_days": 180,
       "enabled": true,
       "image_policy": "disabled_until_rights_verified",
@@ -305,7 +305,18 @@
       "rights_status": "official_public_source",
       "allowed_host": "conselldemallorca.es",
       "article_url_regex": "/content/[^/?#]+/695139$",
-      "diagnostic_links": true
+      "listing_url_template": "https://www.conselldemallorca.es/es/todas-las-noticias?_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_bqOupoVYvgPA_cur={page}&_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_bqOupoVYvgPA_delta=16&_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_bqOupoVYvgPA_redirect=%2Fes%2Ftodas-las-noticias&p_p_id=com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_bqOupoVYvgPA&p_p_lifecycle=0&p_p_mode=view&p_p_state=normal&p_r_p_resetCur=false",
+      "listing_pages": 3,
+      "prefilter_url_keywords": [
+        "soller",
+        "s%C3%B3ller",
+        "fornalutx",
+        "biniaraix",
+        "serra-de-tramuntana",
+        "fabrica-nova",
+        "f%C3%A0brica-nova",
+        "torre-picada"
+      ]
     }
   ]
 }
