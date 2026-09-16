@@ -54,8 +54,8 @@ jobs:
           manual = json.loads(Path("data/manual_posts.json").read_text(encoding="utf-8"))
           post = manual["posts"][-1]
           assert post["source_type"] == "own"
-          assert post["url"].startswith("https://juanjo-cp18.github.io/soller-ara/noticies/")
-          assert post["media_url"].startswith("https://juanjo-cp18.github.io/soller-ara/assets/generated/")
+          assert post["url"].startswith("https://soller-ara.github.io/soller-ara/noticies/")
+          assert post["media_url"].startswith("https://soller-ara.github.io/soller-ara/assets/generated/")
           image_name = post["media_url"].rsplit("/", 1)[-1]
           image_path = Path("assets/generated") / image_name
           assert image_path.exists(), image_path
