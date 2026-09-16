@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Actualitza data/posts.json a partir de les fonts públiques configurades.
 
-v0.32: amplia la recopilació amb fonts informatives externes filtrades per rellevància local.
+v0.33: amplia la recopilació amb mitjans de Mallorca i llistats HTML específics de Sóller.
 """
 
 from __future__ import annotations
@@ -30,7 +30,7 @@ OUTPUT_FILE = ROOT / "data" / "posts.json"
 JS_OUTPUT_FILE = ROOT / "data" / "posts.js"
 MAX_POSTS_PER_SOURCE = 40
 SUMMARY_LIMIT = 260
-USER_AGENT = "SollerAra/0.32 (+https://github.com/Juanjo-Cp18/soller-ara)"
+USER_AGENT = "SollerAra/0.33 (+https://github.com/Juanjo-Cp18/soller-ara)"
 RELATED_WINDOW_HOURS = 72
 
 CATEGORY_KEYWORDS = {
@@ -477,6 +477,46 @@ class GenericSearchLinkParser(HTMLParser):
         self.current_text = []
 
 
+class RegexListingLinkParser(HTMLParser):
+    def __init__(self, base_url: str, allowed_host: str, article_url_regex: str):
+        super().__init__(convert_charrefs=True)
+        self.base_url = base_url
+        self.allowed_host = allowed_host.casefold()
+        self.article_re = re.compile(article_url_regex, re.I)
+        self.current_href: str | None = None
+        self.current_text: list[str] = []
+        self.links: list[tuple[str, str]] = []
+
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        if tag.lower() != "a":
+            return
+        href = dict(attrs).get("href")
+        if not href:
+            return
+        absolute = urljoin(self.base_url, href)
+        parsed = urlparse(absolute)
+        host = parsed.netloc.casefold()
+        if host not in {self.allowed_host, f"www.{self.allowed_host}"}:
+            return
+        if not self.article_re.search(parsed.path):
+            return
+        self.current_href = parsed._replace(query="", fragment="").geturl()
+        self.current_text = []
+
+    def handle_data(self, data: str) -> None:
+        if self.current_href:
+            self.current_text.append(data)
+
+    def handle_endtag(self, tag: str) -> None:
+        if tag.lower() != "a" or not self.current_href:
+            return
+        title = clean_text(" ".join(self.current_text))
+        if len(title) >= 10:
+            self.links.append((self.current_href, title))
+        self.current_href = None
+        self.current_text = []
+
+
 class ArticleMetaParser(HTMLParser):
     def __init__(self):
         super().__init__(convert_charrefs=True)
@@ -886,6 +926,72 @@ def fetch_html_search(source: dict) -> list[dict]:
     return posts
 
 
+def fetch_html_listing_regex(source: dict) -> list[dict]:
+    payload, charset = fetch_bytes(
+        source["url"],
+        "text/html,application/xhtml+xml;q=0.9,*/*;q=0.8",
+    )
+    listing_html = payload.decode(charset, errors="replace")
+    allowed_host = str(source.get("allowed_host") or urlparse(source["url"]).netloc).removeprefix("www.")
+    article_url_regex = str(source.get("article_url_regex") or r".+")
+    parser = RegexListingLinkParser(source["url"], allowed_host, article_url_regex)
+    parser.feed(listing_html)
+
+    unique_links: list[tuple[str, str]] = []
+    seen: set[str] = set()
+    for url, title in parser.links:
+        if url in seen:
+            continue
+        seen.add(url)
+        unique_links.append((url, title))
+
+    max_items = int(source.get("max_items", 30))
+    posts: list[dict] = []
+
+    for url, listing_title in unique_links[:max_items]:
+        title = listing_title
+        summary = ""
+        published_at = date_from_article_url(url)
+
+        try:
+            article_payload, article_charset = fetch_bytes(
+                url,
+                "text/html,application/xhtml+xml;q=0.9,*/*;q=0.8",
+            )
+            article_html = article_payload.decode(article_charset, errors="replace")
+            meta = ArticleMetaParser()
+            meta.feed(article_html)
+
+            title = clean_text(
+                meta.meta.get("og:title")
+                or meta.meta.get("twitter:title")
+                or meta.h1
+                or listing_title
+            )
+            summary = clean_summary(
+                title,
+                meta.meta.get("description")
+                or meta.meta.get("og:description")
+                or meta.meta.get("twitter:description")
+                or "",
+            )
+            published_at = (
+                parse_date(meta.meta.get("article:published_time"))
+                or parse_date(meta.meta.get("datepublished"))
+                or parse_date(meta.meta.get("date"))
+                or published_at
+                or parse_numeric_date_from_text(clean_text(article_html))
+            )
+        except Exception as exc:
+            print(f"AVÍS {source['name']} article {url}: {exc}", file=sys.stderr)
+
+        if not title or not published_at:
+            continue
+        posts.append(build_post(source, title, summary, url, published_at))
+
+    return posts
+
+
 def fetch_html_latest(source: dict) -> list[dict]:
     payload, charset = fetch_bytes(source["url"], "text/html,application/xhtml+xml;q=0.9,*/*;q=0.8")
     html_text = payload.decode(charset, errors="replace")
@@ -1095,6 +1201,9 @@ def fetch_source(source: dict) -> list[dict]:
     if source["type"] == "html_search":
         return fetch_html_search(source)
 
+    if source["type"] == "html_listing_regex":
+        return fetch_html_listing_regex(source)
+
     if source["type"] == "soller2010_news":
         return fetch_soller2010_news(source)
 
@@ -1217,8 +1326,8 @@ def main() -> int:
     ordered_posts, related_pair_count = annotate_related_posts(ordered_posts)
 
     payload = {
-        "version": 32,
-        "generator_version": "0.32",
+        "version": 33,
+        "generator_version": "0.33",
         "fetched_at": datetime.now(timezone.utc).isoformat(),
         "source_count": len(source_status),
         "source_status": source_status,
