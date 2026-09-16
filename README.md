@@ -4,7 +4,13 @@ Projecte públic i sense ànim de lucre per reunir informació local de Sóller 
 
 ## Versió
 
-**v0.35**
+**v0.36**
+
+## Novetats de la v0.36
+
+- TIB i Consell de Mallorca deixen de dependre d'un índex extern i es tornen a consultar directament des dels seus webs oficials.
+- El recopilador utilitza ara una identificació de navegador compatible amb portals Liferay que serveixen contingut diferent segons el client.
+- TIB llegeix els avisos `/es/w/...` i el Consell les notícies de Sala de Premsa, sempre filtrant per rellevància local.
 
 ## Novetats de la v0.35
 
