@@ -927,6 +927,11 @@ def fetch_html_search(source: dict) -> list[dict]:
                 or meta.h1
                 or listing_title
             )
+            if source.get("id") == "tib-avisos-soller":
+                title = re.sub(r"^TIB\s*-\s*Aviso:\s*", "", title, flags=re.I)
+                title = re.sub(r"\s*-\s*CTM\s*$", "", title, flags=re.I)
+            if source.get("id") == "consell-mallorca-soller":
+                title = re.sub(r"\s+-\s+www\s+-\s+LIVE\s+[\d.]+\s*$", "", title, flags=re.I)
             summary = clean_summary(
                 title,
                 meta.meta.get("description")
@@ -1110,7 +1115,7 @@ def fetch_html_latest(source: dict) -> list[dict]:
 
 
 def parse_numeric_date_from_text(value: str) -> str | None:
-    match = re.search(r"\b(\d{1,2})/(\d{1,2})/(\d{4})\b", value)
+    match = re.search(r"\b(\d{1,2})[/-](\d{1,2})[/-](\d{4})\b", value)
     if not match:
         return None
     try:
