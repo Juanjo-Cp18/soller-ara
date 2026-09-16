@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Actualitza data/posts.json a partir de les fonts públiques configurades.
 
-v0.37: millora TIB i amplia la detecció de notícies locals del Consell.
+v0.38: incorpora publicacions pròpies i prepara publicació simultània a xarxes.
 """
 
 from __future__ import annotations
@@ -28,9 +28,10 @@ SOURCES_FILE = ROOT / "sources.json"
 SOCIAL_SOURCES_FILE = ROOT / "social_sources.json"
 OUTPUT_FILE = ROOT / "data" / "posts.json"
 JS_OUTPUT_FILE = ROOT / "data" / "posts.js"
+MANUAL_POSTS_FILE = ROOT / "data" / "manual_posts.json"
 MAX_POSTS_PER_SOURCE = 40
 SUMMARY_LIMIT = 260
-USER_AGENT = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0 Safari/537.36 SollerAra/0.37"
+USER_AGENT = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0 Safari/537.36 SollerAra/0.38"
 RELATED_WINDOW_HOURS = 72
 
 CATEGORY_KEYWORDS = {
@@ -1455,6 +1456,32 @@ def filter_by_max_age(source: dict, posts: list[dict]) -> list[dict]:
     return filtered
 
 
+def load_manual_posts() -> list[dict]:
+    if not MANUAL_POSTS_FILE.exists():
+        return []
+    try:
+        payload = json.loads(MANUAL_POSTS_FILE.read_text(encoding="utf-8"))
+    except Exception as exc:
+        print(f"ERROR publicacions pròpies: {exc}", file=sys.stderr)
+        return []
+
+    posts = []
+    for item in payload.get("posts") or []:
+        if not item.get("id") or not item.get("title") or not item.get("published_at"):
+            continue
+        post = dict(item)
+        post.setdefault("source_id", "soller-ara")
+        post.setdefault("source", "Sóller Ara")
+        post.setdefault("source_type", "own")
+        post.setdefault("language", "ca")
+        post.setdefault("locality", "Sóller")
+        post.setdefault("category", "news")
+        post.setdefault("content_policy", "owned_content")
+        post.setdefault("rights_status", "owned")
+        posts.append(post)
+    return posts
+
+
 def main() -> int:
     config = json.loads(SOURCES_FILE.read_text(encoding="utf-8"))
     posts: list[dict] = []
@@ -1493,6 +1520,20 @@ def main() -> int:
             })
             print(f"ERROR {source.get('name', source.get('id'))}: {exc}", file=sys.stderr)
 
+    manual_posts = load_manual_posts()
+    posts.extend(manual_posts)
+    if manual_posts:
+        source_status.append({
+            "source_id": "soller-ara",
+            "name": "Sóller Ara",
+            "source_type": "own",
+            "method": "manual",
+            "ok": True,
+            "count": len(manual_posts),
+            "error": None,
+        })
+        print(f"OK Sóller Ara: {len(manual_posts)} publicacions pròpies")
+
     meta_posts, meta_source_status, social_integration_status = fetch_optional_meta_social_sources()
     posts.extend(meta_posts)
     # Les integracions socials opcionals només entren a la salut general quan funcionen.
@@ -1506,8 +1547,8 @@ def main() -> int:
     ordered_posts, related_pair_count = annotate_related_posts(ordered_posts)
 
     payload = {
-        "version": 37,
-        "generator_version": "0.37",
+        "version": 38,
+        "generator_version": "0.38",
         "fetched_at": datetime.now(timezone.utc).isoformat(),
         "source_count": len(source_status),
         "source_status": source_status,
