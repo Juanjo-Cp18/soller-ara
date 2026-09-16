@@ -1,7 +1,7 @@
 window.SOLLER_ARA_DATA = {
   "version": 36,
   "generator_version": "0.36",
-  "fetched_at": "2026-09-16T11:05:20.731972+00:00",
+  "fetched_at": "2026-09-16T11:08:26.763792+00:00",
   "source_count": 14,
   "source_status": [
     {
@@ -73,7 +73,7 @@ window.SOLLER_ARA_DATA = {
       "source_type": "media",
       "method": "html_search",
       "ok": true,
-      "count": 9,
+      "count": 10,
       "error": null
     },
     {
@@ -118,7 +118,7 @@ window.SOLLER_ARA_DATA = {
       "source_type": "official",
       "method": "html_listing_regex",
       "ok": true,
-      "count": 0,
+      "count": 1,
       "error": null
     },
     {
@@ -153,7 +153,7 @@ window.SOLLER_ARA_DATA = {
       "error": "(#10) Application does not have permission for this action [type=OAuthException, code=10, subcode=None]"
     }
   ],
-  "post_count": 116,
+  "post_count": 118,
   "related_pair_count": 0,
   "errors": [],
   "posts": [
@@ -1478,6 +1478,26 @@ window.SOLLER_ARA_DATA = {
       "related_sources": []
     },
     {
+      "id": "e7dcc5ec8a0ee426f538",
+      "category": "news",
+      "source_id": "ib3-noticies-soller",
+      "source": "IB3 Notícies",
+      "source_type": "media",
+      "language": "ca",
+      "locality": "Sóller / Serra de Tramuntana",
+      "published_at": "2026-08-24T12:00:00+00:00",
+      "title": "IB3 | Tauler d'anuncis",
+      "summary": "",
+      "url": "https://ib3.org/tauler-danuncis",
+      "platform": null,
+      "account": null,
+      "media_type": null,
+      "content_policy": "headline_date_link_only",
+      "rights_status": "permission_pending",
+      "image_allowed": false,
+      "related_sources": []
+    },
+    {
       "id": "187a4625f1a6d9b66aa9",
       "category": "news",
       "source_id": "ultima-hora-soller",
@@ -2374,6 +2394,26 @@ window.SOLLER_ARA_DATA = {
       "media_type": null,
       "content_policy": "headline_date_link_only",
       "rights_status": "permission_pending",
+      "image_allowed": false,
+      "related_sources": []
+    },
+    {
+      "id": "1e8909c548e1bd59d8f9",
+      "category": "alerts",
+      "source_id": "tib-avisos-soller",
+      "source": "TIB · Avisos",
+      "source_type": "official",
+      "language": "ca",
+      "locality": "Sóller / Port de Sóller / Fornalutx",
+      "published_at": "2026-06-26T12:00:00+00:00",
+      "title": "Avís prova pilot 203",
+      "summary": "Aviso: Prueba piloto: reserva de plaza línea 203 Port de Sóller–Deià–Valldemossa–Palma Avisos e incidencias o alteraciones en los servicios de transporte público TIB de Mallorca: bus, tren, metro y bicicleta pública.",
+      "url": "https://www.tib.org/es/w/avis-prova-pilot-203",
+      "platform": null,
+      "account": null,
+      "media_type": null,
+      "content_policy": "short_factual_excerpt",
+      "rights_status": "official_public_source",
       "image_allowed": false,
       "related_sources": []
     },
