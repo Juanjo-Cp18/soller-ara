@@ -1,5 +1,5 @@
 {
-  "version": 12,
+  "version": 13,
   "sources": [
     {
       "id": "ajuntament-soller-noticies",
@@ -113,29 +113,18 @@
     {
       "id": "ib3-noticies-soller",
       "name": "IB3 Notícies",
-      "type": "rss",
-      "url": "https://ib3.org/feed",
+      "type": "html_search",
+      "url": "https://ib3.org/?s=Sóller",
       "language": "ca",
       "locality": "Sóller / Serra de Tramuntana",
       "source_type": "media",
-      "max_items": 200,
+      "max_items": 30,
       "max_age_days": 60,
-      "include_keywords": [
-        "Sóller",
-        "Soller",
-        "Port de Sóller",
-        "Port de Soller",
-        "Vall de Sóller",
-        "Vall de Soller",
-        "Ferrocarril de Sóller",
-        "Tren de Sóller",
-        "Túnel de Sóller",
-        "Serra de Tramuntana"
-      ],
       "enabled": true,
       "image_policy": "disabled_until_rights_verified",
       "content_policy": "headline_date_link_only",
-      "rights_status": "permission_pending"
+      "rights_status": "permission_pending",
+      "allowed_host": "ib3.org"
     },
     {
       "id": "dbalears-soller",
