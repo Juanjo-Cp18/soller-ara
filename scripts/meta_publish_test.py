@@ -22,7 +22,7 @@ CAPTION = os.environ.get(
     "PUBLISH_CAPTION",
     "Prova de publicació de Sóller Ara. Aquesta publicació forma part de la configuració tècnica inicial del projecte.",
 ).strip()
-IMAGE_URL = "https://juanjo-cp18.github.io/soller-ara/assets/meta-test.jpg"
+IMAGE_URL = "https://juanjo-cp18.github.io/soller-ara/assets/meta-test-v2.jpg"
 
 
 def graph(path: str, method: str = "GET", params: dict | None = None, token: str | None = None) -> dict:
@@ -43,7 +43,7 @@ def graph(path: str, method: str = "GET", params: dict | None = None, token: str
         headers={
             "Authorization": f"Bearer {active_token}",
             "Accept": "application/json",
-            "User-Agent": "SollerAra-InstagramPublish/0.26",
+            "User-Agent": "SollerAra-InstagramPublish/0.27",
         },
     )
 

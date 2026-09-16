@@ -4,7 +4,13 @@ Projecte públic i sense ànim de lucre per reunir informació local de Sóller 
 
 ## Versió
 
-**v0.26**
+**v0.27**
+
+## Novetats de la v0.27
+
+- La imatge de prova d'Instagram es substitueix per un JPEG estàndard **1080 × 1080**, RGB.
+- Nova URL `assets/meta-test-v2.jpg` per evitar qualsevol caché del fitxer anterior.
+- No es canvien tokens ni permisos de Meta.
 
 ## Novetats de la v0.26
 
