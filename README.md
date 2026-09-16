@@ -4,7 +4,15 @@ Projecte públic i sense ànim de lucre per reunir informació local de Sóller 
 
 ## Versió
 
-**v0.30**
+**v0.31**
+
+## Novetats de la v0.31
+
+- S'afegeix el canal RSS oficial de notícies del **Govern de les Illes Balears**.
+- La font es filtra perquè només entrin peces que mencionin Sóller, Port de Sóller o Serra de Tramuntana.
+- El filtre per paraules clau queda disponible per afegir més fonts generals sense omplir la portada de contingut no local.
+- Els RSS poden configurar ara un `max_items` propi per revisar més entrades quan la font és molt àmplia.
+- Aquesta via no depèn de Meta i manté el projecte operatiu encara que l'accés a contingut social públic continuï pendent d'App Review.
 
 ## Novetats de la v0.30
 

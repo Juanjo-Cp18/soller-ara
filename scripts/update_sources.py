@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Actualitza data/posts.json a partir de les fonts públiques configurades.
 
-v0.22: valida el perfil i els mitjans propis de @soller.ara.
+v0.31: amplia la recopilació amb fonts oficials filtrades per rellevància local.
 """
 
 from __future__ import annotations
@@ -30,7 +30,7 @@ OUTPUT_FILE = ROOT / "data" / "posts.json"
 JS_OUTPUT_FILE = ROOT / "data" / "posts.js"
 MAX_POSTS_PER_SOURCE = 40
 SUMMARY_LIMIT = 260
-USER_AGENT = "SollerAra/0.22 (+https://github.com/Juanjo-Cp18/soller-ara)"
+USER_AGENT = "SollerAra/0.31 (+https://github.com/Juanjo-Cp18/soller-ara)"
 RELATED_WINDOW_HOURS = 72
 
 CATEGORY_KEYWORDS = {
@@ -286,9 +286,11 @@ def parse_rss(xml_bytes: bytes, source: dict) -> list[dict]:
     root = ET.fromstring(xml_bytes)
     items: list[dict] = []
 
+    item_limit = int(source.get("max_items", MAX_POSTS_PER_SOURCE))
+
     rss_items = root.findall(".//item")
     if rss_items:
-        for item in rss_items[:MAX_POSTS_PER_SOURCE]:
+        for item in rss_items[:item_limit]:
             title = clean_text(text_of(item, ["title"]))
             url = clean_text(text_of(item, ["link", "guid"]))
             summary = clean_summary(title, text_of(item, ["description", "summary"]))
@@ -300,7 +302,7 @@ def parse_rss(xml_bytes: bytes, source: dict) -> list[dict]:
 
     # Atom fallback (namespaces variables segons servidor).
     entries = root.findall(".//{*}entry")
-    for entry in entries[:MAX_POSTS_PER_SOURCE]:
+    for entry in entries[:item_limit]:
         title = clean_text(text_of(entry, ["{*}title"]))
         summary = clean_summary(title, text_of(entry, ["{*}summary", "{*}content"]))
         published_at = parse_date(text_of(entry, ["{*}published", "{*}updated"]))
@@ -987,6 +989,29 @@ def fetch_source(source: dict) -> list[dict]:
     raise ValueError(f"Tipus de font no suportat: {source['type']}")
 
 
+
+
+def filter_by_keywords(source: dict, posts: list[dict]) -> list[dict]:
+    """Filtra una font general perquè només entrin elements rellevants per Sóller."""
+    keywords = [
+        clean_text(str(keyword)).casefold()
+        for keyword in source.get("include_keywords", [])
+        if clean_text(str(keyword))
+    ]
+    if not keywords:
+        return posts
+
+    filtered: list[dict] = []
+    for post in posts:
+        haystack = " ".join([
+            str(post.get("title") or ""),
+            str(post.get("summary") or ""),
+            str(post.get("url") or ""),
+        ]).casefold()
+        if any(keyword in haystack for keyword in keywords):
+            filtered.append(post)
+    return filtered
+
 def sort_key(post: dict) -> float:
     published = iso_datetime(post.get("published_at"))
     if published is None:
@@ -1035,6 +1060,7 @@ def main() -> int:
             continue
         try:
             source_posts = fetch_source(source)
+            source_posts = filter_by_keywords(source, source_posts)
             source_posts = filter_by_max_age(source, source_posts)
             posts.extend(source_posts)
             source_status.append({
@@ -1073,8 +1099,8 @@ def main() -> int:
     ordered_posts, related_pair_count = annotate_related_posts(ordered_posts)
 
     payload = {
-        "version": 22,
-        "generator_version": "0.22",
+        "version": 31,
+        "generator_version": "0.31",
         "fetched_at": datetime.now(timezone.utc).isoformat(),
         "source_count": len(source_status),
         "source_status": source_status,

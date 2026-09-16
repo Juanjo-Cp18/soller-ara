@@ -1,5 +1,5 @@
 {
-  "version": 9,
+  "version": 10,
   "sources": [
     {
       "id": "ajuntament-soller-noticies",
@@ -87,6 +87,28 @@
       "content_policy": "generated_social_summary",
       "rights_status": "platform_embed",
       "max_age_days": 60
+    },
+    {
+      "id": "goib-noticies-soller",
+      "name": "Govern de les Illes Balears",
+      "type": "rss",
+      "url": "https://www.caib.es/pidip2front/pidipRSS?grup=noticies&lang=ca&opcio=getRSS",
+      "language": "ca",
+      "locality": "Sóller / Serra de Tramuntana",
+      "source_type": "official",
+      "max_items": 200,
+      "max_age_days": 60,
+      "include_keywords": [
+        "Sóller",
+        "Soller",
+        "Port de Sóller",
+        "Port de Soller",
+        "Serra de Tramuntana"
+      ],
+      "enabled": true,
+      "image_policy": "disabled_until_rights_verified",
+      "content_policy": "short_factual_excerpt",
+      "rights_status": "cc_by_open_data"
     }
   ]
 }
