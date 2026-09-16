@@ -8,7 +8,7 @@ Projecte públic i sense ànim de lucre per reunir informació local de Sóller 
 
 ## Novetats de la v0.32
 
-- S'incorporen **IB3 Notícies** i **dBalears** com a noves fonts automàtiques.
+- S'incorporen **IB3 Notícies** i **dBalears** com a noves fonts automàtiques. IB3 es consulta directament pel seu cercador web de «Sóller» perquè el seu RSS general no sempre reflecteix les notícies més recents.
 - Ambdues fonts generals es filtren abans de publicar perquè només entrin peces relacionades amb Sóller, Port de Sóller, la Vall de Sóller o la Serra de Tramuntana.
 - Per als mitjans de comunicació es manté la política conservadora: **titular, data i enllaç original**, sense copiar el cos de la notícia.
 - La recopilació continua executant-se cada hora mitjançant GitHub Actions i no depèn de Meta.
