@@ -4,7 +4,15 @@ Projecte públic i sense ànim de lucre per reunir informació local de Sóller 
 
 ## Versió
 
-**v0.28**
+**v0.29**
+
+## Novetats de la v0.29
+
+- Nou workflow manual **Meta · publicar prova Facebook**.
+- Requereix escriure exactament `PUBLICAR` abans d'executar-se.
+- Publica una imatge pròpia de Sóller Ara a la pàgina Facebook **Sóller Ara**.
+- Utilitza el Page Access Token obtingut durant l'execució; no s'emmagatzema ni s'imprimeix.
+- Cap actualització automàtica pot activar aquesta publicació.
 
 ## Novetats de la v0.28
 
