@@ -1,0 +1,122 @@
+name: Sóller Ara · editar contingut propi
+
+on:
+  workflow_dispatch:
+    inputs:
+      confirmation:
+        description: 'Escriu GUARDAR per confirmar'
+        required: true
+        type: string
+      post_id:
+        description: 'ID de la publicació pròpia'
+        required: true
+        type: string
+      title:
+        description: 'Títol'
+        required: true
+        type: string
+      body:
+        description: 'Text'
+        required: true
+        type: string
+      category:
+        description: 'Categoria'
+        required: true
+        type: choice
+        options:
+          - news
+          - agenda
+          - alerts
+          - services
+          - culture
+          - sports
+          - commerce
+      language:
+        description: 'Idioma'
+        required: true
+        type: choice
+        options:
+          - ca
+          - es
+          - en
+      image_url:
+        description: 'URL pública de la imatge (opcional)'
+        required: false
+        type: string
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "soller-ara-own-edit"
+  cancel-in-progress: false
+
+jobs:
+  edit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Configurar Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+
+      - name: Instal·lar Pillow
+        run: python -m pip install pillow
+
+      - name: Editar publicació
+        env:
+          EDIT_CONFIRMATION: ${{ inputs.confirmation }}
+          POST_ID: ${{ inputs.post_id }}
+          POST_TITLE: ${{ inputs.title }}
+          POST_BODY: ${{ inputs.body }}
+          POST_CATEGORY: ${{ inputs.category }}
+          POST_LANGUAGE: ${{ inputs.language }}
+          POST_IMAGE_URL: ${{ inputs.image_url }}
+        run: python scripts/edit_own_post.py
+
+      - name: Guardar canvis
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/manual_posts.json data/posts.json data/posts.js
+          if [ -d noticies ]; then git add -A noticies; fi
+          if [ -d assets/generated ]; then git add -A assets/generated; fi
+          if git diff --cached --quiet; then
+            echo "No hi ha canvis"
+            exit 0
+          fi
+          git commit -m "editar: contingut propi de Sóller Ara"
+          git pull --rebase origin main
+          git push origin HEAD:main
+
+  deploy:
+    name: Deploy web pública després d'editar
+    needs: edit
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout del main actualitzat
+        uses: actions/checkout@v6
+        with:
+          ref: main
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload site
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: "."
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
