@@ -15,6 +15,16 @@ Projecte públic i sense ànim de lucre per reunir informació local de Sóller 
 - Fins que s'instal·li el token nou a GitHub, els selectors de Facebook i Instagram queden desactivats per defecte al workflow manual.
 - Després de substituir `META_ACCESS_TOKEN`, cal executar primer les comprovacions de lectura/publicació abans d'activar la distribució simultània com a flux habitual.
 
+### Enllaç estable per Instagram
+
+Sóller Ara publica també `/enllacos.html`, una pàgina que llegeix `data/manual_posts.json` i mostra les darreres publicacions pròpies ordenades de més nova a més antiga.
+
+URL preparada per utilitzar una sola vegada a la bio d'Instagram:
+
+`https://juanjo-cp18.github.io/soller-ara/enllacos.html`
+
+Cada targeta d'aquesta pàgina apunta a la URL individual de la notícia. El caption d'Instagram conserva també l'URL exacta de la notícia, encara que la seva clicabilitat depèn de les funcions habilitades al compte.
+
 ## Novetats de la v0.39
 
 - El nou token Meta ha estat validat en mode de només lectura.
