@@ -1,9 +1,7 @@
 #!/usr/bin/env python3
 """Prova privada de Meta per Sóller Ara.
 
-Valida que el token de sistema pot crear un contenidor de publicació a
-l'Instagram propi @soller.ara. IMPORTANT: aquest script NO crida /media_publish,
-per tant no publica res al perfil.
+Valida en mode només lectura l'estat de publicació de l'Instagram propi\n@soller.ara mitjançant content_publishing_limit. No crea ni publica contingut.
 """
 
 from __future__ import annotations
@@ -17,7 +15,6 @@ from urllib.request import Request, urlopen
 
 TOKEN = os.environ.get("META_ACCESS_TOKEN", "").strip()
 GRAPH_VERSION = os.environ.get("META_GRAPH_VERSION", "v26.0").strip() or "v26.0"
-IMAGE_URL = "https://raw.githubusercontent.com/Juanjo-Cp18/soller-ara/main/assets/meta-test.jpg"
 
 
 def graph(path: str, method: str = "GET", params: dict | None = None) -> dict:
@@ -85,23 +82,24 @@ def main() -> int:
         ig_id, username = discover_instagram()
         print(f"OK compte detectat: @{username or '?'}")
 
-        container = graph(
-            f"{ig_id}/media",
-            method="POST",
-            params={
-                "image_url": IMAGE_URL,
-                "caption": "Prova tècnica privada de Sóller Ara. Aquest contenidor NO es publicarà.",
-            },
+        limit = graph(
+            f"{ig_id}/content_publishing_limit",
+            params={"fields": "config,quota_usage"},
         )
-        container_id = str(container.get("id") or "")
-        if not container_id:
-            raise RuntimeError("Meta no ha retornat cap identificador de contenidor.")
+        data = limit.get("data") or []
+        if not isinstance(data, list):
+            raise RuntimeError("Resposta inesperada de content_publishing_limit.")
 
-        print(f"OK contenidor creat: {container_id}")
+        print(f"OK content_publishing_limit consultat: {len(data)} registre(s)")
+        if data:
+            first = data[0]
+            print(
+                "Quota publicada per Meta: "
+                f"quota_usage={first.get('quota_usage')} "
+                f"config={first.get('config')}"
+            )
 
-        status = graph(container_id, params={"fields": "id,status_code"})
-        print(f"Estat del contenidor: {status.get('status_code') or 'desconegut'}")
-        print("RESULTAT: permís de creació validat. NO s'ha cridat /media_publish; no s'ha publicat res.")
+        print("RESULTAT: el token pot consultar l'estat de publicació. No s'ha creat ni publicat cap contingut.")
         return 0
     except Exception as exc:
         print(f"ERROR Meta smoke test: {exc}", file=sys.stderr)

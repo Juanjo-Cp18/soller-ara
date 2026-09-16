@@ -4,7 +4,13 @@ Projecte públic i sense ànim de lucre per reunir informació local de Sóller 
 
 ## Versió
 
-**v0.23**
+**v0.24**
+
+## Novetats de la v0.24
+
+- La prova manual de Meta passa a ser **només lectura**.
+- Consulta `content_publishing_limit` de `@soller.ara` per validar l'accés de publicació sense crear contenidors ni publicar res.
+- Això evita errors poc clars relacionats amb la descàrrega d'imatges durant les proves.
 
 ## Novetats de la v0.23
 
