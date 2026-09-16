@@ -33,6 +33,10 @@ export default {
         return await status(env, cors);
       }
 
+      if (url.pathname === "/api/check" && request.method === "GET") {
+        return await systemCheck(env, cors);
+      }
+
       if (url.pathname === "/api/publish" && request.method === "POST") {
         return await publish(request, env, cors);
       }
@@ -199,6 +203,81 @@ async function rawJson(owner, repo, branch, path, fallback) {
   const response = await fetch(url, { headers: { "Cache-Control": "no-cache" } });
   if (!response.ok) return fallback;
   return response.json();
+}
+
+
+async function systemCheck(env, cors) {
+  const checks = [];
+  const { owner, repo, branch } = repoParts(env);
+
+  checks.push({
+    name: "Cloudflare Worker",
+    ok: true,
+    detail: "Backend de Administración activo",
+  });
+
+  checks.push({
+    name: "Clave de Administración",
+    ok: Boolean(env.ADMIN_PASSWORD),
+    detail: env.ADMIN_PASSWORD ? "Secret configurado" : "Falta ADMIN_PASSWORD",
+  });
+
+  checks.push({
+    name: "Sesiones",
+    ok: Boolean(env.SESSION_SECRET),
+    detail: env.SESSION_SECRET ? "SESSION_SECRET configurado" : "Falta SESSION_SECRET",
+  });
+
+  if (!env.GITHUB_TOKEN) {
+    checks.push({
+      name: "GitHub",
+      ok: false,
+      detail: "Falta GITHUB_TOKEN",
+    });
+    return json({ ok: false, checks }, 200, cors);
+  }
+
+  const headers = {
+    "Authorization": `Bearer ${env.GITHUB_TOKEN}`,
+    "Accept": "application/vnd.github+json",
+    "X-GitHub-Api-Version": "2022-11-28",
+    "User-Agent": "SollerAra-Admin/0.42",
+  };
+
+  const repoResponse = await fetch(`https://api.github.com/repos/${owner}/${repo}`, { headers });
+  checks.push({
+    name: "GitHub · repositorio",
+    ok: repoResponse.ok,
+    detail: repoResponse.ok ? `${owner}/${repo} accesible` : `HTTP ${repoResponse.status}`,
+  });
+
+  const workflows = ["publish-own-content.yml", "manage-posts.yml"];
+  for (const workflow of workflows) {
+    const response = await fetch(
+      `https://api.github.com/repos/${owner}/${repo}/actions/workflows/${workflow}`,
+      { headers }
+    );
+    checks.push({
+      name: `Workflow · ${workflow}`,
+      ok: response.ok,
+      detail: response.ok ? "Disponible para Administración" : `HTTP ${response.status}`,
+    });
+  }
+
+  const publicData = await fetch(
+    `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/data/posts.json?v=${Date.now()}`,
+    { headers: { "Cache-Control": "no-cache" } }
+  );
+  checks.push({
+    name: "Datos públicos",
+    ok: publicData.ok,
+    detail: publicData.ok ? "data/posts.json accesible" : `HTTP ${publicData.status}`,
+  });
+
+  return json({
+    ok: checks.every((item) => item.ok),
+    checks,
+  }, 200, cors);
 }
 
 async function status(env, cors) {
