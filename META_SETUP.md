@@ -34,7 +34,7 @@ La via Business Discovery requereix:
 
 ## Afegir els secrets a GitHub
 
-Repositori `Juanjo-Cp18/soller-ara`:
+Repositori `soller-ara/soller-ara`:
 
 1. Settings.
 2. Secrets and variables.
