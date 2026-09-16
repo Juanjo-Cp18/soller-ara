@@ -131,10 +131,19 @@ Ya implementado:
 - eliminación de imagen generada propia
 - respeto de ocultaciones en futuras actualizaciones
 
-Pendiente:
+Implementado en v0.41:
 - interfaz visual de Administración;
-- autenticación segura;
-- backend privado;
+- login por clave conectado a backend privado;
+- sesiones firmadas y temporales;
+- backend Cloudflare Worker preparado;
+- panel de estado;
+- publicación propia;
+- moderación visual;
+- eliminación propia y ocultación/restauración externa.
+
+Pendiente:
+- desplegar y conectar Cloudflare Worker;
 - edición de publicaciones propias;
 - gestión visual de fuentes;
-- auditoría completa.
+- auditoría privada persistente;
+- usuarios/roles múltiples.
