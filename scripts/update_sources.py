@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Actualitza data/posts.json a partir de les fonts públiques configurades.
 
-v0.38: incorpora publicacions pròpies i prepara publicació simultània a xarxes.
+v0.39: consolida publicació pròpia amb URL individual, targeta social i distribució Meta.
 """
 
 from __future__ import annotations
@@ -31,7 +31,7 @@ JS_OUTPUT_FILE = ROOT / "data" / "posts.js"
 MANUAL_POSTS_FILE = ROOT / "data" / "manual_posts.json"
 MAX_POSTS_PER_SOURCE = 40
 SUMMARY_LIMIT = 260
-USER_AGENT = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0 Safari/537.36 SollerAra/0.38"
+USER_AGENT = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0 Safari/537.36 SollerAra/0.39"
 RELATED_WINDOW_HOURS = 72
 
 CATEGORY_KEYWORDS = {
@@ -1547,8 +1547,8 @@ def main() -> int:
     ordered_posts, related_pair_count = annotate_related_posts(ordered_posts)
 
     payload = {
-        "version": 38,
-        "generator_version": "0.38",
+        "version": 39,
+        "generator_version": "0.39",
         "fetched_at": datetime.now(timezone.utc).isoformat(),
         "source_count": len(source_status),
         "source_status": source_status,
