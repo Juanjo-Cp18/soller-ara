@@ -4,7 +4,15 @@ Projecte públic i sense ànim de lucre per reunir informació local de Sóller 
 
 ## Versió
 
-**v0.24**
+**v0.25**
+
+## Novetats de la v0.25
+
+- Nou workflow manual **Meta · publicar prova Instagram**.
+- Requereix escriure exactament `PUBLICAR` abans d'executar-se.
+- Publica una imatge pròpia del projecte a `@soller.ara` mitjançant el token de sistema de Meta.
+- Cap actualització automàtica pot activar aquest workflow: només funciona amb `workflow_dispatch`.
+- El text es pot modificar abans d'executar la prova.
 
 ## Novetats de la v0.24
 

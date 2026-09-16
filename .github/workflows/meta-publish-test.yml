@@ -1,0 +1,37 @@
+name: Meta · publicar prova Instagram
+
+on:
+  workflow_dispatch:
+    inputs:
+      confirmation:
+        description: 'Escriu PUBLICAR per confirmar que vols fer una publicació real a @soller.ara'
+        required: true
+        type: string
+      caption:
+        description: 'Text de la publicació de prova'
+        required: false
+        default: 'Prova de publicació de Sóller Ara. Aquesta publicació forma part de la configuració tècnica inicial del projecte.'
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  publish-instagram:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Configurar Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+
+      - name: Publicar prova a Instagram
+        env:
+          META_ACCESS_TOKEN: ${{ secrets.META_ACCESS_TOKEN }}
+          META_GRAPH_VERSION: "v26.0"
+          PUBLISH_CONFIRMATION: ${{ inputs.confirmation }}
+          PUBLISH_CAPTION: ${{ inputs.caption }}
+        run: python scripts/meta_publish_test.py
