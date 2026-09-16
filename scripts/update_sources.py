@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Actualitza data/posts.json a partir de les fonts públiques configurades.
 
-v0.21: valida el compte propi de Meta i millora el diagnòstic de Business Discovery.
+v0.22: valida el perfil i els mitjans propis de @soller.ara.
 """
 
 from __future__ import annotations
@@ -30,7 +30,7 @@ OUTPUT_FILE = ROOT / "data" / "posts.json"
 JS_OUTPUT_FILE = ROOT / "data" / "posts.js"
 MAX_POSTS_PER_SOURCE = 40
 SUMMARY_LIMIT = 260
-USER_AGENT = "SollerAra/0.21 (+https://github.com/Juanjo-Cp18/soller-ara)"
+USER_AGENT = "SollerAra/0.22 (+https://github.com/Juanjo-Cp18/soller-ara)"
 RELATED_WINDOW_HOURS = 72
 
 CATEGORY_KEYWORDS = {
@@ -558,14 +558,22 @@ def discover_meta_instagram_account(token: str, graph_version: str) -> dict | No
 
 
 def validate_meta_own_account(token: str, ig_user_id: str, graph_version: str) -> dict:
-    query = urlencode({"fields": "id,username,account_type,media_count"})
+    query = urlencode({"fields": "id,username,media_count"})
     endpoint = f"https://graph.facebook.com/{graph_version}/{ig_user_id}?{query}"
     payload = fetch_json_bearer(endpoint, token)
+
+    media_query = urlencode({
+        "fields": "id,caption,media_type,permalink,timestamp",
+        "limit": 5,
+    })
+    media_endpoint = f"https://graph.facebook.com/{graph_version}/{ig_user_id}/media?{media_query}"
+    media_payload = fetch_json_bearer(media_endpoint, token)
+
     return {
         "id": str(payload.get("id") or ""),
         "username": payload.get("username"),
-        "account_type": payload.get("account_type"),
         "media_count": payload.get("media_count"),
+        "sample_media_count": len(media_payload.get("data") or []),
     }
 
 
@@ -692,8 +700,8 @@ def fetch_optional_meta_social_sources() -> tuple[list[dict], list[dict], list[d
         print(
             "META_OWN_ACCOUNT OK "
             f"instagram=@{own.get('username') or '?'} "
-            f"account_type={own.get('account_type') or '?'} "
-            f"media_count={own.get('media_count')}"
+            f"media_count={own.get('media_count')} "
+            f"sample_media_count={own.get('sample_media_count')}"
         )
     except Exception as exc:
         print(f"META_OWN_ACCOUNT ERROR: {exc}", file=sys.stderr)
@@ -1065,8 +1073,8 @@ def main() -> int:
     ordered_posts, related_pair_count = annotate_related_posts(ordered_posts)
 
     payload = {
-        "version": 21,
-        "generator_version": "0.21",
+        "version": 22,
+        "generator_version": "0.22",
         "fetched_at": datetime.now(timezone.utc).isoformat(),
         "source_count": len(source_status),
         "source_status": source_status,
