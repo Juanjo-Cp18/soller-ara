@@ -19,11 +19,11 @@ TOKEN = os.environ.get("META_ACCESS_TOKEN", "").strip()
 GRAPH_VERSION = os.environ.get("META_GRAPH_VERSION", "v26.0").strip() or "v26.0"
 TITLE = os.environ.get("POST_TITLE", "").strip()
 BODY = os.environ.get("POST_BODY", "").strip()
-IMAGE_URL = os.environ.get("POST_IMAGE_URL", "").strip()
+IMAGE_URL = (os.environ.get("OWN_IMAGE_URL", "").strip() or os.environ.get("POST_IMAGE_URL", "").strip())
 DO_FACEBOOK = os.environ.get("PUBLISH_FACEBOOK", "false").lower() == "true"
 DO_INSTAGRAM = os.environ.get("PUBLISH_INSTAGRAM", "false").lower() == "true"
 CONFIRMATION = os.environ.get("PUBLISH_CONFIRMATION", "").strip()
-POST_URL = os.environ.get("POST_URL", "").strip() or "https://juanjo-cp18.github.io/soller-ara/"
+POST_URL = (os.environ.get("OWN_POST_URL", "").strip() or os.environ.get("POST_URL", "").strip() or "https://juanjo-cp18.github.io/soller-ara/")
 
 
 def graph(path: str, method: str = "GET", params: dict | None = None, token: str | None = None) -> dict:
