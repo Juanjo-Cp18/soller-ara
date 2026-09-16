@@ -192,3 +192,31 @@ Vegeu `META_SETUP.md`. Fins que no existeixin `META_ACCESS_TOKEN` i `META_IG_USE
 ## Cost
 
 Cost addicional actual de Sóller Ara: **0 €**.
+
+
+## Administración v0.41
+
+Se ha iniciado la primera versión real del área privada de Administración.
+
+Implementado:
+- interfaz `/admin/` con acceso por clave;
+- módulo Panel;
+- módulo Publicar;
+- módulo Moderación;
+- backend privado preparado para Cloudflare Workers;
+- sesión temporal firmada;
+- límite básico de intentos fallidos;
+- disparo seguro de workflows de GitHub;
+- publicación propia desde Administración;
+- ocultar/restaurar publicaciones externas;
+- eliminar publicaciones propias;
+- ningún token o contraseña en GitHub Pages;
+- validación automática de JavaScript y comprobación de secretos.
+
+Pendiente de conexión:
+- desplegar el Worker privado;
+- configurar `ADMIN_PASSWORD`, `SESSION_SECRET` y `GITHUB_TOKEN` como secrets;
+- introducir la URL del Worker en `admin/config.js`;
+- probar login y acciones reales desde el panel.
+
+La interfaz pública puede existir en GitHub Pages, pero ninguna acción administrativa funciona hasta que el backend privado esté conectado.
