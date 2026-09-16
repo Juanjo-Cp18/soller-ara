@@ -24,7 +24,7 @@ POSTS_FILE = ROOT / "data" / "posts.json"
 POSTS_JS_FILE = ROOT / "data" / "posts.js"
 DETAIL_DIR = ROOT / "noticies"
 GENERATED_DIR = ROOT / "assets" / "generated"
-SITE_URL = "https://juanjo-cp18.github.io/soller-ara"
+SITE_URL = "https://soller-ara.github.io/soller-ara"
 
 TITLE = os.environ.get("POST_TITLE", "").strip()
 BODY = os.environ.get("POST_BODY", "").strip()
