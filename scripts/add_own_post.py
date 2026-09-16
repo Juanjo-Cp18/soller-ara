@@ -14,7 +14,6 @@ import json
 import os
 import re
 import sys
-import textwrap
 from datetime import datetime, timezone
 from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont
@@ -162,6 +161,7 @@ def main() -> int:
     DETAIL_DIR.mkdir(parents=True, exist_ok=True)
     safe_title = html.escape(TITLE, quote=True)
     safe_body = html.escape(BODY, quote=True)
+    body_html = "<br />".join(safe_body.splitlines())
     safe_url = html.escape(post_url, quote=True)
     safe_image = html.escape(final_image_url, quote=True) if final_image_url else ""
     image_meta = (
@@ -207,7 +207,7 @@ def main() -> int:
       <h1>{safe_title}</h1>
       <p class="article-date">{now}</p>
       {image_html}
-      <div class="article-body"><p>{safe_body}</p></div>
+      <div class="article-body"><p>{body_html}</p></div>
       <p><a class="origin-link" href="../index.html">Veure més informació a Sóller Ara →</a></p>
     </article>
   </main>
