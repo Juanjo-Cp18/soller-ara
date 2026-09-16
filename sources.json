@@ -1,5 +1,5 @@
 {
-  "version": 16,
+  "version": 17,
   "sources": [
     {
       "id": "ajuntament-soller-noticies",
@@ -237,6 +237,44 @@
       "image_policy": "disabled_until_rights_verified",
       "content_policy": "headline_date_link_only",
       "rights_status": "permission_pending"
+    },
+    {
+      "id": "tib-avisos-soller",
+      "name": "TIB · Avisos",
+      "type": "html_listing_regex",
+      "url": "https://www.tib.org/ca/avisos",
+      "language": "ca",
+      "locality": "Sóller / Port de Sóller / Fornalutx",
+      "source_type": "official",
+      "allowed_host": "tib.org",
+      "article_url_regex": "^/ca/w/[^/?#]+$",
+      "max_items": 40,
+      "max_age_days": 120,
+      "include_keywords": [
+        "Sóller",
+        "Soller",
+        "Port de Sóller",
+        "Port de Soller",
+        "Fornalutx",
+        "Biniaraix",
+        "L203",
+        "L204",
+        "L231",
+        "L232",
+        "línia 203",
+        "linia 203",
+        "línia 204",
+        "linia 204",
+        "línia 231",
+        "linia 231",
+        "línia 232",
+        "linia 232"
+      ],
+      "force_category": "alerts",
+      "enabled": true,
+      "image_policy": "disabled_until_rights_verified",
+      "content_policy": "short_factual_excerpt",
+      "rights_status": "official_public_source"
     }
   ]
 }
