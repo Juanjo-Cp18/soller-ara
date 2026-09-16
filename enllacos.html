@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="ca">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0f766e" />
+  <meta name="description" content="Enllaços de les darreres publicacions pròpies de Sóller Ara." />
+  <link rel="stylesheet" href="styles.css?v=0.39" />
+  <title>Enllaços · Sóller Ara</title>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand-wrap" href="index.html" style="text-decoration:none">
+      <div class="brand-mark" aria-hidden="true">SA</div>
+      <div>
+        <h1>Sóller Ara</h1>
+        <p>Darreres publicacions</p>
+      </div>
+    </a>
+  </header>
+
+  <main class="legal-page">
+    <a class="legal-back" href="index.html">← Tornar a Sóller Ara</a>
+    <section class="legal-card">
+      <p class="eyebrow">Enllaços</p>
+      <h1>Darreres publicacions de Sóller Ara</h1>
+      <p>Aquesta pàgina reuneix les darreres publicacions pròpies perquè puguis arribar a la notícia completa des de les nostres xarxes socials.</p>
+      <div id="ownLinks" class="own-links">
+        <p>Carregant publicacions...</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>© 2026 Sóller Ara · Projecte sense ànim de lucre</p>
+  </footer>
+
+  <script>
+    const container = document.getElementById("ownLinks");
+
+    function esc(value) {
+      return String(value || "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;");
+    }
+
+    async function loadOwnPosts() {
+      try {
+        const response = await fetch("data/manual_posts.json?v=" + Date.now(), { cache: "no-store" });
+        if (!response.ok) throw new Error("HTTP " + response.status);
+        const payload = await response.json();
+        const posts = Array.isArray(payload.posts) ? [...payload.posts] : [];
+        posts.sort((a, b) => new Date(b.published_at) - new Date(a.published_at));
+
+        if (!posts.length) {
+          container.innerHTML = "<p>Encara no hi ha publicacions pròpies.</p>";
+          return;
+        }
+
+        container.innerHTML = posts.slice(0, 20).map((post) => `
+          <a class="own-link-card" href="${esc(post.url)}">
+            ${post.media_url ? `<img src="${esc(post.media_url)}" alt="" loading="lazy" />` : ""}
+            <span class="own-link-content">
+              <small>${esc(post.category || "news")}</small>
+              <strong>${esc(post.title)}</strong>
+              <span>${esc(post.summary || "")}</span>
+            </span>
+          </a>
+        `).join("");
+      } catch (error) {
+        container.innerHTML = "<p>No s'han pogut carregar les publicacions.</p>";
+      }
+    }
+
+    loadOwnPosts();
+  </script>
+</body>
+</html>
