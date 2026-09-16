@@ -4,7 +4,14 @@ Projecte públic i sense ànim de lucre per reunir informació local de Sóller 
 
 ## Versió
 
-**v0.33**
+**v0.34**
+
+## Novetats de la v0.34
+
+- S'incorporen els **avisos oficials TIB** relacionats amb Sóller, Port de Sóller, Fornalutx i les línies 203, 204, 231 i 232.
+- Els avisos TIB entren directament al feed com a **Alertes**, sense crear un bloc separat que dupliqui informació.
+- Es reforça la classificació per titular: detencions, robatoris, accidents, protestes i manifestacions es mantenen a **Notícies** encara que les metadades de la pàgina contenguin paraules d'altres categories.
+- Es reforça també la detecció de contingut cultural (Art Sóller, artistes, exposicions, teatre, concerts i havaneres).
 
 ## Novetats de la v0.33
 
