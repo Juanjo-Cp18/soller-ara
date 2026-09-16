@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Actualitza data/posts.json a partir de les fonts públiques configurades.
 
-v0.36: llegeix TIB i Consell directament amb compatibilitat Liferay millorada.
+v0.37: millora TIB i amplia la detecció de notícies locals del Consell.
 """
 
 from __future__ import annotations
@@ -30,7 +30,7 @@ OUTPUT_FILE = ROOT / "data" / "posts.json"
 JS_OUTPUT_FILE = ROOT / "data" / "posts.js"
 MAX_POSTS_PER_SOURCE = 40
 SUMMARY_LIMIT = 260
-USER_AGENT = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0 Safari/537.36 SollerAra/0.36"
+USER_AGENT = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0 Safari/537.36 SollerAra/0.37"
 RELATED_WINDOW_HOURS = 72
 
 CATEGORY_KEYWORDS = {
@@ -543,6 +543,41 @@ class RegexListingLinkParser(HTMLParser):
         self.current_text = []
 
 
+class FirstParagraphAfterH1Parser(HTMLParser):
+    def __init__(self):
+        super().__init__(convert_charrefs=True)
+        self.in_h1 = False
+        self.seen_h1 = False
+        self.in_p = False
+        self.parts: list[str] = []
+        self.done = False
+
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        tag = tag.lower()
+        if tag == "h1":
+            self.in_h1 = True
+        elif tag == "p" and self.seen_h1 and not self.done:
+            self.in_p = True
+
+    def handle_data(self, data: str) -> None:
+        if self.in_p and not self.done:
+            self.parts.append(data)
+
+    def handle_endtag(self, tag: str) -> None:
+        tag = tag.lower()
+        if tag == "h1":
+            self.in_h1 = False
+            self.seen_h1 = True
+        elif tag == "p" and self.in_p:
+            self.in_p = False
+            if clean_text(" ".join(self.parts)):
+                self.done = True
+
+    @property
+    def paragraph(self) -> str:
+        return clean_text(" ".join(self.parts))
+
+
 class ArticleMetaParser(HTMLParser):
     def __init__(self):
         super().__init__(convert_charrefs=True)
@@ -958,37 +993,41 @@ def fetch_html_search(source: dict) -> list[dict]:
 
 
 def fetch_html_listing_regex(source: dict) -> list[dict]:
-    payload, charset = fetch_bytes(
-        source["url"],
-        "text/html,application/xhtml+xml;q=0.9,*/*;q=0.8",
-    )
-    listing_html = payload.decode(charset, errors="replace")
     allowed_host = str(source.get("allowed_host") or urlparse(source["url"]).netloc).removeprefix("www.")
     article_url_regex = str(source.get("article_url_regex") or r".+")
-    parser = RegexListingLinkParser(source["url"], allowed_host, article_url_regex)
-    parser.feed(listing_html)
 
-    # Alguns portals Liferay generen hrefs que HTMLParser no associa bé amb
-    # l'àncora visible. Afegim una segona passada sobre els href crus.
-    candidate_links: list[tuple[str, str]] = list(parser.links)
-    raw_hrefs = re.findall(r'''href=["']([^"']+)["']''', listing_html, flags=re.I)
-    for href in raw_hrefs:
-        absolute = urljoin(source["url"], html.unescape(href))
-        parsed_candidate = urlparse(absolute)
-        host = parsed_candidate.netloc.casefold()
-        if host not in {allowed_host.casefold(), f"www.{allowed_host.casefold()}"}:
-            continue
-        if not re.search(article_url_regex, parsed_candidate.path, flags=re.I):
-            continue
-        clean_candidate = parsed_candidate._replace(query="", fragment="").geturl()
-        candidate_links.append((clean_candidate, ""))
+    listing_urls = [source["url"]]
+    template = source.get("listing_url_template")
+    try:
+        page_count = max(1, int(source.get("listing_pages", 1)))
+    except (TypeError, ValueError):
+        page_count = 1
+    if template and page_count > 1:
+        listing_urls.extend(str(template).format(page=page) for page in range(2, page_count + 1))
 
-    if source.get("diagnostic_links"):
-        for candidate_url, candidate_title in candidate_links[:40]:
-            print(
-                f"MATCHED_LINK {source.get('id')}: {candidate_url} | title={candidate_title}",
-                file=sys.stderr,
-            )
+    candidate_links: list[tuple[str, str]] = []
+    for listing_url in listing_urls:
+        payload, charset = fetch_bytes(
+            listing_url,
+            "text/html,application/xhtml+xml;q=0.9,*/*;q=0.8",
+        )
+        listing_html = payload.decode(charset, errors="replace")
+        parser = RegexListingLinkParser(listing_url, allowed_host, article_url_regex)
+        parser.feed(listing_html)
+        candidate_links.extend(parser.links)
+
+        # Fallback per portals Liferay amb HTML poc convencional.
+        raw_hrefs = re.findall(r'''href=["']([^"']+)["']''', listing_html, flags=re.I)
+        for href in raw_hrefs:
+            absolute = urljoin(listing_url, html.unescape(href))
+            parsed_candidate = urlparse(absolute)
+            host = parsed_candidate.netloc.casefold()
+            if host not in {allowed_host.casefold(), f"www.{allowed_host.casefold()}"}:
+                continue
+            if not re.search(article_url_regex, parsed_candidate.path, flags=re.I):
+                continue
+            clean_candidate = parsed_candidate._replace(query="", fragment="").geturl()
+            candidate_links.append((clean_candidate, ""))
 
     unique_links: list[tuple[str, str]] = []
     seen: set[str] = set()
@@ -997,6 +1036,24 @@ def fetch_html_listing_regex(source: dict) -> list[dict]:
             continue
         seen.add(url)
         unique_links.append((url, title))
+
+    prefilter = [
+        clean_text(str(keyword)).casefold()
+        for keyword in source.get("prefilter_url_keywords", [])
+        if clean_text(str(keyword))
+    ]
+    if prefilter:
+        unique_links = [
+            (url, title) for url, title in unique_links
+            if any(keyword in url.casefold() for keyword in prefilter)
+        ]
+
+    if source.get("diagnostic_links"):
+        for candidate_url, candidate_title in unique_links[:40]:
+            print(
+                f"MATCHED_LINK {source.get('id')}: {candidate_url} | title={candidate_title}",
+                file=sys.stderr,
+            )
 
     max_items = int(source.get("max_items", 30))
     posts: list[dict] = []
@@ -1021,6 +1078,16 @@ def fetch_html_listing_regex(source: dict) -> list[dict]:
                 or meta.h1
                 or listing_title
             )
+
+            if source.get("id") == "tib-avisos-soller":
+                if meta.h1:
+                    title = clean_text(meta.h1)
+                title = re.sub(r"^TIB\s*-\s*Aviso:\s*", "", title, flags=re.I)
+                title = re.sub(r"\s*-\s*CTM\s*$", "", title, flags=re.I)
+
+            if source.get("id") == "consell-mallorca-soller":
+                title = re.sub(r"\s+-\s+www\s+-\s+LIVE\s+[\d.]+\s*$", "", title, flags=re.I)
+
             summary = clean_summary(
                 title,
                 meta.meta.get("description")
@@ -1028,6 +1095,13 @@ def fetch_html_listing_regex(source: dict) -> list[dict]:
                 or meta.meta.get("twitter:description")
                 or "",
             )
+
+            if source.get("extract_first_paragraph"):
+                body_parser = FirstParagraphAfterH1Parser()
+                body_parser.feed(article_html)
+                if body_parser.paragraph:
+                    summary = clean_summary(title, body_parser.paragraph)
+
             published_at = (
                 parse_date(meta.meta.get("article:published_time"))
                 or parse_date(meta.meta.get("datepublished"))
@@ -1432,8 +1506,8 @@ def main() -> int:
     ordered_posts, related_pair_count = annotate_related_posts(ordered_posts)
 
     payload = {
-        "version": 36,
-        "generator_version": "0.36",
+        "version": 37,
+        "generator_version": "0.37",
         "fetched_at": datetime.now(timezone.utc).isoformat(),
         "source_count": len(source_status),
         "source_status": source_status,
