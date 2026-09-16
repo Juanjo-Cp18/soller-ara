@@ -274,7 +274,8 @@
       "content_policy": "short_factual_excerpt",
       "rights_status": "official_public_source",
       "allowed_host": "tib.org",
-      "article_url_regex": "^/es/w/[^/?#]+$"
+      "article_url_regex": "^/es/w/[^/?#]+$",
+      "diagnostic_links": true
     },
     {
       "id": "consell-mallorca-soller",
@@ -303,7 +304,8 @@
       "content_policy": "short_factual_excerpt",
       "rights_status": "official_public_source",
       "allowed_host": "conselldemallorca.es",
-      "article_url_regex": "/content/[^/?#]+/695139$"
+      "article_url_regex": "/content/[^/?#]+/695139$",
+      "diagnostic_links": true
     }
   ]
 }
