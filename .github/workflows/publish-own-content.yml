@@ -1,0 +1,105 @@
+name: Sóller Ara · publicar contingut propi
+
+on:
+  workflow_dispatch:
+    inputs:
+      confirmation:
+        description: 'Escriu PUBLICAR per confirmar una publicació real'
+        required: true
+        type: string
+      title:
+        description: 'Títol'
+        required: true
+        type: string
+      body:
+        description: 'Text de la publicació'
+        required: true
+        type: string
+      category:
+        description: 'Categoria'
+        required: true
+        default: 'news'
+        type: choice
+        options:
+          - news
+          - agenda
+          - alerts
+          - services
+          - culture
+          - sports
+          - commerce
+      language:
+        description: 'Idioma'
+        required: true
+        default: 'ca'
+        type: choice
+        options:
+          - ca
+          - es
+          - en
+      image_url:
+        description: 'URL pública de la imatge (obligatòria si publiques a Instagram)'
+        required: false
+        type: string
+      facebook:
+        description: 'Publicar també a Facebook Sóller Ara'
+        required: true
+        default: true
+        type: boolean
+      instagram:
+        description: 'Publicar també a Instagram @soller.ara'
+        required: true
+        default: false
+        type: boolean
+
+permissions:
+  contents: write
+
+concurrency:
+  group: "soller-ara-own-publish"
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Configurar Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+
+      - name: Crear publicació a Sóller Ara
+        env:
+          PUBLISH_CONFIRMATION: ${{ inputs.confirmation }}
+          POST_TITLE: ${{ inputs.title }}
+          POST_BODY: ${{ inputs.body }}
+          POST_CATEGORY: ${{ inputs.category }}
+          POST_LANGUAGE: ${{ inputs.language }}
+          POST_IMAGE_URL: ${{ inputs.image_url }}
+        run: python scripts/add_own_post.py
+
+      - name: Guardar publicació al repositori
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/manual_posts.json data/posts.json data/posts.js
+          git commit -m "publicar: contingut propi de Sóller Ara"
+          git pull --rebase origin main
+          git push origin HEAD:main
+
+      - name: Publicar a xarxes seleccionades
+        env:
+          META_ACCESS_TOKEN: ${{ secrets.META_ACCESS_TOKEN }}
+          META_GRAPH_VERSION: "v26.0"
+          PUBLISH_CONFIRMATION: ${{ inputs.confirmation }}
+          POST_TITLE: ${{ inputs.title }}
+          POST_BODY: ${{ inputs.body }}
+          POST_IMAGE_URL: ${{ inputs.image_url }}
+          PUBLISH_FACEBOOK: ${{ inputs.facebook }}
+          PUBLISH_INSTAGRAM: ${{ inputs.instagram }}
+        run: python scripts/publish_own_social.py
