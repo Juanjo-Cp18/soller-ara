@@ -52,6 +52,23 @@ El workflow mai imprimeix el token.
 
 Es poden afegir més comptes professionals a `social_sources.json`.
 
+## Per què compartir manualment sí i recopilar automàticament no és el mateix
+
+Compartir una publicació des de Facebook o Instagram és una acció iniciada per una persona dins la plataforma. La publicació continua allotjada a Meta i la plataforma controla en aquell moment si es pot compartir.
+
+Sóller Ara, en canvi, necessita una operació de **lectura automàtica**: consultar periòdicament comptes de tercers, detectar publicacions noves i incorporar-ne la referència al feed sense intervenció humana. Meta tracta aquesta operació com a accés API a contingut de tercers i hi aplica permisos i, segons el cas, revisió de l'app.
+
+Estat verificat del projecte:
+
+- el token actual identifica correctament `@soller.ara` i pot llegir el compte propi;
+- la publicació pròpia a Instagram ja s'ha validat;
+- les consultes Business Discovery als comptes de tercers configurats retornen l'error Meta `#10 Application does not have permission for this action`;
+- per tant, el bloqueig actual és de **permís/revisió de Meta**, no de capacitat tècnica del recopilador.
+
+A Facebook, la via oficial per llegir publicacions públiques de pàgines que no gestionam és **Page Public Content Access**, subjecta a les condicions i revisió de Meta.
+
+A Instagram, Business Discovery permet treballar amb comptes professionals de tercers, però l'accés efectiu depèn dels permisos i del nivell d'accés concedit a l'app. Fins que Meta aprovi aquesta part, Sóller Ara manté les fonts socials de tercers com a complement i prioritza RSS, webs oficials i APIs obertes.
+
 ## X i Facebook
 
 X no s'activa automàticament mentre vulguem mantenir el projecte amb cost addicional 0 €, perquè la lectura mitjançant l'API oficial és de pagament.
