@@ -1187,6 +1187,49 @@ def fetch_youtube_channel(source: dict) -> list[dict]:
     return posts[:max_items]
 
 
+def fetch_freenewsapi_search(source: dict) -> list[dict]:
+    endpoint = source.get("url", "https://freenewsapi.ai/v1/search")
+    host = clean_text(source.get("host"))
+    query_terms = [
+        clean_text(str(term))
+        for term in source.get("query_terms", [])
+        if clean_text(str(term))
+    ]
+    if not host or not query_terms:
+        return []
+
+    max_items = int(source.get("max_items", 25))
+    seen_urls: set[str] = set()
+    posts: list[dict] = []
+
+    for term in query_terms:
+        query = urlencode({
+            "host": host,
+            "q": term,
+            "size": max_items,
+            "fields": "title,url,published_at,lang",
+        })
+        payload, _ = fetch_bytes(
+            f"{endpoint}?{query}",
+            "application/json, text/plain;q=0.9, */*;q=0.8",
+        )
+        parsed = json.loads(payload.decode("utf-8", errors="replace"))
+
+        for item in parsed.get("results", []):
+            title = clean_text(item.get("title"))
+            url = clean_text(item.get("url"))
+            published_at = parse_date(item.get("published_at"))
+            if not title or not url or not published_at or url in seen_urls:
+                continue
+            if urlparse(url).netloc.casefold() != host.casefold():
+                continue
+            seen_urls.add(url)
+            posts.append(build_post(source, title, "", url, published_at))
+
+    posts.sort(key=sort_key, reverse=True)
+    return posts[: max_items * max(1, len(query_terms))]
+
+
 def fetch_source(source: dict) -> list[dict]:
     if source["type"] in ("rss", "atom"):
         payload, _ = fetch_bytes(
@@ -1203,6 +1246,9 @@ def fetch_source(source: dict) -> list[dict]:
 
     if source["type"] == "html_listing_regex":
         return fetch_html_listing_regex(source)
+
+    if source["type"] == "freenewsapi_search":
+        return fetch_freenewsapi_search(source)
 
     if source["type"] == "soller2010_news":
         return fetch_soller2010_news(source)
