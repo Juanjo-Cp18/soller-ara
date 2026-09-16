@@ -222,7 +222,8 @@ def main() -> int:
     if github_env:
         with open(github_env, "a", encoding="utf-8") as env_file:
             env_file.write(f"OWN_POST_ID={post_id}\n")
-            env_file.write(f"OWN_POST_URL={post_url}\n")\n            env_file.write(f"OWN_IMAGE_URL={final_image_url}\n")
+            env_file.write(f"OWN_POST_URL={post_url}\n")
+            env_file.write(f"OWN_IMAGE_URL={final_image_url}\n")
 
     if MANUAL_FILE.exists():
         manual = json.loads(MANUAL_FILE.read_text(encoding="utf-8"))
