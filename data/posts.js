@@ -1,7 +1,7 @@
 window.SOLLER_ARA_DATA = {
   "version": 19,
   "generator_version": "0.19",
-  "fetched_at": "2026-09-15T22:06:50.365856+00:00",
+  "fetched_at": "2026-09-16T00:14:07.271958+00:00",
   "source_count": 6,
   "source_status": [
     {
@@ -866,6 +866,26 @@ window.SOLLER_ARA_DATA = {
       "related_sources": []
     },
     {
+      "id": "7ce73fcaa5e6876daf0f",
+      "category": "agenda",
+      "source_id": "ajuntament-soller-noticies",
+      "source": "Ajuntament de Sóller",
+      "source_type": "official",
+      "language": "ca",
+      "locality": "Sóller",
+      "published_at": "2026-09-07T08:51:51+00:00",
+      "title": "Anunci de la convocatòria del pròxim ple ordinari",
+      "summary": "Tindrà lloc dimecres, 9 de setembre, a les 11:00h",
+      "url": "https://ajsoller.net/ca/noticies/anunci-de-la-convocatoria-del-proxim-ple-ordinari",
+      "platform": null,
+      "account": null,
+      "media_type": null,
+      "content_policy": "short_factual_excerpt",
+      "rights_status": "public_source_reviewed",
+      "image_allowed": false,
+      "related_sources": []
+    },
+    {
       "id": "7e3b0bbe783cbfa22dfd",
       "category": "alerts",
       "source_id": "setmanari-soller",
@@ -882,26 +902,6 @@ window.SOLLER_ARA_DATA = {
       "media_type": null,
       "content_policy": "headline_date_link_only",
       "rights_status": "permission_pending",
-      "image_allowed": false,
-      "related_sources": []
-    },
-    {
-      "id": "99baa9bf4ff527ba42a8",
-      "category": "services",
-      "source_id": "ajuntament-soller-noticies",
-      "source": "Ajuntament de Sóller",
-      "source_type": "official",
-      "language": "ca",
-      "locality": "Sóller",
-      "published_at": "2026-09-07T05:37:04+00:00",
-      "title": "El tinent de batle assisteix a la presentació de l’inici de les obres d’ampliació de la rotonda de la ITV de Son Castelló",
-      "summary": "El tinent de batle de Sóller, Carlos Darder, ha assistit avui a l’inici de les obres d’ampliació de la rotonda de la ITV de Son Castelló, en un acte encapçalat pel president del Consell de Mallorca, Llorenç Galmés, amb…",
-      "url": "https://ajsoller.net/ca/noticies/el-tinent-de-batle-assisteix-la-presentacio-de-linici-de-les-obres-dampliacio-de-la",
-      "platform": null,
-      "account": null,
-      "media_type": null,
-      "content_policy": "short_factual_excerpt",
-      "rights_status": "public_source_reviewed",
       "image_allowed": false,
       "related_sources": []
     },
