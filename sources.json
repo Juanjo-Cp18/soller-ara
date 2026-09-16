@@ -1,5 +1,5 @@
 {
-  "version": 10,
+  "version": 12,
   "sources": [
     {
       "id": "ajuntament-soller-noticies",
@@ -109,6 +109,60 @@
       "image_policy": "disabled_until_rights_verified",
       "content_policy": "short_factual_excerpt",
       "rights_status": "cc_by_open_data"
+    },
+    {
+      "id": "ib3-noticies-soller",
+      "name": "IB3 Notícies",
+      "type": "rss",
+      "url": "https://ib3.org/feed",
+      "language": "ca",
+      "locality": "Sóller / Serra de Tramuntana",
+      "source_type": "media",
+      "max_items": 200,
+      "max_age_days": 60,
+      "include_keywords": [
+        "Sóller",
+        "Soller",
+        "Port de Sóller",
+        "Port de Soller",
+        "Vall de Sóller",
+        "Vall de Soller",
+        "Ferrocarril de Sóller",
+        "Tren de Sóller",
+        "Túnel de Sóller",
+        "Serra de Tramuntana"
+      ],
+      "enabled": true,
+      "image_policy": "disabled_until_rights_verified",
+      "content_policy": "headline_date_link_only",
+      "rights_status": "permission_pending"
+    },
+    {
+      "id": "dbalears-soller",
+      "name": "dBalears",
+      "type": "rss",
+      "url": "https://www.dbalears.cat/feed.rss",
+      "language": "ca",
+      "locality": "Sóller / Serra de Tramuntana",
+      "source_type": "media",
+      "max_items": 200,
+      "max_age_days": 60,
+      "include_keywords": [
+        "Sóller",
+        "Soller",
+        "Port de Sóller",
+        "Port de Soller",
+        "Vall de Sóller",
+        "Vall de Soller",
+        "Ferrocarril de Sóller",
+        "Tren de Sóller",
+        "Túnel de Sóller",
+        "Serra de Tramuntana"
+      ],
+      "enabled": true,
+      "image_policy": "disabled_until_rights_verified",
+      "content_policy": "headline_date_link_only",
+      "rights_status": "permission_pending"
     }
   ]
 }
