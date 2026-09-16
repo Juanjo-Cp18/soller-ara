@@ -1,5 +1,5 @@
 {
-  "version": 18,
+  "version": 19,
   "sources": [
     {
       "id": "ajuntament-soller-noticies",
@@ -241,15 +241,13 @@
     {
       "id": "tib-avisos-soller",
       "name": "TIB · Avisos",
-      "type": "html_listing_regex",
-      "url": "https://www.tib.org/ca/avisos",
+      "type": "freenewsapi_search",
+      "url": "https://freenewsapi.ai/v1/search",
       "language": "ca",
       "locality": "Sóller / Port de Sóller / Fornalutx",
       "source_type": "official",
-      "allowed_host": "tib.org",
-      "article_url_regex": "^/ca/(?:w/[^/?#]+|avisos/-/asset_publisher/[^/]+/content/[^/?#]+)$",
-      "max_items": 40,
-      "max_age_days": 120,
+      "max_items": 30,
+      "max_age_days": 180,
       "include_keywords": [
         "Sóller",
         "Soller",
@@ -271,6 +269,52 @@
         "linia 232"
       ],
       "force_category": "alerts",
+      "enabled": true,
+      "image_policy": "disabled_until_rights_verified",
+      "content_policy": "short_factual_excerpt",
+      "rights_status": "official_public_source",
+      "host": "www.tib.org",
+      "query_terms": [
+        "Sóller",
+        "Port de Sóller",
+        "Fornalutx",
+        "Biniaraix",
+        "L203",
+        "L204",
+        "L231",
+        "L232"
+      ]
+    },
+    {
+      "id": "consell-mallorca-soller",
+      "name": "Consell de Mallorca",
+      "type": "freenewsapi_search",
+      "url": "https://freenewsapi.ai/v1/search",
+      "host": "www.conselldemallorca.es",
+      "language": "ca",
+      "locality": "Sóller / Fornalutx / Serra de Tramuntana",
+      "source_type": "official",
+      "query_terms": [
+        "Sóller",
+        "Port de Sóller",
+        "Fornalutx",
+        "Biniaraix",
+        "Serra de Tramuntana"
+      ],
+      "include_keywords": [
+        "Sóller",
+        "Soller",
+        "Port de Sóller",
+        "Port de Soller",
+        "Fornalutx",
+        "Biniaraix",
+        "Serra de Tramuntana",
+        "Fàbrica Nova",
+        "Fabrica Nova",
+        "Torre Picada"
+      ],
+      "max_items": 30,
+      "max_age_days": 180,
       "enabled": true,
       "image_policy": "disabled_until_rights_verified",
       "content_policy": "short_factual_excerpt",
