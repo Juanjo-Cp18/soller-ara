@@ -4,7 +4,13 @@ Projecte públic i sense ànim de lucre per reunir informació local de Sóller 
 
 ## Versió
 
-**v0.34**
+**v0.35**
+
+## Novetats de la v0.35
+
+- TIB passa a consultar-se mitjançant un índex de metadades sobre el domini oficial `tib.org`, evitant els problemes del HTML dinàmic de Liferay.
+- S'afegeix **Consell de Mallorca** com a font oficial filtrada per Sóller, Port de Sóller, Fornalutx, Biniaraix i Serra de Tramuntana.
+- Es crea `META_APP_REVIEW.md` amb el cas d'ús, estat tècnic, criteri de minimització de dades i material pendent per sol·licitar la revisió de Meta.
 
 ## Novetats de la v0.34
 
