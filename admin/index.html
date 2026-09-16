@@ -50,8 +50,9 @@
       <section id="dashboard" class="module active">
         <div class="module-heading">
           <div><p class="eyebrow">Resumen</p><h2>Estado de Sóller Ara</h2></div>
-          <button id="refreshButton" class="button-secondary" type="button">Actualizar</button>
+          <div class="header-actions"><button id="systemCheckButton" class="button-secondary" type="button">Comprobar sistema</button><button id="refreshButton" class="button-secondary" type="button">Actualizar</button></div>
         </div>
+        <div id="systemCheckResult" class="panel-card" hidden></div>
         <div id="metrics" class="metrics"></div>
         <div class="panel-grid">
           <article class="panel-card">
