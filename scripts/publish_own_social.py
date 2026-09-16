@@ -11,9 +11,14 @@ import json
 import os
 import sys
 import time
+from datetime import datetime, timezone
+from pathlib import Path
 from urllib.error import HTTPError
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen
+
+ROOT = Path(__file__).resolve().parents[1]
+LOG_FILE = ROOT / "data" / "social_publish_log.json"
 
 TOKEN = os.environ.get("META_ACCESS_TOKEN", "").strip()
 GRAPH_VERSION = os.environ.get("META_GRAPH_VERSION", "v26.0").strip() or "v26.0"
@@ -23,7 +28,41 @@ IMAGE_URL = (os.environ.get("OWN_IMAGE_URL", "").strip() or os.environ.get("POST
 DO_FACEBOOK = os.environ.get("PUBLISH_FACEBOOK", "false").lower() == "true"
 DO_INSTAGRAM = os.environ.get("PUBLISH_INSTAGRAM", "false").lower() == "true"
 CONFIRMATION = os.environ.get("PUBLISH_CONFIRMATION", "").strip()
+POST_ID = os.environ.get("OWN_POST_ID", "").strip()
 POST_URL = (os.environ.get("OWN_POST_URL", "").strip() or os.environ.get("POST_URL", "").strip() or "https://juanjo-cp18.github.io/soller-ara/")
+
+
+def load_publish_log() -> dict:
+    if not LOG_FILE.exists():
+        return {"version": 1, "entries": []}
+    try:
+        return json.loads(LOG_FILE.read_text(encoding="utf-8"))
+    except Exception:
+        return {"version": 1, "entries": []}
+
+
+def already_published(log: dict, platform: str) -> bool:
+    if not POST_ID:
+        return False
+    for entry in reversed(log.get("entries") or []):
+        if entry.get("post_id") == POST_ID and entry.get("platform") == platform:
+            return entry.get("status") == "success"
+    return False
+
+
+def record_result(log: dict, platform: str, status: str, remote_id: str = "", error: str = "") -> None:
+    entries = log.setdefault("entries", [])
+    entries.append({
+        "post_id": POST_ID,
+        "platform": platform,
+        "status": status,
+        "remote_id": remote_id,
+        "post_url": POST_URL,
+        "recorded_at": datetime.now(timezone.utc).isoformat(),
+        "error": error,
+    })
+    LOG_FILE.parent.mkdir(parents=True, exist_ok=True)
+    LOG_FILE.write_text(json.dumps(log, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 
 def graph(path: str, method: str = "GET", params: dict | None = None, token: str | None = None) -> dict:
@@ -100,7 +139,7 @@ def discover_accounts() -> tuple[str, str, str, str]:
     return page_id, page_token, ig_id, ig_username
 
 
-def publish_facebook(page_id: str, page_token: str) -> None:
+def publish_facebook(page_id: str, page_token: str) -> str:
     message = f"{TITLE}\n\n{BODY}".strip()
     result = graph(
         f"{page_id}/feed",
@@ -111,13 +150,14 @@ def publish_facebook(page_id: str, page_token: str) -> None:
         },
         token=page_token,
     )
-    identifier = result.get("post_id") or result.get("id")
+    identifier = str(result.get("post_id") or result.get("id") or "")
     if not identifier:
         raise RuntimeError("Facebook no ha retornat identificador de publicació.")
     print(f"FACEBOOK_OK id={identifier}")
+    return identifier
 
 
-def publish_instagram(ig_id: str, ig_username: str, page_token: str) -> None:
+def publish_instagram(ig_id: str, ig_username: str, page_token: str) -> str:
     if not ig_id:
         raise RuntimeError("No s'ha trobat el compte Instagram vinculat a Sóller Ara.")
     if not IMAGE_URL:
@@ -161,6 +201,7 @@ def publish_instagram(ig_id: str, ig_username: str, page_token: str) -> None:
     if not media_id:
         raise RuntimeError("Instagram no ha retornat identificador de publicació.")
     print(f"INSTAGRAM_OK account=@{ig_username or '?'} media_id={media_id}")
+    return media_id
 
 
 def main() -> int:
@@ -177,16 +218,45 @@ def main() -> int:
         print("ERROR: falta títol o text.", file=sys.stderr)
         return 2
 
+    log = load_publish_log()
+
     try:
         page_id, page_token, ig_id, ig_username = discover_accounts()
-        if DO_FACEBOOK:
-            publish_facebook(page_id, page_token)
-        if DO_INSTAGRAM:
-            publish_instagram(ig_id, ig_username, page_token)
-        return 0
     except Exception as exc:
         print(f"ERROR publicació social: {exc}", file=sys.stderr)
+        if DO_FACEBOOK:
+            record_result(log, "facebook", "error", error=str(exc))
+        if DO_INSTAGRAM:
+            record_result(log, "instagram", "error", error=str(exc))
         return 1
+
+    failed = False
+
+    if DO_FACEBOOK:
+        if already_published(log, "facebook"):
+            print("FACEBOOK_SKIP: aquesta publicació ja consta com publicada.")
+        else:
+            try:
+                remote_id = publish_facebook(page_id, page_token)
+                record_result(log, "facebook", "success", remote_id=remote_id)
+            except Exception as exc:
+                failed = True
+                record_result(log, "facebook", "error", error=str(exc))
+                print(f"FACEBOOK_ERROR: {exc}", file=sys.stderr)
+
+    if DO_INSTAGRAM:
+        if already_published(log, "instagram"):
+            print("INSTAGRAM_SKIP: aquesta publicació ja consta com publicada.")
+        else:
+            try:
+                remote_id = publish_instagram(ig_id, ig_username, page_token)
+                record_result(log, "instagram", "success", remote_id=remote_id)
+            except Exception as exc:
+                failed = True
+                record_result(log, "instagram", "error", error=str(exc))
+                print(f"INSTAGRAM_ERROR: {exc}", file=sys.stderr)
+
+    return 1 if failed else 0
 
 
 if __name__ == "__main__":
