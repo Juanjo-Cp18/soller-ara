@@ -90,7 +90,8 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/manual_posts.json data/posts.json data/posts.js noticies assets/generated
+          git add data/manual_posts.json data/posts.json data/posts.js noticies
+          git add assets/generated 2>/dev/null || true
           git commit -m "publicar: contingut propi de Sóller Ara"
           git pull --rebase origin main
           git push origin HEAD:main
@@ -107,8 +108,6 @@ jobs:
           POST_TITLE: ${{ inputs.title }}
           POST_BODY: ${{ inputs.body }}
           POST_IMAGE_URL: ${{ inputs.image_url }}
-          OWN_IMAGE_URL: ${{ env.OWN_IMAGE_URL }}
-          OWN_POST_URL: ${{ env.OWN_POST_URL }}
           PUBLISH_FACEBOOK: ${{ inputs.facebook }}
           PUBLISH_INSTAGRAM: ${{ inputs.instagram }}
         run: python scripts/publish_own_social.py
