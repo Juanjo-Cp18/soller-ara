@@ -26,9 +26,9 @@ Això indica que el bloqueig actual és de permisos/revisió, no de connectivita
 
 ## URLs públiques verificades
 
-- Sóller Ara: https://juanjo-cp18.github.io/soller-ara/
-- Política de privacitat: https://juanjo-cp18.github.io/soller-ara/privacy.html
-- Eliminació de dades: https://juanjo-cp18.github.io/soller-ara/data-deletion.html
+- Sóller Ara: https://soller-ara.github.io/soller-ara/
+- Política de privacitat: https://soller-ara.github.io/soller-ara/privacy.html
+- Eliminació de dades: https://soller-ara.github.io/soller-ara/data-deletion.html
 
 Aquestes pàgines es despleguen mitjançant GitHub Pages i el workflow de desplegament ha finalitzat correctament.
 
@@ -90,9 +90,9 @@ Sóller Ara no necesita descargar ni almacenar permanentemente fotos o vídeos d
 
 ## Instrucciones para el revisor
 
-- URL principal: https://juanjo-cp18.github.io/soller-ara/
-- Política de privacidad: https://juanjo-cp18.github.io/soller-ara/privacy.html
-- Eliminación de datos: https://juanjo-cp18.github.io/soller-ara/data-deletion.html
+- URL principal: https://soller-ara.github.io/soller-ara/
+- Política de privacidad: https://soller-ara.github.io/soller-ara/privacy.html
+- Eliminación de datos: https://soller-ara.github.io/soller-ara/data-deletion.html
 - La aplicación es un agregador local informativo sin ánimo de lucro.
 - El idioma predeterminado es catalán; puede cambiarse a español o inglés desde la cabecera.
 - La funcionalidad solicitada se encuentra en la sección **Xarxes**.
