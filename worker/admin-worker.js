@@ -41,6 +41,10 @@ export default {
         return await publish(request, env, cors);
       }
 
+      if (url.pathname === "/api/edit" && request.method === "POST") {
+        return await editOwn(request, env, cors);
+      }
+
       if (url.pathname === "/api/moderate" && request.method === "POST") {
         return await moderate(request, env, cors);
       }
@@ -241,7 +245,7 @@ async function systemCheck(env, cors) {
     "Authorization": `Bearer ${env.GITHUB_TOKEN}`,
     "Accept": "application/vnd.github+json",
     "X-GitHub-Api-Version": "2022-11-28",
-    "User-Agent": "SollerAra-Admin/0.42",
+    "User-Agent": "SollerAra-Admin/0.43",
   };
 
   const repoResponse = await fetch(`https://api.github.com/repos/${owner}/${repo}`, { headers });
@@ -251,7 +255,7 @@ async function systemCheck(env, cors) {
     detail: repoResponse.ok ? `${owner}/${repo} accesible` : `HTTP ${repoResponse.status}`,
   });
 
-  const workflows = ["publish-own-content.yml", "manage-posts.yml"];
+  const workflows = ["publish-own-content.yml", "edit-own-content.yml", "manage-posts.yml"];
   for (const workflow of workflows) {
     const response = await fetch(
       `https://api.github.com/repos/${owner}/${repo}/actions/workflows/${workflow}`,
@@ -342,6 +346,37 @@ async function publish(request, env, cors) {
   });
 
   return json({ ok: true, workflow: "Sóller Ara · publicar contingut propi" }, 202, cors);
+}
+
+async function editOwn(request, env, cors) {
+  const body = await request.json().catch(() => ({}));
+  const postId = String(body.post_id || "").trim();
+  const title = String(body.title || "").trim();
+  const text = String(body.body || "").trim();
+
+  if (!postId || !title || !text) {
+    return json({ error: "Faltan datos para editar la publicación." }, 400, cors);
+  }
+  if (title.length > 180) {
+    return json({ error: "El título es demasiado largo." }, 400, cors);
+  }
+
+  const allowedCategories = new Set(["news", "agenda", "alerts", "services", "culture", "sports", "commerce"]);
+  const allowedLanguages = new Set(["ca", "es", "en"]);
+  const category = allowedCategories.has(body.category) ? body.category : "news";
+  const language = allowedLanguages.has(body.language) ? body.language : "ca";
+
+  await githubDispatch(env, "edit-own-content.yml", {
+    confirmation: "GUARDAR",
+    post_id: postId,
+    title,
+    body: text,
+    category,
+    language,
+    image_url: String(body.image_url || "").trim(),
+  });
+
+  return json({ ok: true, workflow: "Sóller Ara · editar contingut propi" }, 202, cors);
 }
 
 async function moderate(request, env, cors) {
