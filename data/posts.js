@@ -1,8 +1,8 @@
 window.SOLLER_ARA_DATA = {
-  "version": 22,
-  "generator_version": "0.22",
-  "fetched_at": "2026-09-16T07:42:18.336773+00:00",
-  "source_count": 6,
+  "version": 31,
+  "generator_version": "0.31",
+  "fetched_at": "2026-09-16T09:23:46.584330+00:00",
+  "source_count": 7,
   "source_status": [
     {
       "source_id": "ajuntament-soller-noticies",
@@ -56,6 +56,15 @@ window.SOLLER_ARA_DATA = {
       "method": "youtube_channel",
       "ok": true,
       "count": 1,
+      "error": null
+    },
+    {
+      "source_id": "goib-noticies-soller",
+      "name": "Govern de les Illes Balears",
+      "source_type": "official",
+      "method": "rss",
+      "ok": true,
+      "count": 0,
       "error": null
     }
   ],
