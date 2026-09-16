@@ -459,7 +459,7 @@ function renderFeed() {
           ${socialEmbed}
           ${relatedHtml}
           <div class="card-actions">
-            <a class="origin-link" href="${escapeAttribute(safeUrl)}" target="_blank" rel="noopener noreferrer">${t("card.original")} →</a>
+            ${post.source_type === "own" ? "" : `<a class="origin-link" href="${escapeAttribute(safeUrl)}" target="_blank" rel="noopener noreferrer">${t("card.original")} →</a>`}
             <button class="muted-button" type="button" data-share-id="${escapeAttribute(post.id || "")}">${t("card.share")}</button>
           </div>
         </div>
