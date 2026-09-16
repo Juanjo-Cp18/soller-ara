@@ -29,7 +29,7 @@ DO_FACEBOOK = os.environ.get("PUBLISH_FACEBOOK", "false").lower() == "true"
 DO_INSTAGRAM = os.environ.get("PUBLISH_INSTAGRAM", "false").lower() == "true"
 CONFIRMATION = os.environ.get("PUBLISH_CONFIRMATION", "").strip()
 POST_ID = os.environ.get("OWN_POST_ID", "").strip()
-POST_URL = (os.environ.get("OWN_POST_URL", "").strip() or os.environ.get("POST_URL", "").strip() or "https://juanjo-cp18.github.io/soller-ara/")
+POST_URL = (os.environ.get("OWN_POST_URL", "").strip() or os.environ.get("POST_URL", "").strip() or "https://soller-ara.github.io/soller-ara/")
 
 
 def load_publish_log() -> dict:
@@ -165,7 +165,7 @@ def publish_instagram(ig_id: str, ig_username: str, page_token: str) -> str:
             "Instagram necessita una imatge pública. Afegeix POST_IMAGE_URL o desactiva Instagram."
         )
 
-    caption = f"{TITLE}\n\n{BODY}\n\nNotícia completa: {POST_URL}\nEnllaços: https://juanjo-cp18.github.io/soller-ara/enllacos.html\n\n#Sóller #SollerAra".strip()
+    caption = f"{TITLE}\n\n{BODY}\n\nNotícia completa: {POST_URL}\nEnllaços: https://soller-ara.github.io/soller-ara/enllacos.html\n\n#Sóller #SollerAra".strip()
     container = graph(
         f"{ig_id}/media",
         method="POST",
