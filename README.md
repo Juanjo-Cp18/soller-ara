@@ -4,7 +4,14 @@ Projecte públic i sense ànim de lucre per reunir informació local de Sóller 
 
 ## Versió
 
-**v0.19**
+**v0.20**
+
+## Novetats de la v0.20
+
+- Si `META_ACCESS_TOKEN` està configurat però `META_IG_USER_ID` encara no existeix, GitHub Actions intenta descobrir automàticament la pàgina **Sóller Ara** i el seu `instagram_business_account.id`.
+- El token de Meta mai s'imprimeix als logs.
+- Si el descobriment automàtic funciona, el connector d'Instagram pot continuar sense copiar manualment l'ID.
+- Si Meta no permet aquesta consulta amb el token de sistema, el connector queda inactiu sense afectar la resta de fonts.
 
 ## Novetats de la v0.19
 

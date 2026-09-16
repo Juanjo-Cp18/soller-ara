@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Actualitza data/posts.json a partir de les fonts públiques configurades.
 
-v0.19: prepara la integració oficial d'Instagram mitjançant Meta Business Discovery.
+v0.20: descobreix automàticament l'Instagram Business ID a partir del token de Meta.
 """
 
 from __future__ import annotations
@@ -29,7 +29,7 @@ OUTPUT_FILE = ROOT / "data" / "posts.json"
 JS_OUTPUT_FILE = ROOT / "data" / "posts.js"
 MAX_POSTS_PER_SOURCE = 40
 SUMMARY_LIMIT = 260
-USER_AGENT = "SollerAra/0.19 (+https://github.com/Juanjo-Cp18/soller-ara)"
+USER_AGENT = "SollerAra/0.20 (+https://github.com/Juanjo-Cp18/soller-ara)"
 RELATED_WINDOW_HOURS = 72
 
 CATEGORY_KEYWORDS = {
@@ -508,6 +508,40 @@ def social_summary_from_text(source_name: str, text: str) -> str:
     return labels.get(category, f"{source_name} ha publicat una nova actualització.")
 
 
+def discover_meta_instagram_account(token: str, graph_version: str) -> dict | None:
+    """Descobreix la pàgina Sóller Ara i el seu Instagram professional sense exposar tokens."""
+    fields = "id,name,instagram_business_account{id,username}"
+    endpoint = (
+        f"https://graph.facebook.com/{graph_version}/me/accounts?"
+        + urlencode({"fields": fields})
+    )
+    payload = fetch_json_bearer(endpoint, token)
+    pages = payload.get("data") or []
+
+    # Prioritat: pàgina Sóller Ara. Si només hi ha una pàgina amb Instagram, usa-la.
+    candidates: list[dict] = []
+    for page in pages:
+        instagram = page.get("instagram_business_account") or {}
+        if not instagram.get("id"):
+            continue
+        candidate = {
+            "page_id": page.get("id"),
+            "page_name": page.get("name"),
+            "ig_user_id": str(instagram.get("id")),
+            "username": instagram.get("username"),
+        }
+        candidates.append(candidate)
+
+    for candidate in candidates:
+        if clean_text(candidate.get("page_name")).casefold() in {"soller ara", "sóller ara"}:
+            return candidate
+
+    if len(candidates) == 1:
+        return candidates[0]
+
+    return None
+
+
 def fetch_meta_instagram_source(source: dict, token: str, ig_user_id: str, graph_version: str) -> list[dict]:
     username = str(source.get("username") or source.get("account") or "").lstrip("@").strip()
     if not username:
@@ -578,7 +612,7 @@ def fetch_optional_meta_social_sources() -> tuple[list[dict], list[dict], list[d
     source_status: list[dict] = []
     posts: list[dict] = []
 
-    if not token or not ig_user_id:
+    if not token:
         for source in targets:
             integration_status.append({
                 "platform": "Instagram",
@@ -587,7 +621,41 @@ def fetch_optional_meta_social_sources() -> tuple[list[dict], list[dict], list[d
                 "configured": False,
                 "ok": False,
                 "count": 0,
-                "status": "credentials_required",
+                "status": "token_required",
+                "error": None,
+            })
+        return posts, source_status, integration_status
+
+    discovery: dict | None = None
+    if not ig_user_id:
+        try:
+            discovery = discover_meta_instagram_account(token, graph_version)
+            if discovery:
+                ig_user_id = discovery["ig_user_id"]
+                print(
+                    "META_DISCOVERY OK "
+                    f"page={discovery.get('page_name')} "
+                    f"instagram=@{discovery.get('username') or '?'} "
+                    f"ig_user_id={ig_user_id}"
+                )
+            else:
+                print(
+                    "META_DISCOVERY sense resultat: no s'ha trobat una única pàgina Sóller Ara amb Instagram.",
+                    file=sys.stderr,
+                )
+        except Exception as exc:
+            print(f"META_DISCOVERY ERROR: {exc}", file=sys.stderr)
+
+    if not ig_user_id:
+        for source in targets:
+            integration_status.append({
+                "platform": "Instagram",
+                "name": source.get("name"),
+                "account": source.get("account"),
+                "configured": False,
+                "ok": False,
+                "count": 0,
+                "status": "ig_user_id_discovery_required",
                 "error": None,
             })
         return posts, source_status, integration_status
@@ -962,8 +1030,8 @@ def main() -> int:
     ordered_posts, related_pair_count = annotate_related_posts(ordered_posts)
 
     payload = {
-        "version": 19,
-        "generator_version": "0.19",
+        "version": 20,
+        "generator_version": "0.20",
         "fetched_at": datetime.now(timezone.utc).isoformat(),
         "source_count": len(source_status),
         "source_status": source_status,

@@ -57,3 +57,12 @@ Es poden afegir més comptes professionals a `social_sources.json`.
 X no s'activa automàticament mentre vulguem mantenir el projecte amb cost addicional 0 €, perquè la lectura mitjançant l'API oficial és de pagament.
 
 Per llegir posts públics de pàgines de Facebook que no gestionam, Meta pot requerir **Page Public Content Access** i revisió de l'app. Per això Facebook continua de moment com a accés directe.
+
+
+## Descobriment automàtic de l'Instagram ID (v0.20)
+
+Quan existeix `META_ACCESS_TOKEN` però no `META_IG_USER_ID`, Sóller Ara prova la consulta oficial de pàgines administrades i cerca la pàgina **Sóller Ara** amb un `instagram_business_account` vinculat.
+
+Només s'escriuen als logs dades no secretes: nom de pàgina, username d'Instagram i identificador numèric. El token mai s'imprimeix.
+
+Si Meta no retorna la pàgina amb un token de sistema, caldrà obtenir l'ID per una altra via oficial i guardar-lo com `META_IG_USER_ID`.
