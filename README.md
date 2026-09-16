@@ -4,7 +4,16 @@ Projecte públic i sense ànim de lucre per reunir informació local de Sóller 
 
 ## Versió
 
-**v0.32**
+**v0.33**
+
+## Novetats de la v0.33
+
+- S'elimina de la portada el bloc separat **Emergències i meteorologia** per evitar duplicar avisos que ja entren al feed.
+- AEMET continua com a font automàtica: els avisos meteorològics no desapareixen, simplement deixen de tenir un bloc duplicat.
+- S'incorporen **Diario de Mallorca**, **Última Hora** i **Mallorca Directo**.
+- Diario de Mallorca es llegeix des del seu RSS de Part Forana i es filtra per Sóller, Port, Vall, Fornalutx, Biniaraix, tren i túnel.
+- Última Hora i Mallorca Directo es consulten des de les seves pàgines específiques de Sóller.
+- En els mitjans de comunicació es manté la política de mostrar **titular, data i enllaç original**, sense copiar el cos de la notícia.
 
 ## Novetats de la v0.32
 
