@@ -963,27 +963,31 @@ def fetch_html_listing_regex(source: dict) -> list[dict]:
     parser = RegexListingLinkParser(source["url"], allowed_host, article_url_regex)
     parser.feed(listing_html)
 
-    if not parser.links and source.get("diagnostic_links"):
-        raw_hrefs = re.findall(r'''href=["']([^"']+)["']''', listing_html, flags=re.I)
-        candidates: list[str] = []
-        seen_candidates: set[str] = set()
-        for href in raw_hrefs:
-            absolute = urljoin(source["url"], html.unescape(href))
-            parsed_candidate = urlparse(absolute)
-            host = parsed_candidate.netloc.casefold()
-            if host not in {allowed_host.casefold(), f"www.{allowed_host.casefold()}"}:
-                continue
-            clean_candidate = parsed_candidate._replace(fragment="").geturl()
-            if clean_candidate in seen_candidates:
-                continue
-            seen_candidates.add(clean_candidate)
-            candidates.append(clean_candidate)
-        for candidate in candidates[:40]:
-            print(f"DIAGNOSTIC_LINK {source.get('id')}: {candidate}", file=sys.stderr)
+    # Alguns portals Liferay generen hrefs que HTMLParser no associa bé amb
+    # l'àncora visible. Afegim una segona passada sobre els href crus.
+    candidate_links: list[tuple[str, str]] = list(parser.links)
+    raw_hrefs = re.findall(r'''href=["']([^"']+)["']''', listing_html, flags=re.I)
+    for href in raw_hrefs:
+        absolute = urljoin(source["url"], html.unescape(href))
+        parsed_candidate = urlparse(absolute)
+        host = parsed_candidate.netloc.casefold()
+        if host not in {allowed_host.casefold(), f"www.{allowed_host.casefold()}"}:
+            continue
+        if not re.search(article_url_regex, parsed_candidate.path, flags=re.I):
+            continue
+        clean_candidate = parsed_candidate._replace(query="", fragment="").geturl()
+        candidate_links.append((clean_candidate, ""))
+
+    if source.get("diagnostic_links"):
+        for candidate_url, candidate_title in candidate_links[:40]:
+            print(
+                f"MATCHED_LINK {source.get('id')}: {candidate_url} | title={candidate_title}",
+                file=sys.stderr,
+            )
 
     unique_links: list[tuple[str, str]] = []
     seen: set[str] = set()
-    for url, title in parser.links:
+    for url, title in candidate_links:
         if url in seen:
             continue
         seen.add(url)
@@ -1031,6 +1035,13 @@ def fetch_html_listing_regex(source: dict) -> list[dict]:
 
         if not title or not published_at:
             continue
+
+        if source.get("diagnostic_links"):
+            print(
+                f"PARSED_ITEM {source.get('id')}: {published_at} | {title} | {url}",
+                file=sys.stderr,
+            )
+
         posts.append(build_post(source, title, summary, url, published_at))
 
     return posts
