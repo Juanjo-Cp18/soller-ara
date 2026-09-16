@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex,nofollow,noarchive" />
+  <meta name="theme-color" content="#0f766e" />
+  <title>Administración · Sóller Ara</title>
+  <link rel="stylesheet" href="./admin.css?v=0.41" />
+</head>
+<body>
+  <main class="admin-shell">
+    <section id="loginView" class="login-card">
+      <div class="admin-brand">
+        <span class="brand-mark">SA</span>
+        <div><strong>Sóller Ara</strong><span>Administración</span></div>
+      </div>
+      <h1>Acceso privado</h1>
+      <p>Introduce la clave de administración.</p>
+      <form id="loginForm">
+        <label for="password">Clave de acceso</label>
+        <input id="password" name="password" type="password" autocomplete="current-password" required />
+        <button type="submit">Entrar</button>
+      </form>
+      <p id="loginMessage" class="message" aria-live="polite"></p>
+      <p id="setupMessage" class="setup-note" hidden>
+        El backend de Administración todavía no está configurado.
+      </p>
+    </section>
+
+    <section id="adminView" class="admin-app" hidden>
+      <header class="admin-header">
+        <div class="admin-brand">
+          <span class="brand-mark">SA</span>
+          <div><strong>Sóller Ara</strong><span>Administración</span></div>
+        </div>
+        <div class="header-actions">
+          <span id="connectionState" class="status-pill">Conectado</span>
+          <button id="logoutButton" class="button-secondary" type="button">Salir</button>
+        </div>
+      </header>
+
+      <nav class="admin-nav" aria-label="Módulos de administración">
+        <button class="nav-button active" data-view="dashboard" type="button">Panel</button>
+        <button class="nav-button" data-view="publish" type="button">Publicar</button>
+        <button class="nav-button" data-view="moderation" type="button">Moderación</button>
+      </nav>
+
+      <section id="dashboard" class="module active">
+        <div class="module-heading">
+          <div><p class="eyebrow">Resumen</p><h2>Estado de Sóller Ara</h2></div>
+          <button id="refreshButton" class="button-secondary" type="button">Actualizar</button>
+        </div>
+        <div id="metrics" class="metrics"></div>
+        <div class="panel-grid">
+          <article class="panel-card">
+            <h3>Fuentes</h3>
+            <div id="sourceStatus"></div>
+          </article>
+          <article class="panel-card">
+            <h3>Redes sociales</h3>
+            <div id="socialStatus"></div>
+          </article>
+        </div>
+      </section>
+
+      <section id="publish" class="module">
+        <div class="module-heading">
+          <div><p class="eyebrow">Contenido propio</p><h2>Nueva publicación</h2></div>
+        </div>
+        <form id="publishForm" class="form-card">
+          <label>Título
+            <input name="title" maxlength="180" required />
+          </label>
+          <label>Texto
+            <textarea name="body" rows="7" required></textarea>
+          </label>
+          <div class="form-row">
+            <label>Categoría
+              <select name="category">
+                <option value="news">Noticias</option>
+                <option value="agenda">Agenda</option>
+                <option value="alerts">Avisos</option>
+                <option value="services">Servicios</option>
+                <option value="culture">Cultura</option>
+                <option value="sports">Deportes</option>
+                <option value="commerce">Comercio</option>
+              </select>
+            </label>
+            <label>Idioma
+              <select name="language">
+                <option value="ca">Català</option>
+                <option value="es">Español</option>
+                <option value="en">English</option>
+              </select>
+            </label>
+          </div>
+          <label>URL pública de imagen <span class="hint">(opcional; si queda vacía se genera una tarjeta automática)</span>
+            <input name="image_url" type="url" placeholder="https://..." />
+          </label>
+          <fieldset>
+            <legend>Destinos</legend>
+            <label class="check"><input type="checkbox" checked disabled /> Sóller Ara</label>
+            <label class="check"><input name="facebook" type="checkbox" /> Facebook</label>
+            <label class="check"><input name="instagram" type="checkbox" /> Instagram</label>
+          </fieldset>
+          <div class="publish-preview">
+            <strong>Vista previa</strong>
+            <h3 id="previewTitle">Título de la publicación</h3>
+            <p id="previewBody">El texto aparecerá aquí.</p>
+          </div>
+          <button type="submit">Publicar</button>
+          <p id="publishMessage" class="message" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <section id="moderation" class="module">
+        <div class="module-heading">
+          <div><p class="eyebrow">Control editorial</p><h2>Publicaciones</h2></div>
+          <input id="postSearch" class="search-input" type="search" placeholder="Buscar publicación..." />
+        </div>
+        <div class="moderation-layout">
+          <article class="panel-card">
+            <h3>Publicaciones visibles</h3>
+            <div id="postList" class="post-list"></div>
+          </article>
+          <article class="panel-card">
+            <h3>Ocultadas</h3>
+            <div id="hiddenList" class="post-list"></div>
+          </article>
+        </div>
+        <p id="moderationMessage" class="message" aria-live="polite"></p>
+      </section>
+    </section>
+  </main>
+
+  <script src="./config.js?v=0.41"></script>
+  <script src="./admin.js?v=0.41"></script>
+</body>
+</html>
