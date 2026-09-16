@@ -6,7 +6,7 @@
   <meta name="robots" content="noindex,nofollow,noarchive" />
   <meta name="theme-color" content="#0f766e" />
   <title>Administración · Sóller Ara</title>
-  <link rel="stylesheet" href="./admin.css?v=0.42" />
+  <link rel="stylesheet" href="./admin.css?v=0.43" />
 </head>
 <body>
   <main class="admin-shell">
@@ -68,7 +68,7 @@
 
       <section id="publish" class="module">
         <div class="module-heading">
-          <div><p class="eyebrow">Contenido propio</p><h2>Nueva publicación</h2></div>
+          <div><p class="eyebrow">Contenido propio</p><h2 id="publishHeading">Nueva publicación</h2><p id="editModeNote" class="hint" hidden>La edición modifica la web de Sóller Ara. No modifica publicaciones que ya existan en Facebook o Instagram.</p></div>
         </div>
         <form id="publishForm" class="form-card">
           <label>Título
@@ -111,7 +111,10 @@
             <h3 id="previewTitle">Título de la publicación</h3>
             <p id="previewBody">El texto aparecerá aquí.</p>
           </div>
-          <button type="submit">Publicar</button>
+          <div class="header-actions">
+            <button id="publishSubmitButton" type="submit">Publicar</button>
+            <button id="cancelEditButton" class="button-secondary" type="button" hidden>Cancelar edición</button>
+          </div>
           <p id="publishMessage" class="message" aria-live="polite"></p>
         </form>
       </section>
@@ -136,7 +139,7 @@
     </section>
   </main>
 
-  <script src="./config.js?v=0.42"></script>
-  <script src="./admin.js?v=0.42"></script>
+  <script src="./config.js?v=0.43"></script>
+  <script src="./admin.js?v=0.43"></script>
 </body>
 </html>
