@@ -222,21 +222,25 @@
     const hidden = Array.isArray(statusPayload?.moderation?.hidden_post_ids)
       ? statusPayload.moderation.hidden_post_ids
       : [];
+    const archived = statusPayload?.moderation?.hidden_posts || {};
 
     if (!hidden.length) {
       target.innerHTML = '<p class="empty">No hay publicaciones ocultadas.</p>';
       return;
     }
 
-    target.innerHTML = hidden.map((id) => `
-      <article class="post-item">
-        <h4>${escapeHtml(id)}</h4>
-        <div class="post-meta">Ocultada del feed</div>
-        <div class="post-actions">
-          <button type="button" data-unhide-id="${escapeHtml(id)}">Restaurar</button>
-        </div>
-      </article>
-    `).join("");
+    target.innerHTML = hidden.map((id) => {
+      const post = archived[id] || {};
+      return `
+        <article class="post-item">
+          <h4>${escapeHtml(post.title || id)}</h4>
+          <div class="post-meta">${escapeHtml(post.source || "Publicación")} · Ocultada del feed</div>
+          <div class="post-actions">
+            <button type="button" data-unhide-id="${escapeHtml(id)}">Restaurar</button>
+          </div>
+        </article>
+      `;
+    }).join("");
 
     target.querySelectorAll("[data-unhide-id]").forEach((button) => {
       button.addEventListener("click", () => moderate("unhide", button.dataset.unhideId));
@@ -293,6 +297,40 @@
     }
   }
 
+  function moderationApplied(data, action, postId) {
+    const posts = Array.isArray(data?.posts?.posts) ? data.posts.posts : [];
+    const hidden = Array.isArray(data?.moderation?.hidden_post_ids)
+      ? data.moderation.hidden_post_ids
+      : [];
+    const present = posts.some((post) => post.id === postId);
+    const isHidden = hidden.includes(postId);
+
+    if (action === "hide") return isHidden && !present;
+    if (action === "unhide") return !isHidden && present;
+    if (action === "delete-own") return !present && !isHidden;
+    return false;
+  }
+
+  async function waitForModeration(action, postId) {
+    const attempts = 12;
+    for (let attempt = 1; attempt <= attempts; attempt++) {
+      await new Promise((resolve) => setTimeout(resolve, 2500));
+      const data = await api("/api/status");
+      statusPayload = data;
+      renderMetrics(data);
+      renderSources(data);
+      renderSocial(data);
+      renderPosts();
+
+      if (moderationApplied(data, action, postId)) return true;
+      setMessage(
+        moderationMessage,
+        "Procesando en GitHub… " + attempt + "/" + attempts
+      );
+    }
+    return false;
+  }
+
   async function moderate(action, postId) {
     const labels = {
       "delete-own": "eliminar definitivamente esta publicación propia",
@@ -307,8 +345,22 @@
         method: "POST",
         body: JSON.stringify({ action, post_id: postId }),
       });
-      setMessage(moderationMessage, "Acción enviada correctamente. El cambio aparecerá cuando termine el workflow.", "success");
-      setTimeout(loadStatus, 3500);
+
+      const applied = await waitForModeration(action, postId);
+      if (applied) {
+        const doneLabels = {
+          "hide": "Publicación ocultada correctamente.",
+          "unhide": "Publicación restaurada correctamente.",
+          "delete-own": "Publicación eliminada correctamente.",
+        };
+        setMessage(moderationMessage, doneLabels[action] || "Acción completada.", "success");
+      } else {
+        setMessage(
+          moderationMessage,
+          "La acción se ha enviado, pero está tardando más de lo previsto. Pulsa Actualizar en unos segundos.",
+          "error"
+        );
+      }
     } catch (error) {
       setMessage(moderationMessage, error.message, "error");
     }
