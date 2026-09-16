@@ -1,8 +1,8 @@
 {
-  "version": 33,
-  "generator_version": "0.33",
-  "fetched_at": "2026-09-16T10:30:45.873937+00:00",
-  "source_count": 12,
+  "version": 34,
+  "generator_version": "0.34",
+  "fetched_at": "2026-09-16T10:38:16.872534+00:00",
+  "source_count": 13,
   "source_status": [
     {
       "source_id": "ajuntament-soller-noticies",
@@ -111,6 +111,15 @@
       "ok": true,
       "count": 8,
       "error": null
+    },
+    {
+      "source_id": "tib-avisos-soller",
+      "name": "TIB · Avisos",
+      "source_type": "official",
+      "method": "html_listing_regex",
+      "ok": true,
+      "count": 0,
+      "error": null
     }
   ],
   "social_integration_status": [
@@ -140,15 +149,15 @@
   "errors": [],
   "posts": [
     {
-      "id": "ed3f24c0385e90b103ed",
-      "category": "news",
+      "id": "85f85df365d3bcdba1c3",
+      "category": "agenda",
       "source_id": "youtube-ajuntament-soller",
       "source": "Ajuntament de Sóller · YouTube",
       "source_type": "social",
       "language": "ca",
       "locality": "Sóller",
       "published_at": "2026-09-16T10:00:58+00:00",
-      "title": "Sessió plenària ordinària de l'Ajuntament de Sóller, celebrada el 16 de setembre de 2026.",
+      "title": "Ple ordinari de l'Ajuntament de Sóller, celebrada el 16/9/2026 (Part 2 de la sessió del 9/9/2026).",
       "summary": "Vídeo publicat per Ajuntament de Sóller · YouTube relacionat amb una sessió plenària o activitat municipal.",
       "url": "https://www.youtube.com/watch?v=-c349w_HKS4",
       "platform": "YouTube",
@@ -1381,7 +1390,7 @@
     },
     {
       "id": "7bde627063f88e72027f",
-      "category": "news",
+      "category": "culture",
       "source_id": "ultima-hora-soller",
       "source": "Última Hora",
       "source_type": "media",
@@ -1461,7 +1470,7 @@
     },
     {
       "id": "187a4625f1a6d9b66aa9",
-      "category": "services",
+      "category": "news",
       "source_id": "ultima-hora-soller",
       "source": "Última Hora",
       "source_type": "media",
@@ -1567,7 +1576,7 @@
       "source_type": "media",
       "language": "es",
       "locality": "Sóller",
-      "published_at": "2026-08-13T17:59:00+02:00",
+      "published_at": "2026-08-13T12:00:00+00:00",
       "title": "El fin del eclipse desata el caos para salir de Sóller: discusiones en los buses y atascos de dos horas",
       "summary": "",
       "url": "https://www.ultimahora.es/noticias/part-forana/2026/08/13/2688803/hasta-dos-horas-espera-para-abandonar-soller-tras-eclipse-decenas-personas-esperando-bus.html",
@@ -1661,7 +1670,7 @@
     },
     {
       "id": "39c637cdd311c17ebe84",
-      "category": "culture",
+      "category": "news",
       "source_id": "ultima-hora-soller",
       "source": "Última Hora",
       "source_type": "media",
@@ -1741,7 +1750,7 @@
     },
     {
       "id": "cda6a12ab1e1de548c99",
-      "category": "agenda",
+      "category": "news",
       "source_id": "ultima-hora-soller",
       "source": "Última Hora",
       "source_type": "media",
@@ -1761,7 +1770,7 @@
     },
     {
       "id": "ddd08c6817a93c476172",
-      "category": "culture",
+      "category": "news",
       "source_id": "ultima-hora-soller",
       "source": "Última Hora",
       "source_type": "media",
@@ -1801,7 +1810,7 @@
     },
     {
       "id": "e43fd7a8f511f4e4d2c5",
-      "category": "culture",
+      "category": "news",
       "source_id": "ultima-hora-soller",
       "source": "Última Hora",
       "source_type": "media",
@@ -1821,7 +1830,7 @@
     },
     {
       "id": "cba08a48e309a30959f0",
-      "category": "commerce",
+      "category": "news",
       "source_id": "ultima-hora-soller",
       "source": "Última Hora",
       "source_type": "media",
@@ -1861,7 +1870,7 @@
     },
     {
       "id": "6ab14a8beee9017af34a",
-      "category": "culture",
+      "category": "news",
       "source_id": "ib3-noticies-soller",
       "source": "IB3 Notícies",
       "source_type": "media",
@@ -1901,7 +1910,7 @@
     },
     {
       "id": "087f9169d4b27ccbacd5",
-      "category": "culture",
+      "category": "news",
       "source_id": "mallorca-directo-soller",
       "source": "Mallorca Directo",
       "source_type": "media",
@@ -1921,7 +1930,7 @@
     },
     {
       "id": "e2c13a6fe70ba6fc437c",
-      "category": "culture",
+      "category": "news",
       "source_id": "diario-mallorca-soller",
       "source": "Diario de Mallorca",
       "source_type": "media",
@@ -1941,7 +1950,7 @@
     },
     {
       "id": "3d1f4f253c78d7b2dd00",
-      "category": "culture",
+      "category": "news",
       "source_id": "ultima-hora-soller",
       "source": "Última Hora",
       "source_type": "media",
@@ -2021,7 +2030,7 @@
     },
     {
       "id": "1e5083a6711701c71ed7",
-      "category": "sports",
+      "category": "news",
       "source_id": "mallorca-directo-soller",
       "source": "Mallorca Directo",
       "source_type": "media",
@@ -2041,7 +2050,7 @@
     },
     {
       "id": "8b3599b8d3894971dc94",
-      "category": "culture",
+      "category": "news",
       "source_id": "ultima-hora-soller",
       "source": "Última Hora",
       "source_type": "media",
@@ -2161,7 +2170,7 @@
     },
     {
       "id": "258975cb7794e96bb8d4",
-      "category": "alerts",
+      "category": "news",
       "source_id": "diario-mallorca-soller",
       "source": "Diario de Mallorca",
       "source_type": "media",
@@ -2181,7 +2190,7 @@
     },
     {
       "id": "5484e7e2eb827d252c77",
-      "category": "services",
+      "category": "news",
       "source_id": "ultima-hora-soller",
       "source": "Última Hora",
       "source_type": "media",
@@ -2221,7 +2230,7 @@
     },
     {
       "id": "cb8d717a98d1daff614a",
-      "category": "culture",
+      "category": "news",
       "source_id": "ultima-hora-soller",
       "source": "Última Hora",
       "source_type": "media",
@@ -2321,7 +2330,7 @@
     },
     {
       "id": "7c559dab78638b83aad3",
-      "category": "services",
+      "category": "news",
       "source_id": "ib3-noticies-soller",
       "source": "IB3 Notícies",
       "source_type": "media",
@@ -2341,7 +2350,7 @@
     },
     {
       "id": "60b396a06b3f2f32c9da",
-      "category": "culture",
+      "category": "news",
       "source_id": "ultima-hora-soller",
       "source": "Última Hora",
       "source_type": "media",
