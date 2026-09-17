@@ -44,15 +44,23 @@ jobs:
           SOURCE_CONFIRMATION: ${{ inputs.confirmation }}
         run: python scripts/manage_sources.py
 
+      - name: Registrar activitat
+        env:
+          ACTIVITY_ACTION: ${{ inputs.enabled && 'source-enable' || 'source-disable' }}
+          ACTIVITY_AREA: sources
+          ACTIVITY_TARGET_ID: ${{ inputs.source_id }}
+          ACTIVITY_DETAIL: Cambio de fuente completado desde Administración
+        run: python scripts/log_admin_action.py
+
       - name: Guardar canvi de configuració
         run: |
-          if git diff --quiet -- sources.json; then
+          if git diff --quiet -- sources.json data/activity_log.json; then
             echo "No hi ha canvis"
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add sources.json
+          git add sources.json data/activity_log.json
           git commit -m "fonts: actualitzar estat"
           git pull --rebase origin main
           git push origin HEAD:main
