@@ -1,7 +1,7 @@
 window.SOLLER_ARA_DATA = {
   "version": 40,
   "generator_version": "0.53",
-  "fetched_at": "2026-09-17T10:27:12.476161+00:00",
+  "fetched_at": "2026-09-17T11:20:35.314184+00:00",
   "source_count": 27,
   "source_status": [
     {
@@ -72,9 +72,9 @@ window.SOLLER_ARA_DATA = {
       "name": "Govern de les Illes Balears",
       "source_type": "official",
       "method": "rss",
-      "ok": true,
+      "ok": false,
       "count": 0,
-      "error": null
+      "error": "[Errno 104] Connection reset by peer"
     },
     {
       "source_id": "ib3-noticies-soller",
@@ -272,8 +272,33 @@ window.SOLLER_ARA_DATA = {
   ],
   "post_count": 130,
   "related_pair_count": 0,
-  "errors": [],
+  "errors": [
+    {
+      "source_id": "goib-noticies-soller",
+      "error": "[Errno 104] Connection reset by peer"
+    }
+  ],
   "posts": [
+    {
+      "id": "fd8a12052fe820de840b",
+      "category": "news",
+      "source_id": "sa-veu-soller",
+      "source": "Sa Veu de Sóller",
+      "source_type": "media",
+      "language": "ca",
+      "locality": "Sóller",
+      "published_at": "2026-09-17T10:36:35+00:00",
+      "title": "Un passatger insulta per motius racistes el conductor d’un bus del TIB i acaba denunciat",
+      "summary": "",
+      "url": "https://saveu.cat/noticies/un-passatger-insulta-per-motius-racistes-el-conductor-dun-bus-del-tib-i-acaba-denunciat/",
+      "platform": null,
+      "account": null,
+      "media_type": null,
+      "content_policy": "headline_date_link_only",
+      "rights_status": "permission_pending",
+      "image_allowed": false,
+      "related_sources": []
+    },
     {
       "id": "44b25091a129f25fbc30",
       "category": "alerts",
@@ -811,26 +836,6 @@ window.SOLLER_ARA_DATA = {
       "media_type": null,
       "content_policy": "short_factual_excerpt",
       "rights_status": "public_source_reviewed",
-      "image_allowed": false,
-      "related_sources": []
-    },
-    {
-      "id": "3a78459dcc89fa0e0ecf",
-      "category": "news",
-      "source_id": "sa-veu-soller",
-      "source": "Sa Veu de Sóller",
-      "source_type": "media",
-      "language": "ca",
-      "locality": "Sóller",
-      "published_at": "2026-09-13T07:00:00+00:00",
-      "title": "L’Ajuntament té 25’5 milions al banc i suma 6’6 milions més de romanent",
-      "summary": "",
-      "url": "https://saveu.cat/noticies/lajuntament-te-255-milions-al-banc-i-suma-66-milions-mes-de-romanent/",
-      "platform": null,
-      "account": null,
-      "media_type": null,
-      "content_policy": "headline_date_link_only",
-      "rights_status": "permission_pending",
       "image_allowed": false,
       "related_sources": []
     },
