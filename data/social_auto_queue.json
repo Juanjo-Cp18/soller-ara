@@ -1,6 +1,26 @@
 {
   "version": 1,
   "enabled": true,
-  "generated_at": null,
-  "entries": []
+  "generated_at": "2026-09-17T16:23:21.899994+00:00",
+  "entries": [
+    {
+      "post_id": "8b3e6d82bbba43dac89d",
+      "title": "Creu Roja i Sóller 2010 abandonen l’Hospici per l’estat de l’edifici",
+      "summary": "",
+      "source": "Setmanari Sóller",
+      "source_id": "setmanari-soller",
+      "source_type": "media",
+      "category": "news",
+      "language": "ca",
+      "published_at": "2026-09-17T18:03:00+02:00",
+      "original_url": "https://www.elsoller.cat/soller/local/2026/09/17/354549/creu-roja-soller-2010-abandonen-hospici-per-estat-edifici.html",
+      "content_policy": "headline_date_link_only",
+      "rights_status": "permission_pending",
+      "platforms": [
+        "facebook",
+        "instagram"
+      ],
+      "image_url": "https://soller-ara.github.io/soller-ara/assets/generated/social/8b3e6d82bbba43dac89d.jpg"
+    }
+  ]
 }
