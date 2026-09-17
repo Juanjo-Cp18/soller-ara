@@ -1,7 +1,7 @@
 {
   "version": 40,
   "generator_version": "0.40",
-  "fetched_at": "2026-09-17T06:26:54.542640+00:00",
+  "fetched_at": "2026-09-17T07:19:29.489964+00:00",
   "source_count": 14,
   "source_status": [
     {
@@ -153,7 +153,7 @@
       "error": "(#10) Application does not have permission for this action [type=OAuthException, code=10, subcode=None]"
     }
   ],
-  "post_count": 110,
+  "post_count": 111,
   "related_pair_count": 0,
   "errors": [
     {
@@ -162,6 +162,24 @@
     }
   ],
   "posts": [
+    {
+      "id": "soller-ara-09f9b36a5945666e",
+      "category": "news",
+      "source_id": "soller-ara",
+      "source": "Sóller Ara",
+      "source_type": "own",
+      "language": "ca",
+      "locality": "Sóller",
+      "published_at": "2026-09-17T07:19:29.489964+00:00",
+      "title": "PRUEBA SOLLER ARA",
+      "summary": "Publicación temporal para comprobar el sistema de creación, edición y eliminación.",
+      "url": "https://soller-ara.github.io/soller-ara/noticies/soller-ara-09f9b36a5945666e.html",
+      "content_policy": "owned_content",
+      "rights_status": "owned",
+      "image_allowed": true,
+      "media_url": "https://soller-ara.github.io/soller-ara/assets/generated/soller-ara-09f9b36a5945666e.jpg",
+      "media_type": "image"
+    },
     {
       "id": "50b5f09daffbe3c849ec",
       "category": "news",
