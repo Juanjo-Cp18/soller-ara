@@ -224,6 +224,34 @@
       "mode": "automatic_collected",
       "recorded_at": "2026-09-17T14:22:58.494044+00:00",
       "error": ""
+    },
+    {
+      "post_id": "7707a4302038682ef691",
+      "platform": "facebook",
+      "status": "success",
+      "remote_id": "1384755221378998_122110035015467310",
+      "remote_url": "https://www.facebook.com/1384755221378998_122110035015467310",
+      "title": "Desalojan la sede de Sóller 2010 por un «riesgo estructural grave e inminente»",
+      "post_url": "https://www.ultimahora.es/noticias/part-forana/2026/09/17/2710743/desalojan-sede-soller-2010-por-riesgo-estructural-grave-inminente.html",
+      "source": "Última Hora",
+      "source_id": "ultima-hora-soller",
+      "mode": "automatic_collected",
+      "recorded_at": "2026-09-17T15:26:17.632779+00:00",
+      "error": ""
+    },
+    {
+      "post_id": "7707a4302038682ef691",
+      "platform": "instagram",
+      "status": "success",
+      "remote_id": "18175822498435327",
+      "remote_url": "https://www.instagram.com/p/DdZLdsBl4yK/",
+      "title": "Desalojan la sede de Sóller 2010 por un «riesgo estructural grave e inminente»",
+      "post_url": "https://www.ultimahora.es/noticias/part-forana/2026/09/17/2710743/desalojan-sede-soller-2010-por-riesgo-estructural-grave-inminente.html",
+      "source": "Última Hora",
+      "source_id": "ultima-hora-soller",
+      "mode": "automatic_collected",
+      "recorded_at": "2026-09-17T15:26:27.647782+00:00",
+      "error": ""
     }
   ]
 }
