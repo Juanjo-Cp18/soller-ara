@@ -196,6 +196,34 @@
       "mode": "automatic_collected",
       "recorded_at": "2026-09-17T13:22:31.740570+00:00",
       "error": ""
+    },
+    {
+      "post_id": "83eb0aeff186459b7cf3",
+      "platform": "facebook",
+      "status": "success",
+      "remote_id": "1384755221378998_122110008603467310",
+      "remote_url": "https://www.facebook.com/1384755221378998_122110008603467310",
+      "title": "UGT desaloja el edificio público de Sóller 2010 por «riesgo estructural grave e inminente»",
+      "post_url": "https://www.ultimahora.es/noticias/part-forana/2026/09/17/2710743/ugt-desaloja-edificio-publico-soller-2010-por-riesgo-estructural-grave-inminente.html",
+      "source": "Última Hora",
+      "source_id": "ultima-hora-soller",
+      "mode": "automatic_collected",
+      "recorded_at": "2026-09-17T14:22:38.430832+00:00",
+      "error": ""
+    },
+    {
+      "post_id": "83eb0aeff186459b7cf3",
+      "platform": "instagram",
+      "status": "success",
+      "remote_id": "17922981915427082",
+      "remote_url": "https://www.instagram.com/p/DdZEMFQFlGD/",
+      "title": "UGT desaloja el edificio público de Sóller 2010 por «riesgo estructural grave e inminente»",
+      "post_url": "https://www.ultimahora.es/noticias/part-forana/2026/09/17/2710743/ugt-desaloja-edificio-publico-soller-2010-por-riesgo-estructural-grave-inminente.html",
+      "source": "Última Hora",
+      "source_id": "ultima-hora-soller",
+      "mode": "automatic_collected",
+      "recorded_at": "2026-09-17T14:22:58.494044+00:00",
+      "error": ""
     }
   ]
 }
