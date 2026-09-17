@@ -7,14 +7,18 @@ on:
     paths:
       - "admin/**"
       - "worker/**"
+      - "social_distribution.json"
       - "scripts/activity_log.py"
       - "scripts/log_admin_action.py"
       - "scripts/edit_own_post.py"
       - "scripts/manage_sources.py"
+      - "scripts/prepare_collected_social.py"
+      - "scripts/publish_collected_social.py"
       - ".github/workflows/publish-own-content.yml"
       - ".github/workflows/edit-own-content.yml"
       - ".github/workflows/manage-posts.yml"
       - ".github/workflows/manage-sources.yml"
+      - ".github/workflows/update-sources.yml"
       - ".github/workflows/validate-admin.yml"
   workflow_dispatch:
 
@@ -43,15 +47,19 @@ jobs:
           node --check admin/admin.js
           node --check admin/sources-v2.js
           node --check admin/activity-v1.js
+          node --check admin/social-auto-v1.js
           node --check worker/admin-worker.js
           node --check admin/config.js
 
-      - name: Validar scripts de Administración
+      - name: Validar scripts de Administración y redes
         run: |
           python -m py_compile scripts/edit_own_post.py
           python -m py_compile scripts/manage_sources.py
           python -m py_compile scripts/activity_log.py
           python -m py_compile scripts/log_admin_action.py
+          python -m py_compile scripts/prepare_collected_social.py
+          python -m py_compile scripts/publish_collected_social.py
+          python -m json.tool social_distribution.json >/dev/null
 
       - name: Verificar que no hay secretos en Wrangler
         run: |
