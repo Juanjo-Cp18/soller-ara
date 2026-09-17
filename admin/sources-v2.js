@@ -60,7 +60,7 @@
     section.innerHTML = `
       <div class="module-heading">
         <div><p class="eyebrow">Recopilación</p><h2>Fuentes de Sóller Ara</h2>
-        <p class="hint">Activa o desactiva las fuentes que alimentan automáticamente la web.</p></div>
+        <p class="hint">Activa o desactiva las fuentes que alimentan automáticamente la web. Desactivar una fuente detiene nuevas recopilaciones; las publicaciones anteriores permanecen visibles y pueden ocultarse desde Moderación.</p></div>
         <button id="refreshSourcesButton" class="button-secondary" type="button">Actualizar</button>
       </div>
       <div id="sourcesSummary" class="metrics"></div>
@@ -145,12 +145,12 @@
   }
 
   async function waitFor(sourceId, enabled) {
-    for (let i = 1; i <= 24; i++) {
-      await new Promise((r) => setTimeout(r, 2500));
+    for (let i = 0; i < 20; i++) {
+      await new Promise((r) => setTimeout(r, 1500));
       const config = await repoJson("sources.json");
       const source = (config.sources || []).find((x) => x.id === sourceId);
       if (source && (source.enabled !== false) === enabled) return true;
-      message("Actualizando fuente… " + i + "/24");
+      message("Esperando confirmación de GitHub…");
     }
     return false;
   }
@@ -166,10 +166,12 @@
     try {
       await api("/api/source", { method: "POST", body: JSON.stringify({ source_id: sourceId, enabled: next }) });
       if (await waitFor(sourceId, next)) {
-        message("Fuente " + (next ? "activada" : "desactivada") + " correctamente.", "success");
+        message(next
+          ? "Fuente activada correctamente. Volverá a recopilar en las próximas actualizaciones."
+          : "Fuente desactivada correctamente. No se cargarán nuevas publicaciones; las anteriores permanecen visibles.", "success");
         await load();
       } else {
-        message("El cambio está enviado y GitHub sigue procesándolo. Pulsa Actualizar en unos segundos.", "error");
+        message("El cambio se ha enviado. GitHub todavía está confirmándolo; pulsa Actualizar en unos segundos.", "error");
       }
     } catch (error) {
       message(error.message, "error");
