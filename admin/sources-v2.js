@@ -1,0 +1,182 @@
+(() => {
+  const API = String(window.SOLLER_ARA_ADMIN_API || "").replace(/\/$/, "");
+  const TOKEN_KEY = "sollerAraAdminSession";
+  const GH_BASE = "https://api.github.com/repos/soller-ara/soller-ara/contents/";
+
+  const esc = (v) => String(v ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+
+  async function api(path, options = {}) {
+    const headers = new Headers(options.headers || {});
+    headers.set("Content-Type", "application/json");
+    const token = sessionStorage.getItem(TOKEN_KEY) || "";
+    if (token) headers.set("Authorization", "Bearer " + token);
+    const response = await fetch(API + path, { ...options, headers, cache: "no-store", mode: "cors" });
+    let payload = {};
+    try { payload = await response.json(); } catch (_) {}
+    if (!response.ok) throw new Error(payload.error || "Error de Administración.");
+    return payload;
+  }
+
+  async function repoJson(path) {
+    const response = await fetch(GH_BASE + path + "?ref=main&v=" + Date.now(), {
+      cache: "no-store",
+      mode: "cors",
+      headers: {
+        "Accept": "application/vnd.github.raw+json",
+        "X-GitHub-Api-Version": "2022-11-28",
+      },
+    });
+    if (!response.ok) throw new Error("No se ha podido leer " + path + " (GitHub " + response.status + ").");
+    return response.json();
+  }
+
+  function message(text, kind = "") {
+    const el = document.getElementById("sourcesMessage");
+    if (!el) return;
+    el.textContent = text || "";
+    el.className = "message" + (kind ? " " + kind : "");
+  }
+
+  function inject() {
+    const nav = document.querySelector(".admin-nav");
+    const app = document.getElementById("adminView");
+    if (!nav || !app || document.getElementById("sources")) return;
+
+    const tab = document.createElement("button");
+    tab.className = "nav-button";
+    tab.type = "button";
+    tab.dataset.view = "sources";
+    tab.textContent = "Fuentes";
+    nav.appendChild(tab);
+
+    const section = document.createElement("section");
+    section.id = "sources";
+    section.className = "module";
+    section.innerHTML = `
+      <div class="module-heading">
+        <div><p class="eyebrow">Recopilación</p><h2>Fuentes de Sóller Ara</h2>
+        <p class="hint">Activa o desactiva las fuentes que alimentan automáticamente la web.</p></div>
+        <button id="refreshSourcesButton" class="button-secondary" type="button">Actualizar</button>
+      </div>
+      <div id="sourcesSummary" class="metrics"></div>
+      <article class="panel-card"><h3>Fuentes de información</h3><div id="sourcesList" class="post-list"><p class="empty">Cargando fuentes…</p></div></article>
+      <article class="panel-card" style="margin-top:18px"><h3>Fuentes sociales externas</h3><p class="hint">Su estado se muestra aquí. La activación depende de las APIs de cada plataforma.</p><div id="socialSourcesList" class="post-list"><p class="empty">Cargando…</p></div></article>
+      <article class="panel-card" style="margin-top:18px"><h3>Distribución automática a redes</h3><p class="hint">Siguiente fase: decidir por fuente qué contenido se enviará automáticamente a Facebook e Instagram. Todavía no está activado.</p></article>
+      <p id="sourcesMessage" class="message" aria-live="polite"></p>`;
+    app.appendChild(section);
+
+    tab.addEventListener("click", () => {
+      document.querySelectorAll(".nav-button").forEach((x) => x.classList.remove("active"));
+      document.querySelectorAll(".module").forEach((x) => x.classList.remove("active"));
+      tab.classList.add("active");
+      section.classList.add("active");
+      load();
+    });
+    document.getElementById("refreshSourcesButton").addEventListener("click", load);
+  }
+
+  function statusMap(data) {
+    const map = new Map();
+    for (const item of (data.source_status || [])) if (item.source_id) map.set(item.source_id, item);
+    return map;
+  }
+
+  function typeLabel(source) {
+    if (source.source_type === "official") return "Oficial";
+    if (source.source_type === "media") return "Medio";
+    if (source.source_type === "social") return "Social";
+    return source.source_type || "Fuente";
+  }
+
+  function render(config, posts) {
+    const sources = Array.isArray(config.sources) ? config.sources : [];
+    const active = sources.filter((x) => x.enabled !== false).length;
+    document.getElementById("sourcesSummary").innerHTML = [
+      ["Fuentes configuradas", sources.length], ["Activas", active], ["Desactivadas", sources.length - active]
+    ].map(([a,b]) => `<div class="metric"><span>${esc(a)}</span><strong>${esc(b)}</strong></div>`).join("");
+
+    const health = statusMap(posts);
+    const list = document.getElementById("sourcesList");
+    list.innerHTML = sources.map((source) => {
+      const enabled = source.enabled !== false;
+      const current = health.get(source.id);
+      const label = !enabled ? "DESACTIVADA" : current?.ok === false ? "ERROR" : current?.ok === true ? "OK" : "PENDIENTE";
+      const cls = !enabled || current?.ok == null ? "pending" : current.ok ? "ok" : "bad";
+      return `<article class="post-item">
+        <header><h4>${esc(source.name || source.id)}</h4></header>
+        <div class="post-meta">${esc(typeLabel(source))} · ${esc(source.type || "")} · ${esc(source.language || "")} · ${esc(current?.count ?? 0)} publicaciones</div>
+        <div class="post-meta">${esc(source.locality || "Sóller")}</div>
+        <div class="post-actions"><span class="${cls}">${label}</span><button type="button" data-source-id="${esc(source.id)}" data-source-enabled="${enabled}">${enabled ? "Desactivar" : "Activar"}</button></div>
+      </article>`;
+    }).join("");
+    list.querySelectorAll("[data-source-id]").forEach((button) => button.addEventListener("click", () => toggle(button)));
+  }
+
+  function renderSocial(config) {
+    const list = document.getElementById("socialSourcesList");
+    const sources = Array.isArray(config.sources) ? config.sources : [];
+    list.innerHTML = sources.length ? sources.map((source) => `<article class="post-item">
+      <header><h4>${esc(source.name || source.account || "Fuente social")}</h4></header>
+      <div class="post-meta">${esc(source.platform || "")} · ${esc(source.account || "")}</div>
+      <div class="post-actions"><span class="${source.status === "active" ? "ok" : "pending"}">${esc(source.status || "pendiente")}</span></div>
+    </article>`).join("") : '<p class="empty">No hay fuentes sociales configuradas.</p>';
+  }
+
+  async function load() {
+    const button = document.getElementById("refreshSourcesButton");
+    if (button) { button.disabled = true; button.textContent = "Actualizando…"; }
+    message("");
+    try {
+      const [config, social, posts] = await Promise.all([
+        repoJson("sources.json"), repoJson("social_sources.json"), repoJson("data/posts.json")
+      ]);
+      render(config, posts);
+      renderSocial(social);
+    } catch (error) {
+      message(error.message, "error");
+    } finally {
+      if (button) { button.disabled = false; button.textContent = "Actualizar"; }
+    }
+  }
+
+  async function waitFor(sourceId, enabled) {
+    for (let i = 1; i <= 24; i++) {
+      await new Promise((r) => setTimeout(r, 2500));
+      const config = await repoJson("sources.json");
+      const source = (config.sources || []).find((x) => x.id === sourceId);
+      if (source && (source.enabled !== false) === enabled) return true;
+      message("Actualizando fuente… " + i + "/24");
+    }
+    return false;
+  }
+
+  async function toggle(button) {
+    const sourceId = button.dataset.sourceId;
+    const current = button.dataset.sourceEnabled === "true";
+    const next = !current;
+    if (!confirm("¿Confirmas que quieres " + (next ? "activar" : "desactivar") + " esta fuente?")) return;
+    button.disabled = true;
+    button.textContent = next ? "Activando…" : "Desactivando…";
+    message("Enviando cambio…");
+    try {
+      await api("/api/source", { method: "POST", body: JSON.stringify({ source_id: sourceId, enabled: next }) });
+      if (await waitFor(sourceId, next)) {
+        message("Fuente " + (next ? "activada" : "desactivada") + " correctamente.", "success");
+        await load();
+      } else {
+        message("El cambio está enviado y GitHub sigue procesándolo. Pulsa Actualizar en unos segundos.", "error");
+      }
+    } catch (error) {
+      message(error.message, "error");
+    } finally {
+      button.disabled = false;
+    }
+  }
+
+  inject();
+})();
