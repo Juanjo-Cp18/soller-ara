@@ -112,6 +112,34 @@
       "mode": "automatic_collected",
       "recorded_at": "2026-09-17T10:22:12.494770+00:00",
       "error": ""
+    },
+    {
+      "post_id": "fd8a12052fe820de840b",
+      "platform": "facebook",
+      "status": "success",
+      "remote_id": "1384755221378998_122109918279467310",
+      "remote_url": "https://www.facebook.com/1384755221378998_122109918279467310",
+      "title": "Un passatger insulta per motius racistes el conductor d’un bus del TIB i acaba denunciat",
+      "post_url": "https://saveu.cat/noticies/un-passatger-insulta-per-motius-racistes-el-conductor-dun-bus-del-tib-i-acaba-denunciat/",
+      "source": "Sa Veu de Sóller",
+      "source_id": "sa-veu-soller",
+      "mode": "automatic_collected",
+      "recorded_at": "2026-09-17T11:20:55.531287+00:00",
+      "error": ""
+    },
+    {
+      "post_id": "fd8a12052fe820de840b",
+      "platform": "instagram",
+      "status": "success",
+      "remote_id": "17931710616146067",
+      "remote_url": "https://www.instagram.com/p/DdYvYoJFwlX/",
+      "title": "Un passatger insulta per motius racistes el conductor d’un bus del TIB i acaba denunciat",
+      "post_url": "https://saveu.cat/noticies/un-passatger-insulta-per-motius-racistes-el-conductor-dun-bus-del-tib-i-acaba-denunciat/",
+      "source": "Sa Veu de Sóller",
+      "source_id": "sa-veu-soller",
+      "mode": "automatic_collected",
+      "recorded_at": "2026-09-17T11:21:04.301809+00:00",
+      "error": ""
     }
   ]
 }
