@@ -1,26 +1,26 @@
 {
   "version": 1,
   "enabled": true,
-  "generated_at": "2026-09-17T13:22:03.963585+00:00",
+  "generated_at": "2026-09-17T14:22:23.679604+00:00",
   "entries": [
     {
-      "post_id": "dab15d4e69e8df3c4e97",
-      "title": "En obres el bombament de fecals de Sa Torre",
+      "post_id": "83eb0aeff186459b7cf3",
+      "title": "UGT desaloja el edificio público de Sóller 2010 por «riesgo estructural grave e inminente»",
       "summary": "",
-      "source": "Sa Veu de Sóller",
-      "source_id": "sa-veu-soller",
+      "source": "Última Hora",
+      "source_id": "ultima-hora-soller",
       "source_type": "media",
-      "category": "services",
-      "language": "ca",
-      "published_at": "2026-09-17T13:18:40+00:00",
-      "original_url": "https://saveu.cat/noticies/en-obres-el-bombament-de-fecals-de-sa-torre/",
+      "category": "commerce",
+      "language": "es",
+      "published_at": "2026-09-17T16:01:00+02:00",
+      "original_url": "https://www.ultimahora.es/noticias/part-forana/2026/09/17/2710743/ugt-desaloja-edificio-publico-soller-2010-por-riesgo-estructural-grave-inminente.html",
       "content_policy": "headline_date_link_only",
       "rights_status": "permission_pending",
       "platforms": [
         "facebook",
         "instagram"
       ],
-      "image_url": "https://soller-ara.github.io/soller-ara/assets/generated/social/dab15d4e69e8df3c4e97.jpg"
+      "image_url": "https://soller-ara.github.io/soller-ara/assets/generated/social/83eb0aeff186459b7cf3.jpg"
     }
   ]
 }
