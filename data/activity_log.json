@@ -2,6 +2,16 @@
   "version": 1,
   "entries": [
     {
+      "id": "f7e890beac1ccd16",
+      "timestamp": "2026-09-17T08:21:45.417098+00:00",
+      "action": "source-enable",
+      "area": "sources",
+      "target_id": "youtube-ajuntament-soller",
+      "title": "Ajuntament de Sóller · YouTube",
+      "detail": "Cambio de fuente completado desde Administración",
+      "status": "success"
+    },
+    {
       "id": "800a1f2d613e0bf5",
       "timestamp": "2026-09-17T08:21:21.591818+00:00",
       "action": "source-disable",
