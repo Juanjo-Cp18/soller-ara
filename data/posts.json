@@ -162,7 +162,7 @@
       "error": "(#10) Application does not have permission for this action [type=OAuthException, code=10, subcode=None]"
     }
   ],
-  "post_count": 113,
+  "post_count": 112,
   "related_pair_count": 0,
   "errors": [
     {
@@ -171,25 +171,6 @@
     }
   ],
   "posts": [
-    {
-      "id": "soller-ara-09f9b36a5945666e",
-      "category": "news",
-      "source_id": "soller-ara",
-      "source": "Sóller Ara",
-      "source_type": "own",
-      "language": "ca",
-      "locality": "Sóller",
-      "published_at": "2026-09-17T07:19:29.489964+00:00",
-      "title": "PRUEBA SOLLER ARA . EDITADA",
-      "summary": "Publicación temporal editada correctamente desde Administración.",
-      "url": "https://soller-ara.github.io/soller-ara/noticies/soller-ara-09f9b36a5945666e.html",
-      "content_policy": "owned_content",
-      "rights_status": "owned",
-      "image_allowed": true,
-      "media_url": "https://soller-ara.github.io/soller-ara/assets/generated/soller-ara-09f9b36a5945666e.jpg",
-      "media_type": "image",
-      "related_sources": []
-    },
     {
       "id": "5308b25381269c18bd69",
       "category": "alerts",
