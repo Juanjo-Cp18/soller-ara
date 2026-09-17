@@ -15,7 +15,7 @@ import json
 import os
 import sys
 import time
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from urllib.error import HTTPError, URLError
 from urllib.parse import urlencode
@@ -25,6 +25,8 @@ ROOT = Path(__file__).resolve().parents[1]
 QUEUE_FILE = ROOT / "data" / "social_auto_queue.json"
 LOG_FILE = ROOT / "data" / "social_publish_log.json"
 CONFIG_FILE = ROOT / "social_distribution.json"
+SOURCES_FILE = ROOT / "sources.json"
+MODERATION_FILE = ROOT / "data" / "moderation.json"
 
 TOKEN = os.environ.get("META_ACCESS_TOKEN", "").strip()
 GRAPH_VERSION = os.environ.get("META_GRAPH_VERSION", "v26.0").strip() or "v26.0"
@@ -47,18 +49,21 @@ def save_log(log: dict) -> None:
 
 
 def already_published(log: dict, post_id: str, platform: str) -> bool:
-    for entry in reversed(log.get("entries") or []):
-        if entry.get("post_id") == post_id and entry.get("platform") == platform:
-            return entry.get("status") == "success"
-    return False
+    return any(
+        entry.get("post_id") == post_id and entry.get("platform") == platform
+        and entry.get("status") == "success"
+        for entry in log.get("entries") or []
+    )
 
 
-def record(log: dict, item: dict, platform: str, status: str, remote_id: str = "", error: str = "") -> None:
+def record(log: dict, item: dict, platform: str, status: str, remote_id: str = "", error: str = "", remote_url: str = "") -> None:
     log.setdefault("entries", []).append({
         "post_id": item.get("post_id"),
         "platform": platform,
         "status": status,
         "remote_id": remote_id,
+        "remote_url": remote_url,
+        "title": item.get("title"),
         "post_url": item.get("original_url"),
         "source": item.get("source"),
         "source_id": item.get("source_id"),
@@ -125,13 +130,11 @@ def discover_accounts() -> tuple[str, str, str, str]:
                 page.get("tasks") or [],
             ))
 
-    chosen = next((item for item in candidates if item[0].casefold() in {"soller ara", "sóller ara"}), None)
-    if chosen is None and len(candidates) == 1:
-        chosen = candidates[0]
-    if chosen is None:
+    matches = [item for item in candidates if item[0].casefold() in {"soller ara", "sóller ara"}]
+    if len(matches) != 1:
         raise RuntimeError("No s'ha pogut identificar de forma única la pàgina Sóller Ara.")
 
-    page_name, page_id, page_token, ig_id, ig_username, tasks = chosen
+    page_name, page_id, page_token, ig_id, ig_username, tasks = matches[0]
     if "CREATE_CONTENT" not in tasks:
         raise RuntimeError("La pàgina Sóller Ara no retorna la tasca CREATE_CONTENT.")
     return page_id, page_token, ig_id, ig_username
@@ -206,6 +209,8 @@ def wait_public_image(url: str) -> None:
 def publish_instagram(item: dict, ig_id: str, ig_username: str, page_token: str) -> str:
     if not ig_id:
         raise RuntimeError("No s'ha trobat el compte Instagram vinculat a Sóller Ara.")
+    if ig_username.casefold() != "soller.ara":
+        raise RuntimeError("El compte Instagram vinculat no és @soller.ara.")
     image_url = str(item.get("image_url") or "")
     wait_public_image(image_url)
 
@@ -248,6 +253,43 @@ def publish_instagram(item: dict, ig_id: str, ig_username: str, page_token: str)
     return media_id
 
 
+def eligible_entries(config: dict, entries: list[dict], log: dict) -> list[dict]:
+    """Revalida la cua amb la configuració vigent just abans de publicar."""
+    sources = load_json(SOURCES_FILE, {"sources": []})
+    active_sources = {s.get("id") for s in sources.get("sources", []) if s.get("enabled", True)}
+    hidden = set(load_json(MODERATION_FILE, {}).get("hidden_post_ids", []))
+    now = datetime.now(timezone.utc)
+    threshold = now - timedelta(hours=int(config.get("max_age_hours", 6)))
+    selected = []
+    used_sources = set()
+    for entry in entries:
+        source_id = entry.get("source_id")
+        post_id = entry.get("post_id")
+        if not post_id or post_id in hidden or source_id not in active_sources or entry.get("source_type") == "own":
+            continue
+        if config.get("categories", {}).get(entry.get("category") or "news", True) is False:
+            continue
+        try:
+            published_at = datetime.fromisoformat(str(entry.get("published_at") or "").replace("Z", "+00:00"))
+            if published_at.tzinfo is None:
+                published_at = published_at.replace(tzinfo=timezone.utc)
+        except ValueError:
+            continue
+        if not threshold <= published_at <= now:
+            continue
+        rules = config.get("sources", {}).get(source_id) or {}
+        platforms = [p for p in ("facebook", "instagram") if p in entry.get("platforms", [])
+                     and config.get("platforms", {}).get(p) and rules.get(p)
+                     and not already_published(log, post_id, p)]
+        if not platforms or (config.get("one_post_per_source_per_run", True) and source_id in used_sources):
+            continue
+        selected.append({**entry, "platforms": platforms})
+        used_sources.add(source_id)
+        if len(selected) >= max(1, int(config.get("max_posts_per_run", 3))):
+            break
+    return selected
+
+
 def main() -> int:
     config = load_json(CONFIG_FILE, {"enabled": False})
     queue = load_json(QUEUE_FILE, {"enabled": False, "entries": []})
@@ -255,15 +297,18 @@ def main() -> int:
         print("SOCIAL_AUTO: desactivat; no es publica res.")
         return 0
 
-    entries = queue.get("entries") or []
+    log = load_json(LOG_FILE, {"version": 1, "entries": []})
+    entries = eligible_entries(config, queue.get("entries") or [], log)
     if not entries:
         print("SOCIAL_AUTO: cua buida.")
         return 0
     if not TOKEN:
         print("SOCIAL_AUTO_ERROR: falta META_ACCESS_TOKEN.", file=sys.stderr)
+        for item in entries:
+            for platform in item["platforms"]:
+                record(log, item, platform, "error", error="Falta META_ACCESS_TOKEN.")
         return 1
 
-    log = load_json(LOG_FILE, {"version": 1, "entries": []})
     try:
         page_id, page_token, ig_id, ig_username = discover_accounts()
     except Exception as exc:
@@ -272,7 +317,7 @@ def main() -> int:
             for platform in item.get("platforms") or []:
                 if not already_published(log, str(item.get("post_id") or ""), platform):
                     record(log, item, platform, "error", error=str(exc))
-        return 0
+        return 1
 
     errors = 0
     for item in entries:
@@ -289,14 +334,20 @@ def main() -> int:
                     remote_id = publish_instagram(item, ig_id, ig_username, page_token)
                 else:
                     continue
-                record(log, item, platform, "success", remote_id=remote_id)
+                remote_url = f"https://www.facebook.com/{remote_id}" if platform == "facebook" else ""
+                if platform == "instagram":
+                    try:
+                        remote_url = str(graph(remote_id, params={"fields": "permalink"}, token=page_token).get("permalink") or "")
+                    except Exception:
+                        pass  # Un error de lectura no convierte un envío confirmado en fallido.
+                record(log, item, platform, "success", remote_id=remote_id, remote_url=remote_url)
             except Exception as exc:
                 errors += 1
                 record(log, item, platform, "error", error=str(exc))
                 print(f"{platform.upper()}_ERROR post={post_id}: {exc}", file=sys.stderr)
 
     print(f"SOCIAL_AUTO: procés acabat amb {errors} errors registrats.")
-    return 0
+    return 1 if errors else 0
 
 
 if __name__ == "__main__":

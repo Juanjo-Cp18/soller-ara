@@ -23,7 +23,7 @@ QUEUE_FILE = ROOT / "data" / "social_auto_queue.json"
 MODERATION_FILE = ROOT / "data" / "moderation.json"
 SOURCES_FILE = ROOT / "sources.json"
 CARD_DIR = ROOT / "assets" / "generated" / "social"
-RAW_BASE = "https://raw.githubusercontent.com/soller-ara/soller-ara/main/assets/generated/social"
+IMAGE_BASE = "https://soller-ara.github.io/soller-ara/assets/generated/social"
 
 
 def load_json(path: Path, fallback: dict) -> dict:
@@ -101,7 +101,8 @@ def generate_card(post: dict) -> str:
 
     draw.text((142, 148), "SA", font=logo_font, fill="#ffffff")
     draw.text((310, 140), "SÓLLER ARA", font=brand_font, fill=primary)
-    draw.text((310, 202), str(post.get("category") or "news").upper(), font=small_font, fill=muted)
+    category_names = {"news": "Actualitat", "agenda": "Agenda", "alerts": "Avisos", "services": "Serveis", "culture": "Cultura", "sports": "Esports", "commerce": "Comerç"}
+    draw.text((310, 202), category_names.get(post.get("category"), "Actualitat").upper(), font=small_font, fill=muted)
 
     lines = wrap(draw, str(post.get("title") or ""), title_font, width - 220)
     if len(lines) > 7:
@@ -119,7 +120,7 @@ def generate_card(post: dict) -> str:
     draw.text((110, height - 155), "Informació recopilada per Sóller Ara", font=small_font, fill=muted)
 
     image.save(path, "JPEG", quality=92, optimize=True)
-    return f"{RAW_BASE}/{post_id}.jpg"
+    return f"{IMAGE_BASE}/{post_id}.jpg"
 
 
 def success_pairs(log: dict) -> set[tuple[str, str]]:
@@ -161,7 +162,8 @@ def main() -> int:
     max_age = int(config.get("max_age_hours", 6) or 6)
     max_posts = max(1, int(config.get("max_posts_per_run", 3) or 3))
     one_per_source = bool(config.get("one_post_per_source_per_run", True))
-    threshold = datetime.now(timezone.utc) - timedelta(hours=max_age)
+    now = datetime.now(timezone.utc)
+    threshold = now - timedelta(hours=max_age)
 
     candidates: list[dict] = []
     for post in posts_payload.get("posts") or []:
@@ -176,7 +178,7 @@ def main() -> int:
             continue
 
         published_at = parse_date(post.get("published_at"))
-        if published_at is None or published_at < threshold:
+        if published_at is None or not threshold <= published_at <= now:
             continue
 
         rules = source_rules.get(source_id)

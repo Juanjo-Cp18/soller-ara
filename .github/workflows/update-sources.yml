@@ -23,16 +23,20 @@ permissions:
 
 concurrency:
   group: "update-sources"
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   update:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v6
         with:
           fetch-depth: 0
+          ref: main
 
       - name: Configurar Python
         uses: actions/setup-python@v6
@@ -66,38 +70,6 @@ jobs:
             git push origin HEAD:main
           fi
 
-      - name: Publicar cua a Facebook i Instagram
-        env:
-          META_ACCESS_TOKEN: ${{ secrets.META_ACCESS_TOKEN }}
-          META_GRAPH_VERSION: "v26.0"
-        run: python scripts/publish_collected_social.py
-
-      - name: Guardar registre de distribució social
-        run: |
-          git add data/social_publish_log.json
-          if git diff --cached --quiet; then
-            echo "No hi ha canvis al registre social"
-            exit 0
-          fi
-          git config user.name "soller-ara-bot"
-          git config user.email "actions@users.noreply.github.com"
-          git commit -m "data: registrar distribució social automàtica"
-          git pull --rebase origin main
-          git push origin HEAD:main
-
-  deploy:
-    name: Deploy web pública després d'actualitzar fonts
-    needs: update
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - name: Checkout del main actualitzat
-        uses: actions/checkout@v6
-        with:
-          ref: main
-
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
@@ -109,3 +81,24 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+      - name: Publicar cua a Facebook i Instagram
+        id: social_publish
+        env:
+          META_ACCESS_TOKEN: ${{ secrets.META_ACCESS_TOKEN }}
+          META_GRAPH_VERSION: "v26.0"
+        run: python scripts/publish_collected_social.py
+
+      - name: Guardar registre de distribució social
+        if: ${{ always() && steps.social_publish.outcome != 'skipped' }}
+        run: |
+          git add data/social_publish_log.json
+          if git diff --cached --quiet; then
+            echo "No hi ha canvis al registre social"
+            exit 0
+          fi
+          git config user.name "soller-ara-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git commit -m "data: registrar distribució social automàtica"
+          git pull --rebase origin main
+          git push origin HEAD:main

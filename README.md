@@ -4,7 +4,7 @@ Projecte públic i sense ànim de lucre per reunir informació local de Sóller 
 
 ## Versió
 
-**v0.39**
+**v0.51**
 
 ## Publicacions pròpies i enllaç directe a xarxes
 
@@ -24,6 +24,15 @@ URL preparada per utilitzar una sola vegada a la bio d'Instagram:
 `https://soller-ara.github.io/soller-ara/enllacos.html`
 
 Cada targeta d'aquesta pàgina apunta a la URL individual de la notícia. El caption d'Instagram conserva també l'URL exacta de la notícia, encara que la seva clicabilitat depèn de les funcions habilitades al compte.
+
+## Novetats de la v0.51
+
+- Distribució automàtica activada per Facebook i Instagram: màxim 3 notícies de les darreres 6 hores, una per font i execució.
+- Les targetes pròpies es despleguen a GitHub Pages abans d'enviar-les a Instagram.
+- El registre conserva els resultats encara que una xarxa falli; no es repeteixen enviaments confirmats.
+- Fonts desactivades, moderació i límits es tornen a comprovar abans d'enviar.
+- Administració llegeix dades públiques sense consumir la quota de la API de GitHub.
+- El panell mostra l'últim enviament o error per xarxa i la versió v0.51 també apareix al peu de la web.
 
 ## Novetats de la v0.39
 

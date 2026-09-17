@@ -62,3 +62,11 @@ fieldset{border:1px solid var(--border);border-radius:14px;padding:13px 15px}leg
   justify-content:center;
   text-decoration:none;
 }
+
+#socialAutoStatus .status-row{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:16px;padding:14px 0;border-bottom:1px solid var(--border)}
+#socialAutoStatus .status-row:last-child{border-bottom:0}
+#socialAutoStatus .status-row>span{display:grid;gap:5px;min-width:0}
+#socialAutoStatus .status-row small{display:block;color:var(--muted);line-height:1.5;overflow-wrap:anywhere}
+#socialAutoStatus .status-row a{color:var(--primary);text-underline-offset:3px}
+#socialAutoStatus>.hint{margin:14px 0 0;line-height:1.6}
+@media(max-width:620px){#socialAutoStatus .status-row{grid-template-columns:1fr;gap:8px}#adminVersion{display:inline-flex}.header-actions{flex-wrap:wrap}}

@@ -1,5 +1,5 @@
 (() => {
-  const GH_BASE = "https://api.github.com/repos/soller-ara/soller-ara/contents/";
+  const repoJson = window.SOLLER_ARA_READ_JSON;
   let entries = [];
 
   const esc = (v) => String(v ?? "")
@@ -9,18 +9,7 @@
     .replaceAll('"', "&quot;")
     .replaceAll("'", "&#039;");
 
-  async function repoJson(path) {
-    const response = await fetch(GH_BASE + path + "?ref=main&v=" + Date.now(), {
-      cache: "no-store",
-      mode: "cors",
-      headers: {
-        "Accept": "application/vnd.github.raw+json",
-        "X-GitHub-Api-Version": "2022-11-28",
-      },
-    });
-    if (!response.ok) throw new Error("No se ha podido cargar el registro de actividad.");
-    return response.json();
-  }
+
 
   function labelFor(action) {
     const labels = {

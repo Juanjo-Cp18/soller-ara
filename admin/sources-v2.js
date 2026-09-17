@@ -1,7 +1,7 @@
 (() => {
   const API = String(window.SOLLER_ARA_ADMIN_API || "").replace(/\/$/, "");
   const TOKEN_KEY = "sollerAraAdminSession";
-  const GH_BASE = "https://api.github.com/repos/soller-ara/soller-ara/contents/";
+  const repoJson = window.SOLLER_ARA_READ_JSON;
 
   const esc = (v) => String(v ?? "")
     .replaceAll("&", "&amp;")
@@ -22,18 +22,7 @@
     return payload;
   }
 
-  async function repoJson(path) {
-    const response = await fetch(GH_BASE + path + "?ref=main&v=" + Date.now(), {
-      cache: "no-store",
-      mode: "cors",
-      headers: {
-        "Accept": "application/vnd.github.raw+json",
-        "X-GitHub-Api-Version": "2022-11-28",
-      },
-    });
-    if (!response.ok) throw new Error("No se ha podido leer " + path + " (GitHub " + response.status + ").");
-    return response.json();
-  }
+
 
   function message(text, kind = "") {
     const el = document.getElementById("sourcesMessage");
@@ -66,7 +55,7 @@
       <div id="sourcesSummary" class="metrics"></div>
       <article class="panel-card"><h3>Fuentes de información</h3><div id="sourcesList" class="post-list"><p class="empty">Cargando fuentes…</p></div></article>
       <article class="panel-card" style="margin-top:18px"><h3>Fuentes sociales externas</h3><p class="hint">Su estado se muestra aquí. La activación depende de las APIs de cada plataforma.</p><div id="socialSourcesList" class="post-list"><p class="empty">Cargando…</p></div></article>
-      <article class="panel-card" style="margin-top:18px"><h3>Distribución automática a redes</h3><p class="hint">Siguiente fase: decidir por fuente qué contenido se enviará automáticamente a Facebook e Instagram. Todavía no está activado.</p></article>
+      <article class="panel-card" style="margin-top:18px"><h3>Distribución automática a redes</h3><p class="hint">Estado de los envíos automáticos a Facebook e Instagram según las fuentes y los límites configurados.</p></article>
       <p id="sourcesMessage" class="message" aria-live="polite"></p>`;
     app.appendChild(section);
 
@@ -132,11 +121,15 @@
     if (button) { button.disabled = true; button.textContent = "Actualizando…"; }
     message("");
     try {
-      const [config, social, posts] = await Promise.all([
+      const [config, social, posts] = await Promise.allSettled([
         repoJson("sources.json"), repoJson("social_sources.json"), repoJson("data/posts.json")
       ]);
-      render(config, posts);
-      renderSocial(social);
+      if (config.status === "fulfilled") render(config.value, posts.status === "fulfilled" ? posts.value : {});
+      else document.getElementById("sourcesList").innerHTML = '<p class="message error">No se han podido cargar las fuentes. Pulsa Actualizar.</p>';
+      if (social.status === "fulfilled") renderSocial(social.value);
+      else document.getElementById("socialSourcesList").innerHTML = '<p class="message error">No se han podido cargar las fuentes sociales. Pulsa Actualizar.</p>';
+      const errors = [config, social, posts].filter((result) => result.status === "rejected");
+      if (errors.length) message(errors.map((result) => result.reason.message).join(" "), "error");
     } catch (error) {
       message(error.message, "error");
     } finally {
