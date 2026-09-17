@@ -1,5 +1,5 @@
 {
-  "version": 26,
+  "version": 27,
   "sources": [
     {
       "id": "ajuntament-soller-noticies",
@@ -87,6 +87,39 @@
       "content_policy": "generated_social_summary",
       "rights_status": "platform_embed",
       "max_age_days": 60
+    },
+    {
+      "id": "youtube-ib3-noticies-soller",
+      "name": "IB3 Notícies · YouTube",
+      "type": "youtube_channel",
+      "url": "https://www.youtube.com/feeds/videos.xml?channel_id=UCgBd6ey27YnfwSUy2qpHmZw",
+      "language": "ca",
+      "locality": "Sóller / Fornalutx / Serra de Tramuntana",
+      "source_type": "social",
+      "platform": "YouTube",
+      "account": "@NoticiesIB3",
+      "max_items": 15,
+      "enabled": true,
+      "image_policy": "embed_only",
+      "content_policy": "generated_social_summary",
+      "rights_status": "platform_embed",
+      "max_age_days": 60,
+      "include_keywords": [
+        "Sóller",
+        "Soller",
+        "Port de Sóller",
+        "Port de Soller",
+        "Vall de Sóller",
+        "Vall de Soller",
+        "Fornalutx",
+        "Biniaraix",
+        "Ferrocarril de Sóller",
+        "Tren de Sóller",
+        "Túnel de Sóller",
+        "Tunel de Soller",
+        "Serra de Tramuntana"
+      ],
+      "verification_url": "https://ib3.org/"
     },
     {
       "id": "goib-noticies-soller",

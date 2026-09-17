@@ -62,6 +62,12 @@ Sóller Ara no copia, incrusta ni emmagatzema automàticament publicacions de xa
 
 Els enllaços socials serveixen per facilitar l'accés a la publicació original i no substitueixen els canals oficials d'emergència.
 
+### Previsualitzacions automàtiques d'enllaços
+
+Quan Sóller Ara comparteix un enllaç en una xarxa social, la plataforma pot generar una previsualització amb el titular i una imatge indicada per la pàgina d'origen. Sóller Ara no descarrega, emmagatzema ni puja aquesta imatge com una fotografia pròpia.
+
+La previsualització automàtica no es considera una autorització general per reutilitzar la imatge fora d'aquell enllaç. Si el titular demana que no es mostri o existeix algun dubte sobre els drets, Sóller Ara retirarà la previsualització o la substituirà per un recurs visual propi.
+
 ## AEMET
 
 AEMET indica a la seva web que l'ús i reproducció de la seva informació està autoritzat citant AEMET com a autora. Sóller Ara identifica sempre AEMET com a font dels avisos meteorològics.

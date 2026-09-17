@@ -4,7 +4,7 @@ Projecte públic i sense ànim de lucre per reunir informació local de Sóller 
 
 ## Versió
 
-**v0.51**
+**v0.52**
 
 ## Publicacions pròpies i enllaç directe a xarxes
 
@@ -24,6 +24,13 @@ URL preparada per utilitzar una sola vegada a la bio d'Instagram:
 `https://soller-ara.github.io/soller-ara/enllacos.html`
 
 Cada targeta d'aquesta pàgina apunta a la URL individual de la notícia. El caption d'Instagram conserva també l'URL exacta de la notícia, encara que la seva clicabilitat depèn de les funcions habilitades al compte.
+
+## Novetats de la v0.52
+
+- S'elimina l'accés duplicat «Autobusos TIB» i «TIB a Sóller» queda agrupat dins «Mobilitat ara».
+- S'incorpora el canal oficial d'IB3 Notícies a YouTube, filtrat perquè només entrin vídeos relacionats amb Sóller i el seu entorn.
+- Els vídeos es mostren amb el reproductor oficial de YouTube en mode de privacitat millorada i conserven l'enllaç a l'original.
+- Es documenta el tractament de les previsualitzacions automàtiques dels enllaços a les xarxes socials.
 
 ## Novetats de la v0.51
 

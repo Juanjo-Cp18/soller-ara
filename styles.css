@@ -146,7 +146,7 @@ a { color: inherit; }
 .quick-grid {
   margin-top: 18px;
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 12px;
 }
 .quick-link {
@@ -195,7 +195,7 @@ a { color: inherit; }
   font-weight: 800;
 }
 .tib-shortcuts {
-  margin-top: 14px;
+  margin-top: 12px;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
