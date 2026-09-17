@@ -168,6 +168,34 @@
       "mode": "automatic_collected",
       "recorded_at": "2026-09-17T12:26:51.992859+00:00",
       "error": ""
+    },
+    {
+      "post_id": "dab15d4e69e8df3c4e97",
+      "platform": "facebook",
+      "status": "success",
+      "remote_id": "1384755221378998_122109979623467310",
+      "remote_url": "https://www.facebook.com/1384755221378998_122109979623467310",
+      "title": "En obres el bombament de fecals de Sa Torre",
+      "post_url": "https://saveu.cat/noticies/en-obres-el-bombament-de-fecals-de-sa-torre/",
+      "source": "Sa Veu de Sóller",
+      "source_id": "sa-veu-soller",
+      "mode": "automatic_collected",
+      "recorded_at": "2026-09-17T13:22:22.880078+00:00",
+      "error": ""
+    },
+    {
+      "post_id": "dab15d4e69e8df3c4e97",
+      "platform": "instagram",
+      "status": "success",
+      "remote_id": "18406535488090516",
+      "remote_url": "https://www.instagram.com/p/DdY9SEul4Lw/",
+      "title": "En obres el bombament de fecals de Sa Torre",
+      "post_url": "https://saveu.cat/noticies/en-obres-el-bombament-de-fecals-de-sa-torre/",
+      "source": "Sa Veu de Sóller",
+      "source_id": "sa-veu-soller",
+      "mode": "automatic_collected",
+      "recorded_at": "2026-09-17T13:22:31.740570+00:00",
+      "error": ""
     }
   ]
 }
