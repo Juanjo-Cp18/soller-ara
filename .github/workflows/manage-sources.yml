@@ -18,8 +18,6 @@ on:
 
 permissions:
   contents: write
-  pages: write
-  id-token: write
 
 concurrency:
   group: "soller-ara-manage-sources"
@@ -46,47 +44,15 @@ jobs:
           SOURCE_CONFIRMATION: ${{ inputs.confirmation }}
         run: python scripts/manage_sources.py
 
-      - name: Regenerar feed amb la configuració nova
-        env:
-          META_ACCESS_TOKEN: ${{ secrets.META_ACCESS_TOKEN }}
-          META_IG_USER_ID: ${{ secrets.META_IG_USER_ID }}
-          META_GRAPH_VERSION: "v26.0"
-        run: python scripts/update_sources.py
-
-      - name: Guardar canvis
+      - name: Guardar canvi de configuració
         run: |
-          if git diff --quiet -- sources.json data/posts.json data/posts.js; then
+          if git diff --quiet -- sources.json; then
             echo "No hi ha canvis"
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add sources.json data/posts.json data/posts.js
-          git commit -m "fonts: actualitzar estat i feed"
+          git add sources.json
+          git commit -m "fonts: actualitzar estat"
           git pull --rebase origin main
           git push origin HEAD:main
-
-  deploy:
-    name: Deploy web pública després de gestionar fonts
-    needs: manage
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - name: Checkout del main actualitzat
-        uses: actions/checkout@v6
-        with:
-          ref: main
-
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-
-      - name: Upload site
-        uses: actions/upload-pages-artifact@v4
-        with:
-          path: "."
-
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
