@@ -1,6 +1,7 @@
 (() => {
   const API = String(window.SOLLER_ARA_ADMIN_API || "").replace(/\/$/, "");
   const TOKEN_KEY = "sollerAraAdminSession";
+  const RAW_BASE = "https://raw.githubusercontent.com/soller-ara/soller-ara/main/";
 
   function escapeHtml(value) {
     return String(value ?? "")
@@ -90,9 +91,17 @@
   }
 
   async function fetchJson(path) {
-    const response = await fetch(path + "?v=" + Date.now(), { cache: "no-store" });
+    const separator = path.includes("?") ? "&" : "?";
+    const response = await fetch(path + separator + "v=" + Date.now(), {
+      cache: "no-store",
+      headers: { "Cache-Control": "no-cache" },
+    });
     if (!response.ok) throw new Error("No se ha podido cargar " + path);
     return response.json();
+  }
+
+  function repoJson(path) {
+    return fetchJson(RAW_BASE + path);
   }
 
   function sourceStatusMap(postsData) {
@@ -190,9 +199,9 @@
     setMessage("");
     try {
       const [sourcesConfig, socialConfig, postsData] = await Promise.all([
-        fetchJson("../sources.json"),
-        fetchJson("../social_sources.json"),
-        fetchJson("../data/posts.json"),
+        repoJson("sources.json"),
+        repoJson("social_sources.json"),
+        repoJson("data/posts.json"),
       ]);
       renderSources(sourcesConfig, postsData);
       renderSocialSources(socialConfig);
@@ -207,12 +216,12 @@
   }
 
   async function waitForSource(sourceId, enabled) {
-    for (let attempt = 1; attempt <= 18; attempt++) {
+    for (let attempt = 1; attempt <= 24; attempt++) {
       await new Promise((resolve) => setTimeout(resolve, 2500));
-      const config = await fetchJson("../sources.json");
+      const config = await repoJson("sources.json");
       const source = (config.sources || []).find((item) => item.id === sourceId);
       if (source && (source.enabled !== false) === enabled) return true;
-      setMessage("Actualizando fuente… " + attempt + "/18");
+      setMessage("Actualizando fuente… " + attempt + "/24");
     }
     return false;
   }
@@ -236,16 +245,12 @@
         body: JSON.stringify({ source_id: sourceId, enabled: nextEnabled }),
       });
 
-      // Respuesta visual inmediata mientras GitHub termina el workflow.
-      button.dataset.sourceEnabled = nextEnabled ? "true" : "false";
-      button.textContent = nextEnabled ? "Desactivar" : "Activar";
-
       const applied = await waitForSource(sourceId, nextEnabled);
       if (applied) {
-        setMessage("Fuente " + (nextEnabled ? "activada" : "desactivada") + " correctamente.", "success");
+        setMessage("Fuente " + (nextEnabled ? "activada" : "desactivada") + " correctamente. Actualizando el feed público…", "success");
         await loadSources();
       } else {
-        setMessage("El cambio está enviado y GitHub sigue procesándolo. Puedes actualizar en unos segundos.", "error");
+        setMessage("El cambio está enviado y GitHub sigue procesándolo. Pulsa Actualizar en unos segundos.", "error");
       }
     } catch (error) {
       button.dataset.sourceEnabled = currentlyEnabled ? "true" : "false";
