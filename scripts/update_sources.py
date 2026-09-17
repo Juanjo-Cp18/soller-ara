@@ -1294,16 +1294,16 @@ def social_summary_from_title(source: dict, title: str) -> str:
     name = source.get("name", "la font")
     lowered = title.casefold()
 
-    if "ple" in lowered or "sessió" in lowered or "sesion" in lowered:
+    if source.get("id") == "youtube-ajuntament-soller" and re.search(
+        r"\bple\b|\bsessi[oó] plen[aà]ria\b", lowered
+    ):
         return f"Vídeo publicat per {name} relacionat amb una sessió plenària o activitat municipal."
-    if "directe" in lowered or "en directe" in lowered or "live" in lowered:
+    if re.search(r"\bdirecte\b|\blive\b", lowered):
         return f"Retransmissió publicada per {name}."
-    if "fira" in lowered or "firó" in lowered or "firo" in lowered or "festa" in lowered:
-        return f"Vídeo publicat per {name} relacionat amb una activitat o celebració local."
-    if "avís" in lowered or "avis" in lowered or "alerta" in lowered:
-        return f"Vídeo informatiu publicat per {name} amb contingut d'interès local."
 
-    return f"Vídeo publicat per {name} sobre «{title}»."
+    # Una paraula parcial (p. ex. "completa") no acredita una sessió municipal.
+    # L'autoria és l'única informació que afirmam per defecte.
+    return f"Vídeo publicat per {name}."
 
 
 def fetch_youtube_channel(source: dict) -> list[dict]:
@@ -1403,7 +1403,7 @@ def fetch_source(source: dict) -> list[dict]:
 def filter_by_keywords(source: dict, posts: list[dict]) -> list[dict]:
     """Filtra una font general perquè només entrin elements rellevants per Sóller."""
     keywords = [
-        clean_text(str(keyword)).casefold()
+        unicodedata.normalize("NFC", clean_text(str(keyword))).casefold()
         for keyword in source.get("include_keywords", [])
         if clean_text(str(keyword))
     ]
@@ -1412,11 +1412,12 @@ def filter_by_keywords(source: dict, posts: list[dict]) -> list[dict]:
 
     filtered: list[dict] = []
     for post in posts:
-        haystack = " ".join([
-            str(post.get("title") or ""),
-            str(post.get("summary") or ""),
-            str(post.get("url") or ""),
-        ]).casefold()
+        # El resum de YouTube es genera amb el nom de la font. Aquest nom
+        # no pot convertir un vídeo aliè a Sóller en una coincidència local.
+        fields = ["title"] if source.get("type") == "youtube_channel" else ["title", "summary", "url"]
+        haystack = unicodedata.normalize("NFC", " ".join(
+            str(post.get(field) or "") for field in fields
+        )).casefold()
         if any(keyword in haystack for keyword in keywords):
             filtered.append(post)
     return filtered
@@ -1567,7 +1568,7 @@ def main() -> int:
 
     payload = {
         "version": 40,
-        "generator_version": "0.40",
+        "generator_version": "0.53",
         "fetched_at": datetime.now(timezone.utc).isoformat(),
         "source_count": len(source_status),
         "source_status": source_status,

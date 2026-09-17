@@ -4,7 +4,7 @@ Projecte públic i sense ànim de lucre per reunir informació local de Sóller 
 
 ## Versió
 
-**v0.52**
+**v0.53**
 
 ## Publicacions pròpies i enllaç directe a xarxes
 
@@ -24,6 +24,14 @@ URL preparada per utilitzar una sola vegada a la bio d'Instagram:
 `https://soller-ara.github.io/soller-ara/enllacos.html`
 
 Cada targeta d'aquesta pàgina apunta a la URL individual de la notícia. El caption d'Instagram conserva també l'URL exacta de la notícia, encara que la seva clicabilitat depèn de les funcions habilitades al compte.
+
+## Novetats de la v0.53
+
+- S'afegeixen 12 fonts: 10 canals públics de YouTube d'institucions, associacions, un club esportiu i un creador cultural, més els feeds dels museus MUCBO i Can Prunera.
+- Màxim 60 dies d'antiguitat; els canals d'abast insular tenen un filtre local sobre el títol, sense coincidències artificials pel nom del compte.
+- Vídeos servits pel reproductor oficial de YouTube. Dels feeds dels museus només es mostren titular, data, font i enllaç.
+- El panell distingeix institucions, associacions, clubs i creadors, i explica quan una font funciona però no té contingut recent que compleixi els filtres.
+- Procedència i decisions de revisió documentades a [SOURCES_REVIEW.md](SOURCES_REVIEW.md).
 
 ## Novetats de la v0.52
 

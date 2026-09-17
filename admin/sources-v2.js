@@ -76,6 +76,9 @@
   }
 
   function typeLabel(source) {
+    const entityLabels = { institution: "Institución", association: "Asociación", sports_club: "Club deportivo", creator: "Creador independiente" };
+    const entity = entityLabels[source.entity_type];
+    if (entity) return (source.platform ? source.platform + " · " : "") + entity;
     if (source.source_type === "official") return "Oficial";
     if (source.source_type === "media") return "Medio";
     if (source.source_type === "social") return "Social";
@@ -100,6 +103,7 @@
         <header><h4>${esc(source.name || source.id)}</h4></header>
         <div class="post-meta">${esc(typeLabel(source))} · ${esc(source.type || "")} · ${esc(source.language || "")} · ${esc(current?.count ?? 0)} publicaciones</div>
         <div class="post-meta">${esc(source.locality || "Sóller")}</div>
+        ${enabled && current?.ok === true && current.count === 0 ? '<p class="hint">La fuente responde; no hay publicaciones recientes que cumplan los filtros.</p>' : ""}
         <div class="post-actions"><span class="${cls}">${label}</span><button type="button" data-source-id="${esc(source.id)}" data-source-enabled="${enabled}">${enabled ? "Desactivar" : "Activar"}</button></div>
       </article>`;
     }).join("");

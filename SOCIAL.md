@@ -62,6 +62,14 @@ Sóller Ara consulta el feed públic oficial de YouTube i crea una entrada socia
 
 El vídeo es reprodueix amb el reproductor oficial de YouTube i continua allotjat a YouTube.
 
+## v0.53 — Entitats locals i creadors fora de Meta
+
+S'incorporen deu canals addicionals de YouTube i dos feeds de museus. La relació, procedència i criteris de selecció es documenten a [SOURCES_REVIEW.md](SOURCES_REVIEW.md).
+
+Els canals d'abast insular només aporten vídeos amb referència local al títol; els canals de les entitats locals seleccionades recullen la seva activitat. Es manté el límit de 60 dies i la data original. Cap imatge o vídeo extern es descarrega o torna a allotjar.
+
+El reproductor de YouTube aplica les restriccions d'inserció del titular. El feed públic serveix per descobrir entrades recents, i la seva disponibilitat no concedeix drets de reutilització del fitxer audiovisual.
+
 
 ## v0.16 — Xarxes en directe
 
