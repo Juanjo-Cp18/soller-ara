@@ -1,4 +1,61 @@
 {
   "version": 1,
-  "entries": []
+  "entries": [
+    {
+      "post_id": "44b25091a129f25fbc30",
+      "platform": "facebook",
+      "status": "success",
+      "remote_id": "1384755221378998_122109863907467310",
+      "remote_url": "https://www.facebook.com/1384755221378998_122109863907467310",
+      "title": "Aviso. Nivel naranja. Lluvias. Sierra Tramontana",
+      "post_url": "https://www.aemet.es/documentos_d/eltiempo/prediccion/avisos/cap/Z_CAP_C_LEMM_20260917090943_AFAZ645401PRP11810.xml",
+      "source": "AEMET · Serra de Tramuntana",
+      "source_id": "aemet-avisos-mallorca",
+      "mode": "automatic_collected",
+      "recorded_at": "2026-09-17T09:24:00.571822+00:00",
+      "error": ""
+    },
+    {
+      "post_id": "44b25091a129f25fbc30",
+      "platform": "instagram",
+      "status": "success",
+      "remote_id": "18094992944424808",
+      "remote_url": "https://www.instagram.com/p/DdYiAUImGQU/",
+      "title": "Aviso. Nivel naranja. Lluvias. Sierra Tramontana",
+      "post_url": "https://www.aemet.es/documentos_d/eltiempo/prediccion/avisos/cap/Z_CAP_C_LEMM_20260917090943_AFAZ645401PRP11810.xml",
+      "source": "AEMET · Serra de Tramuntana",
+      "source_id": "aemet-avisos-mallorca",
+      "mode": "automatic_collected",
+      "recorded_at": "2026-09-17T09:24:18.180039+00:00",
+      "error": ""
+    },
+    {
+      "post_id": "5308b25381269c18bd69",
+      "platform": "facebook",
+      "status": "success",
+      "remote_id": "1384755221378998_122109864147467310",
+      "remote_url": "https://www.facebook.com/1384755221378998_122109864147467310",
+      "title": "Les pluges deixen fins a 94 litres a la Serra i descarreguen de forma torrencial a Tuent",
+      "post_url": "https://saveu.cat/noticies/les-pluges-deixen-fins-a-94-litres-a-la-serra-i-descarreguen-de-forma-torrencial-a-tuent/",
+      "source": "Sa Veu de Sóller",
+      "source_id": "sa-veu-soller",
+      "mode": "automatic_collected",
+      "recorded_at": "2026-09-17T09:24:24.671594+00:00",
+      "error": ""
+    },
+    {
+      "post_id": "5308b25381269c18bd69",
+      "platform": "instagram",
+      "status": "success",
+      "remote_id": "18080933660343874",
+      "remote_url": "https://www.instagram.com/p/DdYiDT5GM43/",
+      "title": "Les pluges deixen fins a 94 litres a la Serra i descarreguen de forma torrencial a Tuent",
+      "post_url": "https://saveu.cat/noticies/les-pluges-deixen-fins-a-94-litres-a-la-serra-i-descarreguen-de-forma-torrencial-a-tuent/",
+      "source": "Sa Veu de Sóller",
+      "source_id": "sa-veu-soller",
+      "mode": "automatic_collected",
+      "recorded_at": "2026-09-17T09:24:42.089299+00:00",
+      "error": ""
+    }
+  ]
 }
