@@ -1,8 +1,8 @@
 {
   "version": 40,
   "generator_version": "0.40",
-  "fetched_at": "2026-09-17T07:19:29.489964+00:00",
-  "source_count": 14,
+  "fetched_at": "2026-09-17T07:22:49.604874+00:00",
+  "source_count": 15,
   "source_status": [
     {
       "source_id": "ajuntament-soller-noticies",
@@ -54,18 +54,18 @@
       "name": "Ajuntament de Sóller · YouTube",
       "source_type": "social",
       "method": "youtube_channel",
-      "ok": false,
-      "count": 0,
-      "error": "HTTP Error 404: Not Found"
+      "ok": true,
+      "count": 2,
+      "error": null
     },
     {
       "source_id": "goib-noticies-soller",
       "name": "Govern de les Illes Balears",
       "source_type": "official",
       "method": "rss",
-      "ok": true,
+      "ok": false,
       "count": 0,
-      "error": null
+      "error": "[Errno 104] Connection reset by peer"
     },
     {
       "source_id": "ib3-noticies-soller",
@@ -129,6 +129,15 @@
       "ok": true,
       "count": 1,
       "error": null
+    },
+    {
+      "source_id": "soller-ara",
+      "name": "Sóller Ara",
+      "source_type": "own",
+      "method": "manual",
+      "ok": true,
+      "count": 1,
+      "error": null
     }
   ],
   "social_integration_status": [
@@ -153,12 +162,12 @@
       "error": "(#10) Application does not have permission for this action [type=OAuthException, code=10, subcode=None]"
     }
   ],
-  "post_count": 111,
+  "post_count": 113,
   "related_pair_count": 0,
   "errors": [
     {
-      "source_id": "youtube-ajuntament-soller",
-      "error": "HTTP Error 404: Not Found"
+      "source_id": "goib-noticies-soller",
+      "error": "[Errno 104] Connection reset by peer"
     }
   ],
   "posts": [
@@ -178,7 +187,28 @@
       "rights_status": "owned",
       "image_allowed": true,
       "media_url": "https://soller-ara.github.io/soller-ara/assets/generated/soller-ara-09f9b36a5945666e.jpg",
-      "media_type": "image"
+      "media_type": "image",
+      "related_sources": []
+    },
+    {
+      "id": "5308b25381269c18bd69",
+      "category": "alerts",
+      "source_id": "sa-veu-soller",
+      "source": "Sa Veu de Sóller",
+      "source_type": "media",
+      "language": "ca",
+      "locality": "Sóller",
+      "published_at": "2026-09-17T06:41:47+00:00",
+      "title": "Les pluges deixen fins a 94 litres a la Serra i descarreguen de forma torrencial a Tuent",
+      "summary": "",
+      "url": "https://saveu.cat/noticies/les-pluges-deixen-fins-a-94-litres-a-la-serra-i-descarreguen-de-forma-torrencial-a-tuent/",
+      "platform": null,
+      "account": null,
+      "media_type": null,
+      "content_policy": "headline_date_link_only",
+      "rights_status": "permission_pending",
+      "image_allowed": false,
+      "related_sources": []
     },
     {
       "id": "50b5f09daffbe3c849ec",
@@ -257,6 +287,26 @@
       "media_type": null,
       "content_policy": "headline_date_link_only",
       "rights_status": "permission_pending",
+      "image_allowed": false,
+      "related_sources": []
+    },
+    {
+      "id": "85f85df365d3bcdba1c3",
+      "category": "agenda",
+      "source_id": "youtube-ajuntament-soller",
+      "source": "Ajuntament de Sóller · YouTube",
+      "source_type": "social",
+      "language": "ca",
+      "locality": "Sóller",
+      "published_at": "2026-09-16T13:08:28+00:00",
+      "title": "Ple ordinari de l'Ajuntament de Sóller, celebrada el 16/9/2026 (Part 2 de la sessió del 9/9/2026).",
+      "summary": "Vídeo publicat per Ajuntament de Sóller · YouTube relacionat amb una sessió plenària o activitat municipal.",
+      "url": "https://www.youtube.com/watch?v=-c349w_HKS4",
+      "platform": "YouTube",
+      "account": "@ajuntamentdesoller_",
+      "media_type": "video",
+      "content_policy": "generated_social_summary",
+      "rights_status": "platform_embed",
       "image_allowed": false,
       "related_sources": []
     },
@@ -701,26 +751,6 @@
       "related_sources": []
     },
     {
-      "id": "df0d3e4039ac69bb1a25",
-      "category": "services",
-      "source_id": "sa-veu-soller",
-      "source": "Sa Veu de Sóller",
-      "source_type": "media",
-      "language": "ca",
-      "locality": "Sóller",
-      "published_at": "2026-09-12T07:00:00+00:00",
-      "title": "Dues alternatives per redirigir el trànsit pel centre durant les obres del Fantasio",
-      "summary": "",
-      "url": "https://saveu.cat/noticies/dues-alternatives-per-redirigir-el-transit-pel-centre-durant-les-obres-del-fantasio/",
-      "platform": null,
-      "account": null,
-      "media_type": null,
-      "content_policy": "headline_date_link_only",
-      "rights_status": "permission_pending",
-      "image_allowed": false,
-      "related_sources": []
-    },
-    {
       "id": "4bf5b04f5fac7b21f1f2",
       "category": "services",
       "source_id": "diario-mallorca-soller",
@@ -877,6 +907,26 @@
       "media_type": null,
       "content_policy": "headline_date_link_only",
       "rights_status": "permission_pending",
+      "image_allowed": false,
+      "related_sources": []
+    },
+    {
+      "id": "afc2f48c871c4c51a1c9",
+      "category": "news",
+      "source_id": "youtube-ajuntament-soller",
+      "source": "Ajuntament de Sóller · YouTube",
+      "source_type": "social",
+      "language": "ca",
+      "locality": "Sóller",
+      "published_at": "2026-09-09T12:39:11+00:00",
+      "title": "Sessió plenària ordinària de l'Ajuntament de Sóller, celebrada el 9 de setembre de 2026.",
+      "summary": "Vídeo publicat per Ajuntament de Sóller · YouTube relacionat amb una sessió plenària o activitat municipal.",
+      "url": "https://www.youtube.com/watch?v=Ej0M-wttjM0",
+      "platform": "YouTube",
+      "account": "@ajuntamentdesoller_",
+      "media_type": "video",
+      "content_policy": "generated_social_summary",
+      "rights_status": "platform_embed",
       "image_allowed": false,
       "related_sources": []
     },
