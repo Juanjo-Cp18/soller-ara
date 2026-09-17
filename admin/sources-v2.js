@@ -49,7 +49,7 @@
     section.innerHTML = `
       <div class="module-heading">
         <div><p class="eyebrow">Recopilación</p><h2>Fuentes de Sóller Ara</h2>
-        <p class="hint">Activa o desactiva las fuentes que alimentan automáticamente la web. Desactivar una fuente detiene nuevas recopilaciones; las publicaciones anteriores permanecen visibles y pueden ocultarse desde Moderación.</p></div>
+        <p class="hint">Activa o desactiva las fuentes que alimentan automáticamente la web. Desactivar una fuente detiene nuevas recopilaciones; las publicaciones anteriores se conservan dentro del límite de antigüedad y pueden ocultarse desde Moderación.</p></div>
         <button id="refreshSourcesButton" class="button-secondary" type="button">Actualizar</button>
       </div>
       <div id="sourcesSummary" class="metrics"></div>
@@ -93,15 +93,20 @@
     ].map(([a,b]) => `<div class="metric"><span>${esc(a)}</span><strong>${esc(b)}</strong></div>`).join("");
 
     const health = statusMap(posts);
+    const retainedCounts = new Map();
+    for (const post of (posts.posts || [])) {
+      retainedCounts.set(post.source_id, (retainedCounts.get(post.source_id) || 0) + 1);
+    }
     const list = document.getElementById("sourcesList");
     list.innerHTML = sources.map((source) => {
       const enabled = source.enabled !== false;
       const current = health.get(source.id);
+      const count = enabled ? current?.count ?? 0 : retainedCounts.get(source.id) || 0;
       const label = !enabled ? "DESACTIVADA" : current?.ok === false ? "ERROR" : current?.ok === true ? "OK" : "PENDIENTE";
       const cls = !enabled || current?.ok == null ? "pending" : current.ok ? "ok" : "bad";
       return `<article class="post-item">
         <header><h4>${esc(source.name || source.id)}</h4></header>
-        <div class="post-meta">${esc(typeLabel(source))} · ${esc(source.type || "")} · ${esc(source.language || "")} · ${esc(current?.count ?? 0)} publicaciones</div>
+        <div class="post-meta">${esc(typeLabel(source))} · ${esc(source.type || "")} · ${esc(source.language || "")} · ${esc(count)} publicaciones${enabled ? "" : " conservadas"}</div>
         <div class="post-meta">${esc(source.locality || "Sóller")}</div>
         ${enabled && current?.ok === true && current.count === 0 ? '<p class="hint">La fuente responde; no hay publicaciones recientes que cumplan los filtros.</p>' : ""}
         <div class="post-actions"><span class="${cls}">${label}</span><button type="button" data-source-id="${esc(source.id)}" data-source-enabled="${enabled}">${enabled ? "Desactivar" : "Activar"}</button></div>
@@ -165,7 +170,7 @@
       if (await waitFor(sourceId, next)) {
         message(next
           ? "Fuente activada correctamente. Volverá a recopilar en las próximas actualizaciones."
-          : "Fuente desactivada correctamente. No se cargarán nuevas publicaciones; las anteriores permanecen visibles.", "success");
+          : "Fuente desactivada correctamente. Las publicaciones anteriores se conservarán dentro del límite de antigüedad.", "success");
         await load();
       } else {
         message("El cambio se ha enviado. GitHub todavía está confirmándolo; pulsa Actualizar en unos segundos.", "error");

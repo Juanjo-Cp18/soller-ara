@@ -1,5 +1,6 @@
 import importlib.util
 import json
+import tempfile
 import unittest
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
@@ -86,6 +87,84 @@ class SourceCollectionTests(unittest.TestCase):
         self.assertFalse(post["image_allowed"])
         self.assertNotIn("Text original", post["summary"])
         self.assertNotIn("media_url", post)
+
+
+class SourceLifecycleTests(unittest.TestCase):
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.temp.cleanup)
+        self.root = Path(self.temp.name)
+        for name in ["SOURCES_FILE", "OUTPUT_FILE", "JS_OUTPUT_FILE", "MANUAL_POSTS_FILE", "MODERATION_FILE"]:
+            self.enterContext(patch.object(collector, name, self.root / name))
+        self.enterContext(patch.object(collector, "fetch_optional_meta_social_sources", return_value=([], [], [])))
+        self.paused = {"id": "paused", "name": "Font pausada", "type": "rss", "enabled": False, "max_age_days": 60}
+        self.active = {"id": "active", "name": "Font activa", "type": "rss", "enabled": True, "max_age_days": 60}
+        self.write(collector.SOURCES_FILE, {"sources": [self.paused, self.active]})
+        self.kept = self.post("kept", "paused", 10)
+        self.fresh = self.post("fresh", "active", 1)
+        self.fetch = self.enterContext(patch.object(collector, "fetch_source", return_value=[self.fresh]))
+
+    def write(self, path, data):
+        path.write_text(json.dumps(data), encoding="utf-8")
+
+    def post(self, identifier, source, age):
+        return {"id": identifier, "source_id": source, "source": source, "source_type": "official",
+                "title": identifier, "category": "news", "summary": "",
+                "published_at": (datetime.now(timezone.utc) - timedelta(days=age)).isoformat(),
+                "url": f"https://example.test/{identifier}"}
+
+    def collect(self):
+        self.assertEqual(collector.main(), 0)
+        return json.loads(collector.OUTPUT_FILE.read_text(encoding="utf-8"))
+
+    def test_disabled_source_retains_visible_recent_posts_without_fetching(self):
+        self.write(collector.OUTPUT_FILE, {"posts": [self.kept, self.post("old", "paused", 61),
+            self.post("hidden", "paused", 1), self.post("removed-source", "removed", 1),
+            self.post("active-cache", "active", 1)]})
+        self.write(collector.MODERATION_FILE, {"hidden_post_ids": ["hidden"]})
+        for _ in range(2):
+            result = self.collect()
+            self.assertEqual([post["id"] for post in result["posts"]], ["fresh", "kept"])
+            kept = result["posts"][1]
+            self.assertEqual(kept["published_at"], self.kept["published_at"])
+            self.assertEqual(kept["url"], self.kept["url"])
+            self.assertEqual(result["source_count"], 1)
+            self.assertEqual([source["source_id"] for source in result["source_status"]], ["active"])
+        self.assertEqual([call.args[0]["id"] for call in self.fetch.call_args_list], ["active", "active"])
+
+    def test_moderation_can_hide_and_restore_a_retained_post(self):
+        self.write(collector.OUTPUT_FILE, {"posts": [self.kept]})
+        self.collect()
+        spec = importlib.util.spec_from_file_location("manage_posts", ROOT / "scripts/manage_posts.py")
+        moderation = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(moderation)
+        moderation.POSTS_FILE = collector.OUTPUT_FILE
+        moderation.POSTS_JS_FILE = collector.JS_OUTPUT_FILE
+        moderation.MODERATION_FILE = collector.MODERATION_FILE
+        moderation.MANUAL_FILE = collector.MANUAL_POSTS_FILE
+        moderation.POST_ID = self.kept["id"]
+        moderation.hide()
+        self.assertEqual([post["id"] for post in self.collect()["posts"]], ["fresh"])
+        moderation.unhide()
+        self.assertEqual([post["id"] for post in self.collect()["posts"]], ["fresh", "kept"])
+
+    def test_reenabled_source_resumes_collection_without_duplicates(self):
+        self.write(collector.OUTPUT_FILE, {"posts": [self.kept]})
+        self.collect()
+        self.paused["enabled"] = True
+        self.write(collector.SOURCES_FILE, {"sources": [self.paused, self.active]})
+        self.fetch.reset_mock()
+        self.fetch.side_effect = lambda source: [self.kept, self.post("resumed", "paused", 2)] if source["id"] == "paused" else [self.fresh]
+        result = self.collect()
+        self.assertEqual([post["id"] for post in result["posts"]], ["fresh", "resumed", "kept"])
+        self.assertEqual([call.args[0]["id"] for call in self.fetch.call_args_list], ["paused", "active"])
+
+    def test_invalid_cache_is_not_overwritten_when_preservation_is_required(self):
+        collector.OUTPUT_FILE.write_text("invalid JSON", encoding="utf-8")
+        with self.assertRaises(json.JSONDecodeError):
+            collector.main()
+        self.assertEqual(collector.OUTPUT_FILE.read_text(encoding="utf-8"), "invalid JSON")
+        self.fetch.assert_not_called()
 
 
 if __name__ == "__main__":

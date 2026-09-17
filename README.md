@@ -4,7 +4,7 @@ Projecte públic i sense ànim de lucre per reunir informació local de Sóller 
 
 ## Versió
 
-**v0.54**
+**v0.55**
 
 ## Publicacions pròpies i enllaç directe a xarxes
 
@@ -24,6 +24,13 @@ URL preparada per utilitzar una sola vegada a la bio d'Instagram:
 `https://soller-ara.github.io/soller-ara/enllacos.html`
 
 Cada targeta d'aquesta pàgina apunta a la URL individual de la notícia. El caption d'Instagram conserva també l'URL exacta de la notícia, encara que la seva clicabilitat depèn de les funcions habilitades al compte.
+
+## Novetats de la v0.55
+
+- Desactivar una font atura les consultes noves i conserva les publicacions ja recopilades, amb les dates originals i dins del termini d'antiguitat configurat.
+- Les publicacions conservades continuen subjectes a moderació. Es pot ocultar i restaurar una entrada amb la font desactivada, i tornar-la a activar reprèn la recopilació.
+- Administració mostra el nombre de publicacions conservades de cada font desactivada. Aquestes fonts no es compten com a errors de recopilació ni s'envien a les xarxes automàticament.
+- Es comprova el cicle complet amb dades de prova. Un fitxer anterior il·legible atura l'actualització abans de sobreescriure les entrades que cal conservar.
 
 ## Novetats de la v0.54
 

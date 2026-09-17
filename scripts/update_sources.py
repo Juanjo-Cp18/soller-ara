@@ -1498,9 +1498,30 @@ def load_manual_posts() -> list[dict]:
     return posts
 
 
+def load_disabled_source_posts(sources: list[dict]) -> list[dict]:
+    """Conserva entrades ja recopilades, sense consultar les fonts desactivades."""
+    disabled = [source for source in sources if not source.get("enabled", True)]
+    if not disabled or not OUTPUT_FILE.exists():
+        return []
+
+    # Si el fitxer anterior és il·legible, aturam abans de sobreescriure'l.
+    payload = json.loads(OUTPUT_FILE.read_text(encoding="utf-8"))
+    previous = payload.get("posts") if isinstance(payload, dict) else None
+    if not isinstance(previous, list) or any(not isinstance(post, dict) for post in previous):
+        raise ValueError("El fitxer anterior de publicacions no té un format vàlid.")
+
+    retained: list[dict] = []
+    for source in disabled:
+        source_posts = [post for post in previous if post.get("source_id") == source.get("id")]
+        source_posts = filter_by_keywords(source, source_posts)
+        retention = {"max_age_days": source.get("max_age_days", 60)}
+        retained.extend(filter_by_max_age(retention, source_posts))
+    return retained
+
+
 def main() -> int:
     config = json.loads(SOURCES_FILE.read_text(encoding="utf-8"))
-    posts: list[dict] = []
+    posts = load_disabled_source_posts(config.get("sources", []))
     errors: list[dict] = []
     source_status: list[dict] = []
     social_integration_status: list[dict] = []
@@ -1568,7 +1589,7 @@ def main() -> int:
 
     payload = {
         "version": 40,
-        "generator_version": "0.54",
+        "generator_version": "0.55",
         "fetched_at": datetime.now(timezone.utc).isoformat(),
         "source_count": len(source_status),
         "source_status": source_status,
