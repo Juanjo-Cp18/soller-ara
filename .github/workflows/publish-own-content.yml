@@ -20,23 +20,13 @@ on:
         required: true
         default: 'news'
         type: choice
-        options:
-          - news
-          - agenda
-          - alerts
-          - services
-          - culture
-          - sports
-          - commerce
+        options: [news, agenda, alerts, services, culture, sports, commerce]
       language:
         description: 'Idioma'
         required: true
         default: 'ca'
         type: choice
-        options:
-          - ca
-          - es
-          - en
+        options: [ca, es, en]
       image_url:
         description: 'URL pública de la imatge (opcional; si queda buida Sóller Ara genera una targeta automàtica)'
         required: false
@@ -91,11 +81,20 @@ jobs:
           POST_IMAGE_URL: ${{ inputs.image_url }}
         run: python scripts/add_own_post.py
 
+      - name: Registrar activitat
+        env:
+          ACTIVITY_ACTION: publish
+          ACTIVITY_AREA: publications
+          ACTIVITY_TARGET_ID: ${{ env.OWN_POST_ID }}
+          ACTIVITY_TITLE: ${{ inputs.title }}
+          ACTIVITY_DETAIL: Publicación propia creada desde Administración
+        run: python scripts/log_admin_action.py
+
       - name: Guardar publicació al repositori
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/manual_posts.json data/posts.json data/posts.js noticies
+          git add data/manual_posts.json data/posts.json data/posts.js data/activity_log.json noticies
           git add assets/generated 2>/dev/null || true
           git commit -m "publicar: contingut propi de Sóller Ara"
           git pull --rebase origin main
