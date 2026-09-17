@@ -1,7 +1,7 @@
 window.SOLLER_ARA_DATA = {
   "version": 40,
   "generator_version": "0.55",
-  "fetched_at": "2026-09-17T22:20:01.104463+00:00",
+  "fetched_at": "2026-09-17T23:17:40.207784+00:00",
   "source_count": 27,
   "source_status": [
     {
@@ -118,7 +118,7 @@ window.SOLLER_ARA_DATA = {
       "source_type": "media",
       "method": "html_listing_regex",
       "ok": true,
-      "count": 9,
+      "count": 8,
       "error": null
     },
     {
@@ -270,7 +270,7 @@ window.SOLLER_ARA_DATA = {
       "error": "(#10) Application does not have permission for this action [type=OAuthException, code=10, subcode=None]"
     }
   ],
-  "post_count": 124,
+  "post_count": 123,
   "related_pair_count": 0,
   "errors": [],
   "posts": [
@@ -326,26 +326,6 @@ window.SOLLER_ARA_DATA = {
       "title": "En obres el bombament de fecals de Sa Torre",
       "summary": "",
       "url": "https://saveu.cat/noticies/en-obres-el-bombament-de-fecals-de-sa-torre/",
-      "platform": null,
-      "account": null,
-      "media_type": null,
-      "content_policy": "headline_date_link_only",
-      "rights_status": "permission_pending",
-      "image_allowed": false,
-      "related_sources": []
-    },
-    {
-      "id": "c81a528c6c7bdabf2389",
-      "category": "news",
-      "source_id": "mallorca-directo-soller",
-      "source": "Mallorca Directo",
-      "source_type": "media",
-      "language": "es",
-      "locality": "Sóller",
-      "published_at": "2026-09-17T12:00:00+00:00",
-      "title": "Gasolineras más baratas en Sóller hoy: precios actualizados | Mallorca Directo",
-      "summary": "",
-      "url": "https://mallorcadirecto.com/comarca-de-ponent/soller/gasolineras",
       "platform": null,
       "account": null,
       "media_type": null,
