@@ -8,7 +8,9 @@ on:
       - "admin/**"
       - "worker/**"
       - "scripts/edit_own_post.py"
+      - "scripts/manage_sources.py"
       - ".github/workflows/edit-own-content.yml"
+      - ".github/workflows/manage-sources.yml"
       - ".github/workflows/validate-admin.yml"
   workflow_dispatch:
 
@@ -35,11 +37,14 @@ jobs:
       - name: Validar JavaScript
         run: |
           node --check admin/admin.js
+          node --check admin/sources.js
           node --check worker/admin-worker.js
           node --check admin/config.js
 
-      - name: Validar script de edición
-        run: python -m py_compile scripts/edit_own_post.py
+      - name: Validar scripts de Administración
+        run: |
+          python -m py_compile scripts/edit_own_post.py
+          python -m py_compile scripts/manage_sources.py
 
       - name: Verificar que no hay secretos en Wrangler
         run: |
