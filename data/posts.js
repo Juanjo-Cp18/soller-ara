@@ -1,7 +1,7 @@
 window.SOLLER_ARA_DATA = {
   "version": 40,
   "generator_version": "0.53",
-  "fetched_at": "2026-09-17T12:26:21.840547+00:00",
+  "fetched_at": "2026-09-17T13:22:03.844937+00:00",
   "source_count": 27,
   "source_status": [
     {
@@ -274,6 +274,26 @@ window.SOLLER_ARA_DATA = {
   "related_pair_count": 0,
   "errors": [],
   "posts": [
+    {
+      "id": "dab15d4e69e8df3c4e97",
+      "category": "services",
+      "source_id": "sa-veu-soller",
+      "source": "Sa Veu de Sóller",
+      "source_type": "media",
+      "language": "ca",
+      "locality": "Sóller",
+      "published_at": "2026-09-17T13:18:40+00:00",
+      "title": "En obres el bombament de fecals de Sa Torre",
+      "summary": "",
+      "url": "https://saveu.cat/noticies/en-obres-el-bombament-de-fecals-de-sa-torre/",
+      "platform": null,
+      "account": null,
+      "media_type": null,
+      "content_policy": "headline_date_link_only",
+      "rights_status": "permission_pending",
+      "image_allowed": false,
+      "related_sources": []
+    },
     {
       "id": "c81a528c6c7bdabf2389",
       "category": "news",
@@ -806,26 +826,6 @@ window.SOLLER_ARA_DATA = {
       "title": "Anit arranca la recollida de fems porta a porta per a 623 habitatges",
       "summary": "",
       "url": "https://saveu.cat/noticies/anit-arranca-la-recollida-de-fems-porta-a-porta-per-a-623-habitatges/",
-      "platform": null,
-      "account": null,
-      "media_type": null,
-      "content_policy": "headline_date_link_only",
-      "rights_status": "permission_pending",
-      "image_allowed": false,
-      "related_sources": []
-    },
-    {
-      "id": "acdd30a31d9fddc10bf7",
-      "category": "news",
-      "source_id": "sa-veu-soller",
-      "source": "Sa Veu de Sóller",
-      "source_type": "media",
-      "language": "ca",
-      "locality": "Sóller",
-      "published_at": "2026-09-14T13:34:27+00:00",
-      "title": "Totes les nits d’agost varen ser tropicals",
-      "summary": "",
-      "url": "https://saveu.cat/noticies/totes-les-nits-dagost-varen-ser-tropicals/",
       "platform": null,
       "account": null,
       "media_type": null,
