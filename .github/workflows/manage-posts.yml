@@ -7,10 +7,7 @@ on:
         description: 'Acció'
         required: true
         type: choice
-        options:
-          - hide
-          - unhide
-          - delete-own
+        options: [hide, unhide, delete-own]
       post_id:
         description: 'ID de la publicació'
         required: true
@@ -50,11 +47,19 @@ jobs:
           MODERATION_CONFIRMATION: ${{ inputs.confirmation }}
         run: python scripts/manage_posts.py
 
+      - name: Registrar activitat
+        env:
+          ACTIVITY_ACTION: ${{ inputs.action }}
+          ACTIVITY_AREA: moderation
+          ACTIVITY_TARGET_ID: ${{ inputs.post_id }}
+          ACTIVITY_DETAIL: Acción de moderación completada desde Administración
+        run: python scripts/log_admin_action.py
+
       - name: Guardar canvis
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/moderation.json data/manual_posts.json data/posts.json data/posts.js
+          git add data/moderation.json data/manual_posts.json data/posts.json data/posts.js data/activity_log.json
           if [ -d noticies ]; then git add -A noticies; fi
           if [ -d assets/generated ]; then git add -A assets/generated; fi
           if git diff --cached --quiet; then
