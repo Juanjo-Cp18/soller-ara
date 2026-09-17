@@ -1,26 +1,26 @@
 {
   "version": 1,
   "enabled": true,
-  "generated_at": "2026-09-17T11:20:35.402947+00:00",
+  "generated_at": "2026-09-17T12:26:21.964300+00:00",
   "entries": [
     {
-      "post_id": "fd8a12052fe820de840b",
-      "title": "Un passatger insulta per motius racistes el conductor d’un bus del TIB i acaba denunciat",
+      "post_id": "c81a528c6c7bdabf2389",
+      "title": "Gasolineras más baratas en Sóller hoy: precios actualizados | Mallorca Directo",
       "summary": "",
-      "source": "Sa Veu de Sóller",
-      "source_id": "sa-veu-soller",
+      "source": "Mallorca Directo",
+      "source_id": "mallorca-directo-soller",
       "source_type": "media",
       "category": "news",
-      "language": "ca",
-      "published_at": "2026-09-17T10:36:35+00:00",
-      "original_url": "https://saveu.cat/noticies/un-passatger-insulta-per-motius-racistes-el-conductor-dun-bus-del-tib-i-acaba-denunciat/",
+      "language": "es",
+      "published_at": "2026-09-17T12:00:00+00:00",
+      "original_url": "https://mallorcadirecto.com/comarca-de-ponent/soller/gasolineras",
       "content_policy": "headline_date_link_only",
       "rights_status": "permission_pending",
       "platforms": [
         "facebook",
         "instagram"
       ],
-      "image_url": "https://soller-ara.github.io/soller-ara/assets/generated/social/fd8a12052fe820de840b.jpg"
+      "image_url": "https://soller-ara.github.io/soller-ara/assets/generated/social/c81a528c6c7bdabf2389.jpg"
     }
   ]
 }

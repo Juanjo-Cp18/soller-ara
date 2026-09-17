@@ -1,7 +1,7 @@
 window.SOLLER_ARA_DATA = {
   "version": 40,
   "generator_version": "0.53",
-  "fetched_at": "2026-09-17T11:20:35.314184+00:00",
+  "fetched_at": "2026-09-17T12:26:21.840547+00:00",
   "source_count": 27,
   "source_status": [
     {
@@ -72,9 +72,9 @@ window.SOLLER_ARA_DATA = {
       "name": "Govern de les Illes Balears",
       "source_type": "official",
       "method": "rss",
-      "ok": false,
+      "ok": true,
       "count": 0,
-      "error": "[Errno 104] Connection reset by peer"
+      "error": null
     },
     {
       "source_id": "ib3-noticies-soller",
@@ -82,7 +82,7 @@ window.SOLLER_ARA_DATA = {
       "source_type": "media",
       "method": "html_search",
       "ok": true,
-      "count": 10,
+      "count": 9,
       "error": null
     },
     {
@@ -118,7 +118,7 @@ window.SOLLER_ARA_DATA = {
       "source_type": "media",
       "method": "html_listing_regex",
       "ok": true,
-      "count": 8,
+      "count": 9,
       "error": null
     },
     {
@@ -272,13 +272,28 @@ window.SOLLER_ARA_DATA = {
   ],
   "post_count": 130,
   "related_pair_count": 0,
-  "errors": [
-    {
-      "source_id": "goib-noticies-soller",
-      "error": "[Errno 104] Connection reset by peer"
-    }
-  ],
+  "errors": [],
   "posts": [
+    {
+      "id": "c81a528c6c7bdabf2389",
+      "category": "news",
+      "source_id": "mallorca-directo-soller",
+      "source": "Mallorca Directo",
+      "source_type": "media",
+      "language": "es",
+      "locality": "Sóller",
+      "published_at": "2026-09-17T12:00:00+00:00",
+      "title": "Gasolineras más baratas en Sóller hoy: precios actualizados | Mallorca Directo",
+      "summary": "",
+      "url": "https://mallorcadirecto.com/comarca-de-ponent/soller/gasolineras",
+      "platform": null,
+      "account": null,
+      "media_type": null,
+      "content_policy": "headline_date_link_only",
+      "rights_status": "permission_pending",
+      "image_allowed": false,
+      "related_sources": []
+    },
     {
       "id": "fd8a12052fe820de840b",
       "category": "news",
@@ -1380,26 +1395,6 @@ window.SOLLER_ARA_DATA = {
       "related_sources": []
     },
     {
-      "id": "7ce73fcaa5e6876daf0f",
-      "category": "agenda",
-      "source_id": "ajuntament-soller-noticies",
-      "source": "Ajuntament de Sóller",
-      "source_type": "official",
-      "language": "ca",
-      "locality": "Sóller",
-      "published_at": "2026-09-07T08:51:51+00:00",
-      "title": "Anunci de la convocatòria del pròxim ple ordinari",
-      "summary": "Tindrà lloc dimecres, 9 de setembre, a les 11:00h",
-      "url": "https://ajsoller.net/ca/noticies/anunci-de-la-convocatoria-del-proxim-ple-ordinari",
-      "platform": null,
-      "account": null,
-      "media_type": null,
-      "content_policy": "short_factual_excerpt",
-      "rights_status": "public_source_reviewed",
-      "image_allowed": false,
-      "related_sources": []
-    },
-    {
       "id": "7e3b0bbe783cbfa22dfd",
       "category": "alerts",
       "source_id": "setmanari-soller",
@@ -1416,6 +1411,26 @@ window.SOLLER_ARA_DATA = {
       "media_type": null,
       "content_policy": "headline_date_link_only",
       "rights_status": "permission_pending",
+      "image_allowed": false,
+      "related_sources": []
+    },
+    {
+      "id": "99baa9bf4ff527ba42a8",
+      "category": "services",
+      "source_id": "ajuntament-soller-noticies",
+      "source": "Ajuntament de Sóller",
+      "source_type": "official",
+      "language": "ca",
+      "locality": "Sóller",
+      "published_at": "2026-09-07T05:37:04+00:00",
+      "title": "El tinent de batle assisteix a la presentació de l’inici de les obres d’ampliació de la rotonda de la ITV de Son Castelló",
+      "summary": "El tinent de batle de Sóller, Carlos Darder, ha assistit avui a l’inici de les obres d’ampliació de la rotonda de la ITV de Son Castelló, en un acte encapçalat pel president del Consell de Mallorca, Llorenç Galmés, amb…",
+      "url": "https://ajsoller.net/ca/noticies/el-tinent-de-batle-assisteix-la-presentacio-de-linici-de-les-obres-dampliacio-de-la",
+      "platform": null,
+      "account": null,
+      "media_type": null,
+      "content_policy": "short_factual_excerpt",
+      "rights_status": "public_source_reviewed",
       "image_allowed": false,
       "related_sources": []
     },
@@ -2731,26 +2746,6 @@ window.SOLLER_ARA_DATA = {
       "title": "UGT denuncia la cesión ilegal de trabajadores en la huelga de Sóller 2010",
       "summary": "",
       "url": "https://www.ultimahora.es/noticias/part-forana/2026/07/19/2673293/ugt-denuncia-cesion-ilegal-trabajadores-huelga-soller-2010.html",
-      "platform": null,
-      "account": null,
-      "media_type": null,
-      "content_policy": "headline_date_link_only",
-      "rights_status": "permission_pending",
-      "image_allowed": false,
-      "related_sources": []
-    },
-    {
-      "id": "7c559dab78638b83aad3",
-      "category": "news",
-      "source_id": "ib3-noticies-soller",
-      "source": "IB3 Notícies",
-      "source_type": "media",
-      "language": "ca",
-      "locality": "Sóller / Serra de Tramuntana",
-      "published_at": "2026-07-19T12:00:00+00:00",
-      "title": "IB3N | La Policia Local de Sóller avisa de furts als aparcaments dissuasius",
-      "summary": "",
-      "url": "https://ib3.org/la-policia-local-de-soller-avisa-de-furts-als-aparcaments-dissuasius",
       "platform": null,
       "account": null,
       "media_type": null,
