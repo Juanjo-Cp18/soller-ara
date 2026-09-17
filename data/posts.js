@@ -1,7 +1,7 @@
 window.SOLLER_ARA_DATA = {
   "version": 40,
   "generator_version": "0.40",
-  "fetched_at": "2026-09-17T03:21:09.257322+00:00",
+  "fetched_at": "2026-09-17T04:21:19.571217+00:00",
   "source_count": 14,
   "source_status": [
     {
@@ -54,9 +54,9 @@ window.SOLLER_ARA_DATA = {
       "name": "Ajuntament de Sóller · YouTube",
       "source_type": "social",
       "method": "youtube_channel",
-      "ok": true,
-      "count": 2,
-      "error": null
+      "ok": false,
+      "count": 0,
+      "error": "HTTP Error 404: Not Found"
     },
     {
       "source_id": "goib-noticies-soller",
@@ -153,9 +153,14 @@ window.SOLLER_ARA_DATA = {
       "error": "(#10) Application does not have permission for this action [type=OAuthException, code=10, subcode=None]"
     }
   ],
-  "post_count": 112,
+  "post_count": 110,
   "related_pair_count": 0,
-  "errors": [],
+  "errors": [
+    {
+      "source_id": "youtube-ajuntament-soller",
+      "error": "HTTP Error 404: Not Found"
+    }
+  ],
   "posts": [
     {
       "id": "50b5f09daffbe3c849ec",
@@ -234,26 +239,6 @@ window.SOLLER_ARA_DATA = {
       "media_type": null,
       "content_policy": "headline_date_link_only",
       "rights_status": "permission_pending",
-      "image_allowed": false,
-      "related_sources": []
-    },
-    {
-      "id": "85f85df365d3bcdba1c3",
-      "category": "agenda",
-      "source_id": "youtube-ajuntament-soller",
-      "source": "Ajuntament de Sóller · YouTube",
-      "source_type": "social",
-      "language": "ca",
-      "locality": "Sóller",
-      "published_at": "2026-09-16T13:08:28+00:00",
-      "title": "Ple ordinari de l'Ajuntament de Sóller, celebrada el 16/9/2026 (Part 2 de la sessió del 9/9/2026).",
-      "summary": "Vídeo publicat per Ajuntament de Sóller · YouTube relacionat amb una sessió plenària o activitat municipal.",
-      "url": "https://www.youtube.com/watch?v=-c349w_HKS4",
-      "platform": "YouTube",
-      "account": "@ajuntamentdesoller_",
-      "media_type": "video",
-      "content_policy": "generated_social_summary",
-      "rights_status": "platform_embed",
       "image_allowed": false,
       "related_sources": []
     },
@@ -874,26 +859,6 @@ window.SOLLER_ARA_DATA = {
       "media_type": null,
       "content_policy": "headline_date_link_only",
       "rights_status": "permission_pending",
-      "image_allowed": false,
-      "related_sources": []
-    },
-    {
-      "id": "afc2f48c871c4c51a1c9",
-      "category": "news",
-      "source_id": "youtube-ajuntament-soller",
-      "source": "Ajuntament de Sóller · YouTube",
-      "source_type": "social",
-      "language": "ca",
-      "locality": "Sóller",
-      "published_at": "2026-09-09T12:39:11+00:00",
-      "title": "Sessió plenària ordinària de l'Ajuntament de Sóller, celebrada el 9 de setembre de 2026.",
-      "summary": "Vídeo publicat per Ajuntament de Sóller · YouTube relacionat amb una sessió plenària o activitat municipal.",
-      "url": "https://www.youtube.com/watch?v=Ej0M-wttjM0",
-      "platform": "YouTube",
-      "account": "@ajuntamentdesoller_",
-      "media_type": "video",
-      "content_policy": "generated_social_summary",
-      "rights_status": "platform_embed",
       "image_allowed": false,
       "related_sources": []
     },
