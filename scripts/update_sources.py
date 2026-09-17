@@ -1568,7 +1568,7 @@ def main() -> int:
 
     payload = {
         "version": 40,
-        "generator_version": "0.53",
+        "generator_version": "0.54",
         "fetched_at": datetime.now(timezone.utc).isoformat(),
         "source_count": len(source_status),
         "source_status": source_status,

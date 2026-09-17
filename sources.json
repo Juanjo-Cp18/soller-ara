@@ -1,5 +1,5 @@
 {
-  "version": 28,
+  "version": 29,
   "sources": [
     {
       "id": "ajuntament-soller-noticies",
@@ -9,6 +9,7 @@
       "language": "ca",
       "locality": "Sóller",
       "source_type": "official",
+      "max_age_days": 60,
       "enabled": true,
       "image_policy": "disabled_until_rights_verified",
       "content_policy": "short_factual_excerpt",
@@ -22,6 +23,7 @@
       "language": "ca",
       "locality": "Sóller",
       "source_type": "media",
+      "max_age_days": 60,
       "enabled": true,
       "image_policy": "disabled_until_rights_verified",
       "content_policy": "headline_date_link_only",
@@ -36,6 +38,7 @@
       "locality": "Sóller",
       "source_type": "media",
       "max_items": 20,
+      "max_age_days": 60,
       "enabled": true,
       "image_policy": "disabled_until_rights_verified",
       "content_policy": "headline_date_link_only",
@@ -50,6 +53,7 @@
       "locality": "Sóller",
       "source_type": "official",
       "max_items": 15,
+      "max_age_days": 60,
       "enabled": true,
       "image_policy": "disabled_until_rights_verified",
       "content_policy": "short_factual_excerpt",

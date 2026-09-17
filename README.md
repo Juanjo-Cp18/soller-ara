@@ -4,7 +4,7 @@ Projecte públic i sense ànim de lucre per reunir informació local de Sóller 
 
 ## Versió
 
-**v0.53**
+**v0.54**
 
 ## Publicacions pròpies i enllaç directe a xarxes
 
@@ -24,6 +24,12 @@ URL preparada per utilitzar una sola vegada a la bio d'Instagram:
 `https://soller-ara.github.io/soller-ara/enllacos.html`
 
 Cada targeta d'aquesta pàgina apunta a la URL individual de la notícia. El caption d'Instagram conserva també l'URL exacta de la notícia, encara que la seva clicabilitat depèn de les funcions habilitades al compte.
+
+## Novetats de la v0.54
+
+- Es corregeix l'absència del límit de 60 dies a Sóller 2010: els avisos antics que continuen al seu llistat ja no entren a la recopilació de Sóller Ara.
+- S'aplica també el límit que faltava a les fonts inicials Ajuntament de Sóller, Sa Veu i Setmanari Sóller. Es conserven les dates originals i els terminis específics ja configurats per altres fonts.
+- Una prova de regressió comprova el cas real dels avisos del 24 de març i del 6 d'agost, amb el rellotge fixat al 17 de setembre de 2026.
 
 ## Novetats de la v0.53
 

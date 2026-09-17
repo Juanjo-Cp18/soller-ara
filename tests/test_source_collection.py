@@ -1,4 +1,5 @@
 import importlib.util
+import json
 import unittest
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
@@ -36,6 +37,27 @@ class SourceCollectionTests(unittest.TestCase):
             {"id": "undated", "published_at": None},
         ]
         self.assertEqual(collector.filter_by_max_age({"max_age_days": 60}, posts), posts[:1])
+
+    def test_soller2010_keeps_original_dates_and_excludes_old_notices(self):
+        config = json.loads((ROOT / "sources.json").read_text(encoding="utf-8"))
+        source = next(item for item in config["sources"] if item["id"] == "soller-2010")
+        recent_url = source["url"] + "/recollida-selectiva-dies-de-recollida-i-com-reciclar-correctament"
+        archive_url = source["url"] + "/apertura-piscines-son-angelats"
+        # Dates publicades a la font original; les dues notícies encara surten al llistat.
+        pages = {
+            source["url"]: f'<a href="{recent_url}">Veure</a><a href="{archive_url}">Veure</a>',
+            recent_url: "<h1>RECOLLIDA SELECTIVA</h1><p>06/08/2026 Notícia</p>",
+            archive_url: "<h1>APERTURA PISCINES SON ANGELATS</h1><p>24/03/2026 Notícia</p>",
+        }
+        with patch.object(collector, "fetch_bytes", side_effect=lambda url, *_: (pages[url].encode(), "utf-8")):
+            posts = collector.fetch_source(source)
+        self.assertEqual([post["published_at"] for post in posts], [
+            "2026-08-06T12:00:00+00:00", "2026-03-24T12:00:00+00:00",
+        ])
+        with patch.object(collector, "datetime", wraps=datetime) as clock:
+            clock.now.return_value = datetime(2026, 9, 17, 14, tzinfo=timezone.utc)
+            recent = collector.filter_by_max_age(source, posts)
+        self.assertEqual([post["url"] for post in recent], [recent_url])
 
     def test_cultural_titles_do_not_create_municipal_claims(self):
         source = {"id": "youtube-cultural", "name": "Entitat cultural"}
