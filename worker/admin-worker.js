@@ -45,6 +45,10 @@ export default {
         return await editOwn(request, env, cors);
       }
 
+      if (url.pathname === "/api/source" && request.method === "POST") {
+        return await manageSource(request, env, cors);
+      }
+
       if (url.pathname === "/api/moderate" && request.method === "POST") {
         return await moderate(request, env, cors);
       }
@@ -209,7 +213,6 @@ async function rawJson(owner, repo, branch, path, fallback) {
   return response.json();
 }
 
-
 async function systemCheck(env, cors) {
   const checks = [];
   const { owner, repo, branch } = repoParts(env);
@@ -233,11 +236,7 @@ async function systemCheck(env, cors) {
   });
 
   if (!env.GITHUB_TOKEN) {
-    checks.push({
-      name: "GitHub",
-      ok: false,
-      detail: "Falta GITHUB_TOKEN",
-    });
+    checks.push({ name: "GitHub", ok: false, detail: "Falta GITHUB_TOKEN" });
     return json({ ok: false, checks }, 200, cors);
   }
 
@@ -245,7 +244,7 @@ async function systemCheck(env, cors) {
     "Authorization": `Bearer ${env.GITHUB_TOKEN}`,
     "Accept": "application/vnd.github+json",
     "X-GitHub-Api-Version": "2022-11-28",
-    "User-Agent": "SollerAra-Admin/0.43",
+    "User-Agent": "SollerAra-Admin/0.44",
   };
 
   const repoResponse = await fetch(`https://api.github.com/repos/${owner}/${repo}`, { headers });
@@ -255,7 +254,12 @@ async function systemCheck(env, cors) {
     detail: repoResponse.ok ? `${owner}/${repo} accesible` : `HTTP ${repoResponse.status}`,
   });
 
-  const workflows = ["publish-own-content.yml", "edit-own-content.yml", "manage-posts.yml"];
+  const workflows = [
+    "publish-own-content.yml",
+    "edit-own-content.yml",
+    "manage-posts.yml",
+    "manage-sources.yml",
+  ];
   for (const workflow of workflows) {
     const response = await fetch(
       `https://api.github.com/repos/${owner}/${repo}/actions/workflows/${workflow}`,
@@ -278,10 +282,7 @@ async function systemCheck(env, cors) {
     detail: publicData.ok ? "data/posts.json accesible" : `HTTP ${publicData.status}`,
   });
 
-  return json({
-    ok: checks.every((item) => item.ok),
-    checks,
-  }, 200, cors);
+  return json({ ok: checks.every((item) => item.ok), checks }, 200, cors);
 }
 
 async function status(env, cors) {
@@ -308,7 +309,7 @@ async function githubDispatch(env, workflow, inputs) {
         "Accept": "application/vnd.github+json",
         "Content-Type": "application/json",
         "X-GitHub-Api-Version": "2022-11-28",
-        "User-Agent": "SollerAra-Admin/0.41",
+        "User-Agent": "SollerAra-Admin/0.44",
       },
       body: JSON.stringify({ ref: branch, inputs }),
     }
@@ -377,6 +378,27 @@ async function editOwn(request, env, cors) {
   });
 
   return json({ ok: true, workflow: "Sóller Ara · editar contingut propi" }, 202, cors);
+}
+
+async function manageSource(request, env, cors) {
+  const body = await request.json().catch(() => ({}));
+  const sourceId = String(body.source_id || "").trim();
+  const enabled = body.enabled;
+
+  if (!sourceId || !/^[a-z0-9][a-z0-9-]{1,79}$/.test(sourceId)) {
+    return json({ error: "Fuente no válida." }, 400, cors);
+  }
+  if (typeof enabled !== "boolean") {
+    return json({ error: "Estado de fuente no válido." }, 400, cors);
+  }
+
+  await githubDispatch(env, "manage-sources.yml", {
+    source_id: sourceId,
+    enabled,
+    confirmation: "CONFIRMAR",
+  });
+
+  return json({ ok: true, workflow: "Sóller Ara · gestionar fonts" }, 202, cors);
 }
 
 async function moderate(request, env, cors) {
