@@ -1,8 +1,8 @@
 window.SOLLER_ARA_DATA = {
   "version": 40,
   "generator_version": "0.40",
-  "fetched_at": "2026-09-17T07:22:49.604874+00:00",
-  "source_count": 15,
+  "fetched_at": "2026-09-17T08:09:32.738061+00:00",
+  "source_count": 14,
   "source_status": [
     {
       "source_id": "ajuntament-soller-noticies",
@@ -63,9 +63,9 @@ window.SOLLER_ARA_DATA = {
       "name": "Govern de les Illes Balears",
       "source_type": "official",
       "method": "rss",
-      "ok": false,
+      "ok": true,
       "count": 0,
-      "error": "[Errno 104] Connection reset by peer"
+      "error": null
     },
     {
       "source_id": "ib3-noticies-soller",
@@ -129,15 +129,6 @@ window.SOLLER_ARA_DATA = {
       "ok": true,
       "count": 1,
       "error": null
-    },
-    {
-      "source_id": "soller-ara",
-      "name": "Sóller Ara",
-      "source_type": "own",
-      "method": "manual",
-      "ok": true,
-      "count": 1,
-      "error": null
     }
   ],
   "social_integration_status": [
@@ -164,12 +155,7 @@ window.SOLLER_ARA_DATA = {
   ],
   "post_count": 112,
   "related_pair_count": 0,
-  "errors": [
-    {
-      "source_id": "goib-noticies-soller",
-      "error": "[Errno 104] Connection reset by peer"
-    }
-  ],
+  "errors": [],
   "posts": [
     {
       "id": "5308b25381269c18bd69",

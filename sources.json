@@ -1,5 +1,5 @@
 {
-  "version": 23,
+  "version": 24,
   "sources": [
     {
       "id": "ajuntament-soller-noticies",
@@ -82,7 +82,7 @@
       "platform": "YouTube",
       "account": "@ajuntamentdesoller_",
       "max_items": 15,
-      "enabled": false,
+      "enabled": true,
       "image_policy": "embed_only",
       "content_policy": "generated_social_summary",
       "rights_status": "platform_embed",
