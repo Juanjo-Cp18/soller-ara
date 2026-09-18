@@ -19,7 +19,7 @@ export default {
 
     try {
       if (url.pathname === "/health") {
-        return json({ ok: true, service: "soller-ara-admin" }, 200, cors);
+        return json({ ok: true, service: "soller-ara-admin", version: "0.56", capabilities: ["social_settings"] }, 200, cors);
       }
 
       if (url.pathname === "/api/login" && request.method === "POST") {
@@ -47,6 +47,10 @@ export default {
 
       if (url.pathname === "/api/source" && request.method === "POST") {
         return await manageSource(request, env, cors);
+      }
+
+      if (url.pathname === "/api/social-settings" && request.method === "POST") {
+        return await manageSocialSettings(request, env, cors);
       }
 
       if (url.pathname === "/api/moderate" && request.method === "POST") {
@@ -259,6 +263,7 @@ async function systemCheck(env, cors) {
     "edit-own-content.yml",
     "manage-posts.yml",
     "manage-sources.yml",
+    "manage-social-settings.yml",
   ];
   for (const workflow of workflows) {
     const response = await fetch(
@@ -399,6 +404,46 @@ async function manageSource(request, env, cors) {
   });
 
   return json({ ok: true, workflow: "Sóller Ara · gestionar fonts" }, 202, cors);
+}
+
+async function manageSocialSettings(request, env, cors) {
+  const body = await request.json().catch(() => null);
+  if (!body || typeof body !== "object" || Array.isArray(body)
+      || Object.keys(body).some((key) => !["base_version", "enabled", "sources"].includes(key))
+      || !Number.isInteger(body.base_version) || body.base_version < 1) {
+    return json({ error: "Configuración de redes no válida." }, 400, cors);
+  }
+  if ("enabled" in body && typeof body.enabled !== "boolean") {
+    return json({ error: "El estado de la automatización debe ser sí o no." }, 400, cors);
+  }
+  const rules = body.sources ?? {};
+  if (!rules || typeof rules !== "object" || Array.isArray(rules) || Object.keys(rules).length > 100
+      || (!("enabled" in body) && !Object.keys(rules).length)) {
+    return json({ error: "No hay cambios válidos para guardar." }, 400, cors);
+  }
+  const { owner, repo, branch } = repoParts(env);
+  const [config, sources] = await Promise.all([
+    rawJson(owner, repo, branch, "social_distribution.json", null),
+    rawJson(owner, repo, branch, "sources.json", null),
+  ]);
+  if (!config || !Array.isArray(sources?.sources)) {
+    return json({ error: "No se ha podido comprobar la configuración actual. Prueba de nuevo." }, 503, cors);
+  }
+  if (config.version !== body.base_version) {
+    return json({ error: "La configuración ha cambiado. Pulsa Actualizar antes de guardar." }, 409, cors);
+  }
+  const knownIds = new Set(sources.sources.map((source) => source.id));
+  for (const [id, rule] of Object.entries(rules)) {
+    if (!knownIds.has(id) || !rule || typeof rule !== "object" || Array.isArray(rule)
+        || Object.keys(rule).length !== 2 || typeof rule.facebook !== "boolean" || typeof rule.instagram !== "boolean") {
+      return json({ error: "La selección de fuentes o redes no es válida." }, 400, cors);
+    }
+  }
+  const requestId = crypto.randomUUID();
+  await githubDispatch(env, "manage-social-settings.yml", {
+    confirmation: "GUARDAR", request_id: requestId, change: JSON.stringify(body),
+  });
+  return json({ ok: true, request_id: requestId }, 202, cors);
 }
 
 async function moderate(request, env, cors) {
