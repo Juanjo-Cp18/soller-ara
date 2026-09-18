@@ -18,7 +18,7 @@ POSTS_FILE = ROOT / "data" / "posts.json"
 POSTS_JS_FILE = ROOT / "data" / "posts.js"
 DETAIL_DIR = ROOT / "noticies"
 GENERATED_DIR = ROOT / "assets" / "generated"
-LOGO_FILE = ROOT / "assets" / "brand" / "logo-soller-ara.png"
+LOGO_FILE = ROOT / "assets" / "brand" / "logo-soller-ara-web.png"
 SITE_URL = "https://soller-ara.github.io/soller-ara"
 
 POST_ID = os.environ.get("POST_ID", "").strip()

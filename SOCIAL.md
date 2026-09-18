@@ -98,10 +98,12 @@ A partir d'ara:
 
 Sóller Ara ja incorpora un connector opcional per Instagram Business Discovery.
 
-Quan GitHub disposi de `META_ACCESS_TOKEN` i `META_IG_USER_ID`, les fonts marcades com `meta_business_discovery` a `social_sources.json` es consultaran automàticament.
+Quan GitHub disposi de `META_ACCESS_TOKEN` i `META_IG_USER_ID`, les fonts marcades com `meta_business_discovery` a `social_sources.json` es consultaran automàticament. Les fonts que Meta no autoritza a consultar es mantenen com a `official_link`: continuen visibles com a accés oficial però no es tracten com una recopilació fallida.
 
 El text original de la publicació s'utilitza només per classificar-la i generar una descripció pròpia i neutral. No es publica íntegrament.
 
 El contingut visual es presenta amb l'embed oficial d'Instagram a partir del permalink original.
 
 Si les credencials no estan configurades, el connector s'omet sense provocar errors en les fonts existents.
+
+Les publicacions automàtiques a Instagram inclouen sempre el camp `Informació original:` amb l'URL completa de la notícia. Instagram pot mostrar-la com a text no clicable, però l'adreça queda visible i es pot copiar.

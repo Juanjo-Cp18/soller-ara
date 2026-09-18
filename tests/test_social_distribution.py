@@ -71,6 +71,26 @@ class SocialDistributionTests(unittest.TestCase):
         self.assertEqual(selected[0]["platforms"], ["instagram"])
         self.assertTrue(self.publish.already_published(log, "a1", "facebook"))
 
+    def test_instagram_caption_keeps_full_original_url(self):
+        item = self.post("a1")
+        item["image_url"] = "https://example.test/card.jpg"
+        item["original_url"] = item["url"]
+        calls = []
+
+        def fake_graph(path, **kwargs):
+            calls.append((path, kwargs))
+            if path == "ig/media":
+                return {"id": "container"}
+            if path == "container":
+                return {"status_code": "FINISHED"}
+            return {"id": "media"}
+
+        with patch.object(self.publish, "wait_public_image"), patch.object(self.publish, "graph", side_effect=fake_graph):
+            self.assertEqual(self.publish.publish_instagram(item, "ig", "soller.ara", "token"), "media")
+
+        caption = calls[0][1]["params"]["caption"]
+        self.assertIn("Informació original: https://example.test/original", caption)
+
     def test_changed_source_or_platform_is_rechecked_before_send(self):
         selected = self.prepare_posts([self.post("a1")])
         self.write(self.prepare.SOURCES_FILE, {"sources": [{"id": "a", "enabled": False}]})

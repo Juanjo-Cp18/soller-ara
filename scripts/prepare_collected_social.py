@@ -23,7 +23,7 @@ QUEUE_FILE = ROOT / "data" / "social_auto_queue.json"
 MODERATION_FILE = ROOT / "data" / "moderation.json"
 SOURCES_FILE = ROOT / "sources.json"
 CARD_DIR = ROOT / "assets" / "generated" / "social"
-LOGO_FILE = ROOT / "assets" / "brand" / "logo-soller-ara.png"
+LOGO_FILE = ROOT / "assets" / "brand" / "logo-soller-ara-web.png"
 IMAGE_BASE = "https://soller-ara.github.io/soller-ara/assets/generated/social"
 
 

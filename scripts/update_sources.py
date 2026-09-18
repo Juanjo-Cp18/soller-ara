@@ -12,6 +12,7 @@ import json
 import os
 import re
 import sys
+import time
 import unicodedata
 from difflib import SequenceMatcher
 from datetime import datetime, timezone
@@ -19,7 +20,7 @@ from html.parser import HTMLParser
 from email.utils import parsedate_to_datetime
 from pathlib import Path
 from urllib.parse import urlencode, urljoin, urlparse
-from urllib.error import HTTPError
+from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 from xml.etree import ElementTree as ET
 
@@ -623,10 +624,20 @@ class ArticleMetaParser(HTMLParser):
 
 def fetch_bytes(url: str, accept: str) -> tuple[bytes, str]:
     request = Request(url, headers={"User-Agent": USER_AGENT, "Accept": accept})
-    with urlopen(request, timeout=30) as response:
-        payload = response.read()
-        charset = response.headers.get_content_charset() or "utf-8"
-    return payload, charset
+    for attempt in range(3):
+        try:
+            with urlopen(request, timeout=30) as response:
+                payload = response.read()
+                charset = response.headers.get_content_charset() or "utf-8"
+            return payload, charset
+        except HTTPError as exc:
+            if exc.code not in {429, 500, 502, 503, 504} or attempt == 2:
+                raise
+        except (URLError, TimeoutError):
+            if attempt == 2:
+                raise
+        time.sleep(1.5 * (attempt + 1))
+    raise RuntimeError("No s'ha pogut descarregar la font després de tres intents.")
 
 
 def fetch_json_bearer(url: str, token: str) -> dict:
