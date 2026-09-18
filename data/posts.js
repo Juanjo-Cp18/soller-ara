@@ -1,7 +1,7 @@
 window.SOLLER_ARA_DATA = {
   "version": 41,
   "generator_version": "0.59",
-  "fetched_at": "2026-09-18T17:18:34.659857+00:00",
+  "fetched_at": "2026-09-18T18:23:10.965309+00:00",
   "source_count": 28,
   "source_status": [
     {
@@ -46,7 +46,7 @@ window.SOLLER_ARA_DATA = {
       "source_type": "official",
       "method": "aemet_alerts",
       "ok": true,
-      "count": 2,
+      "count": 0,
       "error": null
     },
     {
@@ -258,7 +258,7 @@ window.SOLLER_ARA_DATA = {
     }
   ],
   "social_integration_status": [],
-  "post_count": 127,
+  "post_count": 125,
   "related_pair_count": 0,
   "errors": [],
   "posts": [
@@ -279,46 +279,6 @@ window.SOLLER_ARA_DATA = {
       "image_allowed": true,
       "media_url": "https://soller-ara.github.io/soller-ara",
       "media_type": "image",
-      "related_sources": []
-    },
-    {
-      "id": "a7028278bbaf57121df6",
-      "category": "alerts",
-      "source_id": "aemet-avisos-mallorca",
-      "source": "AEMET · Serra de Tramuntana",
-      "source_type": "official",
-      "language": "es",
-      "locality": "Sóller / Serra de Tramuntana",
-      "published_at": "2026-09-18T15:50:54+00:00",
-      "title": "Aviso. Nivel amarillo. Lluvias. Sierra Tramontana",
-      "summary": "Aviso de precipitación acumulada en una hora de nivel amarillo de 17:00 18-09-2026 CEST (UTC+2) a 20:59 18-09-2026 CEST (UTC+2).",
-      "url": "https://www.aemet.es/documentos_d/eltiempo/prediccion/avisos/cap/Z_CAP_C_LEMM_20260918155054_AFAZ645401PRP11819.xml",
-      "platform": null,
-      "account": null,
-      "media_type": null,
-      "content_policy": "short_factual_excerpt",
-      "rights_status": "reuse_authorized_with_attribution",
-      "image_allowed": false,
-      "related_sources": []
-    },
-    {
-      "id": "50de0313ba4138570435",
-      "category": "alerts",
-      "source_id": "aemet-avisos-mallorca",
-      "source": "AEMET · Serra de Tramuntana",
-      "source_type": "official",
-      "language": "es",
-      "locality": "Sóller / Serra de Tramuntana",
-      "published_at": "2026-09-18T15:50:54+00:00",
-      "title": "Aviso. Nivel amarillo. Tormentas. Sierra Tramontana",
-      "summary": "Aviso de tormentas de nivel amarillo de 17:00 18-09-2026 CEST (UTC+2) a 20:59 18-09-2026 CEST (UTC+2).",
-      "url": "https://www.aemet.es/documentos_d/eltiempo/prediccion/avisos/cap/Z_CAP_C_LEMM_20260918155054_AFAZ645401TOTO1819.xml",
-      "platform": null,
-      "account": null,
-      "media_type": null,
-      "content_policy": "short_factual_excerpt",
-      "rights_status": "reuse_authorized_with_attribution",
-      "image_allowed": false,
       "related_sources": []
     },
     {
