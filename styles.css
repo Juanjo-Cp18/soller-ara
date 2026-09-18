@@ -52,6 +52,49 @@ a { color: inherit; }
 .brand-mark img { width: 100%; height: 100%; display: block; object-fit: contain; }
 .brand-wrap h1 { margin: 0; font-size: 1.25rem; }
 .brand-wrap p { margin: 3px 0 0; color: var(--muted); font-size: .9rem; }
+.topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.brand-social-links {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.brand-social-links a {
+  min-height: 38px;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 10px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--surface);
+  color: var(--primary);
+  font-size: .82rem;
+  font-weight: 800;
+  text-decoration: none;
+  transition: border-color .18s ease, background .18s ease, transform .18s ease;
+}
+.brand-social-links a:hover {
+  border-color: var(--primary);
+  background: var(--primary-soft);
+  transform: translateY(-1px);
+}
+.brand-social-links svg {
+  width: 18px;
+  height: 18px;
+  flex: 0 0 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+}
+.brand-social-links svg path,
+.brand-social-links .social-dot {
+  fill: currentColor;
+  stroke: none;
+}
 .language-picker select {
   border: 1px solid var(--border);
   background: var(--surface);
@@ -712,6 +755,12 @@ a { color: inherit; }
 
 @media (max-width: 760px) {
   .brand-wrap p { display: none; }
+  .topbar { gap: 12px; }
+  .topbar-actions { gap: 7px; }
+  .brand-social-links { gap: 5px; }
+  .brand-social-links a { min-width: 38px; padding: 7px; justify-content: center; }
+  .brand-social-links a > span { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+  .language-picker select { padding: 9px 8px; }
   .hero { grid-template-columns: 1fr; padding: 28px 22px; }
   .hero h2 { font-size: 2.4rem; }
   .section-heading { align-items: stretch; flex-direction: column; }
@@ -824,6 +873,10 @@ a { color: inherit; }
   overflow: hidden;
 }
 @media (max-width: 560px) {
+  .brand-wrap { gap: 9px; }
+  .brand-wrap h1 { font-size: 1.05rem; }
+  .brand-mark { width: 42px; height: 42px; flex-basis: 42px; border-radius: 13px; }
+  .topbar { padding-inline: 14px; }
   .own-link-card {
     grid-template-columns: 84px 1fr;
   }

@@ -4,7 +4,7 @@ Projecte públic i sense ànim de lucre per reunir informació local de Sóller 
 
 ## Versió
 
-**v0.62**
+**v0.63**
 
 ## Publicacions pròpies i enllaç directe a xarxes
 
@@ -24,6 +24,12 @@ URL preparada per utilitzar una sola vegada a la bio d'Instagram:
 `https://soller-ara.github.io/soller-ara/enllacos.html`
 
 Cada targeta d'aquesta pàgina apunta a la URL individual de la notícia. El caption d'Instagram conserva també l'URL exacta de la notícia, encara que la seva clicabilitat depèn de les funcions habilitades al compte.
+
+## Novetats de la v0.63
+
+- Es prepara un avatar específic per als perfils de Facebook i Instagram, amb fons verd continu i marge segur per al retall circular.
+- La capçalera i el peu de la web incorporen accessos directes als perfils propis de Sóller Ara a Instagram i Facebook.
+- El logotip general de la web i les targetes socials no es modifica; l'adaptació circular queda reservada als avatars dels perfils.
 
 ## Novetats de la v0.62
 

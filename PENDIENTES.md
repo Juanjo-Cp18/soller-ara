@@ -21,6 +21,7 @@ Incorporar una medición de visitas que permita conocer, como mínimo, páginas 
 ## Identidad visual y movimiento
 
 - El nuevo logotipo `SA` con montañas y capilla se usa desde v0.60 en la cabecera y en las nuevas tarjetas propias para Instagram. Las publicaciones anteriores no se modifican.
+- La variante `assets/brand/avatar-soller-ara-social.png`, adaptada al recorte circular de Instagram y Facebook, queda preparada en v0.63. Pendiente: subirla manualmente como foto de perfil en ambas plataformas.
 - Preparar una animación suave y continua del fondo que pase por el color actual, amanecer, día, atardecer y noche. En la web debe respetar `prefers-reduced-motion` y no dificultar la lectura.
 - Comprobar para cada ubicación de Facebook e Instagram si admite movimiento. Cuando una ubicación solo acepte imagen estática, conservar el logotipo fijo y reservar la versión animada para vídeo, reel o historia.
 - La portada estática de Facebook ya está compuesta con las siete fotografías aportadas. Antes de publicarla hay que confirmar las licencias de las imágenes identificadas como iStock.
