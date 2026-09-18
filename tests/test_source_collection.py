@@ -104,7 +104,7 @@ class SourceCollectionTests(unittest.TestCase):
 
         configured = json.loads((ROOT / "sources.json").read_text(encoding="utf-8"))["sources"]
         enabled = {item["id"] for item in configured if item.get("image_policy") == "official_oembed"}
-        self.assertEqual(enabled, {"mucbo-noticies", "can-prunera-noticies"})
+        self.assertEqual(enabled, {"sa-veu-soller", "mucbo-noticies", "can-prunera-noticies"})
 
 
 class SourceLifecycleTests(unittest.TestCase):

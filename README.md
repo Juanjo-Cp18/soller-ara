@@ -4,7 +4,7 @@ Projecte públic i sense ànim de lucre per reunir informació local de Sóller 
 
 ## Versió
 
-**v0.65**
+**v0.66**
 
 ## Publicacions pròpies i enllaç directe a xarxes
 
@@ -24,6 +24,11 @@ URL preparada per utilitzar una sola vegada a la bio d'Instagram:
 `https://soller-ara.github.io/soller-ara/enllacos.html`
 
 Cada targeta d'aquesta pàgina apunta a la URL individual de la notícia. El caption d'Instagram conserva també l'URL exacta de la notícia, encara que la seva clicabilitat depèn de les funcions habilitades al compte.
+
+## Novetats de la v0.66
+
+- Sa Veu de Sóller conserva la previsualització oficial publicada i servida des del mateix domini del mitjà, sense copiar ni allotjar a Sóller Ara la fotografia o l'extracte.
+- La targeta manté visible l'accés a la publicació original i deixa el control del contingut incrustat en mans del mitjà d'origen.
 
 ## Novetats de la v0.65
 
