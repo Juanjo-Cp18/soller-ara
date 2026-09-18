@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "enabled": true,
   "platforms": {
     "facebook": true,
@@ -18,19 +18,65 @@
     "commerce": true
   },
   "sources": {
-    "ajuntament-soller-noticies": {"facebook": true, "instagram": true},
-    "sa-veu-soller": {"facebook": true, "instagram": true},
-    "setmanari-soller": {"facebook": true, "instagram": true},
-    "soller-2010": {"facebook": true, "instagram": true},
-    "aemet-avisos-mallorca": {"facebook": true, "instagram": true},
-    "youtube-ajuntament-soller": {"facebook": true, "instagram": true},
-    "goib-noticies-soller": {"facebook": true, "instagram": true},
-    "ib3-noticies-soller": {"facebook": true, "instagram": true},
-    "dbalears-soller": {"facebook": true, "instagram": true},
-    "diario-mallorca-soller": {"facebook": true, "instagram": true},
-    "ultima-hora-soller": {"facebook": true, "instagram": true},
-    "mallorca-directo-soller": {"facebook": true, "instagram": true},
-    "tib-avisos-soller": {"facebook": true, "instagram": true},
-    "consell-mallorca-soller": {"facebook": true, "instagram": true}
+    "ajuntament-soller-noticies": {
+      "facebook": true,
+      "instagram": true
+    },
+    "sa-veu-soller": {
+      "facebook": true,
+      "instagram": true
+    },
+    "setmanari-soller": {
+      "facebook": true,
+      "instagram": true
+    },
+    "soller-2010": {
+      "facebook": true,
+      "instagram": true
+    },
+    "aemet-avisos-mallorca": {
+      "facebook": true,
+      "instagram": true
+    },
+    "youtube-ajuntament-soller": {
+      "facebook": true,
+      "instagram": true
+    },
+    "youtube-ib3-noticies-soller": {
+      "facebook": true,
+      "instagram": true
+    },
+    "goib-noticies-soller": {
+      "facebook": true,
+      "instagram": true
+    },
+    "ib3-noticies-soller": {
+      "facebook": true,
+      "instagram": true
+    },
+    "dbalears-soller": {
+      "facebook": true,
+      "instagram": true
+    },
+    "diario-mallorca-soller": {
+      "facebook": true,
+      "instagram": true
+    },
+    "ultima-hora-soller": {
+      "facebook": true,
+      "instagram": true
+    },
+    "mallorca-directo-soller": {
+      "facebook": true,
+      "instagram": true
+    },
+    "tib-avisos-soller": {
+      "facebook": true,
+      "instagram": true
+    },
+    "consell-mallorca-soller": {
+      "facebook": true,
+      "instagram": true
+    }
   }
 }
