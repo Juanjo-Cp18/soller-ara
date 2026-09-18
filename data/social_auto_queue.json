@@ -1,45 +1,6 @@
 {
   "version": 1,
   "enabled": true,
-  "generated_at": "2026-09-18T09:34:22.594350+00:00",
-  "entries": [
-    {
-      "post_id": "acee9b8e829d62c136f5",
-      "title": "Madrid iniciarà enguany la tramitació de la Reserva Marina",
-      "summary": "",
-      "source": "Setmanari Sóller",
-      "source_id": "setmanari-soller",
-      "source_type": "media",
-      "category": "culture",
-      "language": "ca",
-      "published_at": "2026-09-18T11:30:00+02:00",
-      "original_url": "https://www.elsoller.cat/soller/local/2026/09/18/354555/madrid-iniciara-enguany-tramitacio-reseva-marina.html",
-      "content_policy": "headline_date_link_only",
-      "rights_status": "permission_pending",
-      "platforms": [
-        "facebook",
-        "instagram"
-      ],
-      "image_url": "https://soller-ara.github.io/soller-ara/assets/generated/social/acee9b8e829d62c136f5.jpg"
-    },
-    {
-      "post_id": "274b437e86c393c62a8a",
-      "title": "Avís taronja a les Pitiüses i al sud i a la serra de Tramuntana de Mallorca",
-      "summary": "Vídeo publicat per IB3 Notícies · YouTube.",
-      "source": "IB3 Notícies · YouTube",
-      "source_id": "youtube-ib3-noticies-soller",
-      "source_type": "social",
-      "category": "news",
-      "language": "ca",
-      "published_at": "2026-09-18T07:19:37+00:00",
-      "original_url": "https://www.youtube.com/watch?v=LE5HaaSgO1k",
-      "content_policy": "generated_social_summary",
-      "rights_status": "platform_embed",
-      "platforms": [
-        "facebook",
-        "instagram"
-      ],
-      "image_url": "https://soller-ara.github.io/soller-ara/assets/generated/social/274b437e86c393c62a8a.jpg"
-    }
-  ]
+  "generated_at": null,
+  "entries": []
 }
