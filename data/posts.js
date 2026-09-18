@@ -1,7 +1,7 @@
 window.SOLLER_ARA_DATA = {
   "version": 40,
   "generator_version": "0.55",
-  "fetched_at": "2026-09-18T07:21:17.889536+00:00",
+  "fetched_at": "2026-09-18T08:21:48.406363+00:00",
   "source_count": 27,
   "source_status": [
     {
@@ -64,7 +64,7 @@ window.SOLLER_ARA_DATA = {
       "source_type": "social",
       "method": "youtube_channel",
       "ok": true,
-      "count": 0,
+      "count": 1,
       "error": null
     },
     {
@@ -72,9 +72,9 @@ window.SOLLER_ARA_DATA = {
       "name": "Govern de les Illes Balears",
       "source_type": "official",
       "method": "rss",
-      "ok": false,
+      "ok": true,
       "count": 0,
-      "error": "[Errno 104] Connection reset by peer"
+      "error": null
     },
     {
       "source_id": "ib3-noticies-soller",
@@ -270,15 +270,30 @@ window.SOLLER_ARA_DATA = {
       "error": "(#10) Application does not have permission for this action [type=OAuthException, code=10, subcode=None]"
     }
   ],
-  "post_count": 125,
+  "post_count": 126,
   "related_pair_count": 0,
-  "errors": [
-    {
-      "source_id": "goib-noticies-soller",
-      "error": "[Errno 104] Connection reset by peer"
-    }
-  ],
+  "errors": [],
   "posts": [
+    {
+      "id": "274b437e86c393c62a8a",
+      "category": "news",
+      "source_id": "youtube-ib3-noticies-soller",
+      "source": "IB3 Notícies · YouTube",
+      "source_type": "social",
+      "language": "ca",
+      "locality": "Sóller / Fornalutx / Serra de Tramuntana",
+      "published_at": "2026-09-18T07:19:37+00:00",
+      "title": "Avís taronja a les Pitiüses i al sud i a la serra de Tramuntana de Mallorca",
+      "summary": "Vídeo publicat per IB3 Notícies · YouTube.",
+      "url": "https://www.youtube.com/watch?v=LE5HaaSgO1k",
+      "platform": "YouTube",
+      "account": "@NoticiesIB3",
+      "media_type": "video",
+      "content_policy": "generated_social_summary",
+      "rights_status": "platform_embed",
+      "image_allowed": false,
+      "related_sources": []
+    },
     {
       "id": "6948de7c5a15a97a6b4b",
       "category": "news",
