@@ -504,6 +504,34 @@
       "mode": "automatic_collected",
       "recorded_at": "2026-09-18T09:35:04.120312+00:00",
       "error": ""
+    },
+    {
+      "post_id": "10c6de320e4b8b78bed4",
+      "platform": "facebook",
+      "status": "success",
+      "remote_id": "1384755221378998_122110425657467310",
+      "remote_url": "https://www.facebook.com/1384755221378998_122110425657467310",
+      "title": "Ses Escolàpies encara la recta final de les obres amb la vista posada a reobrir-lo el 2027",
+      "post_url": "https://saveu.cat/noticies/ses-escolapies-encara-la-recta-final-de-les-obres-amb-la-vista-posada-a-reobrir-lo-el-2027/",
+      "source": "Sa Veu de Sóller",
+      "source_id": "sa-veu-soller",
+      "mode": "automatic_collected",
+      "recorded_at": "2026-09-18T10:04:53.869661+00:00",
+      "error": ""
+    },
+    {
+      "post_id": "10c6de320e4b8b78bed4",
+      "platform": "instagram",
+      "status": "success",
+      "remote_id": "18356178796247875",
+      "remote_url": "https://www.instagram.com/p/DdbLeknEqn5/",
+      "title": "Ses Escolàpies encara la recta final de les obres amb la vista posada a reobrir-lo el 2027",
+      "post_url": "https://saveu.cat/noticies/ses-escolapies-encara-la-recta-final-de-les-obres-amb-la-vista-posada-a-reobrir-lo-el-2027/",
+      "source": "Sa Veu de Sóller",
+      "source_id": "sa-veu-soller",
+      "mode": "automatic_collected",
+      "recorded_at": "2026-09-18T10:05:03.185278+00:00",
+      "error": ""
     }
   ]
 }
