@@ -170,7 +170,7 @@ def render_detail(post: dict) -> None:
 <body>
   <header class="topbar">
     <a class="brand-wrap" href="../index.html" style="text-decoration:none">
-      <div class="brand-mark"><img src="../assets/brand/logo-soller-ara.png" alt="" /></div>
+      <div class="brand-mark"><img src="../assets/brand/logo-soller-ara-web.png" width="48" height="48" alt="" /></div>
       <div><h1>Sóller Ara</h1><p>Tot el que passa a Sóller, en un sol lloc.</p></div>
     </a>
   </header>

@@ -138,7 +138,7 @@
     const text = [post.title, summary, `Fuente: ${post.source || "Fuente original"}`, `Información original: ${post.url || ""}`].filter(Boolean).join("\n\n");
     target.innerHTML = `<div class="social-preview-grid">
       ${selected.includes("facebook") ? `<article class="network-preview"><strong>Facebook</strong><p>${esc(text)}</p><a href="${esc(post.url)}" target="_blank" rel="noopener noreferrer">${esc(post.url)}</a></article>` : ""}
-      ${selected.includes("instagram") ? `<article class="network-preview instagram"><strong>Instagram · tarjeta propia</strong><div class="instagram-card"><img src="../assets/brand/logo-soller-ara.png" alt="" /><small>SÓLLER ARA · ${esc(categoryNames[post.category] || "Actualidad")}</small><h4>${esc(post.title)}</h4><p>Fuente: ${esc(post.source || "Fuente original")}</p></div><p>${esc(text)}\n\n#Sóller #SollerAra</p></article>` : ""}
+      ${selected.includes("instagram") ? `<article class="network-preview instagram"><strong>Instagram · tarjeta propia</strong><div class="instagram-card"><img src="../assets/brand/logo-soller-ara-web.png" width="54" height="54" alt="" /><small>SÓLLER ARA · ${esc(categoryNames[post.category] || "Actualidad")}</small><h4>${esc(post.title)}</h4><p>Fuente: ${esc(post.source || "Fuente original")}</p></div><p>${esc(text)}\n\n#Sóller #SollerAra</p></article>` : ""}
     </div><p class="hint">Vista previa de la siguiente candidata según la configuración mostrada. Revisarla no publica ni reserva la noticia.</p>`;
   }
 
