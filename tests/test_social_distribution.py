@@ -75,6 +75,7 @@ class SocialDistributionTests(unittest.TestCase):
         item = self.post("a1")
         item["image_url"] = "https://example.test/card.jpg"
         item["original_url"] = item["url"]
+        item["content_policy"] = "summary_allowed"
         calls = []
 
         def fake_graph(path, **kwargs):
@@ -90,6 +91,7 @@ class SocialDistributionTests(unittest.TestCase):
 
         caption = calls[0][1]["params"]["caption"]
         self.assertIn("Informació original: https://example.test/original", caption)
+        self.assertLess(caption.index("Informació original:"), caption.index("Aquest text"))
 
     def test_changed_source_or_platform_is_rechecked_before_send(self):
         selected = self.prepare_posts([self.post("a1")])

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://soller-ara.github.io/soller-ara/sitemap.xml

@@ -161,15 +161,15 @@ def hashtag(category: str) -> str:
 
 
 def base_text(item: dict) -> str:
-    parts = [str(item.get("title") or "").strip()]
-    summary = safe_summary(item)
-    if summary:
-        parts.extend(["", summary])
-    parts.extend([
+    parts = [
+        str(item.get("title") or "").strip(),
         "",
         f"Font: {item.get('source') or 'Font original'}",
         f"Informació original: {item.get('original_url') or ''}",
-    ])
+    ]
+    summary = safe_summary(item)
+    if summary:
+        parts.extend(["", summary])
     return "\n".join(parts).strip()
 
 

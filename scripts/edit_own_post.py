@@ -156,7 +156,10 @@ def render_detail(post: dict) -> None:
   <title>{safe_title} · Sóller Ara</title>
   <meta name="description" content="{safe_body[:280]}" />
   <link rel="canonical" href="{safe_url}" />
-  <link rel="stylesheet" href="../styles.css?v=0.38" />
+  <link rel="icon" href="../favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="48x48" href="../assets/brand/favicon-48.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="../assets/brand/apple-touch-icon.png" />
+  <link rel="stylesheet" href="../styles.css?v=0.64" />
   <meta property="og:type" content="article" />
   <meta property="og:site_name" content="Sóller Ara" />
   <meta property="og:title" content="{safe_title}" />
