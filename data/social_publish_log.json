@@ -336,6 +336,34 @@
       "mode": "automatic_collected",
       "recorded_at": "2026-09-18T07:22:19.714395+00:00",
       "error": ""
+    },
+    {
+      "post_id": "82f09da6952132dfaabe",
+      "platform": "facebook",
+      "status": "success",
+      "remote_id": "1384755221378998_122110386303467310",
+      "remote_url": "https://www.facebook.com/1384755221378998_122110386303467310",
+      "title": "Aviso. Nivel amarillo. Lluvias. Sierra Tramontana",
+      "post_url": "https://www.aemet.es/documentos_d/eltiempo/prediccion/avisos/cap/Z_CAP_C_LEMM_20260918070018_AFAZ645401PRP11816.xml",
+      "source": "AEMET · Serra de Tramuntana",
+      "source_id": "aemet-avisos-mallorca",
+      "mode": "automatic_collected",
+      "recorded_at": "2026-09-18T08:22:01.499232+00:00",
+      "error": ""
+    },
+    {
+      "post_id": "82f09da6952132dfaabe",
+      "platform": "instagram",
+      "status": "success",
+      "remote_id": "18473625073114663",
+      "remote_url": "https://www.instagram.com/p/Dda_tFFibbC/",
+      "title": "Aviso. Nivel amarillo. Lluvias. Sierra Tramontana",
+      "post_url": "https://www.aemet.es/documentos_d/eltiempo/prediccion/avisos/cap/Z_CAP_C_LEMM_20260918070018_AFAZ645401PRP11816.xml",
+      "source": "AEMET · Serra de Tramuntana",
+      "source_id": "aemet-avisos-mallorca",
+      "mode": "automatic_collected",
+      "recorded_at": "2026-09-18T08:22:10.221707+00:00",
+      "error": ""
     }
   ]
 }
