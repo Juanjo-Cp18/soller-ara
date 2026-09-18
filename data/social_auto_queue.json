@@ -1,6 +1,64 @@
 {
   "version": 1,
   "enabled": true,
-  "generated_at": null,
-  "entries": []
+  "generated_at": "2026-09-18T15:06:20.993986+00:00",
+  "entries": [
+    {
+      "post_id": "8e4ac5de499d63272960",
+      "title": "El CEIP Es Puig compleix mig segle d’educació",
+      "summary": "",
+      "source": "Setmanari Sóller",
+      "source_id": "setmanari-soller",
+      "source_type": "media",
+      "category": "agenda",
+      "language": "ca",
+      "published_at": "2026-09-18T17:00:00+02:00",
+      "original_url": "https://www.elsoller.cat/soller/reportatges/2026/09/18/354557/ceip-puig-compleix-mig-segle-educacio.html",
+      "content_policy": "headline_date_link_only",
+      "rights_status": "permission_pending",
+      "platforms": [
+        "facebook",
+        "instagram"
+      ],
+      "image_url": "https://soller-ara.github.io/soller-ara/assets/generated/social/8e4ac5de499d63272960.jpg"
+    },
+    {
+      "post_id": "ce45f0cdfa7beaa5dc53",
+      "title": "Bel Fullana i Rebeca Morey, al Solleric per la Nit de l'Art",
+      "summary": "Vídeo publicat per IB3 Notícies · YouTube.",
+      "source": "IB3 Notícies · YouTube",
+      "source_id": "youtube-ib3-noticies-soller",
+      "source_type": "social",
+      "category": "news",
+      "language": "ca",
+      "published_at": "2026-09-18T12:55:48+00:00",
+      "original_url": "https://www.youtube.com/watch?v=fV_J_5CWOM0",
+      "content_policy": "generated_social_summary",
+      "rights_status": "platform_embed",
+      "platforms": [
+        "facebook",
+        "instagram"
+      ],
+      "image_url": "https://soller-ara.github.io/soller-ara/assets/generated/social/ce45f0cdfa7beaa5dc53.jpg"
+    },
+    {
+      "post_id": "58829026096dc6d5d78d",
+      "title": "IB3N | Bel Fullana invoca el Club Miseria al Solleric per la Nit de l’Art",
+      "summary": "",
+      "source": "IB3 Notícies",
+      "source_id": "ib3-noticies-soller",
+      "source_type": "media",
+      "category": "news",
+      "language": "ca",
+      "published_at": "2026-09-18T12:00:00+00:00",
+      "original_url": "https://ib3.org/bel-fullana-invoca-el-club-miseria-al-solleric-per-la-nit-de-lart",
+      "content_policy": "headline_date_link_only",
+      "rights_status": "permission_pending",
+      "platforms": [
+        "facebook",
+        "instagram"
+      ],
+      "image_url": "https://soller-ara.github.io/soller-ara/assets/generated/social/58829026096dc6d5d78d.jpg"
+    }
+  ]
 }
