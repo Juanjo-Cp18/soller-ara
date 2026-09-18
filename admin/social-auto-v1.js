@@ -1,5 +1,6 @@
 (() => {
   const API = String(window.SOLLER_ARA_ADMIN_API || "").replace(/\/$/, "");
+  const LIVE_REPO_API = "https://api.github.com/repos/soller-ara/soller-ara/contents/";
   const TOKEN_KEY = "sollerAraAdminSession";
   const repoJson = window.SOLLER_ARA_READ_JSON;
   const categoryNames = {news: "Noticias", agenda: "Agenda", alerts: "Avisos", services: "Servicios", culture: "Cultura", sports: "Deportes", commerce: "Comercio"};
@@ -20,6 +21,24 @@
     try { payload = await response.json(); } catch (_) {}
     if (!response.ok) throw new Error(payload.error || `Error de Administración (${response.status}).`);
     return payload;
+  }
+
+  async function liveRepoJson(path) {
+    const url = new URL(path, LIVE_REPO_API);
+    url.searchParams.set("ref", "main");
+    url.searchParams.set("v", Date.now());
+    const response = await fetch(url, {
+      cache: "no-store",
+      credentials: "omit",
+      headers: {Accept: "application/vnd.github.raw+json"},
+      signal: AbortSignal.timeout(12000),
+    });
+    if (!response.ok) throw new Error(`GitHub no ha devuelto ${path} (${response.status}).`);
+    const payload = await response.json();
+    if (!payload?.content || payload.encoding !== "base64") return payload;
+    const binary = atob(String(payload.content).replaceAll("\n", ""));
+    const bytes = Uint8Array.from(binary, (character) => character.charCodeAt(0));
+    return JSON.parse(new TextDecoder().decode(bytes));
   }
 
   async function findCard() {
@@ -142,11 +161,14 @@
   async function waitForSave(requestId) {
     for (let attempt = 0; attempt < 30; attempt++) {
       await new Promise((resolve) => setTimeout(resolve, 2000));
-      const results = await repoJson("data/social_settings_results.json").catch(() => ({entries: []}));
+      const results = await liveRepoJson("data/social_settings_results.json")
+        .catch(() => repoJson("data/social_settings_results.json"))
+        .catch(() => ({entries: []}));
       const result = (results.entries || []).find((entry) => entry.request_id === requestId);
       if (result) {
         if (!result.ok) throw new Error(result.error || "No se ha guardado el cambio.");
-        const config = await repoJson("social_distribution.json");
+        const config = await liveRepoJson("social_distribution.json")
+          .catch(() => repoJson("social_distribution.json"));
         if (config.version >= result.version) return config;
       }
       const message = document.getElementById("socialSettingsMessage");
@@ -194,7 +216,7 @@
       }
       target.innerHTML = '<p class="empty">Cargando configuración…</p>';
       const [configResult, logResult, sourcesResult, postsResult, healthResult] = await Promise.allSettled([
-        repoJson("social_distribution.json"), repoJson("data/social_publish_log.json"),
+        liveRepoJson("social_distribution.json").catch(() => repoJson("social_distribution.json")), repoJson("data/social_publish_log.json"),
         repoJson("sources.json"), repoJson("data/posts.json"),
         fetch(API + "/health", {cache: "no-store", mode: "cors"}).then((response) => response.ok ? response.json() : {}),
       ]);
