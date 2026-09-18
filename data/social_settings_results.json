@@ -5,6 +5,12 @@
       "recorded_at": "2026-09-18T09:46:43.131892+00:00",
       "ok": true,
       "version": 4
+    },
+    {
+      "request_id": "3cffb2d1-3361-4d3d-9918-1a5247b948dd",
+      "recorded_at": "2026-09-18T09:48:54.262801+00:00",
+      "ok": false,
+      "error": "No se ha guardado el cambio. Actualiza el panel y revisa la selección; puede haber cambiado en otra sesión."
     }
   ]
 }
