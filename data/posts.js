@@ -1,7 +1,7 @@
 window.SOLLER_ARA_DATA = {
   "version": 40,
   "generator_version": "0.55",
-  "fetched_at": "2026-09-18T03:20:31.005497+00:00",
+  "fetched_at": "2026-09-18T04:20:28.500443+00:00",
   "source_count": 27,
   "source_status": [
     {
@@ -182,7 +182,7 @@ window.SOLLER_ARA_DATA = {
       "method": "youtube_channel",
       "ok": false,
       "count": 0,
-      "error": "HTTP Error 404: Not Found"
+      "error": "HTTP Error 500: Internal Server Error"
     },
     {
       "source_id": "youtube-tramuntana-xxi",
@@ -299,7 +299,7 @@ window.SOLLER_ARA_DATA = {
     },
     {
       "source_id": "youtube-ballades-mallorca-soller",
-      "error": "HTTP Error 404: Not Found"
+      "error": "HTTP Error 500: Internal Server Error"
     },
     {
       "source_id": "youtube-tramuntana-xxi",
