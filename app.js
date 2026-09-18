@@ -501,6 +501,9 @@ function extractTikTokId(url) {
 }
 
 function renderOfficialLinkPreview(post) {
+  // Els mitjans de comunicació es mostren només com a titular, data i enllaç.
+  // Encara que l'iframe sigui oficial, evitam reproduir-ne fotografia i extracte.
+  if (post.source_type === "media") return "";
   if (post.embed_type !== "official_oembed" || !post.embed_url || !post.url) return "";
   try {
     const original = new URL(post.url);
