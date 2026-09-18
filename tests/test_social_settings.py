@@ -1,4 +1,5 @@
 import importlib.util
+import json
 import unittest
 from pathlib import Path
 
@@ -54,6 +55,18 @@ class SocialSettingsTests(unittest.TestCase):
             "sources": {"source-a": {"facebook": True, "instagram": False}},
         })
         self.assertEqual(result, self.config)
+
+    def test_repository_has_explicit_social_rule_for_every_source(self):
+        config = json.loads((ROOT / "social_distribution.json").read_text(encoding="utf-8"))
+        sources = json.loads((ROOT / "sources.json").read_text(encoding="utf-8"))
+        known = {source["id"] for source in sources["sources"]}
+        configured = set(config["sources"])
+        self.assertEqual(known - configured, set(), "Hay fuentes sin decisión explícita para redes")
+        self.assertEqual(configured - known, set(), "Hay reglas sociales para fuentes inexistentes")
+        for source_id, rule in config["sources"].items():
+            with self.subTest(source_id=source_id):
+                self.assertEqual(set(rule), {"facebook", "instagram"})
+                self.assertTrue(all(type(value) is bool for value in rule.values()))
 
 
 if __name__ == "__main__":

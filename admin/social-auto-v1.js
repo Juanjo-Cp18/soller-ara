@@ -125,9 +125,15 @@
 
   function sourceControls(config, sources) {
     return `<div id="socialSourceControls" class="social-source-list">${sources.map((source) => {
+      const configured = Object.prototype.hasOwnProperty.call(config.sources || {}, source.id);
       const rule = config.sources?.[source.id] || {};
       const inactive = source.enabled === false;
-      return `<div class="social-source-row"><span><strong>${esc(source.name || source.id)}</strong><small>${inactive ? "Fuente desactivada" : esc(source.locality || "Sóller")}</small></span>
+      const selected = Boolean(rule.facebook || rule.instagram);
+      const detail = inactive ? "Fuente desactivada"
+        : !configured ? "Pendiente de decidir su distribución social"
+        : selected ? esc(source.locality || "Sóller")
+        : `${esc(source.locality || "Sóller")} · sin distribución social`;
+      return `<div class="social-source-row"><span><strong>${esc(source.name || source.id)}</strong><small>${detail}</small></span>
         <label class="check"><input type="checkbox" data-social-source="${esc(source.id)}" data-platform="facebook" ${rule.facebook ? "checked" : ""} ${inactive ? "disabled" : ""}/> Facebook</label>
         <label class="check"><input type="checkbox" data-social-source="${esc(source.id)}" data-platform="instagram" ${rule.instagram ? "checked" : ""} ${inactive ? "disabled" : ""}/> Instagram</label></div>`;
     }).join("")}</div>`;
@@ -202,6 +208,8 @@
       const posts = postsResult.value.posts || [];
       const settingsReady = healthResult.status === "fulfilled" && healthResult.value.capabilities?.includes("social_settings");
       state = {config, entries, sources, posts, settingsReady};
+      const missingSources = sources.filter((source) => source.enabled !== false
+        && !Object.prototype.hasOwnProperty.call(config.sources || {}, source.id));
       const categories = Object.entries(config.categories || {}).filter(([, enabled]) => enabled === true).map(([key]) => categoryNames[key] || key);
       target.innerHTML = `<div class="status-list">${row("Automatización", config.enabled ? "Revisión programada cada hora; los envíos se confirman debajo." : "La publicación automática está pausada.", config.enabled ? "ACTIVA" : "EN PAUSA", config.enabled ? "ok" : "pending")
         + platformRow(config, entries, "facebook", logResult.status === "fulfilled")
@@ -209,6 +217,7 @@
         + row("Ritmo máximo", `Contenido de las últimas ${esc(config.max_age_hours || 6)} h, sin repetir envíos confirmados.`, `${config.max_posts_per_run || 3} noticias / ejecución`)}</div>
       <div class="social-settings"><div class="social-settings-heading"><div><h4>Control de envíos</h4><p class="hint">La pausa no detiene la recopilación de la web. Las casillas solo autorizan la distribución a cada red.</p></div>
         <label class="switch-label"><input id="socialAutomationEnabled" type="checkbox" ${config.enabled ? "checked" : ""}/><span>${config.enabled ? "Automatización activa" : "Automatización en pausa"}</span></label></div>
+        ${missingSources.length ? `<p class="message error">Hay ${missingSources.length} ${missingSources.length === 1 ? "fuente activa pendiente" : "fuentes activas pendientes"} de decidir para redes. Revisa sus casillas y guarda la configuración.</p>` : ""}
         ${sourceControls(config, sources)}<div class="social-settings-actions"><button id="saveSocialSettings" class="primary-button" type="button" ${settingsReady ? "" : "disabled"}>Guardar configuración</button><span id="socialSettingsMessage" class="message ${settingsReady ? "" : "error"}" aria-live="polite">${settingsReady ? "" : "Servidor pendiente de actualizar. Puedes revisar la selección, pero todavía no guardarla."}</span></div></div>
       <div class="social-preview"><h4>Vista previa del siguiente envío</h4><div id="socialPreview"></div></div>
       <p class="hint">Categorías activas: ${esc(categories.join(", ") || "ninguna")}. Máximo una noticia por fuente en cada ejecución.</p>`;

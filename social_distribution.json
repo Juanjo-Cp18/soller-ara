@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "enabled": true,
   "platforms": {
     "facebook": true,
@@ -77,6 +77,54 @@
     "consell-mallorca-soller": {
       "facebook": true,
       "instagram": true
+    },
+    "youtube-can-prunera": {
+      "facebook": false,
+      "instagram": false
+    },
+    "youtube-aires-sollerics": {
+      "facebook": false,
+      "instagram": false
+    },
+    "youtube-xeremiers-soller": {
+      "facebook": false,
+      "instagram": false
+    },
+    "youtube-club-volei-soller": {
+      "facebook": false,
+      "instagram": false
+    },
+    "youtube-ballades-mallorca-soller": {
+      "facebook": false,
+      "instagram": false
+    },
+    "youtube-tramuntana-xxi": {
+      "facebook": false,
+      "instagram": false
+    },
+    "youtube-gob-mallorca-soller": {
+      "facebook": false,
+      "instagram": false
+    },
+    "youtube-museu-maritim-soller": {
+      "facebook": false,
+      "instagram": false
+    },
+    "youtube-serra-tramuntana": {
+      "facebook": false,
+      "instagram": false
+    },
+    "youtube-consell-mallorca-soller": {
+      "facebook": false,
+      "instagram": false
+    },
+    "mucbo-noticies": {
+      "facebook": false,
+      "instagram": false
+    },
+    "can-prunera-noticies": {
+      "facebook": false,
+      "instagram": false
     }
   }
 }
