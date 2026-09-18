@@ -1,64 +1,45 @@
 {
   "version": 1,
   "enabled": true,
-  "generated_at": "2026-09-18T09:20:07.104367+00:00",
+  "generated_at": "2026-09-18T09:34:22.594350+00:00",
   "entries": [
     {
-      "post_id": "5eaa266158ce7ec8eb8d",
-      "title": "«Cal mantenir actes com les havaneres»",
+      "post_id": "acee9b8e829d62c136f5",
+      "title": "Madrid iniciarà enguany la tramitació de la Reserva Marina",
       "summary": "",
       "source": "Setmanari Sóller",
       "source_id": "setmanari-soller",
       "source_type": "media",
       "category": "culture",
       "language": "ca",
-      "published_at": "2026-09-18T10:38:00+02:00",
-      "original_url": "https://www.elsoller.cat/soller/societat-i-cultura/2026/09/18/354551/cal-mantenir-actes-com-les-havaneres.html",
+      "published_at": "2026-09-18T11:30:00+02:00",
+      "original_url": "https://www.elsoller.cat/soller/local/2026/09/18/354555/madrid-iniciara-enguany-tramitacio-reseva-marina.html",
       "content_policy": "headline_date_link_only",
       "rights_status": "permission_pending",
       "platforms": [
         "facebook",
         "instagram"
       ],
-      "image_url": "https://soller-ara.github.io/soller-ara/assets/generated/social/5eaa266158ce7ec8eb8d.jpg"
+      "image_url": "https://soller-ara.github.io/soller-ara/assets/generated/social/acee9b8e829d62c136f5.jpg"
     },
     {
-      "post_id": "326902bca77887b8a960",
-      "title": "La parròquia recuperarà la creu gaudiniana aquest hivern",
-      "summary": "",
-      "source": "Sa Veu de Sóller",
-      "source_id": "sa-veu-soller",
-      "source_type": "media",
-      "category": "services",
+      "post_id": "274b437e86c393c62a8a",
+      "title": "Avís taronja a les Pitiüses i al sud i a la serra de Tramuntana de Mallorca",
+      "summary": "Vídeo publicat per IB3 Notícies · YouTube.",
+      "source": "IB3 Notícies · YouTube",
+      "source_id": "youtube-ib3-noticies-soller",
+      "source_type": "social",
+      "category": "news",
       "language": "ca",
-      "published_at": "2026-09-18T08:30:00+00:00",
-      "original_url": "https://saveu.cat/noticies/la-parroquia-recuperara-la-creu-gaudiniana-aquest-hivern/",
-      "content_policy": "headline_date_link_only",
-      "rights_status": "permission_pending",
+      "published_at": "2026-09-18T07:19:37+00:00",
+      "original_url": "https://www.youtube.com/watch?v=LE5HaaSgO1k",
+      "content_policy": "generated_social_summary",
+      "rights_status": "platform_embed",
       "platforms": [
         "facebook",
         "instagram"
       ],
-      "image_url": "https://soller-ara.github.io/soller-ara/assets/generated/social/326902bca77887b8a960.jpg"
-    },
-    {
-      "post_id": "500adb5e0519462468a4",
-      "title": "Aviso. Nivel amarillo. Tormentas. Sierra Tramontana",
-      "summary": "Aviso de tormentas de nivel amarillo de 12:00 18-09-2026 CEST (UTC+2) a 17:59 18-09-2026 CEST (UTC+2).",
-      "source": "AEMET · Serra de Tramuntana",
-      "source_id": "aemet-avisos-mallorca",
-      "source_type": "official",
-      "category": "alerts",
-      "language": "es",
-      "published_at": "2026-09-18T07:00:18+00:00",
-      "original_url": "https://www.aemet.es/documentos_d/eltiempo/prediccion/avisos/cap/Z_CAP_C_LEMM_20260918070018_AFAZ645401TOTO1816.xml",
-      "content_policy": "short_factual_excerpt",
-      "rights_status": "reuse_authorized_with_attribution",
-      "platforms": [
-        "facebook",
-        "instagram"
-      ],
-      "image_url": "https://soller-ara.github.io/soller-ara/assets/generated/social/500adb5e0519462468a4.jpg"
+      "image_url": "https://soller-ara.github.io/soller-ara/assets/generated/social/274b437e86c393c62a8a.jpg"
     }
   ]
 }

@@ -1,7 +1,7 @@
 {
   "version": 40,
   "generator_version": "0.55",
-  "fetched_at": "2026-09-18T09:20:06.910779+00:00",
+  "fetched_at": "2026-09-18T09:34:22.445664+00:00",
   "source_count": 27,
   "source_status": [
     {
@@ -274,6 +274,26 @@
   "related_pair_count": 0,
   "errors": [],
   "posts": [
+    {
+      "id": "acee9b8e829d62c136f5",
+      "category": "culture",
+      "source_id": "setmanari-soller",
+      "source": "Setmanari Sóller",
+      "source_type": "media",
+      "language": "ca",
+      "locality": "Sóller",
+      "published_at": "2026-09-18T11:30:00+02:00",
+      "title": "Madrid iniciarà enguany la tramitació de la Reserva Marina",
+      "summary": "",
+      "url": "https://www.elsoller.cat/soller/local/2026/09/18/354555/madrid-iniciara-enguany-tramitacio-reseva-marina.html",
+      "platform": null,
+      "account": null,
+      "media_type": null,
+      "content_policy": "headline_date_link_only",
+      "rights_status": "permission_pending",
+      "image_allowed": false,
+      "related_sources": []
+    },
     {
       "id": "5eaa266158ce7ec8eb8d",
       "category": "culture",
@@ -1466,26 +1486,6 @@
       "title": "Arranca el muntatge de la coberta que protegirà la Fàbrica Nova",
       "summary": "",
       "url": "https://www.elsoller.cat/soller/local/2026/09/07/354513/arranca-muntatge-coberta-protegira-fabrica-nova.html",
-      "platform": null,
-      "account": null,
-      "media_type": null,
-      "content_policy": "headline_date_link_only",
-      "rights_status": "permission_pending",
-      "image_allowed": false,
-      "related_sources": []
-    },
-    {
-      "id": "7e3b0bbe783cbfa22dfd",
-      "category": "alerts",
-      "source_id": "setmanari-soller",
-      "source": "Setmanari Sóller",
-      "source_type": "media",
-      "language": "ca",
-      "locality": "Sóller",
-      "published_at": "2026-09-07T10:04:00+02:00",
-      "title": "Empitjoren les reserves d’aigua a les Balears i la Tramuntana Nord es manté en prealerta",
-      "summary": "",
-      "url": "https://www.elsoller.cat/soller/local/2026/09/07/354511/empitjoren-les-reserves-aigua-les-balears-tramuntana-nord-mante-prealerta.html",
       "platform": null,
       "account": null,
       "media_type": null,
