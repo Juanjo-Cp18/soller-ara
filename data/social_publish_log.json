@@ -280,6 +280,62 @@
       "mode": "automatic_collected",
       "recorded_at": "2026-09-17T16:23:54.742370+00:00",
       "error": ""
+    },
+    {
+      "post_id": "6948de7c5a15a97a6b4b",
+      "platform": "facebook",
+      "status": "success",
+      "remote_id": "1384755221378998_122110361061467310",
+      "remote_url": "https://www.facebook.com/1384755221378998_122110361061467310",
+      "title": "“La informació és necessària, però la seducció és allò que ens apel·la a les emocions”",
+      "post_url": "https://saveu.cat/entrevistes/la-informacio-es-necessaria-pero-la-seduccio-es-allo-que-ens-apella-a-les-emocions/",
+      "source": "Sa Veu de Sóller",
+      "source_id": "sa-veu-soller",
+      "mode": "automatic_collected",
+      "recorded_at": "2026-09-18T07:21:39.515558+00:00",
+      "error": ""
+    },
+    {
+      "post_id": "6948de7c5a15a97a6b4b",
+      "platform": "instagram",
+      "status": "success",
+      "remote_id": "17957273532211260",
+      "remote_url": "https://www.instagram.com/p/Dda4zCdHdlm/",
+      "title": "“La informació és necessària, però la seducció és allò que ens apel·la a les emocions”",
+      "post_url": "https://saveu.cat/entrevistes/la-informacio-es-necessaria-pero-la-seduccio-es-allo-que-ens-apella-a-les-emocions/",
+      "source": "Sa Veu de Sóller",
+      "source_id": "sa-veu-soller",
+      "mode": "automatic_collected",
+      "recorded_at": "2026-09-18T07:21:56.308773+00:00",
+      "error": ""
+    },
+    {
+      "post_id": "89a9baa8368a6e2ccbff",
+      "platform": "facebook",
+      "status": "success",
+      "remote_id": "1384755221378998_122110361175467310",
+      "remote_url": "https://www.facebook.com/1384755221378998_122110361175467310",
+      "title": "Aviso. Nivel naranja. Lluvias. Sierra Tramontana",
+      "post_url": "https://www.aemet.es/documentos_d/eltiempo/prediccion/avisos/cap/Z_CAP_C_LEMM_20260918070018_AFAZ645401PRP11810.xml",
+      "source": "AEMET · Serra de Tramuntana",
+      "source_id": "aemet-avisos-mallorca",
+      "mode": "automatic_collected",
+      "recorded_at": "2026-09-18T07:22:01.036016+00:00",
+      "error": ""
+    },
+    {
+      "post_id": "89a9baa8368a6e2ccbff",
+      "platform": "instagram",
+      "status": "success",
+      "remote_id": "18092613515663257",
+      "remote_url": "https://www.instagram.com/p/Dda41pfnQtJ/",
+      "title": "Aviso. Nivel naranja. Lluvias. Sierra Tramontana",
+      "post_url": "https://www.aemet.es/documentos_d/eltiempo/prediccion/avisos/cap/Z_CAP_C_LEMM_20260918070018_AFAZ645401PRP11810.xml",
+      "source": "AEMET · Serra de Tramuntana",
+      "source_id": "aemet-avisos-mallorca",
+      "mode": "automatic_collected",
+      "recorded_at": "2026-09-18T07:22:19.714395+00:00",
+      "error": ""
     }
   ]
 }
