@@ -1,7 +1,7 @@
 {
   "version": 41,
   "generator_version": "0.59",
-  "fetched_at": "2026-09-18T16:20:09.380387+00:00",
+  "fetched_at": "2026-09-18T16:39:55.999867+00:00",
   "source_count": 27,
   "source_status": [
     {
@@ -249,10 +249,28 @@
     }
   ],
   "social_integration_status": [],
-  "post_count": 126,
+  "post_count": 127,
   "related_pair_count": 0,
   "errors": [],
   "posts": [
+    {
+      "id": "soller-ara-3a92e58abeb84913",
+      "category": "news",
+      "source_id": "soller-ara",
+      "source": "Sóller Ara",
+      "source_type": "own",
+      "language": "ca",
+      "locality": "Sóller",
+      "published_at": "2026-09-18T16:39:55.999867+00:00",
+      "title": "Neix Sóller Ara: tota la informació local, en un sol lloc",
+      "summary": "Sóller Ara neix amb una idea senzilla: fer més fàcil estar al dia de tot allò que passa al nostre municipi.\n\nReunim en un sol espai notícies, avisos, mobilitat, agenda, serveis, cultura, esports, comerç i publicacions d’institucions, associacions i mitjans locals.\n\nCada informació manté sempre visible el nom de la font i l’enllaç a la publicació original. Sóller Ara no pretén substituir els mitjans, les institucions ni les entitats que generen la informació, sinó ajudar a descobrir-la i consultar-la de manera ordenada.\n\nLa recopilació està automatitzada, compta amb assistència d’intel·ligència artificial i supervisió humana. El projecte és públic, independent i sense ànim de lucre.\n\nTambé ens pots seguir a Facebook i Instagram per rebre les informacions més recents.\n\nBenvinguts a Sóller Ara.\n\nTot el que passa a Sóller, en un sol lloc.",
+      "url": "https://soller-ara.github.io/soller-ara/noticies/soller-ara-3a92e58abeb84913.html",
+      "content_policy": "owned_content",
+      "rights_status": "owned",
+      "image_allowed": true,
+      "media_url": "https://soller-ara.github.io/soller-ara",
+      "media_type": "image"
+    },
     {
       "id": "a7028278bbaf57121df6",
       "category": "alerts",

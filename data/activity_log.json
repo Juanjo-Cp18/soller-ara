@@ -2,6 +2,16 @@
   "version": 1,
   "entries": [
     {
+      "id": "1baac6505f887422",
+      "timestamp": "2026-09-18T16:39:56.051114+00:00",
+      "action": "publish",
+      "area": "publications",
+      "target_id": "soller-ara-3a92e58abeb84913",
+      "title": "Neix Sóller Ara: tota la informació local, en un sol lloc",
+      "detail": "Publicación propia creada desde Administración",
+      "status": "success"
+    },
+    {
       "id": "f7e890beac1ccd16",
       "timestamp": "2026-09-17T08:21:45.417098+00:00",
       "action": "source-enable",
