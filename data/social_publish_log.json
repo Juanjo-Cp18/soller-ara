@@ -616,6 +616,34 @@
       "mode": "automatic_collected",
       "recorded_at": "2026-09-18T15:07:47.055744+00:00",
       "error": ""
+    },
+    {
+      "post_id": "caf94b41a032507a5f12",
+      "platform": "facebook",
+      "status": "success",
+      "remote_id": "1384755221378998_122110581135467310",
+      "remote_url": "https://www.facebook.com/1384755221378998_122110581135467310",
+      "title": "26 de septiembre: Supresión de servicio en la línea 203",
+      "post_url": "https://www.tib.org/es/w/avis-ral-li-vall-de-sant-pere-l203",
+      "source": "TIB · Avisos",
+      "source_id": "tib-avisos-soller",
+      "mode": "automatic_collected",
+      "recorded_at": "2026-09-18T15:20:56.515937+00:00",
+      "error": ""
+    },
+    {
+      "post_id": "caf94b41a032507a5f12",
+      "platform": "instagram",
+      "status": "success",
+      "remote_id": "18120277120907342",
+      "remote_url": "https://www.instagram.com/p/DdbvpYtHcwc/",
+      "title": "26 de septiembre: Supresión de servicio en la línea 203",
+      "post_url": "https://www.tib.org/es/w/avis-ral-li-vall-de-sant-pere-l203",
+      "source": "TIB · Avisos",
+      "source_id": "tib-avisos-soller",
+      "mode": "automatic_collected",
+      "recorded_at": "2026-09-18T15:21:12.226243+00:00",
+      "error": ""
     }
   ]
 }
