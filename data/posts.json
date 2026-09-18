@@ -1,7 +1,7 @@
 {
   "version": 41,
   "generator_version": "0.59",
-  "fetched_at": "2026-09-18T10:04:18.401352+00:00",
+  "fetched_at": "2026-09-18T10:21:22.383273+00:00",
   "source_count": 27,
   "source_status": [
     {
@@ -109,7 +109,7 @@
       "source_type": "media",
       "method": "html_listing_regex",
       "ok": true,
-      "count": 30,
+      "count": 29,
       "error": null
     },
     {
@@ -270,7 +270,7 @@
       "error": "(#10) Application does not have permission for this action [type=OAuthException, code=10, subcode=None]"
     }
   ],
-  "post_count": 125,
+  "post_count": 124,
   "related_pair_count": 0,
   "errors": [],
   "posts": [
@@ -2780,26 +2780,6 @@
       "title": "Multas de 200 euros en Sóller: las cámaras de la ZBE ya vigilan el centro",
       "summary": "",
       "url": "https://mallorcadirecto.com/comarca-de-ponent/soller/multas-200-euros-soller-camaras-zbe",
-      "platform": null,
-      "account": null,
-      "media_type": null,
-      "content_policy": "headline_date_link_only",
-      "rights_status": "permission_pending",
-      "image_allowed": false,
-      "related_sources": []
-    },
-    {
-      "id": "819206a945d32ef48706",
-      "category": "agenda",
-      "source_id": "ultima-hora-soller",
-      "source": "Última Hora",
-      "source_type": "media",
-      "language": "es",
-      "locality": "Sóller",
-      "published_at": "2026-07-20T12:06:03+02:00",
-      "title": "El Servicio de Vigilancia del Litoral intensifica el control del chárter irregular en el Port de Sóller",
-      "summary": "",
-      "url": "https://www.ultimahora.es/noticias/part-forana/2026/07/20/2673689/servicio-vigilancia-del-litoral-intensifica-control-del-charter-irregular-port-soller.html",
       "platform": null,
       "account": null,
       "media_type": null,
