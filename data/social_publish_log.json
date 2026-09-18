@@ -448,6 +448,62 @@
       "mode": "automatic_collected",
       "recorded_at": "2026-09-18T09:21:11.359341+00:00",
       "error": ""
+    },
+    {
+      "post_id": "acee9b8e829d62c136f5",
+      "platform": "facebook",
+      "status": "success",
+      "remote_id": "1384755221378998_122110412301467310",
+      "remote_url": "https://www.facebook.com/1384755221378998_122110412301467310",
+      "title": "Madrid iniciarà enguany la tramitació de la Reserva Marina",
+      "post_url": "https://www.elsoller.cat/soller/local/2026/09/18/354555/madrid-iniciara-enguany-tramitacio-reseva-marina.html",
+      "source": "Setmanari Sóller",
+      "source_id": "setmanari-soller",
+      "mode": "automatic_collected",
+      "recorded_at": "2026-09-18T09:34:36.702326+00:00",
+      "error": ""
+    },
+    {
+      "post_id": "acee9b8e829d62c136f5",
+      "platform": "instagram",
+      "status": "success",
+      "remote_id": "17948024919289943",
+      "remote_url": "https://www.instagram.com/p/DdbIA_AoyZ4/",
+      "title": "Madrid iniciarà enguany la tramitació de la Reserva Marina",
+      "post_url": "https://www.elsoller.cat/soller/local/2026/09/18/354555/madrid-iniciara-enguany-tramitacio-reseva-marina.html",
+      "source": "Setmanari Sóller",
+      "source_id": "setmanari-soller",
+      "mode": "automatic_collected",
+      "recorded_at": "2026-09-18T09:34:49.535377+00:00",
+      "error": ""
+    },
+    {
+      "post_id": "274b437e86c393c62a8a",
+      "platform": "facebook",
+      "status": "success",
+      "remote_id": "1384755221378998_122110412631467310",
+      "remote_url": "https://www.facebook.com/1384755221378998_122110412631467310",
+      "title": "Avís taronja a les Pitiüses i al sud i a la serra de Tramuntana de Mallorca",
+      "post_url": "https://www.youtube.com/watch?v=LE5HaaSgO1k",
+      "source": "IB3 Notícies · YouTube",
+      "source_id": "youtube-ib3-noticies-soller",
+      "mode": "automatic_collected",
+      "recorded_at": "2026-09-18T09:34:53.452636+00:00",
+      "error": ""
+    },
+    {
+      "post_id": "274b437e86c393c62a8a",
+      "platform": "instagram",
+      "status": "success",
+      "remote_id": "18155195275507035",
+      "remote_url": "https://www.instagram.com/p/DdbIC1mjqfh/",
+      "title": "Avís taronja a les Pitiüses i al sud i a la serra de Tramuntana de Mallorca",
+      "post_url": "https://www.youtube.com/watch?v=LE5HaaSgO1k",
+      "source": "IB3 Notícies · YouTube",
+      "source_id": "youtube-ib3-noticies-soller",
+      "mode": "automatic_collected",
+      "recorded_at": "2026-09-18T09:35:04.120312+00:00",
+      "error": ""
     }
   ]
 }
