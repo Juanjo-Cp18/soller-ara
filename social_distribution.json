@@ -1,5 +1,5 @@
 {
-  "version": 3,
+  "version": 4,
   "enabled": true,
   "platforms": {
     "facebook": true,
@@ -79,52 +79,52 @@
       "instagram": true
     },
     "youtube-can-prunera": {
-      "facebook": false,
-      "instagram": false
+      "facebook": true,
+      "instagram": true
     },
     "youtube-aires-sollerics": {
-      "facebook": false,
-      "instagram": false
+      "facebook": true,
+      "instagram": true
     },
     "youtube-xeremiers-soller": {
-      "facebook": false,
-      "instagram": false
+      "facebook": true,
+      "instagram": true
     },
     "youtube-club-volei-soller": {
-      "facebook": false,
-      "instagram": false
+      "facebook": true,
+      "instagram": true
     },
     "youtube-ballades-mallorca-soller": {
-      "facebook": false,
-      "instagram": false
+      "facebook": true,
+      "instagram": true
     },
     "youtube-tramuntana-xxi": {
-      "facebook": false,
-      "instagram": false
+      "facebook": true,
+      "instagram": true
     },
     "youtube-gob-mallorca-soller": {
-      "facebook": false,
-      "instagram": false
+      "facebook": true,
+      "instagram": true
     },
     "youtube-museu-maritim-soller": {
-      "facebook": false,
-      "instagram": false
+      "facebook": true,
+      "instagram": true
     },
     "youtube-serra-tramuntana": {
-      "facebook": false,
-      "instagram": false
+      "facebook": true,
+      "instagram": true
     },
     "youtube-consell-mallorca-soller": {
-      "facebook": false,
-      "instagram": false
+      "facebook": true,
+      "instagram": true
     },
     "mucbo-noticies": {
-      "facebook": false,
-      "instagram": false
+      "facebook": true,
+      "instagram": true
     },
     "can-prunera-noticies": {
-      "facebook": false,
-      "instagram": false
+      "facebook": true,
+      "instagram": true
     }
   }
 }

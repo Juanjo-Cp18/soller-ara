@@ -1,3 +1,10 @@
 {
-  "entries": []
+  "entries": [
+    {
+      "request_id": "f668e617-e779-40ee-a3ae-9ce9046637f8",
+      "recorded_at": "2026-09-18T09:46:43.131892+00:00",
+      "ok": true,
+      "version": 4
+    }
+  ]
 }
