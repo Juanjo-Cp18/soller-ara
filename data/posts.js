@@ -1,7 +1,7 @@
 window.SOLLER_ARA_DATA = {
   "version": 41,
   "generator_version": "0.59",
-  "fetched_at": "2026-09-18T16:08:18.642868+00:00",
+  "fetched_at": "2026-09-18T16:13:01.310815+00:00",
   "source_count": 27,
   "source_status": [
     {
@@ -411,6 +411,8 @@ window.SOLLER_ARA_DATA = {
       "content_policy": "headline_date_link_only",
       "rights_status": "permission_pending",
       "image_allowed": false,
+      "embed_type": "official_oembed",
+      "embed_url": "https://saveu.cat/noticies/ses-escolapies-encara-la-recta-final-de-les-obres-amb-la-vista-posada-a-reobrir-lo-el-2027/embed/",
       "related_sources": []
     },
     {
@@ -471,6 +473,8 @@ window.SOLLER_ARA_DATA = {
       "content_policy": "headline_date_link_only",
       "rights_status": "permission_pending",
       "image_allowed": false,
+      "embed_type": "official_oembed",
+      "embed_url": "https://saveu.cat/noticies/la-parroquia-recuperara-la-creu-gaudiniana-aquest-hivern/embed/",
       "related_sources": []
     },
     {
@@ -491,6 +495,8 @@ window.SOLLER_ARA_DATA = {
       "content_policy": "headline_date_link_only",
       "rights_status": "permission_pending",
       "image_allowed": false,
+      "embed_type": "official_oembed",
+      "embed_url": "https://saveu.cat/entrevistes/la-informacio-es-necessaria-pero-la-seduccio-es-allo-que-ens-apella-a-les-emocions/embed/",
       "related_sources": []
     },
     {
@@ -551,6 +557,8 @@ window.SOLLER_ARA_DATA = {
       "content_policy": "headline_date_link_only",
       "rights_status": "permission_pending",
       "image_allowed": false,
+      "embed_type": "official_oembed",
+      "embed_url": "https://saveu.cat/noticies/en-obres-el-bombament-de-fecals-de-sa-torre/embed/",
       "related_sources": []
     },
     {
@@ -571,6 +579,8 @@ window.SOLLER_ARA_DATA = {
       "content_policy": "headline_date_link_only",
       "rights_status": "permission_pending",
       "image_allowed": false,
+      "embed_type": "official_oembed",
+      "embed_url": "https://saveu.cat/noticies/un-passatger-insulta-per-motius-racistes-el-conductor-dun-bus-del-tib-i-acaba-denunciat/embed/",
       "related_sources": []
     },
     {
@@ -591,6 +601,8 @@ window.SOLLER_ARA_DATA = {
       "content_policy": "headline_date_link_only",
       "rights_status": "permission_pending",
       "image_allowed": false,
+      "embed_type": "official_oembed",
+      "embed_url": "https://saveu.cat/noticies/les-pluges-deixen-fins-a-94-litres-a-la-serra-i-descarreguen-de-forma-torrencial-a-tuent/embed/",
       "related_sources": []
     },
     {
@@ -611,6 +623,8 @@ window.SOLLER_ARA_DATA = {
       "content_policy": "headline_date_link_only",
       "rights_status": "permission_pending",
       "image_allowed": false,
+      "embed_type": "official_oembed",
+      "embed_url": "https://saveu.cat/noticies/les-cameres-de-la-zbe-registren-fins-a-25-000-infraccions/embed/",
       "related_sources": []
     },
     {
@@ -631,6 +645,8 @@ window.SOLLER_ARA_DATA = {
       "content_policy": "headline_date_link_only",
       "rights_status": "permission_pending",
       "image_allowed": false,
+      "embed_type": "official_oembed",
+      "embed_url": "https://saveu.cat/noticies/el-mal-estat-de-conservacio-obliga-apuntalar-un-tram-de-la-coberta-de-lhospital/embed/",
       "related_sources": []
     },
     {
@@ -651,6 +667,8 @@ window.SOLLER_ARA_DATA = {
       "content_policy": "headline_date_link_only",
       "rights_status": "permission_pending",
       "image_allowed": false,
+      "embed_type": "official_oembed",
+      "embed_url": "https://saveu.cat/noticies/en-reparacio-la-font-publica-del-carrer-de-cetre/embed/",
       "related_sources": []
     },
     {
@@ -671,6 +689,8 @@ window.SOLLER_ARA_DATA = {
       "content_policy": "headline_date_link_only",
       "rights_status": "permission_pending",
       "image_allowed": false,
+      "embed_type": "official_oembed",
+      "embed_url": "https://saveu.cat/noticies/en-alerta-taronja-per-tempestes-a-partir-de-la-mitjanit/embed/",
       "related_sources": []
     },
     {
@@ -791,6 +811,8 @@ window.SOLLER_ARA_DATA = {
       "content_policy": "headline_date_link_only",
       "rights_status": "permission_pending",
       "image_allowed": false,
+      "embed_type": "official_oembed",
+      "embed_url": "https://saveu.cat/noticies/apareixen-taques-daigua-marro-davant-les-costes-del-port-de-soller/embed/",
       "related_sources": []
     },
     {
@@ -811,6 +833,8 @@ window.SOLLER_ARA_DATA = {
       "content_policy": "headline_date_link_only",
       "rights_status": "permission_pending",
       "image_allowed": false,
+      "embed_type": "official_oembed",
+      "embed_url": "https://saveu.cat/noticies/la-patronal-nautica-demana-mes-proteccio-marina-i-posa-lull-a-soller/embed/",
       "related_sources": []
     },
     {
