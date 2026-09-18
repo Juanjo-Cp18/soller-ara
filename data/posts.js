@@ -1,7 +1,7 @@
 window.SOLLER_ARA_DATA = {
   "version": 40,
   "generator_version": "0.55",
-  "fetched_at": "2026-09-18T06:25:26.003678+00:00",
+  "fetched_at": "2026-09-18T07:21:17.889536+00:00",
   "source_count": 27,
   "source_status": [
     {
@@ -46,7 +46,7 @@ window.SOLLER_ARA_DATA = {
       "source_type": "official",
       "method": "aemet_alerts",
       "ok": true,
-      "count": 3,
+      "count": 4,
       "error": null
     },
     {
@@ -54,27 +54,27 @@ window.SOLLER_ARA_DATA = {
       "name": "Ajuntament de Sóller · YouTube",
       "source_type": "social",
       "method": "youtube_channel",
-      "ok": false,
-      "count": 0,
-      "error": "HTTP Error 404: Not Found"
+      "ok": true,
+      "count": 2,
+      "error": null
     },
     {
       "source_id": "youtube-ib3-noticies-soller",
       "name": "IB3 Notícies · YouTube",
       "source_type": "social",
       "method": "youtube_channel",
-      "ok": false,
+      "ok": true,
       "count": 0,
-      "error": "HTTP Error 404: Not Found"
+      "error": null
     },
     {
       "source_id": "goib-noticies-soller",
       "name": "Govern de les Illes Balears",
       "source_type": "official",
       "method": "rss",
-      "ok": true,
+      "ok": false,
       "count": 0,
-      "error": null
+      "error": "[Errno 104] Connection reset by peer"
     },
     {
       "source_id": "ib3-noticies-soller",
@@ -144,90 +144,90 @@ window.SOLLER_ARA_DATA = {
       "name": "Can Prunera · YouTube",
       "source_type": "social",
       "method": "youtube_channel",
-      "ok": false,
+      "ok": true,
       "count": 0,
-      "error": "HTTP Error 404: Not Found"
+      "error": null
     },
     {
       "source_id": "youtube-aires-sollerics",
       "name": "Aires Sollerics · YouTube",
       "source_type": "social",
       "method": "youtube_channel",
-      "ok": false,
+      "ok": true,
       "count": 0,
-      "error": "HTTP Error 404: Not Found"
+      "error": null
     },
     {
       "source_id": "youtube-xeremiers-soller",
       "name": "Xeremiers de Sóller · YouTube",
       "source_type": "social",
       "method": "youtube_channel",
-      "ok": false,
+      "ok": true,
       "count": 0,
-      "error": "HTTP Error 404: Not Found"
+      "error": null
     },
     {
       "source_id": "youtube-club-volei-soller",
       "name": "Club Vòlei Sóller · YouTube",
       "source_type": "social",
       "method": "youtube_channel",
-      "ok": false,
+      "ok": true,
       "count": 0,
-      "error": "HTTP Error 404: Not Found"
+      "error": null
     },
     {
       "source_id": "youtube-ballades-mallorca-soller",
       "name": "Ballades A Mallorca · YouTube",
       "source_type": "social",
       "method": "youtube_channel",
-      "ok": false,
+      "ok": true,
       "count": 0,
-      "error": "HTTP Error 404: Not Found"
+      "error": null
     },
     {
       "source_id": "youtube-tramuntana-xxi",
       "name": "Tramuntana XXI · YouTube",
       "source_type": "social",
       "method": "youtube_channel",
-      "ok": false,
+      "ok": true,
       "count": 0,
-      "error": "HTTP Error 404: Not Found"
+      "error": null
     },
     {
       "source_id": "youtube-gob-mallorca-soller",
       "name": "GOB Mallorca · YouTube",
       "source_type": "social",
       "method": "youtube_channel",
-      "ok": false,
+      "ok": true,
       "count": 0,
-      "error": "HTTP Error 404: Not Found"
+      "error": null
     },
     {
       "source_id": "youtube-museu-maritim-soller",
       "name": "Museu Marítim de Mallorca · YouTube",
       "source_type": "social",
       "method": "youtube_channel",
-      "ok": false,
+      "ok": true,
       "count": 0,
-      "error": "HTTP Error 404: Not Found"
+      "error": null
     },
     {
       "source_id": "youtube-serra-tramuntana",
       "name": "Serra de Tramuntana Patrimoni Mundial · YouTube",
       "source_type": "social",
       "method": "youtube_channel",
-      "ok": false,
+      "ok": true,
       "count": 0,
-      "error": "HTTP Error 404: Not Found"
+      "error": null
     },
     {
       "source_id": "youtube-consell-mallorca-soller",
       "name": "Consell de Mallorca · YouTube",
       "source_type": "social",
       "method": "youtube_channel",
-      "ok": false,
+      "ok": true,
       "count": 0,
-      "error": "HTTP Error 404: Not Found"
+      "error": null
     },
     {
       "source_id": "mucbo-noticies",
@@ -270,59 +270,95 @@ window.SOLLER_ARA_DATA = {
       "error": "(#10) Application does not have permission for this action [type=OAuthException, code=10, subcode=None]"
     }
   ],
-  "post_count": 122,
+  "post_count": 125,
   "related_pair_count": 0,
   "errors": [
     {
-      "source_id": "youtube-ajuntament-soller",
-      "error": "HTTP Error 404: Not Found"
-    },
-    {
-      "source_id": "youtube-ib3-noticies-soller",
-      "error": "HTTP Error 404: Not Found"
-    },
-    {
-      "source_id": "youtube-can-prunera",
-      "error": "HTTP Error 404: Not Found"
-    },
-    {
-      "source_id": "youtube-aires-sollerics",
-      "error": "HTTP Error 404: Not Found"
-    },
-    {
-      "source_id": "youtube-xeremiers-soller",
-      "error": "HTTP Error 404: Not Found"
-    },
-    {
-      "source_id": "youtube-club-volei-soller",
-      "error": "HTTP Error 404: Not Found"
-    },
-    {
-      "source_id": "youtube-ballades-mallorca-soller",
-      "error": "HTTP Error 404: Not Found"
-    },
-    {
-      "source_id": "youtube-tramuntana-xxi",
-      "error": "HTTP Error 404: Not Found"
-    },
-    {
-      "source_id": "youtube-gob-mallorca-soller",
-      "error": "HTTP Error 404: Not Found"
-    },
-    {
-      "source_id": "youtube-museu-maritim-soller",
-      "error": "HTTP Error 404: Not Found"
-    },
-    {
-      "source_id": "youtube-serra-tramuntana",
-      "error": "HTTP Error 404: Not Found"
-    },
-    {
-      "source_id": "youtube-consell-mallorca-soller",
-      "error": "HTTP Error 404: Not Found"
+      "source_id": "goib-noticies-soller",
+      "error": "[Errno 104] Connection reset by peer"
     }
   ],
   "posts": [
+    {
+      "id": "6948de7c5a15a97a6b4b",
+      "category": "news",
+      "source_id": "sa-veu-soller",
+      "source": "Sa Veu de Sóller",
+      "source_type": "media",
+      "language": "ca",
+      "locality": "Sóller",
+      "published_at": "2026-09-18T07:10:24+00:00",
+      "title": "“La informació és necessària, però la seducció és allò que ens apel·la a les emocions”",
+      "summary": "",
+      "url": "https://saveu.cat/entrevistes/la-informacio-es-necessaria-pero-la-seduccio-es-allo-que-ens-apella-a-les-emocions/",
+      "platform": null,
+      "account": null,
+      "media_type": null,
+      "content_policy": "headline_date_link_only",
+      "rights_status": "permission_pending",
+      "image_allowed": false,
+      "related_sources": []
+    },
+    {
+      "id": "89a9baa8368a6e2ccbff",
+      "category": "alerts",
+      "source_id": "aemet-avisos-mallorca",
+      "source": "AEMET · Serra de Tramuntana",
+      "source_type": "official",
+      "language": "es",
+      "locality": "Sóller / Serra de Tramuntana",
+      "published_at": "2026-09-18T07:00:18+00:00",
+      "title": "Aviso. Nivel naranja. Lluvias. Sierra Tramontana",
+      "summary": "Aviso de precipitación acumulada en una hora de nivel naranja de 09:00 18-09-2026 CEST (UTC+2) a 11:59 18-09-2026 CEST (UTC+2).",
+      "url": "https://www.aemet.es/documentos_d/eltiempo/prediccion/avisos/cap/Z_CAP_C_LEMM_20260918070018_AFAZ645401PRP11810.xml",
+      "platform": null,
+      "account": null,
+      "media_type": null,
+      "content_policy": "short_factual_excerpt",
+      "rights_status": "reuse_authorized_with_attribution",
+      "image_allowed": false,
+      "related_sources": []
+    },
+    {
+      "id": "82f09da6952132dfaabe",
+      "category": "alerts",
+      "source_id": "aemet-avisos-mallorca",
+      "source": "AEMET · Serra de Tramuntana",
+      "source_type": "official",
+      "language": "es",
+      "locality": "Sóller / Serra de Tramuntana",
+      "published_at": "2026-09-18T07:00:18+00:00",
+      "title": "Aviso. Nivel amarillo. Lluvias. Sierra Tramontana",
+      "summary": "Aviso de precipitación acumulada en una hora de nivel amarillo de 12:00 18-09-2026 CEST (UTC+2) a 17:59 18-09-2026 CEST (UTC+2).",
+      "url": "https://www.aemet.es/documentos_d/eltiempo/prediccion/avisos/cap/Z_CAP_C_LEMM_20260918070018_AFAZ645401PRP11816.xml",
+      "platform": null,
+      "account": null,
+      "media_type": null,
+      "content_policy": "short_factual_excerpt",
+      "rights_status": "reuse_authorized_with_attribution",
+      "image_allowed": false,
+      "related_sources": []
+    },
+    {
+      "id": "500adb5e0519462468a4",
+      "category": "alerts",
+      "source_id": "aemet-avisos-mallorca",
+      "source": "AEMET · Serra de Tramuntana",
+      "source_type": "official",
+      "language": "es",
+      "locality": "Sóller / Serra de Tramuntana",
+      "published_at": "2026-09-18T07:00:18+00:00",
+      "title": "Aviso. Nivel amarillo. Tormentas. Sierra Tramontana",
+      "summary": "Aviso de tormentas de nivel amarillo de 12:00 18-09-2026 CEST (UTC+2) a 17:59 18-09-2026 CEST (UTC+2).",
+      "url": "https://www.aemet.es/documentos_d/eltiempo/prediccion/avisos/cap/Z_CAP_C_LEMM_20260918070018_AFAZ645401TOTO1816.xml",
+      "platform": null,
+      "account": null,
+      "media_type": null,
+      "content_policy": "short_factual_excerpt",
+      "rights_status": "reuse_authorized_with_attribution",
+      "image_allowed": false,
+      "related_sources": []
+    },
     {
       "id": "8b3e6d82bbba43dac89d",
       "category": "news",
@@ -404,26 +440,6 @@ window.SOLLER_ARA_DATA = {
       "related_sources": []
     },
     {
-      "id": "44b25091a129f25fbc30",
-      "category": "alerts",
-      "source_id": "aemet-avisos-mallorca",
-      "source": "AEMET · Serra de Tramuntana",
-      "source_type": "official",
-      "language": "es",
-      "locality": "Sóller / Serra de Tramuntana",
-      "published_at": "2026-09-17T09:09:43+00:00",
-      "title": "Aviso. Nivel naranja. Lluvias. Sierra Tramontana",
-      "summary": "Aviso de precipitación acumulada en una hora de nivel naranja de 02:00 18-09-2026 CEST (UTC+2) a 11:59 18-09-2026 CEST (UTC+2).",
-      "url": "https://www.aemet.es/documentos_d/eltiempo/prediccion/avisos/cap/Z_CAP_C_LEMM_20260917090943_AFAZ645401PRP11810.xml",
-      "platform": null,
-      "account": null,
-      "media_type": null,
-      "content_policy": "short_factual_excerpt",
-      "rights_status": "reuse_authorized_with_attribution",
-      "image_allowed": false,
-      "related_sources": []
-    },
-    {
       "id": "ad3069f8eaaa96268b8e",
       "category": "alerts",
       "source_id": "aemet-avisos-mallorca",
@@ -433,28 +449,8 @@ window.SOLLER_ARA_DATA = {
       "locality": "Sóller / Serra de Tramuntana",
       "published_at": "2026-09-17T09:09:43+00:00",
       "title": "Aviso. Nivel naranja. Tormentas. Sierra Tramontana",
-      "summary": "Aviso de tormentas de nivel naranja de 02:00 18-09-2026 CEST (UTC+2) a 11:59 18-09-2026 CEST (UTC+2).",
+      "summary": "Aviso de tormentas de nivel naranja de 09:00 18-09-2026 CEST (UTC+2) a 11:59 18-09-2026 CEST (UTC+2).",
       "url": "https://www.aemet.es/documentos_d/eltiempo/prediccion/avisos/cap/Z_CAP_C_LEMM_20260917090943_AFAZ645401TOTO1810.xml",
-      "platform": null,
-      "account": null,
-      "media_type": null,
-      "content_policy": "short_factual_excerpt",
-      "rights_status": "reuse_authorized_with_attribution",
-      "image_allowed": false,
-      "related_sources": []
-    },
-    {
-      "id": "f6fe306f836cbbbb43db",
-      "category": "alerts",
-      "source_id": "aemet-avisos-mallorca",
-      "source": "AEMET · Serra de Tramuntana",
-      "source_type": "official",
-      "language": "es",
-      "locality": "Sóller / Serra de Tramuntana",
-      "published_at": "2026-09-17T09:09:43+00:00",
-      "title": "Aviso. Nivel amarillo. Lluvias. Sierra Tramontana",
-      "summary": "Aviso de precipitación acumulada en 12 horas de nivel amarillo de 02:00 18-09-2026 CEST (UTC+2) a 11:59 18-09-2026 CEST (UTC+2).",
-      "url": "https://www.aemet.es/documentos_d/eltiempo/prediccion/avisos/cap/Z_CAP_C_LEMM_20260917090943_AFAZ645401PRP21810.xml",
       "platform": null,
       "account": null,
       "media_type": null,
@@ -560,6 +556,26 @@ window.SOLLER_ARA_DATA = {
       "media_type": null,
       "content_policy": "headline_date_link_only",
       "rights_status": "permission_pending",
+      "image_allowed": false,
+      "related_sources": []
+    },
+    {
+      "id": "85f85df365d3bcdba1c3",
+      "category": "agenda",
+      "source_id": "youtube-ajuntament-soller",
+      "source": "Ajuntament de Sóller · YouTube",
+      "source_type": "social",
+      "language": "ca",
+      "locality": "Sóller",
+      "published_at": "2026-09-16T13:08:28+00:00",
+      "title": "Ple ordinari de l'Ajuntament de Sóller, celebrada el 16/9/2026 (Part 2 de la sessió del 9/9/2026).",
+      "summary": "Vídeo publicat per Ajuntament de Sóller · YouTube relacionat amb una sessió plenària o activitat municipal.",
+      "url": "https://www.youtube.com/watch?v=-c349w_HKS4",
+      "platform": "YouTube",
+      "account": "@ajuntamentdesoller_",
+      "media_type": "video",
+      "content_policy": "generated_social_summary",
+      "rights_status": "platform_embed",
       "image_allowed": false,
       "related_sources": []
     },
@@ -864,26 +880,6 @@ window.SOLLER_ARA_DATA = {
       "related_sources": []
     },
     {
-      "id": "9e6d3a81c8e3fbc4c2b2",
-      "category": "services",
-      "source_id": "sa-veu-soller",
-      "source": "Sa Veu de Sóller",
-      "source_type": "media",
-      "language": "ca",
-      "locality": "Sóller",
-      "published_at": "2026-09-14T13:41:12+00:00",
-      "title": "Anit arranca la recollida de fems porta a porta per a 623 habitatges",
-      "summary": "",
-      "url": "https://saveu.cat/noticies/anit-arranca-la-recollida-de-fems-porta-a-porta-per-a-623-habitatges/",
-      "platform": null,
-      "account": null,
-      "media_type": null,
-      "content_policy": "headline_date_link_only",
-      "rights_status": "permission_pending",
-      "image_allowed": false,
-      "related_sources": []
-    },
-    {
       "id": "bc76cf1c96b3669c334c",
       "category": "services",
       "source_id": "ajuntament-soller-noticies",
@@ -1120,6 +1116,26 @@ window.SOLLER_ARA_DATA = {
       "media_type": null,
       "content_policy": "headline_date_link_only",
       "rights_status": "permission_pending",
+      "image_allowed": false,
+      "related_sources": []
+    },
+    {
+      "id": "afc2f48c871c4c51a1c9",
+      "category": "news",
+      "source_id": "youtube-ajuntament-soller",
+      "source": "Ajuntament de Sóller · YouTube",
+      "source_type": "social",
+      "language": "ca",
+      "locality": "Sóller",
+      "published_at": "2026-09-09T12:39:11+00:00",
+      "title": "Sessió plenària ordinària de l'Ajuntament de Sóller, celebrada el 9 de setembre de 2026.",
+      "summary": "Vídeo publicat per Ajuntament de Sóller · YouTube relacionat amb una sessió plenària o activitat municipal.",
+      "url": "https://www.youtube.com/watch?v=Ej0M-wttjM0",
+      "platform": "YouTube",
+      "account": "@ajuntamentdesoller_",
+      "media_type": "video",
+      "content_policy": "generated_social_summary",
+      "rights_status": "platform_embed",
       "image_allowed": false,
       "related_sources": []
     },

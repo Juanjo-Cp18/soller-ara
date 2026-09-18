@@ -1,6 +1,45 @@
 {
   "version": 1,
   "enabled": true,
-  "generated_at": null,
-  "entries": []
+  "generated_at": "2026-09-18T07:21:18.021894+00:00",
+  "entries": [
+    {
+      "post_id": "6948de7c5a15a97a6b4b",
+      "title": "“La informació és necessària, però la seducció és allò que ens apel·la a les emocions”",
+      "summary": "",
+      "source": "Sa Veu de Sóller",
+      "source_id": "sa-veu-soller",
+      "source_type": "media",
+      "category": "news",
+      "language": "ca",
+      "published_at": "2026-09-18T07:10:24+00:00",
+      "original_url": "https://saveu.cat/entrevistes/la-informacio-es-necessaria-pero-la-seduccio-es-allo-que-ens-apella-a-les-emocions/",
+      "content_policy": "headline_date_link_only",
+      "rights_status": "permission_pending",
+      "platforms": [
+        "facebook",
+        "instagram"
+      ],
+      "image_url": "https://soller-ara.github.io/soller-ara/assets/generated/social/6948de7c5a15a97a6b4b.jpg"
+    },
+    {
+      "post_id": "89a9baa8368a6e2ccbff",
+      "title": "Aviso. Nivel naranja. Lluvias. Sierra Tramontana",
+      "summary": "Aviso de precipitación acumulada en una hora de nivel naranja de 09:00 18-09-2026 CEST (UTC+2) a 11:59 18-09-2026 CEST (UTC+2).",
+      "source": "AEMET · Serra de Tramuntana",
+      "source_id": "aemet-avisos-mallorca",
+      "source_type": "official",
+      "category": "alerts",
+      "language": "es",
+      "published_at": "2026-09-18T07:00:18+00:00",
+      "original_url": "https://www.aemet.es/documentos_d/eltiempo/prediccion/avisos/cap/Z_CAP_C_LEMM_20260918070018_AFAZ645401PRP11810.xml",
+      "content_policy": "short_factual_excerpt",
+      "rights_status": "reuse_authorized_with_attribution",
+      "platforms": [
+        "facebook",
+        "instagram"
+      ],
+      "image_url": "https://soller-ara.github.io/soller-ara/assets/generated/social/89a9baa8368a6e2ccbff.jpg"
+    }
+  ]
 }
