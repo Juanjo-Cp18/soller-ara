@@ -1,8 +1,8 @@
 window.SOLLER_ARA_DATA = {
   "version": 41,
   "generator_version": "0.59",
-  "fetched_at": "2026-09-18T16:39:55.999867+00:00",
-  "source_count": 27,
+  "fetched_at": "2026-09-18T17:18:34.659857+00:00",
+  "source_count": 28,
   "source_status": [
     {
       "source_id": "ajuntament-soller-noticies",
@@ -246,6 +246,15 @@ window.SOLLER_ARA_DATA = {
       "ok": true,
       "count": 5,
       "error": null
+    },
+    {
+      "source_id": "soller-ara",
+      "name": "Sóller Ara",
+      "source_type": "own",
+      "method": "manual",
+      "ok": true,
+      "count": 1,
+      "error": null
     }
   ],
   "social_integration_status": [],
@@ -269,7 +278,8 @@ window.SOLLER_ARA_DATA = {
       "rights_status": "owned",
       "image_allowed": true,
       "media_url": "https://soller-ara.github.io/soller-ara",
-      "media_type": "image"
+      "media_type": "image",
+      "related_sources": []
     },
     {
       "id": "a7028278bbaf57121df6",
