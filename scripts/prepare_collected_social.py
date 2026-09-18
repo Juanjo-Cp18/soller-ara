@@ -23,6 +23,7 @@ QUEUE_FILE = ROOT / "data" / "social_auto_queue.json"
 MODERATION_FILE = ROOT / "data" / "moderation.json"
 SOURCES_FILE = ROOT / "sources.json"
 CARD_DIR = ROOT / "assets" / "generated" / "social"
+LOGO_FILE = ROOT / "assets" / "brand" / "logo-soller-ara.png"
 IMAGE_BASE = "https://soller-ara.github.io/soller-ara/assets/generated/social"
 
 
@@ -91,15 +92,19 @@ def generate_card(post: dict) -> str:
     muted = "#687673"
 
     draw.rounded_rectangle((70, 70, width - 70, height - 70), radius=52, fill="#ffffff")
-    draw.rounded_rectangle((110, 110, 270, 270), radius=42, fill=primary)
+    if LOGO_FILE.exists():
+        with Image.open(LOGO_FILE) as source_logo:
+            logo = source_logo.convert("RGB").resize((160, 160), Image.Resampling.LANCZOS)
+            image.paste(logo, (110, 110))
+    else:
+        draw.rounded_rectangle((110, 110, 270, 270), radius=42, fill=primary)
+        draw.text((142, 148), "SA", font=load_font(68, True), fill="#ffffff")
 
-    logo_font = load_font(68, True)
     brand_font = load_font(38, True)
     title_font = load_font(66, True)
     source_font = load_font(34, True)
     small_font = load_font(30, False)
 
-    draw.text((142, 148), "SA", font=logo_font, fill="#ffffff")
     draw.text((310, 140), "SÓLLER ARA", font=brand_font, fill=primary)
     category_names = {"news": "Actualitat", "agenda": "Agenda", "alerts": "Avisos", "services": "Serveis", "culture": "Cultura", "sports": "Esports", "commerce": "Comerç"}
     draw.text((310, 202), category_names.get(post.get("category"), "Actualitat").upper(), font=small_font, fill=muted)

@@ -18,6 +18,7 @@ POSTS_FILE = ROOT / "data" / "posts.json"
 POSTS_JS_FILE = ROOT / "data" / "posts.js"
 DETAIL_DIR = ROOT / "noticies"
 GENERATED_DIR = ROOT / "assets" / "generated"
+LOGO_FILE = ROOT / "assets" / "brand" / "logo-soller-ara.png"
 SITE_URL = "https://soller-ara.github.io/soller-ara"
 
 POST_ID = os.environ.get("POST_ID", "").strip()
@@ -83,14 +84,18 @@ def generate_social_card(post_id: str, title: str, category: str) -> str:
     surface = "#ffffff"
 
     draw.rounded_rectangle((70, 70, width - 70, height - 70), radius=52, fill=surface)
-    draw.rounded_rectangle((110, 110, 270, 270), radius=42, fill=primary)
+    if LOGO_FILE.exists():
+        with Image.open(LOGO_FILE) as source_logo:
+            logo = source_logo.convert("RGB").resize((160, 160), Image.Resampling.LANCZOS)
+            image.paste(logo, (110, 110))
+    else:
+        draw.rounded_rectangle((110, 110, 270, 270), radius=42, fill=primary)
+        draw.text((142, 148), "SA", font=load_font(68, bold=True), fill="#ffffff")
 
-    brand_font = load_font(68, bold=True)
     category_font = load_font(38, bold=True)
     title_font = load_font(72, bold=True)
     footer_font = load_font(34, bold=False)
 
-    draw.text((142, 148), "SA", font=brand_font, fill="#ffffff")
     draw.text((310, 140), "SÓLLER ARA", font=category_font, fill=primary)
     draw.text((310, 200), category.upper(), font=footer_font, fill=muted)
 
@@ -165,7 +170,7 @@ def render_detail(post: dict) -> None:
 <body>
   <header class="topbar">
     <a class="brand-wrap" href="../index.html" style="text-decoration:none">
-      <div class="brand-mark" aria-hidden="true">SA</div>
+      <div class="brand-mark"><img src="../assets/brand/logo-soller-ara.png" alt="" /></div>
       <div><h1>Sóller Ara</h1><p>Tot el que passa a Sóller, en un sol lloc.</p></div>
     </a>
   </header>
