@@ -1,6 +1,26 @@
 {
   "version": 1,
   "enabled": true,
-  "generated_at": null,
-  "entries": []
+  "generated_at": "2026-09-18T10:04:18.528398+00:00",
+  "entries": [
+    {
+      "post_id": "10c6de320e4b8b78bed4",
+      "title": "Ses Escolàpies encara la recta final de les obres amb la vista posada a reobrir-lo el 2027",
+      "summary": "",
+      "source": "Sa Veu de Sóller",
+      "source_id": "sa-veu-soller",
+      "source_type": "media",
+      "category": "services",
+      "language": "ca",
+      "published_at": "2026-09-18T10:00:00+00:00",
+      "original_url": "https://saveu.cat/noticies/ses-escolapies-encara-la-recta-final-de-les-obres-amb-la-vista-posada-a-reobrir-lo-el-2027/",
+      "content_policy": "headline_date_link_only",
+      "rights_status": "permission_pending",
+      "platforms": [
+        "facebook",
+        "instagram"
+      ],
+      "image_url": "https://soller-ara.github.io/soller-ara/assets/generated/social/10c6de320e4b8b78bed4.jpg"
+    }
+  ]
 }

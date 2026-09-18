@@ -1,7 +1,7 @@
 {
-  "version": 40,
-  "generator_version": "0.55",
-  "fetched_at": "2026-09-18T09:42:22.692555+00:00",
+  "version": 41,
+  "generator_version": "0.59",
+  "fetched_at": "2026-09-18T10:04:18.401352+00:00",
   "source_count": 27,
   "source_status": [
     {
@@ -275,6 +275,28 @@
   "errors": [],
   "posts": [
     {
+      "id": "10c6de320e4b8b78bed4",
+      "category": "services",
+      "source_id": "sa-veu-soller",
+      "source": "Sa Veu de Sóller",
+      "source_type": "media",
+      "language": "ca",
+      "locality": "Sóller",
+      "published_at": "2026-09-18T10:00:00+00:00",
+      "title": "Ses Escolàpies encara la recta final de les obres amb la vista posada a reobrir-lo el 2027",
+      "summary": "",
+      "url": "https://saveu.cat/noticies/ses-escolapies-encara-la-recta-final-de-les-obres-amb-la-vista-posada-a-reobrir-lo-el-2027/",
+      "platform": null,
+      "account": null,
+      "media_type": null,
+      "content_policy": "headline_date_link_only",
+      "rights_status": "permission_pending",
+      "image_allowed": false,
+      "embed_type": "official_oembed",
+      "embed_url": "https://saveu.cat/noticies/ses-escolapies-encara-la-recta-final-de-les-obres-amb-la-vista-posada-a-reobrir-lo-el-2027/embed/",
+      "related_sources": []
+    },
+    {
       "id": "acee9b8e829d62c136f5",
       "category": "culture",
       "source_id": "setmanari-soller",
@@ -332,6 +354,8 @@
       "content_policy": "headline_date_link_only",
       "rights_status": "permission_pending",
       "image_allowed": false,
+      "embed_type": "official_oembed",
+      "embed_url": "https://saveu.cat/noticies/la-parroquia-recuperara-la-creu-gaudiniana-aquest-hivern/embed/",
       "related_sources": []
     },
     {
@@ -372,6 +396,8 @@
       "content_policy": "headline_date_link_only",
       "rights_status": "permission_pending",
       "image_allowed": false,
+      "embed_type": "official_oembed",
+      "embed_url": "https://saveu.cat/entrevistes/la-informacio-es-necessaria-pero-la-seduccio-es-allo-que-ens-apella-a-les-emocions/embed/",
       "related_sources": []
     },
     {
@@ -492,6 +518,8 @@
       "content_policy": "headline_date_link_only",
       "rights_status": "permission_pending",
       "image_allowed": false,
+      "embed_type": "official_oembed",
+      "embed_url": "https://saveu.cat/noticies/en-obres-el-bombament-de-fecals-de-sa-torre/embed/",
       "related_sources": []
     },
     {
@@ -512,6 +540,8 @@
       "content_policy": "headline_date_link_only",
       "rights_status": "permission_pending",
       "image_allowed": false,
+      "embed_type": "official_oembed",
+      "embed_url": "https://saveu.cat/noticies/un-passatger-insulta-per-motius-racistes-el-conductor-dun-bus-del-tib-i-acaba-denunciat/embed/",
       "related_sources": []
     },
     {
@@ -532,6 +562,8 @@
       "content_policy": "headline_date_link_only",
       "rights_status": "permission_pending",
       "image_allowed": false,
+      "embed_type": "official_oembed",
+      "embed_url": "https://saveu.cat/noticies/les-pluges-deixen-fins-a-94-litres-a-la-serra-i-descarreguen-de-forma-torrencial-a-tuent/embed/",
       "related_sources": []
     },
     {
@@ -552,6 +584,8 @@
       "content_policy": "headline_date_link_only",
       "rights_status": "permission_pending",
       "image_allowed": false,
+      "embed_type": "official_oembed",
+      "embed_url": "https://saveu.cat/noticies/les-cameres-de-la-zbe-registren-fins-a-25-000-infraccions/embed/",
       "related_sources": []
     },
     {
@@ -572,6 +606,8 @@
       "content_policy": "headline_date_link_only",
       "rights_status": "permission_pending",
       "image_allowed": false,
+      "embed_type": "official_oembed",
+      "embed_url": "https://saveu.cat/noticies/el-mal-estat-de-conservacio-obliga-apuntalar-un-tram-de-la-coberta-de-lhospital/embed/",
       "related_sources": []
     },
     {
@@ -592,6 +628,8 @@
       "content_policy": "headline_date_link_only",
       "rights_status": "permission_pending",
       "image_allowed": false,
+      "embed_type": "official_oembed",
+      "embed_url": "https://saveu.cat/noticies/en-reparacio-la-font-publica-del-carrer-de-cetre/embed/",
       "related_sources": []
     },
     {
@@ -612,6 +650,8 @@
       "content_policy": "headline_date_link_only",
       "rights_status": "permission_pending",
       "image_allowed": false,
+      "embed_type": "official_oembed",
+      "embed_url": "https://saveu.cat/noticies/en-alerta-taronja-per-tempestes-a-partir-de-la-mitjanit/embed/",
       "related_sources": []
     },
     {
@@ -732,6 +772,8 @@
       "content_policy": "headline_date_link_only",
       "rights_status": "permission_pending",
       "image_allowed": false,
+      "embed_type": "official_oembed",
+      "embed_url": "https://saveu.cat/noticies/apareixen-taques-daigua-marro-davant-les-costes-del-port-de-soller/embed/",
       "related_sources": []
     },
     {
@@ -752,26 +794,8 @@
       "content_policy": "headline_date_link_only",
       "rights_status": "permission_pending",
       "image_allowed": false,
-      "related_sources": []
-    },
-    {
-      "id": "ab605184edd6305a4e0b",
-      "category": "news",
-      "source_id": "sa-veu-soller",
-      "source": "Sa Veu de Sóller",
-      "source_type": "media",
-      "language": "ca",
-      "locality": "Sóller",
-      "published_at": "2026-09-15T13:53:04+00:00",
-      "title": "La protesta de Sóller contra la massificació turística arriba a la taula de Prohens",
-      "summary": "",
-      "url": "https://saveu.cat/noticies/la-protesta-de-soller-contra-la-massificacio-turistica-arriba-a-la-taula-de-prohens/",
-      "platform": null,
-      "account": null,
-      "media_type": null,
-      "content_policy": "headline_date_link_only",
-      "rights_status": "permission_pending",
-      "image_allowed": false,
+      "embed_type": "official_oembed",
+      "embed_url": "https://saveu.cat/noticies/la-patronal-nautica-demana-mes-proteccio-marina-i-posa-lull-a-soller/embed/",
       "related_sources": []
     },
     {
@@ -1475,17 +1499,17 @@
       "related_sources": []
     },
     {
-      "id": "99baa9bf4ff527ba42a8",
-      "category": "services",
+      "id": "7ce73fcaa5e6876daf0f",
+      "category": "agenda",
       "source_id": "ajuntament-soller-noticies",
       "source": "Ajuntament de Sóller",
       "source_type": "official",
       "language": "ca",
       "locality": "Sóller",
-      "published_at": "2026-09-07T05:37:04+00:00",
-      "title": "El tinent de batle assisteix a la presentació de l’inici de les obres d’ampliació de la rotonda de la ITV de Son Castelló",
-      "summary": "El tinent de batle de Sóller, Carlos Darder, ha assistit avui a l’inici de les obres d’ampliació de la rotonda de la ITV de Son Castelló, en un acte encapçalat pel president del Consell de Mallorca, Llorenç Galmés, amb…",
-      "url": "https://ajsoller.net/ca/noticies/el-tinent-de-batle-assisteix-la-presentacio-de-linici-de-les-obres-dampliacio-de-la",
+      "published_at": "2026-09-07T08:51:51+00:00",
+      "title": "Anunci de la convocatòria del pròxim ple ordinari",
+      "summary": "Tindrà lloc dimecres, 9 de setembre, a les 11:00h",
+      "url": "https://ajsoller.net/ca/noticies/anunci-de-la-convocatoria-del-proxim-ple-ordinari",
       "platform": null,
       "account": null,
       "media_type": null,
@@ -1512,6 +1536,8 @@
       "content_policy": "headline_date_link_only",
       "rights_status": "link_only_no_media_license",
       "image_allowed": false,
+      "embed_type": "official_oembed",
+      "embed_url": "https://mucbo.org/un-agost-ple-de-descobriments-natura-i-diversio-amb-tallers-de-ciencia-del-mucbo/embed/",
       "related_sources": []
     },
     {
@@ -1532,6 +1558,8 @@
       "content_policy": "headline_date_link_only",
       "rights_status": "link_only_no_media_license",
       "image_allowed": false,
+      "embed_type": "official_oembed",
+      "embed_url": "https://mucbo.org/el-mucbo-presenta-dues-noves-animacions-audiovisuals-sobre-les-coves-i-els-aquifers/embed/",
       "related_sources": []
     },
     {
@@ -1552,6 +1580,8 @@
       "content_policy": "headline_date_link_only",
       "rights_status": "link_only_no_media_license",
       "image_allowed": false,
+      "embed_type": "official_oembed",
+      "embed_url": "https://mucbo.org/el-mucbo-rep-una-valuosa-donacio-per-a-la-conservacio-de-les-seves-colleccions/embed/",
       "related_sources": []
     },
     {
@@ -1572,6 +1602,8 @@
       "content_policy": "headline_date_link_only",
       "rights_status": "link_only_no_media_license",
       "image_allowed": false,
+      "embed_type": "official_oembed",
+      "embed_url": "https://mucbo.org/bolma-rugosa/embed/",
       "related_sources": []
     },
     {
@@ -1592,6 +1624,8 @@
       "content_policy": "headline_date_link_only",
       "rights_status": "link_only_no_media_license",
       "image_allowed": false,
+      "embed_type": "official_oembed",
+      "embed_url": "https://mucbo.org/drimia-maritima/embed/",
       "related_sources": []
     },
     {
@@ -1612,6 +1646,8 @@
       "content_policy": "headline_date_link_only",
       "rights_status": "link_only_no_media_license",
       "image_allowed": false,
+      "embed_type": "official_oembed",
+      "embed_url": "https://canprunera.com/un-centon-para-joan-miquel-oliver/embed/",
       "related_sources": []
     },
     {
@@ -1692,6 +1728,8 @@
       "content_policy": "headline_date_link_only",
       "rights_status": "link_only_no_media_license",
       "image_allowed": false,
+      "embed_type": "official_oembed",
+      "embed_url": "https://mucbo.org/el-programa-educatiu-2026-27-arriba-amb-novetats-pels-alumnes-de-tots-els-nivells/embed/",
       "related_sources": []
     },
     {
@@ -1752,6 +1790,8 @@
       "content_policy": "headline_date_link_only",
       "rights_status": "link_only_no_media_license",
       "image_allowed": false,
+      "embed_type": "official_oembed",
+      "embed_url": "https://canprunera.com/para-que-sirve-un-museo/embed/",
       "related_sources": []
     },
     {
@@ -1812,6 +1852,8 @@
       "content_policy": "headline_date_link_only",
       "rights_status": "link_only_no_media_license",
       "image_allowed": false,
+      "embed_type": "official_oembed",
+      "embed_url": "https://canprunera.com/feliz-sant-bartomeu/embed/",
       "related_sources": []
     },
     {
@@ -1932,6 +1974,8 @@
       "content_policy": "headline_date_link_only",
       "rights_status": "link_only_no_media_license",
       "image_allowed": false,
+      "embed_type": "official_oembed",
+      "embed_url": "https://mucbo.org/tallers-per-a-apropar-la-natura-al-public-juvenil/embed/",
       "related_sources": []
     },
     {
@@ -1952,6 +1996,8 @@
       "content_policy": "headline_date_link_only",
       "rights_status": "link_only_no_media_license",
       "image_allowed": false,
+      "embed_type": "official_oembed",
+      "embed_url": "https://mucbo.org/una-vetllada-de-gloses-i-poesia/embed/",
       "related_sources": []
     },
     {
@@ -2312,6 +2358,8 @@
       "content_policy": "headline_date_link_only",
       "rights_status": "link_only_no_media_license",
       "image_allowed": false,
+      "embed_type": "official_oembed",
+      "embed_url": "https://mucbo.org/dianthus-rupicola-subsp-bocchoriana-l-llorens-gradaille/embed/",
       "related_sources": []
     },
     {
@@ -2332,6 +2380,8 @@
       "content_policy": "headline_date_link_only",
       "rights_status": "link_only_no_media_license",
       "image_allowed": false,
+      "embed_type": "official_oembed",
+      "embed_url": "https://mucbo.org/oryctes-nasicornis/embed/",
       "related_sources": []
     },
     {
@@ -2392,6 +2442,8 @@
       "content_policy": "headline_date_link_only",
       "rights_status": "link_only_no_media_license",
       "image_allowed": false,
+      "embed_type": "official_oembed",
+      "embed_url": "https://canprunera.com/leonora-carrington-en-can-prunera-una-revelacion/embed/",
       "related_sources": []
     },
     {
@@ -2632,6 +2684,8 @@
       "content_policy": "headline_date_link_only",
       "rights_status": "link_only_no_media_license",
       "image_allowed": false,
+      "embed_type": "official_oembed",
+      "embed_url": "https://canprunera.com/el-mundo-de-mon-joan-tiquat/embed/",
       "related_sources": []
     },
     {
