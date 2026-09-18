@@ -1,26 +1,26 @@
 {
   "version": 1,
   "enabled": true,
-  "generated_at": "2026-09-18T15:20:34.615289+00:00",
+  "generated_at": "2026-09-18T15:58:21.621858+00:00",
   "entries": [
     {
-      "post_id": "caf94b41a032507a5f12",
-      "title": "26 de septiembre: Supresión de servicio en la línea 203",
-      "summary": "Debido a la celebración del RAL·LI VALL DE SANT PERE el sábado 26 de septiembre, la línea 203 suprime el servicio entre las paradas de Ma-10, Valldemossa y Ma-10, Sóller hasta las 14.30 h . En esta franja horaria, el…",
-      "source": "TIB · Avisos",
-      "source_id": "tib-avisos-soller",
+      "post_id": "a7028278bbaf57121df6",
+      "title": "Aviso. Nivel amarillo. Lluvias. Sierra Tramontana",
+      "summary": "Aviso de precipitación acumulada en una hora de nivel amarillo de 17:00 18-09-2026 CEST (UTC+2) a 20:59 18-09-2026 CEST (UTC+2).",
+      "source": "AEMET · Serra de Tramuntana",
+      "source_id": "aemet-avisos-mallorca",
       "source_type": "official",
       "category": "alerts",
-      "language": "ca",
-      "published_at": "2026-09-18T12:00:00+00:00",
-      "original_url": "https://www.tib.org/es/w/avis-ral-li-vall-de-sant-pere-l203",
+      "language": "es",
+      "published_at": "2026-09-18T15:50:54+00:00",
+      "original_url": "https://www.aemet.es/documentos_d/eltiempo/prediccion/avisos/cap/Z_CAP_C_LEMM_20260918155054_AFAZ645401PRP11819.xml",
       "content_policy": "short_factual_excerpt",
-      "rights_status": "official_public_source",
+      "rights_status": "reuse_authorized_with_attribution",
       "platforms": [
         "facebook",
         "instagram"
       ],
-      "image_url": "https://soller-ara.github.io/soller-ara/assets/generated/social/caf94b41a032507a5f12.jpg"
+      "image_url": "https://soller-ara.github.io/soller-ara/assets/generated/social/a7028278bbaf57121df6.jpg"
     }
   ]
 }
