@@ -1,26 +1,64 @@
 {
   "version": 1,
   "enabled": true,
-  "generated_at": "2026-09-18T08:21:48.597358+00:00",
+  "generated_at": "2026-09-18T09:20:07.104367+00:00",
   "entries": [
     {
-      "post_id": "82f09da6952132dfaabe",
-      "title": "Aviso. Nivel amarillo. Lluvias. Sierra Tramontana",
-      "summary": "Aviso de precipitación acumulada en una hora de nivel amarillo de 12:00 18-09-2026 CEST (UTC+2) a 17:59 18-09-2026 CEST (UTC+2).",
+      "post_id": "5eaa266158ce7ec8eb8d",
+      "title": "«Cal mantenir actes com les havaneres»",
+      "summary": "",
+      "source": "Setmanari Sóller",
+      "source_id": "setmanari-soller",
+      "source_type": "media",
+      "category": "culture",
+      "language": "ca",
+      "published_at": "2026-09-18T10:38:00+02:00",
+      "original_url": "https://www.elsoller.cat/soller/societat-i-cultura/2026/09/18/354551/cal-mantenir-actes-com-les-havaneres.html",
+      "content_policy": "headline_date_link_only",
+      "rights_status": "permission_pending",
+      "platforms": [
+        "facebook",
+        "instagram"
+      ],
+      "image_url": "https://soller-ara.github.io/soller-ara/assets/generated/social/5eaa266158ce7ec8eb8d.jpg"
+    },
+    {
+      "post_id": "326902bca77887b8a960",
+      "title": "La parròquia recuperarà la creu gaudiniana aquest hivern",
+      "summary": "",
+      "source": "Sa Veu de Sóller",
+      "source_id": "sa-veu-soller",
+      "source_type": "media",
+      "category": "services",
+      "language": "ca",
+      "published_at": "2026-09-18T08:30:00+00:00",
+      "original_url": "https://saveu.cat/noticies/la-parroquia-recuperara-la-creu-gaudiniana-aquest-hivern/",
+      "content_policy": "headline_date_link_only",
+      "rights_status": "permission_pending",
+      "platforms": [
+        "facebook",
+        "instagram"
+      ],
+      "image_url": "https://soller-ara.github.io/soller-ara/assets/generated/social/326902bca77887b8a960.jpg"
+    },
+    {
+      "post_id": "500adb5e0519462468a4",
+      "title": "Aviso. Nivel amarillo. Tormentas. Sierra Tramontana",
+      "summary": "Aviso de tormentas de nivel amarillo de 12:00 18-09-2026 CEST (UTC+2) a 17:59 18-09-2026 CEST (UTC+2).",
       "source": "AEMET · Serra de Tramuntana",
       "source_id": "aemet-avisos-mallorca",
       "source_type": "official",
       "category": "alerts",
       "language": "es",
       "published_at": "2026-09-18T07:00:18+00:00",
-      "original_url": "https://www.aemet.es/documentos_d/eltiempo/prediccion/avisos/cap/Z_CAP_C_LEMM_20260918070018_AFAZ645401PRP11816.xml",
+      "original_url": "https://www.aemet.es/documentos_d/eltiempo/prediccion/avisos/cap/Z_CAP_C_LEMM_20260918070018_AFAZ645401TOTO1816.xml",
       "content_policy": "short_factual_excerpt",
       "rights_status": "reuse_authorized_with_attribution",
       "platforms": [
         "facebook",
         "instagram"
       ],
-      "image_url": "https://soller-ara.github.io/soller-ara/assets/generated/social/82f09da6952132dfaabe.jpg"
+      "image_url": "https://soller-ara.github.io/soller-ara/assets/generated/social/500adb5e0519462468a4.jpg"
     }
   ]
 }
