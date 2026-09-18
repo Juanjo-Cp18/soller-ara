@@ -356,7 +356,7 @@ def build_post(source: dict, title: str, summary: str, url: str, published_at: s
     if content_policy == "short_factual_excerpt":
         public_summary = truncate(clean_text(summary), 220)
 
-    return {
+    post = {
         "id": stable_id(source["id"], url, title),
         "category": source.get("force_category") or categorize(title, summary),
         "source_id": source["id"],
@@ -375,6 +375,15 @@ def build_post(source: dict, title: str, summary: str, url: str, published_at: s
         "rights_status": source.get("rights_status", "unknown"),
         "image_allowed": source.get("image_policy") == "allowed",
     }
+    if source.get("image_policy") == "official_oembed":
+        original = urlparse(url)
+        source_host = urlparse(str(source.get("url") or "")).netloc.casefold().removeprefix("www.")
+        original_host = original.netloc.casefold().removeprefix("www.")
+        if original.scheme == "https" and original_host == source_host:
+            embed_path = original.path.rstrip("/") + "/embed/"
+            post["embed_type"] = "official_oembed"
+            post["embed_url"] = original._replace(path=embed_path, query="", fragment="").geturl()
+    return post
 
 
 
@@ -1588,8 +1597,8 @@ def main() -> int:
     ordered_posts, related_pair_count = annotate_related_posts(ordered_posts)
 
     payload = {
-        "version": 40,
-        "generator_version": "0.55",
+        "version": 41,
+        "generator_version": "0.59",
         "fetched_at": datetime.now(timezone.utc).isoformat(),
         "source_count": len(source_status),
         "source_status": source_status,

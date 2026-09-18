@@ -88,6 +88,24 @@ class SourceCollectionTests(unittest.TestCase):
         self.assertNotIn("Text original", post["summary"])
         self.assertNotIn("media_url", post)
 
+    def test_official_oembed_requires_explicit_policy_and_same_provider(self):
+        source = {"id": "local-media", "name": "Mitjà local", "url": "https://local.test/feed/",
+                  "source_type": "media", "image_policy": "official_oembed"}
+        post = collector.build_post(source, "Titular", "", "https://local.test/noticia/", "2026-09-18T08:00:00Z")
+        self.assertEqual(post["embed_type"], "official_oembed")
+        self.assertEqual(post["embed_url"], "https://local.test/noticia/embed/")
+        self.assertFalse(post["image_allowed"])
+
+        external = collector.build_post(source, "Titular", "", "https://other.test/noticia/", "2026-09-18T08:00:00Z")
+        self.assertNotIn("embed_url", external)
+        disabled = collector.build_post({**source, "image_policy": "disabled_until_rights_verified"},
+                                        "Titular", "", "https://local.test/noticia/", "2026-09-18T08:00:00Z")
+        self.assertNotIn("embed_url", disabled)
+
+        configured = json.loads((ROOT / "sources.json").read_text(encoding="utf-8"))["sources"]
+        enabled = {item["id"] for item in configured if item.get("image_policy") == "official_oembed"}
+        self.assertEqual(enabled, {"sa-veu-soller", "mucbo-noticies", "can-prunera-noticies"})
+
 
 class SourceLifecycleTests(unittest.TestCase):
     def setUp(self):

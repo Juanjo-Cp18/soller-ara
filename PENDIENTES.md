@@ -1,8 +1,8 @@
 # Pendientes de Sóller Ara
 
-## Imágenes de vista previa de enlaces externos
+## Imágenes de vista previa de enlaces externos — resuelto en v0.59
 
-Investigar si Sóller Ara puede mostrar automáticamente la imagen de vista previa que aparece al pegar un enlace en Facebook.
+Sóller Ara puede mostrar una vista previa únicamente cuando la fuente ofrece un mecanismo oficial de inserción. El primer piloto se limita a Sa Veu, MUCBO y Can Prunera mediante sus páginas `oEmbed`, servidas directamente por cada fuente.
 
 Antes de activarlo hay que comprobar:
 
@@ -12,4 +12,4 @@ Antes de activarlo hay que comprobar:
 - qué hacer cuando la fuente cambia o elimina la imagen;
 - una alternativa sin fotografía para las fuentes que no permitan ese uso.
 
-La función se incorporará únicamente para las fuentes cuya comprobación técnica y de derechos resulte favorable.
+No se copia, descarga ni vuelve a alojar ninguna fotografía. Las etiquetas `og:image` continúan sin habilitar por sí solas el uso de una imagen. El criterio completo queda documentado en `IMAGE_PREVIEW_POLICY.md`.

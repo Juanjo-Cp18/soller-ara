@@ -4,7 +4,7 @@ Projecte públic i sense ànim de lucre per reunir informació local de Sóller 
 
 ## Versió
 
-**v0.58**
+**v0.59**
 
 ## Publicacions pròpies i enllaç directe a xarxes
 
@@ -24,6 +24,13 @@ URL preparada per utilitzar una sola vegada a la bio d'Instagram:
 `https://soller-ara.github.io/soller-ara/enllacos.html`
 
 Cada targeta d'aquesta pàgina apunta a la URL individual de la notícia. El caption d'Instagram conserva també l'URL exacta de la notícia, encara que la seva clicabilitat depèn de les funcions habilitades al compte.
+
+## Novetats de la v0.59
+
+- Sa Veu, MUCBO i Can Prunera mostren una previsualització oficial allotjada per la font mitjançant `oEmbed`; Sóller Ara no copia ni allotja les fotografies.
+- La inserció només s'accepta per HTTPS, en el mateix domini de la notícia i amb la ruta oficial `/embed/`.
+- `og:image` no es considera una autorització de reutilització. La resta de fonts continuen sense fotografia fins que tenguin permís, llicència compatible o un mecanisme oficial d'inserció.
+- La decisió i l'auditoria queden documentades a [IMAGE_PREVIEW_POLICY.md](IMAGE_PREVIEW_POLICY.md).
 
 ## Novetats de la v0.58
 

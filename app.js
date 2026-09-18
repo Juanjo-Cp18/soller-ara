@@ -431,6 +431,7 @@ function renderFeed() {
   feed.innerHTML = visiblePosts.map((post) => {
     const categoryLabel = translations[currentLanguage].categories[post.category] || post.category;
     const safeUrl = post.url || "#";
+    const officialPreview = renderOfficialLinkPreview(post);
     const socialEmbed = renderSocialEmbed(post);
     const socialLabel = post.source_type === "social" && post.platform
       ? `<span class="social-platform">${escapeHtml(post.platform)}</span>`
@@ -450,6 +451,7 @@ function renderFeed() {
           <span class="badge">${escapeHtml(categoryLabel)}</span>
           <h3>${escapeHtml(post.title || "")}</h3>
           ${post.summary ? `<p>${escapeHtml(post.summary)}</p>` : ""}
+          ${officialPreview}
           ${socialEmbed}
           ${relatedHtml}
           <div class="card-actions">
@@ -496,6 +498,30 @@ function extractYouTubeId(url) {
 function extractTikTokId(url) {
   const match = String(url || "").match(/\/video\/(\d+)/);
   return match ? match[1] : "";
+}
+
+function renderOfficialLinkPreview(post) {
+  if (post.embed_type !== "official_oembed" || !post.embed_url || !post.url) return "";
+  try {
+    const original = new URL(post.url);
+    const embed = new URL(post.embed_url);
+    const originalHost = original.hostname.replace(/^www\./, "");
+    const embedHost = embed.hostname.replace(/^www\./, "");
+    const expectedPath = `${original.pathname.replace(/\/$/, "")}/embed/`;
+    if (original.protocol !== "https:" || embed.protocol !== "https:"
+        || originalHost !== embedHost || embed.pathname !== expectedPath) return "";
+    return `
+      <div class="social-embed source-link-preview">
+        <iframe
+          src="${escapeAttribute(embed.href)}"
+          title="${escapeAttribute(`Vista previa de ${post.source || "la fuente original"}`)}"
+          loading="lazy"
+          sandbox="allow-scripts allow-same-origin allow-popups"
+          referrerpolicy="strict-origin-when-cross-origin"></iframe>
+      </div>`;
+  } catch (_) {
+    return "";
+  }
 }
 
 function renderSocialEmbed(post) {
