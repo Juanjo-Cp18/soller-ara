@@ -20,6 +20,7 @@ on:
       - "tests/test_social_distribution.py"
       - "tests/test_source_collection.py"
       - "tests/test_social_settings.py"
+      - "tests/test_admin_analytics.mjs"
       - ".github/workflows/publish-own-content.yml"
       - ".github/workflows/edit-own-content.yml"
       - ".github/workflows/manage-posts.yml"
@@ -54,6 +55,8 @@ jobs:
           node --check admin/public-data.js
           node --check admin/admin.js
           node --check admin/sources-v2.js
+          node --check admin/visits-v1.js
+          node tests/test_admin_analytics.mjs
           node --check admin/activity-v1.js
           node --check admin/social-auto-v1.js
           node --check worker/admin-worker.js
@@ -83,3 +86,4 @@ jobs:
             exit 1
           fi
           echo "OK: no hay secretos escritos en configuración pública"
+
