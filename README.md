@@ -4,7 +4,7 @@ Projecte públic i sense ànim de lucre per reunir informació local de Sóller 
 
 ## Versió
 
-**v0.67**
+**v0.68**
 
 ## Publicacions pròpies i enllaç directe a xarxes
 
@@ -24,6 +24,12 @@ URL preparada per utilitzar una sola vegada a la bio d'Instagram:
 `https://soller-ara.github.io/soller-ara/enllacos.html`
 
 Cada targeta d'aquesta pàgina apunta a la URL individual de la notícia. El caption d'Instagram conserva també l'URL exacta de la notícia, encara que la seva clicabilitat depèn de les funcions habilitades al compte.
+
+## Novetats de la v0.68
+
+- Cloudflare Web Analytics s'incorpora a les pàgines públiques i a les notícies pròpies actuals i futures.
+- Administració queda exclosa; es respecten Do Not Track i Global Privacy Control.
+- La política de privacitat explica les mètriques. El recompte comença des de l'activació i no identifica persones úniques.
 
 ## Novetats de la v0.67
 
