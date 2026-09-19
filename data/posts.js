@@ -1,7 +1,7 @@
 window.SOLLER_ARA_DATA = {
   "version": 41,
   "generator_version": "0.59",
-  "fetched_at": "2026-09-18T23:18:43.330614+00:00",
+  "fetched_at": "2026-09-19T00:26:37.305708+00:00",
   "source_count": 28,
   "source_status": [
     {
@@ -65,7 +65,7 @@ window.SOLLER_ARA_DATA = {
       "method": "youtube_channel",
       "ok": false,
       "count": 0,
-      "error": "HTTP Error 500: Internal Server Error"
+      "error": "HTTP Error 404: Not Found"
     },
     {
       "source_id": "goib-noticies-soller",
@@ -189,9 +189,9 @@ window.SOLLER_ARA_DATA = {
       "name": "Tramuntana XXI · YouTube",
       "source_type": "social",
       "method": "youtube_channel",
-      "ok": true,
+      "ok": false,
       "count": 0,
-      "error": null
+      "error": "HTTP Error 404: Not Found"
     },
     {
       "source_id": "youtube-gob-mallorca-soller",
@@ -267,7 +267,7 @@ window.SOLLER_ARA_DATA = {
     },
     {
       "source_id": "youtube-ib3-noticies-soller",
-      "error": "HTTP Error 500: Internal Server Error"
+      "error": "HTTP Error 404: Not Found"
     },
     {
       "source_id": "youtube-can-prunera",
@@ -287,6 +287,10 @@ window.SOLLER_ARA_DATA = {
     },
     {
       "source_id": "youtube-ballades-mallorca-soller",
+      "error": "HTTP Error 404: Not Found"
+    },
+    {
+      "source_id": "youtube-tramuntana-xxi",
       "error": "HTTP Error 404: Not Found"
     },
     {
