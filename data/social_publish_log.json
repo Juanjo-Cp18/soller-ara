@@ -728,6 +728,34 @@
       "mode": "automatic_collected",
       "recorded_at": "2026-09-19T07:19:18.007433+00:00",
       "error": ""
+    },
+    {
+      "post_id": "2d4d1406ddc127598499",
+      "platform": "facebook",
+      "status": "success",
+      "remote_id": "1384755221378998_122110982511467310",
+      "remote_url": "https://www.facebook.com/1384755221378998_122110982511467310",
+      "title": "L’Associació de Músics celebra els 20 anys amb bandes mortes",
+      "post_url": "https://www.elsoller.cat/soller/societat-i-cultura/2026/09/19/354559/associacio-musics-celebra-els-anys-amb-bandes-mortes.html",
+      "source": "Setmanari Sóller",
+      "source_id": "setmanari-soller",
+      "mode": "automatic_collected",
+      "recorded_at": "2026-09-19T08:21:45.170046+00:00",
+      "error": ""
+    },
+    {
+      "post_id": "2d4d1406ddc127598499",
+      "platform": "instagram",
+      "status": "success",
+      "remote_id": "17937892080363917",
+      "remote_url": "https://www.instagram.com/p/DddkeCuGKed/",
+      "title": "L’Associació de Músics celebra els 20 anys amb bandes mortes",
+      "post_url": "https://www.elsoller.cat/soller/societat-i-cultura/2026/09/19/354559/associacio-musics-celebra-els-anys-amb-bandes-mortes.html",
+      "source": "Setmanari Sóller",
+      "source_id": "setmanari-soller",
+      "mode": "automatic_collected",
+      "recorded_at": "2026-09-19T08:22:01.832325+00:00",
+      "error": ""
     }
   ]
 }
