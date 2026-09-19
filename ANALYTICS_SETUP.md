@@ -1,6 +1,6 @@
-# Medición de visitas — preparación, todavía sin activar
+# Medición de visitas — v0.68
 
-Cloudflare Web Analytics es la opción seleccionada para la web alojada en GitHub Pages. Falta vincular la cuenta y obtener el identificador público del sitio. No se ha instalado ningún seguimiento en las páginas públicas.
+Cloudflare Web Analytics se incorpora a la web de GitHub Pages con el token público facilitado por el usuario. La integración y la política de privacidad están preparadas para publicar en v0.68. La recepción de estadísticas se debe confirmar en el panel privado de Cloudflare.
 
 ## Configuración prevista
 
