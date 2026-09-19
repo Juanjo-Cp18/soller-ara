@@ -784,6 +784,34 @@
       "mode": "automatic_collected",
       "recorded_at": "2026-09-19T15:19:36.055510+00:00",
       "error": ""
+    },
+    {
+      "post_id": "e5643f62656989ce2984",
+      "platform": "facebook",
+      "status": "success",
+      "remote_id": "1384755221378998_122111186211467310",
+      "remote_url": "https://www.facebook.com/1384755221378998_122111186211467310",
+      "title": "Campos-Sóller (diumenge, 17.30 h), primer desplaçament cercant la victòria tot i les moltes baixes",
+      "post_url": "https://www.elsoller.cat/soller/esports/2026/09/19/354553/campos-soller-diumenge-1730-primer-desplacament-cercant-victoria-tot-les-moltes-baixes.html",
+      "source": "Setmanari Sóller",
+      "source_id": "setmanari-soller",
+      "mode": "automatic_collected",
+      "recorded_at": "2026-09-19T16:19:42.367398+00:00",
+      "error": ""
+    },
+    {
+      "post_id": "e5643f62656989ce2984",
+      "platform": "instagram",
+      "status": "success",
+      "remote_id": "18095156792640139",
+      "remote_url": "https://www.instagram.com/p/DdebKomjRCY/",
+      "title": "Campos-Sóller (diumenge, 17.30 h), primer desplaçament cercant la victòria tot i les moltes baixes",
+      "post_url": "https://www.elsoller.cat/soller/esports/2026/09/19/354553/campos-soller-diumenge-1730-primer-desplacament-cercant-victoria-tot-les-moltes-baixes.html",
+      "source": "Setmanari Sóller",
+      "source_id": "setmanari-soller",
+      "mode": "automatic_collected",
+      "recorded_at": "2026-09-19T16:19:57.242926+00:00",
+      "error": ""
     }
   ]
 }
