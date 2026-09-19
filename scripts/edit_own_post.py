@@ -189,6 +189,7 @@ def render_detail(post: dict) -> None:
     </article>
   </main>
   <footer class="footer"><p>© 2026 Sóller Ara · Projecte sense ànim de lucre</p></footer>
+  <script src="../analytics.js?v=1" defer></script>
 </body>
 </html>
 """
