@@ -1,6 +1,26 @@
 {
   "version": 1,
   "enabled": true,
-  "generated_at": null,
-  "entries": []
+  "generated_at": "2026-09-19T15:19:04.222516+00:00",
+  "entries": [
+    {
+      "post_id": "e6326617ea0c3edff0d8",
+      "title": "trofeu ciutat de sóller",
+      "summary": "Vídeo publicat per Club Vòlei Sóller · YouTube.",
+      "source": "Club Vòlei Sóller · YouTube",
+      "source_id": "youtube-club-volei-soller",
+      "source_type": "social",
+      "category": "sports",
+      "language": "ca",
+      "published_at": "2026-09-19T14:50:00+00:00",
+      "original_url": "https://www.youtube.com/watch?v=q_-hMqJmesI",
+      "content_policy": "generated_social_summary",
+      "rights_status": "platform_embed",
+      "platforms": [
+        "facebook",
+        "instagram"
+      ],
+      "image_url": "https://soller-ara.github.io/soller-ara/assets/generated/social/e6326617ea0c3edff0d8.jpg"
+    }
+  ]
 }
