@@ -756,6 +756,34 @@
       "mode": "automatic_collected",
       "recorded_at": "2026-09-19T08:22:01.832325+00:00",
       "error": ""
+    },
+    {
+      "post_id": "e6326617ea0c3edff0d8",
+      "platform": "facebook",
+      "status": "success",
+      "remote_id": "1384755221378998_122111164035467310",
+      "remote_url": "https://www.facebook.com/1384755221378998_122111164035467310",
+      "title": "trofeu ciutat de sóller",
+      "post_url": "https://www.youtube.com/watch?v=q_-hMqJmesI",
+      "source": "Club Vòlei Sóller · YouTube",
+      "source_id": "youtube-club-volei-soller",
+      "mode": "automatic_collected",
+      "recorded_at": "2026-09-19T15:19:20.824239+00:00",
+      "error": ""
+    },
+    {
+      "post_id": "e6326617ea0c3edff0d8",
+      "platform": "instagram",
+      "status": "success",
+      "remote_id": "17928391056417301",
+      "remote_url": "https://www.instagram.com/p/DdeUQlcoPSA/",
+      "title": "trofeu ciutat de sóller",
+      "post_url": "https://www.youtube.com/watch?v=q_-hMqJmesI",
+      "source": "Club Vòlei Sóller · YouTube",
+      "source_id": "youtube-club-volei-soller",
+      "mode": "automatic_collected",
+      "recorded_at": "2026-09-19T15:19:36.055510+00:00",
+      "error": ""
     }
   ]
 }
