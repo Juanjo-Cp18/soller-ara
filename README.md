@@ -4,7 +4,7 @@ Projecte públic i sense ànim de lucre per reunir informació local de Sóller 
 
 ## Versió
 
-**v0.66**
+**v0.67**
 
 ## Publicacions pròpies i enllaç directe a xarxes
 
@@ -24,6 +24,12 @@ URL preparada per utilitzar una sola vegada a la bio d'Instagram:
 `https://soller-ara.github.io/soller-ara/enllacos.html`
 
 Cada targeta d'aquesta pàgina apunta a la URL individual de la notícia. El caption d'Instagram conserva també l'URL exacta de la notícia, encara que la seva clicabilitat depèn de les funcions habilitades al compte.
+
+## Novetats de la v0.67
+
+- El logotip de la capçalera recorre suaument els tons del color actual, l'alba, el dia, el capvespre i la nit.
+- L'animació dura 32 segons, manté el símbol llegible i s'atura automàticament quan el dispositiu té activada la reducció de moviment.
+- Els avatars i les targetes socials continuen sent estàtics per evitar retalls o incompatibilitats a Facebook i Instagram.
 
 ## Novetats de la v0.66
 
