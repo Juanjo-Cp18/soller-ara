@@ -700,6 +700,34 @@
       "mode": "automatic_collected",
       "recorded_at": "2026-09-18T16:08:48.390353+00:00",
       "error": ""
+    },
+    {
+      "post_id": "37d2e230e9a57742f54d",
+      "platform": "facebook",
+      "status": "success",
+      "remote_id": "1384755221378998_122110960965467310",
+      "remote_url": "https://www.facebook.com/1384755221378998_122110960965467310",
+      "title": "L’Estat ultima el decret per crear la reserva marina a la costa de la Serra de Tramuntana",
+      "post_url": "https://saveu.cat/noticies/lestat-ultima-el-decret-per-crear-la-reserva-marina-a-la-costa-de-la-serra-de-tramuntana/",
+      "source": "Sa Veu de Sóller",
+      "source_id": "sa-veu-soller",
+      "mode": "automatic_collected",
+      "recorded_at": "2026-09-19T07:19:06.305511+00:00",
+      "error": ""
+    },
+    {
+      "post_id": "37d2e230e9a57742f54d",
+      "platform": "instagram",
+      "status": "success",
+      "remote_id": "18155355649503241",
+      "remote_url": "https://www.instagram.com/p/DdddTNKkfVC/",
+      "title": "L’Estat ultima el decret per crear la reserva marina a la costa de la Serra de Tramuntana",
+      "post_url": "https://saveu.cat/noticies/lestat-ultima-el-decret-per-crear-la-reserva-marina-a-la-costa-de-la-serra-de-tramuntana/",
+      "source": "Sa Veu de Sóller",
+      "source_id": "sa-veu-soller",
+      "mode": "automatic_collected",
+      "recorded_at": "2026-09-19T07:19:18.007433+00:00",
+      "error": ""
     }
   ]
 }
