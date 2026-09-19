@@ -1,26 +1,26 @@
 {
   "version": 1,
   "enabled": true,
-  "generated_at": "2026-09-19T07:18:47.451541+00:00",
+  "generated_at": "2026-09-19T08:21:28.130722+00:00",
   "entries": [
     {
-      "post_id": "37d2e230e9a57742f54d",
-      "title": "L’Estat ultima el decret per crear la reserva marina a la costa de la Serra de Tramuntana",
+      "post_id": "2d4d1406ddc127598499",
+      "title": "L’Associació de Músics celebra els 20 anys amb bandes mortes",
       "summary": "",
-      "source": "Sa Veu de Sóller",
-      "source_id": "sa-veu-soller",
+      "source": "Setmanari Sóller",
+      "source_id": "setmanari-soller",
       "source_type": "media",
       "category": "news",
       "language": "ca",
-      "published_at": "2026-09-19T07:00:00+00:00",
-      "original_url": "https://saveu.cat/noticies/lestat-ultima-el-decret-per-crear-la-reserva-marina-a-la-costa-de-la-serra-de-tramuntana/",
+      "published_at": "2026-09-19T09:30:00+02:00",
+      "original_url": "https://www.elsoller.cat/soller/societat-i-cultura/2026/09/19/354559/associacio-musics-celebra-els-anys-amb-bandes-mortes.html",
       "content_policy": "headline_date_link_only",
       "rights_status": "permission_pending",
       "platforms": [
         "facebook",
         "instagram"
       ],
-      "image_url": "https://soller-ara.github.io/soller-ara/assets/generated/social/37d2e230e9a57742f54d.jpg"
+      "image_url": "https://soller-ara.github.io/soller-ara/assets/generated/social/2d4d1406ddc127598499.jpg"
     }
   ]
 }
