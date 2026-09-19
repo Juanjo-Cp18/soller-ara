@@ -19,7 +19,7 @@ export default {
 
     try {
       if (url.pathname === "/health") {
-        return json({ ok: true, service: "soller-ara-admin", version: "0.56", capabilities: ["social_settings"] }, 200, cors);
+        return json({ ok: true, service: "soller-ara-admin", version: "0.69", capabilities: ["social_settings", "web_analytics"] }, 200, cors);
       }
 
       if (url.pathname === "/api/login" && request.method === "POST") {
@@ -28,6 +28,10 @@ export default {
 
       const session = await requireSession(request, env);
       if (!session) return json({ error: "Sesión no válida o caducada." }, 401, cors);
+
+      if (url.pathname === "/api/analytics" && request.method === "GET") {
+        return await webAnalytics(url, env, cors);
+      }
 
       if (url.pathname === "/api/status" && request.method === "GET") {
         return await status(env, cors);
@@ -464,4 +468,70 @@ async function moderate(request, env, cors) {
   });
 
   return json({ ok: true, workflow: "Sóller Ara · gestionar publicacions" }, 202, cors);
+}
+
+// Private read-only analytics. Never send the Cloudflare API credential to browsers.
+const analyticsCache = new Map();
+async function webAnalytics(url, env, cors) {
+  const period = url.searchParams.get("period") || "7d";
+  const durations = { "24h": 86400000, "7d": 7 * 86400000 };
+  if (!Object.hasOwn(durations, period)) {
+    return json({ error: "Periodo no válido." }, 400, cors);
+  }
+  if (!env.CF_ANALYTICS_API_TOKEN || !/^[a-f0-9]{32}$/i.test(env.CF_ANALYTICS_ACCOUNT_ID || "")) {
+    return json({ code: "analytics_not_configured", error: "La consulta de visitas está pendiente de conectar con Cloudflare." }, 503, cors);
+  }
+  const cached = analyticsCache.get(period);
+  if (cached && cached.account === env.CF_ANALYTICS_ACCOUNT_ID &&
+      cached.token === env.CF_ANALYTICS_API_TOKEN && Date.now() - cached.at < 300000) {
+    return json(cached.payload, 200, cors);
+  }
+  const end = new Date();
+  const start = new Date(end.getTime() - durations[period]);
+  const query = `query SollerAraVisits($account: String!, $from: Time!, $to: Time!) {
+    viewer { accounts(filter: {accountTag: $account}) {
+      totals: rumPageloadEventsAdaptiveGroups(limit: 1, filter: {
+        datetime_geq: $from, datetime_lt: $to,
+        requestHost: "soller-ara.github.io", requestPath_like: "/soller-ara/%",
+        requestPath_notlike: "/soller-ara/admin/%", requestPath_neq: "/soller-ara/admin"
+      }) { count sum { visits } }
+    } }
+  }`;
+  try {
+    const response = await fetch("https://api.cloudflare.com/client/v4/graphql", {
+      method: "POST",
+      headers: { Authorization: `Bearer ${env.CF_ANALYTICS_API_TOKEN}`, "Content-Type": "application/json" },
+      body: JSON.stringify({ query, variables: {
+        account: env.CF_ANALYTICS_ACCOUNT_ID, from: start.toISOString(), to: end.toISOString(),
+      } }),
+      signal: AbortSignal.timeout(15000),
+    });
+    const result = await response.json();
+    if (!response.ok || result.errors?.length) {
+      // Do not expose provider responses: they may contain account or credential details.
+      return json({ code: "analytics_unavailable", error: "Cloudflare no ha permitido consultar las visitas. Hay que revisar el permiso de lectura y la configuración de la cuenta." }, 502, cors);
+    }
+    const accounts = result.data?.viewer?.accounts;
+    if (!Array.isArray(accounts) || accounts.length !== 1 || !Array.isArray(accounts[0].totals)) {
+      throw new Error("Missing analytics data");
+    }
+    const rows = accounts[0].totals;
+    if (rows.length > 1) throw new Error("Unexpected analytics groups");
+    let pageviews = 0, visits = 0;
+    if (rows.length) {
+      pageviews = rows[0].count;
+      visits = rows[0].sum?.visits;
+      if (![pageviews, visits].every(n => typeof n === "number" && Number.isFinite(n) && n >= 0)) {
+        throw new Error("Invalid analytics metrics");
+      }
+    }
+    const payload = {
+      ok: true, period, from: start.toISOString(), to: end.toISOString(),
+      fetched_at: new Date().toISOString(), visits: Math.round(visits), pageviews: Math.round(pageviews),
+    };
+    analyticsCache.set(period, { account: env.CF_ANALYTICS_ACCOUNT_ID, token: env.CF_ANALYTICS_API_TOKEN, at: Date.now(), payload });
+    return json(payload, 200, cors);
+  } catch (_) {
+    return json({ code: "analytics_unavailable", error: "No se han podido leer las visitas. Prueba de nuevo dentro de unos minutos." }, 502, cors);
+  }
 }
