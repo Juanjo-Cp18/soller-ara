@@ -16,6 +16,7 @@ LOADER = """// Public Cloudflare Web Analytics site token, never an API credenti
       navigator.doNotTrack === "1" || navigator.globalPrivacyControl === true ||
       document.querySelector("script[data-cf-beacon]")) return;
   const beacon = document.createElement("script");
+  beacon.type = "module";
   beacon.src = "https://static.cloudflareinsights.com/beacon.min.js";
   beacon.defer = true;
   beacon.setAttribute("data-cf-beacon", JSON.stringify({ token }));
