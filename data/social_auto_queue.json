@@ -1,26 +1,6 @@
 {
   "version": 1,
   "enabled": true,
-  "generated_at": "2026-09-19T08:21:28.130722+00:00",
-  "entries": [
-    {
-      "post_id": "2d4d1406ddc127598499",
-      "title": "L’Associació de Músics celebra els 20 anys amb bandes mortes",
-      "summary": "",
-      "source": "Setmanari Sóller",
-      "source_id": "setmanari-soller",
-      "source_type": "media",
-      "category": "news",
-      "language": "ca",
-      "published_at": "2026-09-19T09:30:00+02:00",
-      "original_url": "https://www.elsoller.cat/soller/societat-i-cultura/2026/09/19/354559/associacio-musics-celebra-els-anys-amb-bandes-mortes.html",
-      "content_policy": "headline_date_link_only",
-      "rights_status": "permission_pending",
-      "platforms": [
-        "facebook",
-        "instagram"
-      ],
-      "image_url": "https://soller-ara.github.io/soller-ara/assets/generated/social/2d4d1406ddc127598499.jpg"
-    }
-  ]
+  "generated_at": null,
+  "entries": []
 }
