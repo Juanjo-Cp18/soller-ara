@@ -1,0 +1,53 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs/promises';
+import vm from 'node:vm';
+import { webcrypto } from 'node:crypto';
+const source = (await fs.readFile('worker/admin-worker.js', 'utf8')).replace('export default {', 'const worker = {');
+const context = vm.createContext({ crypto:webcrypto, TextEncoder, TextDecoder, Request, Response, URL, AbortSignal, btoa, atob, console });
+vm.runInContext(source, context);
+const env={ SESSION_SECRET:'test-session-secret', CF_ANALYTICS_ACCOUNT_ID:'a'.repeat(32), CF_ANALYTICS_API_TOKEN:'private-test-token' };
+context.env=env;
+const session=await vm.runInContext('createSession(env.SESSION_SECRET)',context);
+let calls=0;
+let expected;
+let provider = {data:{viewer:{accounts:[{totals:[{count:18,sum:{visits:7}}]}]}}};
+context.fetch=async (url,opts)=>{
+ calls++;
+ assert.equal(url,'https://api.cloudflare.com/client/v4/graphql');
+ assert.equal(opts.headers.Authorization,'Bearer private-test-token');
+ const body=JSON.parse(opts.body);expected=body;
+ assert.match(body.query,/requestHost: "soller-ara.github.io"/);
+ assert.match(body.query,/requestPath_like: "\/soller-ara\/%"/);
+ return Response.json(provider);
+};
+async function call(path='/api/analytics',auth=true){
+ context.req=new Request('https://example.test'+path,{headers:auth?{Authorization:'Bearer '+session}:{}});
+ const res=await vm.runInContext('worker.fetch(req,env)',context);
+ const payload=await res.json();
+ assert.equal(res.headers.get('Cache-Control'),'no-store');
+ assert.ok(!JSON.stringify(payload).includes('private-test-token'));
+ return [res.status,payload];
+}
+assert.equal((await call('/api/analytics',false))[0],401);
+assert.equal(calls,0);
+assert.equal((await call('/api/analytics?period=all'))[0],400);
+delete env.CF_ANALYTICS_API_TOKEN;
+assert.equal((await call())[0],503);
+assert.equal(calls,0);
+env.CF_ANALYTICS_API_TOKEN='private-test-token';
+let [status,data]=await call();assert.equal(status,200);assert.equal(data.visits,7);assert.equal(data.pageviews,18);
+assert.equal(new Date(expected.variables.to)-new Date(expected.variables.from),7*86400000);
+await call();assert.equal(calls,1);
+await call('/api/analytics?period=24h');assert.equal(calls,2);
+assert.equal(new Date(expected.variables.to)-new Date(expected.variables.from),86400000);
+vm.runInContext('analyticsCache.clear()',context);
+provider={errors:[{message:'private-test-token'}],data:{viewer:{accounts:[{totals:[]}]}}};
+assert.equal((await call())[0],502);
+provider={data:{viewer:{accounts:[]}}};assert.equal((await call())[0],502);
+provider={data:{viewer:{accounts:[{totals:[{count:18,sum:{}}]}]}}};assert.equal((await call())[0],502);
+provider={data:{viewer:{accounts:[{totals:[]}]}}};
+[status,data]=await call();assert.equal(status,200);assert.equal(data.visits,0);assert.equal(data.pageviews,0);
+assert.equal((await call('/api/analytics',false))[0],401); // even with warm cache
+vm.runInContext('analyticsCache.clear()',context);
+context.fetch=async()=>{throw new Error('private-test-token')};assert.equal((await call())[0],502);
+console.log('PASS: authentication, invalid periods, missing configuration, hostname/path scope, 24h/7d windows, cache, provider errors, missing data, real zero, no credential exposure.');
