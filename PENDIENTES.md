@@ -18,6 +18,10 @@ No se copia, descarga ni vuelve a alojar ninguna fotografía. Las etiquetas `og:
 
 Cloudflare Web Analytics configurado con el identificador público facilitado por el usuario. La integración cubre las páginas públicas y las plantillas de noticias propias. Administración, otros dominios, Do Not Track y Global Privacy Control quedan excluidos. Pendiente de confirmar la recepción de datos dentro del panel de la cuenta de Cloudflare. Las visitas no son personas únicas ni estadísticas retroactivas.
 
+## Visitas dentro de Administración — preparada en v0.69
+
+Pestaña Visitas con visitas y páginas vistas de las últimas 24 horas o 7 días. La consulta usa la sesión privada de Administración y no expone credenciales de Cloudflare. Pendiente: desplegar el Worker actualizado, configurar CF_ANALYTICS_ACCOUNT_ID y el secret CF_ANALYTICS_API_TOKEN (Account Analytics:Read), y contrastar los resultados reales con Web Analytics. La interfaz indica que falta conexión hasta completar estos pasos; nunca presenta un fallo como cero visitas. Instrucciones en ANALYTICS_SETUP.md.
+
 ## Identidad visual y movimiento
 
 - El nuevo logotipo `SA` con montañas y capilla se usa desde v0.60 en la cabecera y en las nuevas tarjetas propias para Instagram. Las publicaciones anteriores no se modifican.
@@ -26,3 +30,4 @@ Cloudflare Web Analytics configurado con el identificador público facilitado po
 - Comprobar para cada ubicación de Facebook e Instagram si admite movimiento. Cuando una ubicación solo acepte imagen estática, conservar el logotipo fijo y reservar la versión animada para vídeo, reel o historia.
 - La portada estática de Facebook ya está compuesta con las siete fotografías aportadas. Antes de publicarla hay que confirmar las licencias de las imágenes identificadas como iStock.
 - La ayuda actual de Facebook describe la portada de Página como una fotografía. Preparar una variante animada únicamente si la propia interfaz de la Página admite vídeo en el momento de publicarla; en caso contrario, usar el ciclo día/noche en la web y como vídeo, reel o historia.
+
