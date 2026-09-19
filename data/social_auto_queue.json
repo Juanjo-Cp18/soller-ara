@@ -1,26 +1,26 @@
 {
   "version": 1,
   "enabled": true,
-  "generated_at": "2026-09-19T15:19:04.222516+00:00",
+  "generated_at": "2026-09-19T16:19:27.065752+00:00",
   "entries": [
     {
-      "post_id": "e6326617ea0c3edff0d8",
-      "title": "trofeu ciutat de sóller",
-      "summary": "Vídeo publicat per Club Vòlei Sóller · YouTube.",
-      "source": "Club Vòlei Sóller · YouTube",
-      "source_id": "youtube-club-volei-soller",
-      "source_type": "social",
-      "category": "sports",
+      "post_id": "e5643f62656989ce2984",
+      "title": "Campos-Sóller (diumenge, 17.30 h), primer desplaçament cercant la victòria tot i les moltes baixes",
+      "summary": "",
+      "source": "Setmanari Sóller",
+      "source_id": "setmanari-soller",
+      "source_type": "media",
+      "category": "news",
       "language": "ca",
-      "published_at": "2026-09-19T14:50:00+00:00",
-      "original_url": "https://www.youtube.com/watch?v=q_-hMqJmesI",
-      "content_policy": "generated_social_summary",
-      "rights_status": "platform_embed",
+      "published_at": "2026-09-19T17:30:00+02:00",
+      "original_url": "https://www.elsoller.cat/soller/esports/2026/09/19/354553/campos-soller-diumenge-1730-primer-desplacament-cercant-victoria-tot-les-moltes-baixes.html",
+      "content_policy": "headline_date_link_only",
+      "rights_status": "permission_pending",
       "platforms": [
         "facebook",
         "instagram"
       ],
-      "image_url": "https://soller-ara.github.io/soller-ara/assets/generated/social/e6326617ea0c3edff0d8.jpg"
+      "image_url": "https://soller-ara.github.io/soller-ara/assets/generated/social/e5643f62656989ce2984.jpg"
     }
   ]
 }
