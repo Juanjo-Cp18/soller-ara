@@ -14,14 +14,14 @@ Antes de activarlo hay que comprobar:
 
 No se copia, descarga ni vuelve a alojar ninguna fotografía. Las etiquetas `og:image` continúan sin habilitar por sí solas el uso de una imagen. El criterio completo queda documentado en `IMAGE_PREVIEW_POLICY.md`.
 
-## Medición de visitas
+## Medición de visitas — incorporada en v0.68
 
-Incorporar una medición de visitas que permita conocer, como mínimo, páginas vistas, visitantes aproximados, origen del tráfico y contenidos más consultados. Antes de activarla hay que elegir una solución respetuosa con la privacidad y comprobar si requiere aviso de cookies; Cloudflare Web Analytics es la primera opción a evaluar para esta web estática.
+Cloudflare Web Analytics configurado con el identificador público facilitado por el usuario. La integración cubre las páginas públicas y las plantillas de noticias propias. Administración, otros dominios, Do Not Track y Global Privacy Control quedan excluidos. Pendiente de confirmar la recepción de datos dentro del panel de la cuenta de Cloudflare. Las visitas no son personas únicas ni estadísticas retroactivas.
 
 ## Identidad visual y movimiento
 
 - El nuevo logotipo `SA` con montañas y capilla se usa desde v0.60 en la cabecera y en las nuevas tarjetas propias para Instagram. Las publicaciones anteriores no se modifican.
-- La variante `assets/brand/avatar-soller-ara-social.png`, adaptada al recorte circular de Instagram y Facebook, queda preparada en v0.63. Pendiente: subirla manualmente como foto de perfil en ambas plataformas.
+- La variante `assets/brand/avatar-soller-ara-social.png`, adaptada al recorte circular de Instagram y Facebook, queda preparada en v0.63. El usuario confirmó la sustitución del avatar de Instagram.
 - Resuelto en v0.67: la cabecera de la web incorpora un ciclo suave del color actual, amanecer, día, atardecer y noche; respeta `prefers-reduced-motion` y mantiene legible el símbolo.
 - Comprobar para cada ubicación de Facebook e Instagram si admite movimiento. Cuando una ubicación solo acepte imagen estática, conservar el logotipo fijo y reservar la versión animada para vídeo, reel o historia.
 - La portada estática de Facebook ya está compuesta con las siete fotografías aportadas. Antes de publicarla hay que confirmar las licencias de las imágenes identificadas como iStock.
